@@ -6,7 +6,6 @@ import Notification from './notification';
 import SearchHeader from './searchHeader';
 import { Link } from 'react-router-dom';
 import { AlignLeft, Maximize, Bell, MessageCircle, MoreHorizontal } from 'react-feather';
-import {EN} from '../../../constant'
 
 const Header = () => {
   const [sidebar, setSidebar] = useState(false);
@@ -63,7 +62,7 @@ const Header = () => {
         <div className="main-header-right row">
           <div className="main-header-left d-lg-none">
             <div className="logo-wrapper">
-              <Link to={`${process.env.PUBLIC_URL}/dashboard/default`}>
+              <Link to="/dashboard/default">
                 <img className="img-fluid" src={logo} alt="" />
               </Link>
             </div>
@@ -89,7 +88,7 @@ const Header = () => {
               </li>
               <li className="onhover-dropdown">
                 <a className="txt-dark" href="#javascript">
-                  <h6>{EN}</h6></a>
+                  <h6>EN</h6></a>
                 <Language />
               </li>
               <li className="onhover-dropdown">
@@ -122,7 +121,7 @@ const Header = () => {
             </div>
           </script>
           <script id="empty-template" type="text/x-handlebars-template">
-            <div className="EmptyMessage">{"Your search turned up 0 results. This most likely means the backend is down, yikes!"}</div>
+            <div className="EmptyMessage">Your search turned up 0 results. This most likely means the backend is down, yikes!</div>
           </script>
         </div>
       </div>

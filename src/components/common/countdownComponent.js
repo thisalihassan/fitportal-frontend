@@ -1,11 +1,17 @@
-import React, { Fragment } from 'react';
-import Countdown from 'react-countdown';
+import React, { Fragment ,useState ,useEffect} from 'react';
+import Countdown from 'react-countdown-now';
 
-const CountdownComponent = () => {
+const CountdownComponent = (props) => {
+    const [style, setStyle] = useState();
 
-    const Completionist = () => <span>{"You are good to go!"}</span>;
+    useEffect(() => {
+        setTimeout(function () {
+            setStyle({style: {display:'none'}});
+        }.bind(this),1000)        
+    },[]);
+    const Completionist = () => <span>You are good to go!</span>;
 
-        const renderer = ({ days, hours, minutes, seconds, completed }) => {
+        const renderer = ({ total, days, hours, minutes, seconds, milliseconds, completed }) => {
             if (completed) {
                 // Render a completed state
                 return <Completionist />;
@@ -14,13 +20,13 @@ const CountdownComponent = () => {
                 return <div className="countdown">
                     <ul>
                         <li><span id="days" className="time digits">{days}</span><span
-                            className="title">{"days"}</span></li>
+                            className="title">days</span></li>
                         <li><span id="hours" className="time digits">{hours}</span><span
-                            className="title">{"Hours"}</span></li>
+                            className="title">Hours</span></li>
                         <li><span id="minutes" className="time digits">{minutes}</span><span
-                            className="title">{"Minutes"}</span></li>
+                            className="title">Minutes</span></li>
                         <li><span id="seconds" className="time digits">{seconds}</span><span
-                            className="title">{"Seconds"}</span></li>
+                            className="title">Seconds</span></li>
                     </ul>
                 </div>;
             }

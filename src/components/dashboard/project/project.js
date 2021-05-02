@@ -1,46 +1,26 @@
 import React, { Fragment } from 'react';
 import Breadcrumb from '../../common/breadcrumb';
-import { Home, Activity, Users } from 'react-feather';
-import { Tabs, TabList, TabPanel, Tab } from 'react-tabs';
-import HomeComponent from './home-component';
-import BudgetComponent from './budget-component';
-import UserComponent from './user-component';
-import { Homes,BudgetSummary,TeamMembers } from "../../../constant";
 
 const Project = () => {
-        return (
-            <Fragment>
-                <Breadcrumb title="Project" parent="Dashboard" />
-                <div className="container-fluid">
-                    <div className="row theme-tab">
-                        <Tabs className="col-sm-12">
-                            <TabList className="tabs tab-title">
-                                <Tab className="current">
-                                    <Home />{Homes}
-                                </Tab>
-                                <Tab>
-                                    <Activity />{BudgetSummary}
-                                </Tab>
-                                <Tab>
-                                    <Users />{TeamMembers}
-                                </Tab>
-                            </TabList>
-                            <div className="tab-content-cls">
-                                <TabPanel>
-                                    <HomeComponent />
-                                </TabPanel>
-                                <TabPanel>
-                                    <BudgetComponent />
-                                </TabPanel>
-                                <TabPanel >
-                                    <UserComponent />
-                                </TabPanel>
+    return (
+        <Fragment>
+            <Breadcrumb parent="Dashboard" title="Project" />
+            <div className="container-fluid">
+                <div className="row">
+                    <div className="col-sm-12">
+                        <div className="card">
+                            <div className="card-header">
+                                <h5>Sample Card</h5><span>lorem ipsum dolor sit amet, consectetur adipisicing elit</span>
                             </div>
-                        </Tabs>
+                            <div className="card-body">
+                                <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </Fragment>
-        );
-}
+            </div>
+        </Fragment>
+    );
+};
 
 export default Project;

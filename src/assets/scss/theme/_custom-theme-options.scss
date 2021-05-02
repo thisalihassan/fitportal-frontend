@@ -2,36 +2,44 @@
    55. theme layout CSS Start
 ==========================**/
 //Sidebar color scss
-$color1: #405365;
-$color2: #1c1d1e;
-$color3: #0c0c3c;
-$color4: #0747a6;
-$color5: #4d3096;
-@each $bg-name, $bg-color in (color1, $color1), (color2, $color2), (color3, $color3), (color4, $color4),
-	(color5, $color5), (light, $light-color), (dark, #2f3c4e)
-{
-	.bg-#{$bg-name} {
-		background-color: $bg-color !important ;
+$color1 : #405365;
+$color2 : #1C1D1E;
+$color3 : #0c0c3c;
+$color4 : #0747a6;
+$color5 : #4d3096;
+@each $bg-name, $bg-color in (color1, $color1),
+				(color2, $color2) ,
+				(color3, $color3),
+				(color4, $color4),
+				(color5, $color5),
+				(light, $light-color),
+				(dark, #2f3c4e){
+	.bg-#{$bg-name}{
+		background-color:$bg-color !important ;
 	}
 }
-$i: 1;
+$i:1;
 @while $i<=6 {
-	.bg-pattern#{$i} {
+	.bg-pattern#{$i}{
 		background-image: url(../../images/sidebar-pattern/#{$i}.png) !important;
 		background-color: #2f3c4e;
 	}
-	.bg-img#{$i} {
+	.bg-img#{$i}{
 		background-image: url(../../images/sidebar-image/#{$i}.jpg) !important;
 	}
-	$i: $i + 1;
+	$i:$i+1;
 }
 .page-wrapper {
 	.page-body-wrapper {
-		.page-sidebar {
-			@each $sidebar-name, $sidebar-color in (color1, $color1), (color2, $color2), (color3, $color3),
-				(color4, $color4), (color5, $color5), (light, $light-color), (dark, #2f3c4e)
-			{
-				&.#{$sidebar-name}-sidebar {
+		.page-sidebar{
+			@each $sidebar-name, $sidebar-color in (color1, $color1),
+							(color2, $color2) ,
+							(color3, $color3),
+							(color4, $color4),
+							(color5, $color5),
+							(light, $light-color),
+							(dark, #2f3c4e){
+				&.#{$sidebar-name}-sidebar{
 					background-color: $sidebar-color;
 					.sidebar-menu {
 						> li {
@@ -42,30 +50,30 @@ $i: 1;
 							}
 						}
 						.sidebar-submenu {
-							> li {
-								> a {
-									&:hover,
-									&.active {
+							> li{
+								> a{
+									&:hover,&.active{
 										color: $white;
 									}
 								}
 								&.active {
-									> a {
-										&.active {
+									> a{
+										&.active{
 											color: $white;
 										}
 									}
 								}
+
 							}
 						}
 					}
-					@if ($sidebar-name == light) {
+					@if($sidebar-name == light){
 						.sidebar-user {
-							h6 {
+							h6{
 								color: $primary-color;
 							}
-							p {
-								color: $theme-body-font-color;
+							p{
+								color: 	$theme-body-font-color
 							}
 						}
 						.sidebar-menu {
@@ -78,17 +86,16 @@ $i: 1;
 								}
 							}
 							.sidebar-submenu {
-								> li {
-									> a {
+								> li{
+									> a{
 										color: $theme-body-font-color;
-										&:hover,
-										&.active {
+										&:hover,&.active{
 											color: $primary-color;
 										}
 									}
 									&.active {
-										> a {
-											&.active {
+										> a{
+											&.active{
 												color: $primary-color;
 											}
 										}
@@ -99,16 +106,16 @@ $i: 1;
 					}
 				}
 			}
-			$i: 1;
+			$i:1;
 			@while $i<=6 {
-				&.sidebar-pattern#{$i} {
+				&.sidebar-pattern#{$i}{
 					background-image: url(../../images/sidebar-pattern/#{$i}.png);
 					background-color: #2f3c4e !important;
 				}
-				&.sidebar-img#{$i} {
+				&.sidebar-img#{$i}{
 					background-image: url(../../images/sidebar-image/#{$i}.jpg);
 				}
-				$i: $i + 1;
+				$i:$i+1;
 			}
 		}
 	}
@@ -116,27 +123,26 @@ $i: 1;
 //Sidebar settings
 .page-wrapper {
 	.page-body-wrapper {
-		.page-sidebar {
+		.page-sidebar{
 			&[sidebar-layout="border-sidebar"] {
 				.sidebar-header {
 					border-bottom: 1px solid rgba(124, 124, 124, 0.15);
 					transition: all 0.3s ease;
 				}
 			}
-			&[sidebar-layout="iconcolor-sidebar"] {
-				.sidebar-menu {
-					li {
-						$colors: $success-color, $secondary-color, $primary-color, $danger-color, $info-color,
-							$warning-color, $light-color;
-						$repeat: 100;
+			&[sidebar-layout="iconcolor-sidebar"]{
+				.sidebar-menu{
+					li{
+						$colors: $success-color, $secondary-color, $primary-color, $danger-color, $info-color, $warning-color, $light-color;
+						$repeat: 100 ;
 						@for $i from 1 through $repeat {
-							&:nth-child(#{length($colors)}n + #{$i}) {
-								svg {
+							&:nth-child(#{length($colors)}n+#{$i}) {
+								svg{
 									color: lighten(nth($colors, random(length($colors))), 15%);
 								}
-								a {
-									&:hover {
-										> span {
+								a{
+									&:hover{
+										> span{
 											color: lighten(nth($colors, random(length($colors))), 15%);
 										}
 									}
@@ -145,20 +151,19 @@ $i: 1;
 						}
 					}
 				}
-				&.light-sidebar {
-					.sidebar-menu {
-						li {
-							$colors: $success-color, $secondary-color, $primary-color, $danger-color, $info-color,
-								$warning-color, $dark-color;
-							$repeat: 100;
+				&.light-sidebar{
+					.sidebar-menu{
+						li{
+							$colors: $success-color, $secondary-color, $primary-color, $danger-color, $info-color, $warning-color, $dark-color;
+							$repeat: 100 ;
 							@for $i from 1 through $repeat {
-								&:nth-child(#{length($colors)}n + #{$i}) {
-									svg {
+								&:nth-child(#{length($colors)}n+#{$i}) {
+									svg{
 										color: darken(nth($colors, random(length($colors))), 15%);
 									}
-									a {
-										&:hover {
-											span {
+									a{
+										&:hover{
+											span{
 												color: darken(nth($colors, random(length($colors))), 15%);
 											}
 										}
@@ -190,7 +195,7 @@ $i: 1;
 								background-color: $light-color !important;
 							}
 							ul {
-								li {
+								li{
 									&:hover {
 										.sidebar-submenu {
 											background-color: $light-color !important;
@@ -216,7 +221,7 @@ $i: 1;
 								background-color: $color1 !important;
 							}
 							ul {
-								li {
+								li{
 									&:hover {
 										.sidebar-submenu {
 											background-color: $color1 !important;
@@ -242,7 +247,7 @@ $i: 1;
 								background-color: $color2 !important;
 							}
 							ul {
-								li {
+								li{
 									&:hover {
 										.sidebar-submenu {
 											background-color: $color2 !important;
@@ -268,7 +273,7 @@ $i: 1;
 								background-color: $color3 !important;
 							}
 							ul {
-								li {
+								li{
 									&:hover {
 										.sidebar-submenu {
 											background-color: $color3 !important;
@@ -294,7 +299,7 @@ $i: 1;
 								background-color: $color4 !important;
 							}
 							ul {
-								li {
+								li{
 									&:hover {
 										.sidebar-submenu {
 											background-color: $color4 !important;
@@ -320,7 +325,7 @@ $i: 1;
 								background-color: $color5 !important;
 							}
 							ul {
-								li {
+								li{
 									&:hover {
 										.sidebar-submenu {
 											background-color: $color5 !important;
@@ -338,17 +343,17 @@ $i: 1;
 
 //Dark layout
 body {
-	&.light-only {
-		.page-wrapper {
-			.page-body-wrapper {
-				.page-sidebar {
+	&.light-only{
+		.page-wrapper{
+			.page-body-wrapper{
+				.page-sidebar{
 					background-color: $white;
 					.sidebar-user {
-						h6 {
+						h6{
 							color: $primary-color;
 						}
-						p {
-							color: $theme-body-font-color;
+						p{
+							color: 	$theme-body-font-color
 						}
 					}
 					.sidebar-menu {
@@ -361,17 +366,16 @@ body {
 							}
 						}
 						.sidebar-submenu {
-							> li {
-								> a {
+							> li{
+								> a{
 									color: $theme-body-font-color;
-									&:hover,
-									&.active {
+									&:hover,&.active{
 										color: $primary-color;
 									}
 								}
 								&.active {
-									> a {
-										&.active {
+									> a{
+										&.active{
 											color: $primary-color;
 										}
 									}
@@ -418,8 +422,7 @@ body {
 			}
 		}
 		.ProfileCard-realName {
-			a,
-			span {
+			a, span {
 				color: $dark-small-font-color;
 			}
 		}
@@ -441,28 +444,23 @@ body {
 			}
 		}
 		.vertical-timeline-element-icon {
-			box-shadow: 0 0 0 4px $dark-border-color, inset 0 2px 0 rgba($black, 0.08), 0 3px 0 4px rgba($black, 0.05);
+			box-shadow: 0 0 0 4px $dark-border-color, inset 0 2px 0 rgba($black,.08), 0 3px 0 4px rgba($black,.05);
 		}
 		.vertical-timeline {
 			&::before {
 				background: $dark-border-color !important;
 			}
 		}
-		.sweet-alert,
-		.reactour__helper,
-		.fileContainer,
-		.ceCBVJ {
+		.sweet-alert, .reactour__helper, .fileContainer, .ceCBVJ {
 			background-color: $dark-card-background !important;
 		}
-		.rbc-month-view,
-		.rbc-time-view {
+		.rbc-month-view, .rbc-time-view {
 			border: 1px solid $dark-border-color;
 		}
 		.rbc-toolbar {
 			button {
 				color: $dark-small-font-color;
-				&:hover,
-				&:focus {
+				&:hover, &:focus {
 					background-color: $primary-color;
 					color: $white;
 				}
@@ -474,19 +472,18 @@ body {
 			}
 		}
 		.rbc-off-range-bg {
-			background: $dark-body-background;
+			background: $dark-body-background ;
 		}
 		.rbc-day-bg {
 			+ .rbc-day-bg {
 				border-left: 1px solid $dark-border-color;
 			}
 		}
-		.rbc-header,
-		.rbc-timeslot-group {
+		.rbc-header, .rbc-timeslot-group {
 			border-bottom: 1px solid $dark-border-color;
-			+ .rbc-header {
+			 + .rbc-header {
 				border-left: 1px solid $dark-border-color;
-			}
+			 }
 		}
 		.rbc-time-content {
 			border-top: 2px solid $dark-border-color;
@@ -519,24 +516,14 @@ body {
 				border-top: 1px solid $dark-border-color;
 			}
 		}
-		.rbc-time-header-content,
-		.rbc-time-content > * + * > * {
+		.rbc-time-header-content, .rbc-time-content > * + * > * {
 			border-left: $dark-border-color;
 		}
 		#external-events {
 			border: 1px solid $dark-border-color;
 		}
 		.fc-unthemed {
-			th,
-			td,
-			thead,
-			tbody,
-			.fc-divider,
-			.fc-row,
-			.fc-content,
-			.fc-popover,
-			.fc-list-view,
-			.fc-list-heading td {
+			th,  td,  thead,  tbody,  .fc-divider,  .fc-row,  .fc-content,  .fc-popover,  .fc-list-view,  .fc-list-heading td {
 				border-color: $dark-border-color;
 			}
 			td {
@@ -544,12 +531,9 @@ body {
 					background: $dark-body-background;
 				}
 			}
-			.fc-divider,
-			.fc-popover,
-			.fc-list-heading {
+			.fc-divider, .fc-popover , .fc-list-heading {
 				background-color: $dark-border-color;
-				.fc-header,
-				td {
+				.fc-header, td {
 					background-color: $dark-border-color;
 				}
 			}
@@ -559,36 +543,10 @@ body {
 				.main-menu {
 					> li {
 						a {
-							&.active,
-							&:hover {
+							&.active, &:hover {
 								background: $dark-body-background;
 							}
 						}
-					}
-				}
-			}
-		}
-		.list-persons {
-			.profile-mail {
-				.media {
-					.media-body {
-						ul {
-							li {
-								+ li {
-									border-left: 2px solid $dark-border-color;
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-		.contacts-tabs {
-			.nav-pills {
-				border-right: 1px solid $dark-border-color;
-				.nav-link {
-					+ .nav-link {
-						border-top: 1px solid $dark-border-color;
 					}
 				}
 			}
@@ -610,10 +568,10 @@ body {
 				}
 			}
 		}
-		.my-gallery {
+		.my-gallery{
 			&.gallery-with-description {
 				.caption {
-					border: 1px solid $dark-border-color;
+                   border: 1px solid $dark-border-color;
 				}
 				figure {
 					.img-thumbnail {
@@ -625,8 +583,7 @@ body {
 		.masonry-with-dec {
 			.my-masonry-grid_column {
 				li {
-					img,
-					.caption {
+					img, .caption {
 						border: 1px solid $dark-border-color;
 					}
 				}
@@ -637,43 +594,39 @@ body {
 				background-color: $dark-body-background;
 			}
 		}
-		.table-primary,
-		.table-secondary,
-		.table-success,
-		.table-info,
-		.table-warning,
-		.table-danger,
-		.table-light {
-			th,
-			td {
+		.table-primary, .table-secondary, .table-success, .table-info, .table-warning, .table-danger, .table-light {
+			th,td {
 				color: $black !important;
 			}
 		}
-		@each $border-tab-name, $border-tab-color in (primary, $primary-color), (secondary, $secondary-color),
-			(success, $success-color), (danger, $danger-color), (info, $info-color), (light, $light-color),
-			(dark, $dark-color), (warning, $warning-color)
-		{
-			.borderb-tab-#{$border-tab-name} {
-				.nav-tabs {
-					&.nav-item {
-						.nav-link {
-							color: $dark-all-font-color;
-						}
-					}
-					.nav-link {
-						&.active {
-							color: $border-tab-color;
-							border-bottom: 2px solid $border-tab-color !important;
-						}
-					}
+		@each $border-tab-name, $border-tab-color in (primary, $primary-color),
+        (secondary, $secondary-color) ,
+        (success, $success-color),
+        (danger, $danger-color),
+        (info, $info-color),
+        (light, $light-color),
+        (dark, $dark-color),
+        (warning, $warning-color) {
+		.borderb-tab-#{$border-tab-name}{
+			.nav-tabs {
+			&.nav-item {
+				.nav-link {
+				color: $dark-all-font-color;
 				}
 			}
+			.nav-link {
+				&.active {
+				color: $border-tab-color;
+				border-bottom: 2px solid $border-tab-color !important;
+				}
+			}
+			}
+		}
 		}
 		ol {
 			&.progtrckr {
 				li {
-					&.progtrckr-doing,
-					&.progtrckr-done {
+					&.progtrckr-doing, &.progtrckr-done {
 						color: $dark-small-font-color;
 					}
 					&.progtrckr-todo {
@@ -720,31 +673,11 @@ body {
 				}
 			}
 		}
-		.mega-inline,
-		.mega-horizontal {
+		.mega-inline, .mega-horizontal {
 			.card {
 				border: 1px solid $dark-border-color;
 			}
 		}
-
-		// draggable card
-		.react-kanban-column {
-			background-color: $dark-body-background;
-		}
-		.react-kanban-card,
-		.react-kanban-card-adder-form,
-		.react-kanban-card-skeleton {
-			background-color: $dark-card-background;
-		}
-		.react-kanban-card__title {
-			border-bottom: 1px solid $dark-border-color;
-		}
-		.draggable-card {
-			.react-kanban-card__title {
-				border-bottom: none;
-			}
-		}
-
 		.input-cropper {
 			border: 1px solid $dark-border-color;
 		}
@@ -754,61 +687,6 @@ body {
 		.dzu-previewButton {
 			filter: brightness(0.5) invert(1);
 		}
-
-		// react datatable
-		.rdt_Table {
-			border: 1px solid $dark-border-color;
-		}
-		.rdt_TableHeadRow {
-			background-color: $dark-card-background;
-		}
-		.rdt_TableCol,
-		.rdt_TableCol_Sortable,
-		.___react-data-table-allow-propagation___ {
-			color: $dark-all-font-color;
-		}
-		.rdt_TableRow {
-			&:nth-of-type(odd) {
-				color: $dark-all-font-color;
-				background-color: $dark-body-background;
-			}
-			&:nth-of-type(even) {
-				color: $dark-all-font-color;
-				background-color: $dark-card-background;
-			}
-		}
-		.fpZHHx {
-			fill: $dark-all-font-color;
-			color: $dark-all-font-color;
-		}
-		.rdt_Pagination {
-			background-color: $dark-card-background;
-			border-top-color: $dark-border-color;
-			color: $dark-all-font-color;
-			button {
-				color: $dark-all-font-color;
-				fill: $dark-all-font-color;
-				&:disabled {
-					color: $dark-small-font-color;
-					fill: $dark-small-font-color;
-				}
-			}
-		}
-		.rdt_TableCol_Sortable {
-			&:hover {
-				color: $dark-all-font-color;
-			}
-		}
-		.rdt_TableHeader {
-			background-color: $dark-body-background !important;
-			> div {
-				&:last-child {
-					background-color: $dark-body-background !important;
-					color: $dark-all-font-color;
-				}
-			}
-		}
-
 		.popover-header {
 			color: $theme-body-font-color;
 		}
@@ -826,35 +704,13 @@ body {
 		.dropdown-menu {
 			background-color: $dark-body-background !important;
 		}
-		.dropdown-item,
-		span.twitter-typeahead .tt-suggestion {
+		.dropdown-item, span.twitter-typeahead .tt-suggestion {
 			color: $dark-all-font-color;
-			&:hover,
-			&:focus,
-			&.active {
+			&:hover, &:focus, &.active {
 				background-color: $dark-card-background !important;
 				color: $dark-all-font-color !important;
 			}
 		}
-
-		// kanban board
-		.kanban-container {
-			.kanban-item {
-				.kanban-box {
-					background-color: $dark-card-background;
-				}
-			}
-		}
-		.jkanban-container {
-			.kanban-container {
-				.kanban-item {
-					.kanban-box {
-						border: 1px solid $dark-border-color;
-					}
-				}
-			}
-		}
-
 		.modal-header {
 			.close {
 				color: $dark-small-font-color;
@@ -865,13 +721,12 @@ body {
 		}
 		.tab-vertical {
 			.nav-tabs {
-				border: 1px solid hsla(0, 0%, 100%, 0.3);
+				border: 1px solid hsla(0,0%,100%,.3);
 				.nav-link {
 					+ .nav-link {
-						border-top: 1px solid hsla(0, 0%, 100%, 0.3);
+						border-top: 1px solid hsla(0,0%,100%,.3);
 					}
-					&:hover,
-					&:focus {
+					&:hover, &:focus {
 						background-color: $dark-body-background;
 					}
 				}
@@ -925,7 +780,7 @@ body {
 				}
 			}
 		}
-		.checkout {
+		.checkout{
 			.checkout-details {
 				background-color: $dark-body-background;
 				border: 1px solid $dark-border-color;
@@ -933,40 +788,40 @@ body {
 			}
 		}
 		.order-box {
-			.title-box {
+			.title-box{
 				color: #bfc2c6;
 				border-bottom: 1px solid $dark-border-color;
 			}
 			.qty {
-				li {
+				li{
 					color: #bfc2c6;
-					span {
+					span{
 						color: #bfc2c6;
 					}
 				}
 				border-bottom: 1px solid $dark-border-color;
 			}
 			.sub-total {
-				li {
+				li{
 					color: #bfc2c6;
 				}
 			}
 			.total {
-				li {
+				li{
 					color: #bfc2c6;
 				}
 			}
 		}
-		.shopping-checkout-option {
-			.checkbox_animated {
-				&:after {
+		.shopping-checkout-option{
+			.checkbox_animated{
+				&:after{
 					border: 2px solid $dark-border-color;
 				}
 			}
 		}
-		.animate-chk {
-			.radio_animated {
-				&:after {
+		.animate-chk{
+			.radio_animated{
+				&:after{
 					border: 2px solid $dark-border-color;
 				}
 			}
@@ -999,8 +854,7 @@ body {
 				}
 			}
 		}
-		.radio_animated,
-		.checkbox_animated {
+		.radio_animated, .checkbox_animated{
 			&:after {
 				background: $dark-body-background;
 				border: 2px solid $dark-body-background;
@@ -1018,46 +872,45 @@ body {
 				}
 			}
 		}
-		.bitcoin-form {
-			.bitcoin-form-dropdown {
+		.bitcoin-form{
+			.bitcoin-form-dropdown{
 				.onhover-dropdown {
 					.btn {
 						background-color: $dark-border-color;
 						color: $dark-all-font-color;
 					}
-					.onhover-show-div {
+					.onhover-show-div{
 						background-color: $dark-body-background;
 						box-shadow: 0 0 2px 2px $dark-body-background;
 					}
 				}
 			}
-			.form-row {
-				.input-group {
-					.input-group-prepend {
-						.input-group-text {
+			.form-row{
+				.input-group{
+					.input-group-prepend{
+						.input-group-text{
 							border: 1px solid $dark-border-color;
 						}
 					}
 				}
 			}
 		}
-		.active-order-table,
-		.market-table {
-			table {
-				thead {
-					tr {
+		.active-order-table, .market-table {
+			table{
+				thead{
+					tr{
 						th {
 							border-top: none !important;
 						}
 					}
 				}
-				tbody {
-					tr {
-						td {
+				tbody{
+					tr{
+						td{
 							border-bottom: 1px solid $dark-border-color;
 						}
-						&:last-child {
-							td {
+						&:last-child{
+							td{
 								border-bottom: none;
 							}
 						}
@@ -1065,9 +918,9 @@ body {
 				}
 			}
 		}
-		.pricing-card-design-2 {
-			.pricing-block {
-				.pricing-inner {
+		.pricing-card-design-2{
+			.pricing-block{
+				.pricing-inner{
 					ul {
 						li {
 							border-bottom: 1px solid $dark-border-color;
@@ -1076,32 +929,31 @@ body {
 				}
 			}
 		}
-		.flot-chart-container {
-			.legend {
-				.table {
-					tbody {
+		.flot-chart-container{
+			.legend{
+				.table{
+					tbody{
 						background-color: $dark-card-background;
 						color: $white;
-						.legendLabel {
+						.legendLabel{
 							padding-left: 5px;
 						}
 					}
 				}
 			}
 		}
-		.google-visualization-tooltip {
-			text {
+		.google-visualization-tooltip{
+			text{
 				fill: rgba(0, 0, 0, 0.7) !important;
 			}
 		}
-		.nav-dark,
-		.nav-pills.nav-dark {
-			.nav-link {
+		.nav-dark ,.nav-pills.nav-dark{
+			.nav-link{
 				color: $white;
 			}
 		}
 		.loader-wrapper {
-			background-color: $dark-body-background;
+			background-color: $dark-body-background ;
 			.loader {
 				background-color: $dark-body-background !important;
 			}
@@ -1135,7 +987,7 @@ body {
 				}
 				.rt-tbody {
 					.rt-tr-group {
-						.rt-tr {
+						.rt-tr{
 							&.-odd {
 								background-color: $dark-body-background;
 							}
@@ -1151,8 +1003,7 @@ body {
 				.-btn {
 					color: $dark-small-font-color;
 				}
-				input,
-				select {
+				input, select {
 					background: $dark-body-background;
 					color: $white;
 				}
@@ -1170,21 +1021,21 @@ body {
 						}
 					}
 					.nav-right {
-						> ul {
-							> li {
+						> ul{
+							> li{
 								border-left: 1px solid $dark-border-color;
 								&:last-child,
 								&:nth-child(5),
-								&:nth-child(1) {
+								&:nth-child(1){
 									border-left: none;
 								}
-								&:nth-child(5) {
+								&:nth-child(5){
 									border-right: 1px solid $dark-border-color;
 								}
-								&:first-child {
+								&:first-child{
 									.search-form {
-										.form-group {
-											&:before {
+										.form-group{
+											&:before{
 												background: $dark-border-color;
 											}
 										}
@@ -1217,7 +1068,7 @@ body {
 										span {
 											color: $dark-small-font-color;
 										}
-										&:hover {
+										&:hover{
 											background-color: #282e38;
 										}
 									}
@@ -1239,19 +1090,15 @@ body {
 							li {
 								a {
 									color: $dark-all-font-color;
-									svg {
-										path,
-										line,
-										circle {
+									svg{
+										path, line, circle{
 											color: $dark-all-font-color !important;
 										}
 									}
-									&:hover {
+									&:hover{
 										color: $primary-color;
-										svg {
-											line,
-											path,
-											circle {
+										svg{
+											line, path, circle{
 												color: $primary-color !important;
 											}
 										}
@@ -1303,11 +1150,11 @@ body {
 							}
 						}
 					}
-					.mega-menu-header {
-						.vertical-menu-main {
-							.main-nav {
-								.main-menu {
-									li {
+					.mega-menu-header{
+						.vertical-menu-main{
+							.main-nav{
+								.main-menu{
+									li{
 										background-color: $dark-card-background;
 									}
 								}
@@ -1322,27 +1169,27 @@ body {
 							.image-dark {
 								display: none;
 							}
-							.image-light {
+							.image-light{
 								display: block;
 							}
 						}
 					}
 				}
-				@media only screen and (max-width: 991px) {
-					.main-header-right {
+				@media only screen and (max-width: 991px){
+					.main-header-right{
 						.nav-right {
-							> ul {
+							> ul{
 								background-color: $dark-card-background;
 								box-shadow: 0 2px 2px 2px $dark-border-color;
 							}
 						}
 					}
 				}
-				@media only screen and (max-width: 575px) {
-					.nav-right {
+				@media only screen and (max-width: 575px){
+					.nav-right{
 						> ul {
 							.search-form {
-								.form-control-plaintext {
+								.form-control-plaintext{
 									background-color: $dark-body-background;
 									border: 1px solid $dark-border-color;
 									color: $dark-all-font-color;
@@ -1352,15 +1199,15 @@ body {
 					}
 				}
 			}
-			.right-sidebar {
+			.right-sidebar{
 				background-color: $dark-body-background;
 				box-shadow: 0 0 11px rgba(69, 110, 243, 0.13);
-				.modal-header {
+				.modal-header{
 					border-bottom: 1px solid $dark-border-color;
 				}
 				.friend-list-search {
 					background-color: $dark-card-background;
-					input {
+					input{
 						background-color: $dark-body-background;
 						border: 1px solid $dark-border-color;
 					}
@@ -1370,27 +1217,27 @@ body {
 			.page-body-wrapper {
 				/* sidebar start */
 				&.sidebar-icon {
-					.page-sidebar {
+					.page-sidebar{
 						.sidebar-menu {
-							.sidebar-header {
+							.sidebar-header{
 								> i {
 									color: $dark-all-font-color;
 								}
 							}
-							li {
+							li{
 								background-color: $dark-card-background;
-								&:hover {
+								&:hover{
 									.single-header,
-									.sidebar-submenu {
+									.sidebar-submenu{
 										background-color: $dark-card-background;
 									}
 								}
-								a:hover + ul {
+								a:hover + ul{
 									background-color: $dark-card-background;
 								}
 							}
 						}
-						.sidebar-user {
+						.sidebar-user{
 							box-shadow: 3px 2px 7px -1px rgb(41, 50, 64);
 						}
 					}
@@ -1421,7 +1268,8 @@ body {
 							color: $primary-color;
 							border-bottom: 1px solid rgba(241, 241, 241, 0.35);
 						}
-						> li {
+						>
+						li {
 							> a {
 								color: $dark-all-font-color;
 								&.active {
@@ -1444,6 +1292,7 @@ body {
 							&.sidebar-header {
 								color: $warning-color;
 							}
+
 						}
 						a {
 							color: $light-color;
@@ -1464,12 +1313,12 @@ body {
 				/* sidebar end */
 
 				/* body start*/
-				.page-body {
-					.topper-lists {
+				.page-body{
+					.topper-lists{
 						table {
-							tbody {
-								tr {
-									td {
+							tbody{
+								tr{
+									td{
 										p {
 											color: $dark-small-font-color;
 										}
@@ -1481,15 +1330,13 @@ body {
 					.header-small {
 						color: $dark-small-font-color;
 					}
-					.statistics {
+					.statistics{
 						p {
 							color: $dark-small-font-color;
 						}
 					}
-					.feather-main,
-					.professor-table {
-						.media-body,
-						.professor-block {
+					.feather-main, .professor-table {
+						.media-body, .professor-block{
 							p {
 								color: $dark-small-font-color;
 							}
@@ -1498,29 +1345,28 @@ body {
 					.logs-element {
 						span {
 							+ span {
-								color: $dark-small-font-color;
+								color: $dark-small-font-color
 							}
 						}
 					}
-					.progress-block {
-						.progress-title {
-							span {
+					.progress-block{
+						.progress-title{
+							span{
 								+ span {
 									color: $dark-small-font-color;
 								}
 							}
 						}
 					}
-					.ecommerce-icons {
-						div {
-							span {
+					.ecommerce-icons{
+						div{
+							span{
 								color: $dark-small-font-color;
 							}
 						}
 					}
-					.new-users,
-					.recent-notification {
-						.media {
+					.new-users, .recent-notification{
+						.media{
 							.media-body {
 								p {
 									color: $dark-small-font-color;
@@ -1528,30 +1374,30 @@ body {
 							}
 						}
 					}
-					.progress-media {
-						.media {
+					.progress-media{
+						.media{
 							.media-body {
 								span {
 									color: $dark-small-font-color;
 								}
 							}
 						}
-						.progress-change {
+						.progress-change{
 							span {
 								color: $dark-small-font-color;
 							}
 						}
 					}
-					.topper-lists {
-						table {
-							tbody {
-								tr {
+					.topper-lists{
+						table{
+							tbody{
+								tr{
 									td {
 										border-top: none !important;
 										border-bottom: 1px solid $dark-border-color;
 									}
-									&:last-child {
-										td {
+									&:last-child{
+										td{
 											border-bottom: none;
 										}
 									}
@@ -1559,9 +1405,9 @@ body {
 							}
 						}
 					}
-					.notifiaction-media {
-						.media {
-							.media-body {
+					.notifiaction-media{
+						.media{
+							.media-body{
 								.circle-left {
 									border: 5px solid #334154;
 								}
@@ -1571,14 +1417,14 @@ body {
 					.upcoming-event {
 						.upcoming-innner {
 							border-bottom: 1px solid $dark-border-color;
-							&:last-child {
+							&:last-child{
 								border-bottom: none;
 							}
 						}
 					}
-					.professor-table {
-						table {
-							tbody {
+					.professor-table{
+						table{
+							tbody{
 								tr {
 									td {
 										border-top: none !important;
@@ -1587,29 +1433,29 @@ body {
 							}
 						}
 					}
-					.number-widgets {
-						.media {
-							.media-body {
+					.number-widgets{
+						.media{
+							.media-body{
 								h6 {
 									color: $dark-all-font-color;
 								}
 							}
 						}
 					}
-					.activity {
+					.activity{
 						.media {
-							.gradient-round {
+							.gradient-round{
 								&.gradient-line-1,
 								&.small-line,
-								&.medium-line {
+								&.medium-line{
 									&:after {
 										background-color: $dark-border-color;
 									}
 								}
 							}
-							.media-body {
-								h6 {
-									span {
+							.media-body{
+								h6{
+									span{
 										color: $dark-small-font-color;
 									}
 								}
@@ -1617,8 +1463,8 @@ body {
 						}
 					}
 					.card.custom-card {
-						.card-header {
-							border-bottom: none !important;
+						.card-header{
+							border-bottom : none !important;
 						}
 					}
 				}
@@ -1649,18 +1495,18 @@ body {
 						.card-header {
 							background-color: $dark-card-background;
 							border-bottom: 1px solid $dark-border-color;
-							.buttons-right {
+							.buttons-right{
 								.right-header-dropdown.onhover-show-div {
 									background-color: $dark-body-background;
 									box-shadow: 0 0 2px 2px $dark-body-background;
-									a {
+									a{
 										color: $dark-all-font-color;
 									}
 								}
 							}
-							&.card-header-border {
-								.right-header {
-									span {
+							&.card-header-border{
+								.right-header{
+									span{
 										&:first-child {
 											color: $dark-small-font-color;
 										}
@@ -1668,7 +1514,7 @@ body {
 									.right-header-dropdown.onhover-show-div {
 										background-color: $dark-body-background;
 										box-shadow: 0 0 2px 2px $dark-body-background;
-										a {
+										a{
 											color: $dark-all-font-color;
 										}
 									}
@@ -1677,12 +1523,7 @@ body {
 							> span {
 								color: $dark-all-font-color;
 							}
-							h1,
-							h2,
-							h3,
-							h4,
-							h5,
-							h6 {
+							h1, h2, h3, h4, h5, h6 {
 								color: $dark-all-font-color;
 							}
 							.card-header-right {
@@ -1697,9 +1538,7 @@ body {
 								color: $dark-small-font-color;
 							}
 						}
-						.alert-light.outline,
-						.alert-light.outline-2x,
-						.alert-light.inverse {
+						.alert-light.outline, .alert-light.outline-2x, .alert-light.inverse {
 							color: $dark-all-font-color;
 						}
 						#animation-box {
@@ -1719,8 +1558,7 @@ body {
 							color: $dark-all-font-color;
 						}
 						.table {
-							th,
-							td {
+							th, td {
 								color: $dark-all-font-color;
 							}
 							thead {
@@ -1728,29 +1566,17 @@ body {
 									border-bottom: 2px solid $dark-border-color;
 								}
 								.border-bottom-primary {
-									th {
+									th{
 										border-bottom: 1px solid $primary-color;
 									}
 								}
 							}
-							.table-primary,
-							.table-secondary,
-							.table-success,
-							.table-info,
-							.table-warning,
-							.table-light,
-							.table-danger {
-								th,
-								td {
+							.table-primary, .table-secondary, .table-success, .table-info, .table-warning, .table-light, .table-danger {
+								th, td {
 									color: $sidebar-submenu-font-color;
 								}
 							}
-							.bg-primary,
-							.bg-secondary,
-							.bg-success,
-							.bg-info,
-							.bg-warning,
-							.bg-danger {
+							.bg-primary, .bg-secondary, .bg-success, .bg-info, .bg-warning, .bg-danger {
 								color: $white;
 							}
 							.bg-light {
@@ -1761,31 +1587,26 @@ body {
 									color: $black;
 								}
 							}
-							.double,
-							.dotted,
-							.dashed {
+							.double, .dotted, .dashed {
 								border-color: $dark-border-color;
 							}
 							tbody {
-								.border-bottom-primary {
-									th,
-									td {
+								.border-bottom-primary{
+									th, td{
 										border-bottom: 1px solid $primary-color;
 									}
 								}
 							}
 						}
-						.table-responsive {
-							.table {
-								th,
-								td {
+						.table-responsive{
+							.table{
+								th,td{
 									border-top: 1px solid $dark-border-color;
 								}
 							}
 						}
-						.table[class*="bg-"] {
-							th,
-							td {
+						.table[class*='bg-']{
+							th, td{
 								color: $white;
 							}
 						}
@@ -1793,10 +1614,9 @@ body {
 							tbody {
 								tr {
 									&:nth-of-type(odd) {
-										background-color: rgba(0, 0, 0, 0.05);
+										background-color:rgba(0, 0, 0, 0.05);
 										&:hover {
-											th,
-											td {
+											th, td {
 												color: $white;
 											}
 										}
@@ -1805,17 +1625,16 @@ body {
 							}
 						}
 						.table-bordered {
-							td,
-							th {
+							td, th {
 								border-color: $dark-border-color;
 							}
 						}
-						.table-inverse {
+						.table-inverse{
 							tbody {
-								tr {
-									&:nth-of-type(odd) {
+								tr{
+									&:nth-of-type(odd){
 										&:hover {
-											td {
+											td{
 												color: $dark-all-font-color;
 											}
 										}
@@ -1824,17 +1643,13 @@ body {
 							}
 						}
 						.table-border-vertical {
-							tr,
-							th,
-							td {
+							tr, th, td {
 								border-right: 1px solid $dark-border-color;
 							}
 						}
-						.table-styling {
-							thead,
-							tbody {
-								th,
-								td {
+						.table-styling{
+							thead, tbody{
+								th, td{
 									color: $white;
 								}
 							}
@@ -1877,8 +1692,7 @@ body {
 								}
 							}
 						}
-						.btn-outline-light,
-						.btn-outline-dark {
+						.btn-outline-light, .btn-outline-dark {
 							color: $white !important;
 						}
 						.btn-outline-light {
@@ -1901,9 +1715,7 @@ body {
 							}
 						}
 						.chart-overflow {
-							&#line-chart,
-							&#column-chart1,
-							&#column-chart2 {
+							&#line-chart,&#column-chart1,&#column-chart2{
 								rect {
 									fill: $dark-card-background;
 								}
@@ -1913,9 +1725,9 @@ body {
 									fill: $dark-card-background;
 								}
 								> g {
-									> g {
-										> g {
-											text {
+									>g{
+										>g{
+											text{
 												fill: rgb(177, 177, 178);
 											}
 										}
@@ -1946,10 +1758,7 @@ body {
 							border-right: 1px solid $dark-border-color !important;
 						}
 						.chart-container {
-							.live-products,
-							.turnover,
-							.monthly,
-							.uses {
+							.live-products, .turnover, .monthly, .uses {
 								.ct-labels {
 									.ct-label {
 										color: $white;
@@ -1959,8 +1768,7 @@ body {
 									stroke: $white;
 								}
 							}
-							#browser-uses-chart,
-							#website-visiter-chart {
+							#browser-uses-chart, #website-visiter-chart {
 								svg {
 									text {
 										fill: $dark-all-font-color;
@@ -1999,7 +1807,7 @@ body {
 						.page-link {
 							background-color: $dark-card-background;
 							border: 1px solid $dark-border-color;
-							&:hover {
+							&:hover{
 								background-color: $dark-border-color;
 							}
 						}
@@ -2026,47 +1834,46 @@ body {
 							background-color: $dark-card-background;
 							border-top: 1px solid $dark-border-color;
 						}
-						.product-table {
-							#API-2_wrapper {
-								#API-2 {
-									tbody {
-										td {
-											span,
-											p {
+						.product-table{
+							#API-2_wrapper{
+								#API-2{
+									tbody{
+										td{
+											span, p{
 												color: $dark-small-font-color;
 											}
 										}
 									}
 								}
 							}
-							h6 {
+							h6{
 								color: $dark-small-font-color;
 							}
 						}
-						.scroll-demo {
+						.scroll-demo{
 							border: 1px solid $dark-border-color;
 						}
-						.search-form {
-							input {
+						.search-form{
+							input{
 								border: 1px solid $dark-border-color;
 								color: $dark-all-font-color;
 								background-color: $dark-body-background;
 							}
-							.form-group {
+							.form-group{
 								&:before {
-									background: $dark-card-background;
+									background:$dark-card-background;
 								}
 							}
 						}
-						.cd-timeline-content {
+						.cd-timeline-content{
 							background-color: $dark-border-color;
-							&::before {
+							&::before{
 								border-left: 7px solid $dark-border-color;
 							}
 						}
-						.cd-timeline-block {
+						.cd-timeline-block{
 							&:nth-child(even) {
-								.cd-timeline-content {
+								.cd-timeline-content{
 									&::before {
 										border-right-color: $dark-border-color;
 										border-left: transparent;
@@ -2074,22 +1881,18 @@ body {
 								}
 							}
 						}
-						.breadcrumb {
+						.breadcrumb{
 							background-color: $dark-body-background;
 						}
-						.user-status {
-							table {
-								td,
-								th {
+						.user-status{
+							table{
+								td, th{
 									border-top: none !important;
 								}
 							}
 						}
-						#donut-color-chart-morris-daily,
-						#donut-color-chart-morris,
-						#browser-uses-chart,
-						#website-visiter-chart {
-							svg {
+						#donut-color-chart-morris-daily, #donut-color-chart-morris, #browser-uses-chart, #website-visiter-chart{
+							svg{
 								opacity: 0.5;
 							}
 						}
@@ -2119,64 +1922,58 @@ body {
 								}
 							}
 						}
-						.separator {
+						.separator{
 							border: 1px solid $dark-border-color;
 						}
 					}
-					.default-according {
-						li {
-							.text-muted {
-								color: $dark-all-font-color !important;
+					.default-according{
+						li{
+							.text-muted{
+								color: $dark-all-font-color!important;
 							}
 						}
 					}
 					.navs-icon.default-according.style-1 {
-						li {
-							button {
-								&:hover {
-									color: $primary-color !important;
+						li{
+							button{
+								&:hover
+								{
+									color: $primary-color!important;
 								}
 							}
 						}
 					}
-					.nav-list {
-						.nav-list-disc {
-							li {
-								a {
+					.nav-list{
+						.nav-list-disc{
+							li{
+								a{
 									color: $dark-all-font-color;
 								}
-								&:hover {
+								&:hover{
 									color: $primary-color;
-									a {
+									a{
 										color: $primary-color;
 									}
 								}
 							}
+
 						}
 					}
-					.navs-dropdown {
-						.onhover-show-div {
+					.navs-dropdown{
+						.onhover-show-div{
 							background-color: $dark-body-background;
 							box-shadow: 0 0 2px 2px $dark-border-color;
-							.navs-icon {
-								li {
-									a {
-										svg {
-											path,
-											line,
-											polyline,
-											polygon,
-											rect {
+							.navs-icon{
+								li{
+									a{
+										svg{
+											path, line, polyline, polygon, rect{
 												color: $dark-all-font-color !important;
 											}
 										}
-										&:hover {
-											svg {
-												path,
-												line,
-												polyline,
-												polygon,
-												rect {
+										&:hover{
+											svg{
+												path, line, polyline, polygon, rect{
 													color: $primary-color !important;
 												}
 											}
@@ -2186,10 +1983,10 @@ body {
 							}
 						}
 					}
-					.onhover-dropdown {
+					.onhover-dropdown{
 						&:hover {
-							.onhover-show-div {
-								&:before {
+							.onhover-show-div{
+								&:before{
 									border-bottom: 7px solid $dark-body-background;
 								}
 							}
@@ -2213,8 +2010,7 @@ body {
 						.blog-date {
 							color: $dark-all-font-color;
 						}
-						.blog-details,
-						.blog-details-main {
+						.blog-details, .blog-details-main {
 							.blog-social {
 								li {
 									color: $dark-small-font-color;
@@ -2260,7 +2056,7 @@ body {
 								}
 							}
 						}
-						hr {
+						hr{
 							border-top: 1px solid $dark-border-color;
 						}
 					}
@@ -2269,8 +2065,7 @@ body {
 							tr {
 								&:hover {
 									background-color: $dark-body-background;
-									td,
-									th {
+									td, th {
 										color: $white;
 									}
 								}
@@ -2302,8 +2097,7 @@ body {
 							}
 						}
 					}
-					#donut-color-chart-morris,
-					#donut-color-chart-morris-daily {
+					#donut-color-chart-morris, #donut-color-chart-morris-daily {
 						svg {
 							text {
 								fill: $dark-all-font-color;
@@ -2337,6 +2131,7 @@ body {
 									border-left: 1px solid $dark-border-color;
 								}
 							}
+
 						}
 					}
 					.form-control {
@@ -2350,8 +2145,7 @@ body {
 							border-bottom: 1px solid $primary-color !important;
 						}
 					}
-					.checkbox,
-					.radio {
+					.checkbox, .radio {
 						label {
 							&::before {
 								background-color: $dark-body-background;
@@ -2519,8 +2313,7 @@ body {
 						}
 					}
 					.social-widget-card {
-						h5,
-						h4 {
+						h5, h4 {
 							color: $dark-all-font-color;
 						}
 						span {
@@ -2570,26 +2363,25 @@ body {
 						}
 					}
 					.search-page {
-						.info-block {
-							+ .info-block {
+						.info-block{
+							+ .info-block{
 								border-top: 1px solid $dark-border-color;
 							}
 						}
 					}
-					.card-absolute {
-						.bg-primary,
-						.bg-secondary {
-							h5 {
+					.card-absolute{
+						.bg-primary, .bg-secondary{
+							h5{
 								color: $white;
 							}
 						}
 					}
-					.timeline-small {
-						.media {
-							.timeline-round {
+					.timeline-small{
+						.media{
+							.timeline-round{
 								&.timeline-line-1,
 								&.small-line,
-								&.medium-line {
+								&.medium-line{
 									&:after {
 										background-color: $dark-border-color;
 									}
@@ -2603,12 +2395,11 @@ body {
 					border-top: 1px solid $dark-body-background;
 					background-color: $dark-card-background;
 				}
-				.custom-select,
-				.custom-file-label {
+				.custom-select, .custom-file-label {
 					background: $dark-body-background;
 					color: $dark-all-font-color;
 				}
-				.footer-fix {
+				.footer-fix{
 					background-color: $dark-card-background;
 					border-top: 1px solid $dark-border-color;
 				}
@@ -2638,8 +2429,8 @@ body {
 								background-color: $dark-card-background;
 								box-shadow: 1px 1px 3px 1px $dark-body-background;
 							}
-							.avatar {
-								img {
+							.avatar{
+								img{
 									border: 5px solid $dark-border-color;
 								}
 							}
@@ -2678,13 +2469,13 @@ body {
 									}
 								}
 							}
-							img {
+							img{
 								box-shadow: 1px 1px 4px 1px $dark-body-background;
 							}
 						}
 						.chat-msg-box {
 							.my-message {
-								border: 1px solid $dark-border-color;
+								border: 1px solid $dark-border-color
 							}
 							.message {
 								color: $dark-all-font-color;
@@ -2716,10 +2507,10 @@ body {
 						}
 					}
 				}
-				.bitcoin-chat {
-					.chat {
-						.chat-msg-box {
-							.message {
+				.bitcoin-chat{
+					.chat{
+						.chat-msg-box{
+							.message{
 								&.my-message {
 									background-color: #1c222b;
 									.chat-user-img {
@@ -2747,15 +2538,13 @@ body {
 				box-shadow: 0 3px 20px 0 $dark-border-color;
 			}
 			.input-group-solid {
-				.input-group-text,
-				.form-control {
+				.input-group-text, .form-control {
 					background: $dark-body-background;
 					border: 1px solid $dark-border-color;
 					color: $dark-all-font-color;
 				}
 			}
-			.semilight-bg-color,
-			.header-bg-color {
+			.semilight-bg-color, .header-bg-color {
 				background-color: $white;
 			}
 			.list-group-item {
@@ -2846,9 +2635,7 @@ body {
 							}
 						}
 					}
-					h3,
-					h4,
-					h6 {
+					h3, h4, h6{
 						color: $white;
 					}
 				}
@@ -2857,8 +2644,7 @@ body {
 				background-blend-mode: overlay;
 				background-color: rgba(54, 64, 74, 0.7);
 				.authentication-box {
-					h4,
-					h3 {
+					h4, h3 {
 						color: $white;
 					}
 					h6 {
@@ -2868,8 +2654,8 @@ body {
 						background-color: $dark-card-background;
 						.theme-form {
 							.form-group {
-								input[type="text"],
-								input[type="password"] {
+								input[type=text],
+								input[type=password] {
 									background-color: $dark-body-background;
 									border: 1px solid $dark-border-color;
 									color: $dark-all-font-color;
@@ -2935,7 +2721,7 @@ body {
 				}
 			}
 			.theme-form {
-				.login-divider {
+				.login-divider{
 					border-top: 1px solid $dark-border-color;
 					&:before {
 						background: $dark-border-color;
@@ -2968,6 +2754,7 @@ body {
 								background-color: $dark-border-color;
 							}
 						}
+
 					}
 					.authentication-box {
 						h4 {
@@ -2976,15 +2763,15 @@ body {
 						h6 {
 							color: $dark-small-font-color;
 						}
-						h3 {
+						h3{
 							color: $dark-all-font-color;
 						}
 						.card {
 							background-color: $dark-card-background;
 							.theme-form {
 								.form-group {
-									input[type="text"],
-									input[type="password"] {
+									input[type=text],
+									input[type=password] {
 										background-color: $dark-body-background;
 										border: 1px solid $dark-border-color;
 										color: $dark-all-font-color;
@@ -3003,44 +2790,46 @@ body {
 					}
 				}
 			}
-			.vertical-menu-main {
+			.vertical-menu-main{
 				background-color: $dark-card-background;
 			}
 			.pixelstrap {
-				a {
+				a{
 					color: $dark-all-font-color;
 					&:focus,
 					&:active,
-					&:hover {
+					&:hover{
 						color: $dark-all-font-color;
 					}
 				}
 				> {
 					li {
-						> a.highlighted {
-							&:before {
+						> a.highlighted{
+							&:before
+							{
 								background-color: $dark-card-background;
 							}
-							&:after {
+							&:after
+							{
 								background-color: $dark-border-color;
 							}
 						}
 					}
 				}
 			}
-			@media (min-width: 1200px) {
-				.pixelstrap {
+			@media (min-width: 1200px){
+				.pixelstrap{
 					ul {
 						background: $dark-body-background;
 						border: 1px solid $dark-border-color;
-						a {
+						a{
 							&:hover,
 							&:focus,
 							&:active,
-							&.highlighted {
+							&.highlighted{
 								color: $primary-color;
 							}
-							&.current {
+							&.current{
 								background-color: $dark-body-background;
 								color: $primary-color;
 							}
@@ -3049,26 +2838,26 @@ body {
 				}
 			}
 			.mega-menu {
-				.title {
+				.title{
 					color: $dark-all-font-color;
 					border-bottom: 1px solid $dark-border-color;
 				}
-				.galleria-list {
-					.galleria {
+				.galleria-list{
+					.galleria{
 						> div {
-							.username {
+							.username{
 								color: $dark-all-font-color;
-								small {
+								small{
 									color: $dark-small-font-color;
 								}
 							}
 						}
 					}
 				}
-				.list-unstyled {
-					div {
-						a {
-							&:hover {
+				.list-unstyled{
+					div{
+						a{
+							&:hover{
 								color: $primary-color;
 							}
 						}
@@ -3078,59 +2867,59 @@ body {
 			.default-according {
 				.card {
 					background-color: $dark-card-background;
-					.btn-link {
+					.btn-link{
 						background-color: $dark-card-background;
 						border: 1px solid $dark-card-background;
 						color: $white;
 					}
-					.text-muted {
+					.text-muted{
 						color: $dark-small-font-color !important;
 					}
 				}
-				.bg-primary {
-					.btn-link {
+				.bg-primary{
+					.btn-link{
 						background-color: $primary-color;
 						border: 1px solid $primary-color;
 					}
 				}
-				.bg-secondary {
-					.btn-link {
+				.bg-secondary{
+					.btn-link{
 						background-color: $secondary-color;
 						border: 1px solid $secondary-color;
 					}
 				}
 			}
-			.collapse {
-				.card-body {
+			.collapse{
+				.card-body{
 					background-color: $dark-card-background;
 				}
 			}
-			@media screen and (max-width: 1660px) {
-				.chat-box {
-					.chat-history {
-						.call-icons {
-							ul {
-								li {
+			@media screen and (max-width: 1660px){
+				.chat-box{
+					.chat-history{
+						.call-icons{
+							ul{
+								li{
 									border: 1px solid $dark-border-color;
 								}
 							}
 						}
-						.total-time {
-							h2 {
+						.total-time{
+							h2{
 								color: $dark-all-font-color;
 							}
 						}
 					}
 				}
-				.caller-img {
-					img {
+				.caller-img{
+					img{
 						opacity: 0.7;
 					}
 				}
 				.chat-box {
 					.chat-history {
 						.call-content {
-							> div {
+							>div{
 								background-color: rgba(0, 0, 0, 0.75);
 								background-blend-mode: overlay;
 							}
@@ -3138,24 +2927,24 @@ body {
 					}
 				}
 			}
-			@media only screen and (max-width: 1199px) {
-				.sm {
+			@media only screen and (max-width: 1199px){
+				.sm{
 					background-color: $dark-card-background;
 					border: 1px solid $dark-border-color;
 				}
-				.pixelstrap {
-					.mobile-back {
+				.pixelstrap{
+					.mobile-back{
 						border-bottom: 1px solid $dark-border-color;
 					}
-					ul {
-						li {
+					ul{
+						li{
 							border-top: 1px solid $dark-border-color;
 						}
-						a {
+						a{
 							background: $dark-card-background;
 							&:hover,
 							&:focus,
-							&:active {
+							&:active{
 								background: $dark-card-background;
 							}
 						}
@@ -3165,22 +2954,22 @@ body {
 					border-top: 1px solid $dark-border-color;
 					background-color: $dark-card-background;
 				}
-				.error-wrapper {
-					.maintenance-icons {
-						li {
-							i {
+				.error-wrapper{
+					.maintenance-icons{
+						li{
+							i{
 								color: $dark-color;
 							}
 						}
 					}
 				}
 			}
-			.pixelstrap {
-				ul {
+			.pixelstrap{
+				ul{
 					background: $dark-card-background;
 				}
 			}
-			@media only screen and (max-width: 575px) {
+			@media only screen and (max-width: 575px){
 				.user-profile {
 					.hovercard {
 						.info {
@@ -3194,6 +2983,7 @@ body {
 				.widget-joins {
 					.border-after-xs {
 						&:after {
+
 							background-color: $dark-border-color;
 						}
 					}
@@ -3215,21 +3005,9 @@ body {
 					color: $dark-all-font-color;
 					border-color: $dark-border-color;
 				}
-				input[type="text"],
-				input[type="email"],
-				input[type="search"],
-				input[type="password"],
-				input[type="number"],
-				input[type="tel"],
-				input[type="date"],
-				input[type="datetime-local"],
-				input[type="time"],
-				input[type="datetime-local"],
-				input[type="month"],
-				input[type="week"],
-				input[type="url"],
-				input[type="file"],
-				select {
+				input[type=text], input[type=email], input[type=search],
+				input[type=password], input[type=number], input[type=tel], input[type=date], input[type=datetime-local], input[type=time], input[type=datetime-local], input[type=month], input[type=week],
+				input[type=url], input[type=file], select {
 					border-color: $dark-border-color;
 					background-color: $dark-body-background;
 					color: $dark-all-font-color;
@@ -3245,43 +3023,43 @@ body {
 					border-color: $dark-border-color;
 				}
 			}
-			.form-divider {
+			.form-divider{
 				border-top: 1px solid $dark-border-color;
-				&::before {
+				&::before{
 					background: $dark-card-background;
 					color: $dark-all-font-color;
 				}
 			}
 		}
-		.CodeMirror {
+		.CodeMirror{
 			background: $dark-card-background;
 			border: 1px solid $dark-small-font-color;
 			color: $dark-all-font-color;
-			.CodeMirror-code {
-				pre {
+			.CodeMirror-code{
+				pre{
 					background: $dark-card-background;
 				}
 			}
 		}
-		.editor-toolbar {
+		.editor-toolbar{
 			border-top: 1px solid $dark-small-font-color;
 			border-left: 1px solid $dark-small-font-color;
 			border-right: 1px solid $dark-small-font-color;
-			a {
+			a{
 				color: $dark-all-font-color !important;
 				&:hover,
-				&.active {
+				&.active{
 					background: $dark-border-color;
 				}
 			}
-			i.separator {
+			i.separator{
 				border-left: 1px solid $dark-small-font-color;
 				border-right: 1px solid $dark-small-font-color;
 			}
 		}
 		.editor-toolbar.disabled-for-preview {
-			a {
-				&:not(.no-disable) {
+			a{
+				&:not(.no-disable){
 					background: $dark-border-color;
 				}
 			}
@@ -3289,39 +3067,35 @@ body {
 		.editor-preview {
 			background-color: $dark-card-background;
 		}
-		.editor-toolbar.fullscreen,
-		.editor-preview-side {
+		.editor-toolbar.fullscreen, .editor-preview-side{
 			background: $dark-card-background;
 			border: 1px solid $dark-small-font-color;
 		}
-		.u-step {
+		.u-step{
 			background: $dark-border-color;
 			&.active,
-			&.current {
+			&.current{
 				background: $primary-color;
 				color: $white;
 			}
 		}
-		.u-step-title,
-		.u-pearl-title {
+		.u-step-title, .u-pearl-title{
 			color: $dark-all-font-color;
 		}
-		.u-step-number {
+		.u-step-number{
 			background-color: $dark-card-background;
 		}
-		.u-pearl {
-			&:before {
+		.u-pearl{
+			&:before{
 				background-color: $dark-border-color;
 			}
 		}
-		.u-pearl-number,
-		.u-pearl-icon {
+		.u-pearl-number, .u-pearl-icon{
 			background: $dark-body-background;
 			border: 2px solid $dark-body-background;
 		}
 		.u-pearl.disabled {
-			.u-pearl-icon,
-			.u-pearl-number {
+			.u-pearl-icon, .u-pearl-number{
 				background: $dark-border-color;
 				border: 2px solid $dark-border-color;
 			}
@@ -3329,48 +3103,48 @@ body {
 				background-color: #334053;
 			}
 		}
-		.u-pearl.error {
-			&:after {
+		.u-pearl.error{
+			&:after{
 				background-color: $dark-body-background;
 			}
 		}
-		.note-editor.note-frame {
+		.note-editor.note-frame{
 			border-color: $dark-border-color;
 			.note-editing-area {
-				.note-editable {
+				.note-editable{
 					background-color: $dark-card-background;
 					color: $dark-all-font-color;
 				}
 			}
 		}
-		.swal-modal {
+		.swal-modal{
 			background-color: $dark-card-background;
-			.swal-title {
+			.swal-title{
 				color: $dark-all-font-color;
 			}
-			.swal-text {
+			.swal-text{
 				color: $dark-small-font-color;
 			}
-			.swal-content__input {
+			.swal-content__input{
 				background-color: $dark-body-background;
 				color: $dark-all-font-color;
 			}
 		}
-		.nav-tabs {
+		.nav-tabs{
 			border-bottom: 1px solid $dark-border-color;
-			.nav-link {
-				&.active {
+			.nav-link{
+				&.active{
 					background-color: $dark-card-background;
 					color: $dark-all-font-color;
 					border-color: $dark-border-color $dark-border-color $dark-card-background;
 				}
 				&:hover,
-				&:focus {
+				&:focus{
 					border-color: $dark-border-color $dark-border-color $dark-border-color;
 				}
 			}
-			.nav-item.show {
-				.nav-link {
+			.nav-item.show{
+				.nav-link{
 					background-color: $dark-card-background;
 					color: $dark-all-font-color;
 					border-color: $dark-border-color $dark-border-color $dark-card-background;
@@ -3379,16 +3153,16 @@ body {
 		}
 		.nav-tabs.nav-bottom {
 			.nav-item {
-				.nav-link {
+				.nav-link{
 					&.active,
 					&.focus,
-					&.hover {
+					&.hover{
 						border-color: $dark-card-background $dark-border-color $dark-border-color;
 					}
 				}
 			}
 		}
-		.dropdown-divider {
+		.dropdown-divider{
 			border-top: 1px solid $dark-border-color;
 		}
 		.icon-hover-bottom {
@@ -3417,46 +3191,46 @@ body {
 			background-color: #d8ecff;
 			border-radius: 2px;
 		}
-		#cd-timeline {
+		#cd-timeline{
 			&::before {
 				background: $dark-border-color;
 			}
 		}
-		.timeliny {
+		.timeliny{
 			border-top: 1px solid $dark-border-color;
 			border-bottom: 1px solid $dark-border-color;
-			&::before {
+			&::before{
 				background-color: $white;
 			}
-			.timeliny-dot {
+			.timeliny-dot{
 				background-color: $dark-card-background;
 				border: 1px solid $white;
 				&::before {
 					color: $dark-all-font-color;
 				}
 			}
-			.timeliny-timeline {
-				.timeliny-timeblock {
-					&.active {
-						.timeliny-dot {
-							&::before {
+			.timeliny-timeline{
+				.timeliny-timeblock{
+					&.active{
+						.timeliny-dot{
+							&::before{
 								color: $dark-all-font-color;
 							}
 						}
 					}
-					&:not(.inactive):not(.active) {
-						.timeliny-dot {
+					&:not(.inactive):not(.active){
+						.timeliny-dot{
 							&:hover {
 								background-color: $white;
-								&::before {
+								&::before{
 									color: $dark-all-font-color;
 								}
 							}
 						}
 					}
-					.timeliny-dot {
-						&:hover {
-							&::after {
+					.timeliny-dot{
+						&:hover{
+							&::after{
 								background-color: $dark-card-background;
 								border: 1px solid $dark-border-color;
 								color: $dark-all-font-color;
@@ -3466,23 +3240,23 @@ body {
 				}
 			}
 		}
-		.todo {
-			.todo-list-wrapper {
-				#todo-list {
+		.todo{
+			.todo-list-wrapper{
+				#todo-list{
 					li {
-						.task-container {
+						.task-container{
 							background: $dark-card-background;
 							border-bottom: 1px solid $dark-border-color;
-							.task-label {
+							.task-label{
 								color: $dark-all-font-color;
 							}
-							&:hover {
-								h4 {
+							&:hover{
+								h4{
 									color: $white;
 								}
 							}
-							.task-action-btn {
-								.action-box {
+							.task-action-btn{
+								.action-box{
 									&:hover:not(.active) {
 										background: $dark-card-background;
 										border: 1px solid $dark-border-color;
@@ -3490,13 +3264,13 @@ body {
 								}
 							}
 						}
-						&.completed {
-							.task-container {
-								.task-label {
+						&.completed{
+							.task-container{
+								.task-label{
 									color: $primary-color;
 								}
-								.complete-btn {
-									&:hover {
+								.complete-btn{
+									&:hover{
 										border: 1px solid $success-color !important;
 									}
 								}
@@ -3505,14 +3279,15 @@ body {
 					}
 				}
 				.todo-list-footer {
-					.new-task-wrapper {
-						textarea {
+					.new-task-wrapper{
+						textarea{
 							background-color: $dark-card-background;
 							border: 1px solid $dark-border-color;
 							color: $dark-all-font-color;
 						}
 					}
 				}
+
 			}
 		}
 		.user-profile {
@@ -3527,137 +3302,130 @@ body {
 			.hovercard {
 				.info {
 					.title {
-						a {
+						a{
 							color: $dark-all-font-color;
 						}
 					}
 				}
-				.user-image {
-					.avatar {
-						img {
+				.user-image{
+					.avatar{
+						img{
 							border: 10px solid $dark-card-background;
 						}
 					}
-					.icon-wrapper {
+					.icon-wrapper{
 						background-color: $dark-card-background;
 					}
 				}
-				.tabs-scoial {
+				.tabs-scoial{
 					border-bottom: none !important;
 				}
 			}
 			.follow {
-				.follow-num {
+				.follow-num{
 					color: $dark-all-font-color;
 				}
 			}
-			.profile-img-style {
-				.user-name {
+			.profile-img-style{
+				.user-name{
 					color: $dark-all-font-color;
 				}
-				p {
+				p{
 					color: $dark-small-font-color;
 				}
 			}
 		}
-		span.twitter-typeahead {
-			.tt-menu {
+		span.twitter-typeahead{
+			.tt-menu{
 				background-color: $dark-body-background;
 				color: $dark-all-font-color;
 			}
-			.tt-suggestion {
+			.tt-suggestion{
 				color: $dark-all-font-color;
 				&:hover,
-				&:focus {
+				&:focus{
 					background-color: $dark-card-background;
 				}
 			}
 		}
-		.typography {
-			small {
+		.typography{
+			small{
 				color: $dark-all-font-color;
 			}
 		}
-		.blockquote-footer {
+		.blockquote-footer{
 			color: $dark-small-font-color;
 		}
-		.code-box-copy {
-			pre {
+		.code-box-copy{
+			pre{
 				background-color: $dark-body-background;
-				code {
+				code{
 					background-color: $dark-body-background;
 				}
 			}
-			pre[class*="language-"] {
+			pre[class*="language-"]{
 				border: 1px solid $dark-border-color;
 			}
-			.code-box-copy__btn {
+			.code-box-copy__btn{
 				background-color: $dark-body-background;
 				border: 1px solid $dark-border-color;
-				color: $white;
+				color:$white;
 			}
-			code[class*="language-"],
-			pre[class*="language-"] {
+			code[class*=language-], pre[class*=language-]{
 				text-shadow: 0px 1px $black;
-				::selection {
+				::selection{
 					text-shadow: none;
 					background: $dark-card-background;
 				}
 			}
 		}
-		table.fixedHeader-floating {
+		table.fixedHeader-floating{
 			background-color: $dark-body-background;
 		}
-		.error-wrapper {
+		.error-wrapper{
 			background-color: rgba(54, 64, 74, 0.8);
-			.sub-content {
+			.sub-content{
 				color: $dark-all-font-color;
 			}
 		}
-		.b-light {
-			border: 1px solid $dark-border-color !important;
+		.b-light{
+			border:1px solid $dark-border-color !important;
 		}
-		.modal-content {
+		.modal-content{
 			background-color: $dark-card-background;
-			.modal-header {
+			.modal-header{
 				border-bottom: 1px solid $dark-border-color;
 			}
 		}
-		.modal {
-			.theme-close {
+		.modal{
+			.theme-close{
 				background-color: $dark-card-background !important;
 			}
 		}
-		.loader-box {
-			&.card-loader {
+		.loader-box{
+			&.card-loader{
 				background-color: $dark-card-background;
 			}
 		}
-		.my-gallery {
-			&.gallery-with-description {
+		.my-gallery{
+			&.gallery-with-description{
 				img {
 					border: 1px solid $dark-border-color !important;
 					border-bottom: none !important;
 				}
 			}
 		}
-		@each $var in $alert-name {
-			$i: index($alert-name, $var);
-			.alert-#{$var}.inverse {
-				color: $dark-all-font-color;
-			}
-		}
-		.alert-theme {
-			span {
-				+ span {
-					+ span {
+		.alert-theme{
+			span{
+				+ span{
+					+ span{
 						border: 1px solid $primary-color;
 						background-color: $dark-body-background;
 						border-radius: 4px;
 					}
 				}
 			}
-			i {
+			i{
 				background-color: $primary-color;
 				color: $white;
 				padding: 20px;
@@ -3665,24 +3433,23 @@ body {
 			}
 		}
 		.user-card {
-			.user-deatils {
+			.user-deatils{
 				h6 {
 					color: $dark-small-font-color;
 				}
 			}
-			.card-footer {
-				> div {
+			.card-footer{
+				> div{
 					&:first-child {
 						border-right: 1px solid $dark-border-color;
 					}
 				}
-				.user-footer {
+				.user-footer{
 					h6 {
 						color: $dark-small-font-color;
 					}
-					svg {
-						path,
-						rect {
+					svg{
+						path, rect {
 							color: $dark-small-font-color;
 						}
 					}
@@ -3690,10 +3457,10 @@ body {
 			}
 		}
 		.dashboard-chat {
-			.chat {
+			.chat{
 				.media {
-					.media-body {
-						.message-main {
+					.media-body{
+						.message-main{
 							p {
 								background-color: $dark-body-background;
 							}
@@ -3703,19 +3470,19 @@ body {
 						}
 					}
 				}
-				.right-side-chat {
-					.media-body {
-						p {
+				.right-side-chat{
+					.media-body{
+						p{
 							&:before {
 								border-left: 7px solid $dark-body-background;
 							}
 						}
 					}
 				}
-				.left-side-chat {
-					.media-body {
-						p {
-							&:before {
+				.left-side-chat{
+					.media-body{
+						p{
+							&:before{
 								border-right: 7px solid $dark-body-background;
 							}
 						}
@@ -3727,41 +3494,39 @@ body {
 			border: 2px solid $dark-border-color;
 		}
 		.invest-dropdown {
-			.right-header-dropdown {
+			.right-header-dropdown{
 				&.onhover-show-div {
 					background-color: $dark-body-background;
 					box-shadow: 0 0 2px 2px $dark-body-background;
-					a {
+					a{
 						color: $dark-all-font-color;
 					}
 				}
 			}
 		}
-		.server-card-bg {
+		.server-card-bg{
 			background-color: #181f27 !important;
 		}
 		.server-widgets {
 			.bottom-server {
-				h5 {
+				h5{
 					.second-color {
 						color: $dark-all-font-color;
 					}
 				}
 			}
 		}
-		.tabs-project {
-			.nav-item {
-				.nav-link {
+		.tabs-project{
+			.nav-item{
+				.nav-link{
 					color: $dark-all-font-color;
 				}
 			}
 		}
-		.current-progress,
-		.order-history {
-			table {
-				tr {
-					td,
-					th {
+		.current-progress, .order-history{
+			table{
+				tr{
+					td, th{
 						border-top: none !important;
 					}
 				}
@@ -3770,13 +3535,13 @@ body {
 				background-color: $dark-body-background;
 			}
 		}
-		.navigation-option {
-			ul {
+		.navigation-option{
+			ul{
 				li {
 					a {
 						color: $dark-all-font-color;
 					}
-					&:hover {
+					&:hover{
 						background-color: $dark-body-background;
 					}
 				}
@@ -3794,9 +3559,9 @@ body {
 			.product-img {
 				.product-hover {
 					ul {
-						li {
+						li{
 							background-color: $dark-card-background;
-							&:hover {
+							&:hover{
 								background-color: $black;
 								color: $white;
 							}
@@ -3805,40 +3570,45 @@ body {
 				}
 			}
 		}
-		.browse {
-			.browse-articles {
-				ul {
-					li {
+		.browse{
+			.browse-articles{
+				ul{
+					li{
 						a {
 							color: $dark-all-font-color;
 						}
-						&:hover {
+						&:hover{
 							background-color: $dark-body-background;
 						}
 					}
 				}
 			}
 		}
-		@each $btn-name, $btn-color in (primary, $primary-color), (secondary, $secondary-color),
-			(success, $success-color), (danger, $danger-color), (info, $info-color), (light, $light-color),
-			(dark, $dark-color), (warning, $warning-color)
-		{
-			.radio-#{$btn-name} {
-				input[type="radio"] {
-					& + label {
-						&::before {
+		@each $btn-name, $btn-color in (primary, $primary-color),
+						(secondary, $secondary-color) ,
+						(success, $success-color),
+						(danger, $danger-color),
+						(info, $info-color),
+						(light, $light-color),
+						(dark, $dark-color),
+						(warning, $warning-color) {
+			.radio-#{$btn-name}{
+				input[type="radio"]
+				{
+					& + label{
+						&::before{
 							border-color: $btn-color !important;
 						}
-						&::after {
+						&::after{
 							background-color: $btn-color;
 						}
 					}
-					&:checked {
-						& + label {
-							&::before {
+					&:checked{
+						& + label{
+							&::before{
 								border-color: $btn-color !important;
 							}
-							&::after {
+							&::after{
 								background-color: $btn-color;
 							}
 						}
@@ -3847,23 +3617,32 @@ body {
 			}
 		}
 
-		@each $btn-name, $btn-color in (primary, $primary-color), (secondary, $secondary-color),
-			(success, $success-color), (danger, $danger-color), (info, $info-color), (light, $light-color),
-			(dark, $dark-color), (warning, $warning-color)
-		{
-			.checkbox-#{$btn-name} {
-				label {
-					&::before {
-						border-color: $btn-color !important;
+		@each $btn-name, $btn-color in (primary, $primary-color),
+						(secondary, $secondary-color) ,
+						(success, $success-color),
+						(danger, $danger-color),
+						(info, $info-color),
+						(light, $light-color),
+						(dark, $dark-color),
+						(warning, $warning-color) {
+			.checkbox-#{$btn-name}{
+				label{
+					&::before{
+						border-color:$btn-color !important;
 					}
 				}
+
 			}
 		}
 
-		@each $btn-name, $btn-color in (primary, $primary-color), (secondary, $secondary-color),
-			(success, $success-color), (danger, $danger-color), (info, $info-color), (light, $light-color),
-			(dark, $dark-color), (warning, $warning-color)
-		{
+		@each $btn-name, $btn-color in   (primary, $primary-color),
+						(secondary, $secondary-color) ,
+						(success, $success-color),
+						(danger, $danger-color),
+						(info, $info-color),
+						(light, $light-color),
+						(dark, $dark-color),
+						(warning, $warning-color) {
 			.checkbox-solid-#{$btn-name} {
 				label {
 					&:before {
@@ -3887,35 +3666,35 @@ body {
 					}
 				}
 			}
+
 		}
-		.bootstrap-datetimepicker-widget {
-			ul {
-				li {
+		.bootstrap-datetimepicker-widget{
+			ul{
+				li{
 					color: $dark-all-font-color;
 					border-bottom: 1px solid $dark-border-color;
 				}
 			}
-			tr {
-				th,
-				td {
-					&:hover {
+			tr{
+				th,td{
+					&:hover{
 						background-color: $dark-card-background;
 					}
-					span {
-						&:hover {
+					span{
+						&:hover{
 							background-color: $dark-card-background;
 						}
 					}
 					&.prev,
-					&.next {
-						&:hover {
+					&.next{
+						&:hover{
 							background-color: $dark-card-background;
 						}
 					}
 				}
-				&:first-child {
-					th {
-						&:hover {
+				&:first-child{
+					th{
+						&:hover{
 							background-color: $dark-card-background;
 						}
 					}
@@ -3925,19 +3704,19 @@ body {
 		.btn-transparent {
 			color: $dark-all-font-color;
 		}
-		.categories {
-			ul {
-				li {
+		.categories{
+			ul{
+				li{
 					a {
 						color: $dark-small-font-color;
 					}
-					&:hover {
+					&:hover{
 						background-color: $dark-body-background;
 					}
 				}
 			}
 		}
-		.main {
+		.main{
 			.langChoice {
 				background: $dark-body-background;
 				color: $white;
@@ -3964,8 +3743,7 @@ body {
 							color: $dark-small-font-color;
 						}
 					}
-					p,
-					.light-span {
+					p, .light-span{
 						color: $dark-small-font-color;
 					}
 				}
@@ -3978,8 +3756,7 @@ body {
 				}
 			}
 		}
-		.filter-cards-view,
-		.timeline-content {
+		.filter-cards-view, .timeline-content {
 			p {
 				color: $dark-small-font-color;
 			}
@@ -3990,7 +3767,7 @@ body {
 			}
 			.comments-box {
 				.input-group {
-					.form-control {
+					.form-control{
 						border: none !important;
 					}
 					.input-group-append {
@@ -4002,7 +3779,7 @@ body {
 		.social-chat {
 			.media-body {
 				border: 1px solid $dark-border-color;
-				&:after {
+				&:after{
 					border-right: 7px solid $dark-card-background;
 				}
 			}
@@ -4036,7 +3813,7 @@ body {
 								&:nth-child(2) {
 									border-right: 1px solid $dark-border-color;
 								}
-								&:nth-child(5) {
+								&:nth-child(5){
 									border-right: none;
 									border-left: 1px solid $dark-border-color;
 								}
@@ -4059,17 +3836,17 @@ body {
 			}
 		}
 	}
-	&.dark-body-only {
+	&.dark-body-only{
 		.page-wrapper {
 			.page-body-wrapper {
-				.page-sidebar {
+				.page-sidebar{
 					background-color: $white;
 					.sidebar-user {
-						h6 {
+						h6{
 							color: $primary-color;
 						}
-						p {
-							color: $theme-body-font-color;
+						p{
+							color: 	$theme-body-font-color
 						}
 					}
 					.sidebar-menu {
@@ -4082,17 +3859,16 @@ body {
 							}
 						}
 						.sidebar-submenu {
-							> li {
-								> a {
+							> li{
+								> a{
 									color: $theme-body-font-color;
-									&:hover,
-									&.active {
+									&:hover,&.active{
 										color: $primary-color;
 									}
 								}
 								&.active {
-									> a {
-										&.active {
+									> a{
+										&.active{
 											color: $primary-color;
 										}
 									}
@@ -4101,14 +3877,14 @@ body {
 						}
 					}
 				}
-				.page-body {
+				.page-body{
 					color: $dark-all-font-color;
 					background-color: $dark-body-background;
-					.topper-lists {
+					.topper-lists{
 						table {
-							tbody {
-								tr {
-									td {
+							tbody{
+								tr{
+									td{
 										p {
 											color: $dark-small-font-color;
 										}
@@ -4120,15 +3896,13 @@ body {
 					.header-small {
 						color: $dark-small-font-color;
 					}
-					.statistics {
+					.statistics{
 						p {
 							color: $dark-small-font-color;
 						}
 					}
-					.feather-main,
-					.professor-table {
-						.media-body,
-						.professor-block {
+					.feather-main, .professor-table {
+						.media-body, .professor-block{
 							p {
 								color: $dark-small-font-color;
 							}
@@ -4137,29 +3911,28 @@ body {
 					.logs-element {
 						span {
 							+ span {
-								color: $dark-small-font-color;
+								color: $dark-small-font-color
 							}
 						}
 					}
-					.progress-block {
-						.progress-title {
-							span {
+					.progress-block{
+						.progress-title{
+							span{
 								+ span {
 									color: $dark-small-font-color;
 								}
 							}
 						}
 					}
-					.ecommerce-icons {
-						div {
-							span {
+					.ecommerce-icons{
+						div{
+							span{
 								color: $dark-small-font-color;
 							}
 						}
 					}
-					.new-users,
-					.recent-notification {
-						.media {
+					.new-users, .recent-notification{
+						.media{
 							.media-body {
 								p {
 									color: $dark-small-font-color;
@@ -4167,30 +3940,30 @@ body {
 							}
 						}
 					}
-					.progress-media {
-						.media {
+					.progress-media{
+						.media{
 							.media-body {
 								span {
 									color: $dark-small-font-color;
 								}
 							}
 						}
-						.progress-change {
+						.progress-change{
 							span {
 								color: $dark-small-font-color;
 							}
 						}
 					}
-					.topper-lists {
-						table {
-							tbody {
-								tr {
+					.topper-lists{
+						table{
+							tbody{
+								tr{
 									td {
 										border-top: none !important;
 										border-bottom: 1px solid $dark-border-color;
 									}
-									&:last-child {
-										td {
+									&:last-child{
+										td{
 											border-bottom: none;
 										}
 									}
@@ -4198,9 +3971,9 @@ body {
 							}
 						}
 					}
-					.notifiaction-media {
-						.media {
-							.media-body {
+					.notifiaction-media{
+						.media{
+							.media-body{
 								.circle-left {
 									border: 5px solid #334154;
 								}
@@ -4210,14 +3983,14 @@ body {
 					.upcoming-event {
 						.upcoming-innner {
 							border-bottom: 1px solid $dark-border-color;
-							&:last-child {
+							&:last-child{
 								border-bottom: none;
 							}
 						}
 					}
-					.professor-table {
-						table {
-							tbody {
+					.professor-table{
+						table{
+							tbody{
 								tr {
 									td {
 										border-top: none !important;
@@ -4226,29 +3999,29 @@ body {
 							}
 						}
 					}
-					.number-widgets {
-						.media {
-							.media-body {
+					.number-widgets{
+						.media{
+							.media-body{
 								h6 {
 									color: $dark-all-font-color;
 								}
 							}
 						}
 					}
-					.activity {
+					.activity{
 						.media {
-							.gradient-round {
+							.gradient-round{
 								&.gradient-line-1,
 								&.small-line,
-								&.medium-line {
+								&.medium-line{
 									&:after {
 										background-color: $dark-border-color;
 									}
 								}
 							}
-							.media-body {
-								h6 {
-									span {
+							.media-body{
+								h6{
+									span{
 										color: $dark-small-font-color;
 									}
 								}
@@ -4256,8 +4029,8 @@ body {
 						}
 					}
 					.card.custom-card {
-						.card-header {
-							border-bottom: none !important;
+						.card-header{
+							border-bottom : none !important;
 						}
 					}
 				}
@@ -4287,18 +4060,18 @@ body {
 						.card-header {
 							background-color: $dark-card-background;
 							border-bottom: 1px solid $dark-border-color;
-							.buttons-right {
+							.buttons-right{
 								.right-header-dropdown.onhover-show-div {
 									background-color: $dark-body-background;
 									box-shadow: 0 0 2px 2px $dark-body-background;
-									a {
+									a{
 										color: $dark-all-font-color;
 									}
 								}
 							}
-							&.card-header-border {
-								.right-header {
-									span {
+							&.card-header-border{
+								.right-header{
+									span{
 										&:first-child {
 											color: $dark-small-font-color;
 										}
@@ -4306,7 +4079,7 @@ body {
 									.right-header-dropdown.onhover-show-div {
 										background-color: $dark-body-background;
 										box-shadow: 0 0 2px 2px $dark-body-background;
-										a {
+										a{
 											color: $dark-all-font-color;
 										}
 									}
@@ -4315,12 +4088,7 @@ body {
 							> span {
 								color: $dark-all-font-color;
 							}
-							h1,
-							h2,
-							h3,
-							h4,
-							h5,
-							h6 {
+							h1, h2, h3, h4, h5, h6 {
 								color: $dark-all-font-color;
 							}
 							.card-header-right {
@@ -4335,9 +4103,7 @@ body {
 								color: $dark-small-font-color;
 							}
 						}
-						.alert-light.outline,
-						.alert-light.outline-2x,
-						.alert-light.inverse {
+						.alert-light.outline, .alert-light.outline-2x, .alert-light.inverse {
 							color: $dark-all-font-color;
 						}
 						#animation-box {
@@ -4357,8 +4123,7 @@ body {
 							color: $dark-all-font-color;
 						}
 						.table {
-							th,
-							td {
+							th, td {
 								color: $dark-all-font-color;
 							}
 							thead {
@@ -4366,29 +4131,17 @@ body {
 									border-bottom: 2px solid $dark-border-color;
 								}
 								.border-bottom-primary {
-									th {
+									th{
 										border-bottom: 1px solid $primary-color;
 									}
 								}
 							}
-							.table-primary,
-							.table-secondary,
-							.table-success,
-							.table-info,
-							.table-warning,
-							.table-light,
-							.table-danger {
-								th,
-								td {
+							.table-primary, .table-secondary, .table-success, .table-info, .table-warning, .table-light, .table-danger {
+								th, td {
 									color: $sidebar-submenu-font-color;
 								}
 							}
-							.bg-primary,
-							.bg-secondary,
-							.bg-success,
-							.bg-info,
-							.bg-warning,
-							.bg-danger {
+							.bg-primary, .bg-secondary, .bg-success, .bg-info, .bg-warning, .bg-danger {
 								color: $white;
 							}
 							.bg-light {
@@ -4399,31 +4152,26 @@ body {
 									color: $black;
 								}
 							}
-							.double,
-							.dotted,
-							.dashed {
+							.double, .dotted, .dashed {
 								border-color: $dark-border-color;
 							}
 							tbody {
-								.border-bottom-primary {
-									th,
-									td {
+								.border-bottom-primary{
+									th, td{
 										border-bottom: 1px solid $primary-color;
 									}
 								}
 							}
 						}
-						.table-responsive {
-							.table {
-								th,
-								td {
+						.table-responsive{
+							.table{
+								th,td{
 									border-top: 1px solid $dark-border-color;
 								}
 							}
 						}
-						.table[class*="bg-"] {
-							th,
-							td {
+						.table[class*='bg-']{
+							th, td{
 								color: $white;
 							}
 						}
@@ -4431,10 +4179,9 @@ body {
 							tbody {
 								tr {
 									&:nth-of-type(odd) {
-										background-color: rgba(0, 0, 0, 0.05);
+										background-color:rgba(0, 0, 0, 0.05);
 										&:hover {
-											th,
-											td {
+											th, td {
 												color: $white;
 											}
 										}
@@ -4443,17 +4190,16 @@ body {
 							}
 						}
 						.table-bordered {
-							td,
-							th {
+							td, th {
 								border-color: $dark-border-color;
 							}
 						}
-						.table-inverse {
+						.table-inverse{
 							tbody {
-								tr {
-									&:nth-of-type(odd) {
+								tr{
+									&:nth-of-type(odd){
 										&:hover {
-											td {
+											td{
 												color: $dark-all-font-color;
 											}
 										}
@@ -4462,17 +4208,13 @@ body {
 							}
 						}
 						.table-border-vertical {
-							tr,
-							th,
-							td {
+							tr, th, td {
 								border-right: 1px solid $dark-border-color;
 							}
 						}
-						.table-styling {
-							thead,
-							tbody {
-								th,
-								td {
+						.table-styling{
+							thead, tbody{
+								th, td{
 									color: $white;
 								}
 							}
@@ -4515,8 +4257,7 @@ body {
 								}
 							}
 						}
-						.btn-outline-light,
-						.btn-outline-dark {
+						.btn-outline-light, .btn-outline-dark {
 							color: $white !important;
 						}
 						.btn-outline-light {
@@ -4539,9 +4280,7 @@ body {
 							}
 						}
 						.chart-overflow {
-							&#line-chart,
-							&#column-chart1,
-							&#column-chart2 {
+							&#line-chart,&#column-chart1,&#column-chart2{
 								rect {
 									fill: $dark-card-background;
 								}
@@ -4551,9 +4290,9 @@ body {
 									fill: $dark-card-background;
 								}
 								> g {
-									> g {
-										> g {
-											text {
+									>g{
+										>g{
+											text{
 												fill: rgb(177, 177, 178);
 											}
 										}
@@ -4584,10 +4323,7 @@ body {
 							border-right: 1px solid $dark-border-color !important;
 						}
 						.chart-container {
-							.live-products,
-							.turnover,
-							.monthly,
-							.uses {
+							.live-products, .turnover, .monthly, .uses {
 								.ct-labels {
 									.ct-label {
 										color: $white;
@@ -4597,8 +4333,7 @@ body {
 									stroke: $white;
 								}
 							}
-							#browser-uses-chart,
-							#website-visiter-chart {
+							#browser-uses-chart, #website-visiter-chart {
 								svg {
 									text {
 										fill: $dark-all-font-color;
@@ -4637,7 +4372,7 @@ body {
 						.page-link {
 							background-color: $dark-card-background;
 							border: 1px solid $dark-border-color;
-							&:hover {
+							&:hover{
 								background-color: $dark-border-color;
 							}
 						}
@@ -4664,47 +4399,46 @@ body {
 							background-color: $dark-card-background;
 							border-top: 1px solid $dark-border-color;
 						}
-						.product-table {
-							#API-2_wrapper {
-								#API-2 {
-									tbody {
-										td {
-											span,
-											p {
+						.product-table{
+							#API-2_wrapper{
+								#API-2{
+									tbody{
+										td{
+											span, p{
 												color: $dark-small-font-color;
 											}
 										}
 									}
 								}
 							}
-							h6 {
+							h6{
 								color: $dark-small-font-color;
 							}
 						}
-						.scroll-demo {
+						.scroll-demo{
 							border: 1px solid $dark-border-color;
 						}
-						.search-form {
-							input {
+						.search-form{
+							input{
 								border: 1px solid $dark-border-color;
 								color: $dark-all-font-color;
 								background-color: $dark-body-background;
 							}
-							.form-group {
+							.form-group{
 								&:before {
-									background: $dark-card-background;
+									background:$dark-card-background;
 								}
 							}
 						}
-						.cd-timeline-content {
+						.cd-timeline-content{
 							background-color: $dark-border-color;
-							&::before {
+							&::before{
 								border-left: 7px solid $dark-border-color;
 							}
 						}
-						.cd-timeline-block {
+						.cd-timeline-block{
 							&:nth-child(even) {
-								.cd-timeline-content {
+								.cd-timeline-content{
 									&::before {
 										border-right-color: $dark-border-color;
 										border-left: transparent;
@@ -4712,22 +4446,18 @@ body {
 								}
 							}
 						}
-						.breadcrumb {
+						.breadcrumb{
 							background-color: $dark-body-background;
 						}
-						.user-status {
-							table {
-								td,
-								th {
+						.user-status{
+							table{
+								td, th{
 									border-top: none !important;
 								}
 							}
 						}
-						#donut-color-chart-morris-daily,
-						#donut-color-chart-morris,
-						#browser-uses-chart,
-						#website-visiter-chart {
-							svg {
+						#donut-color-chart-morris-daily, #donut-color-chart-morris, #browser-uses-chart, #website-visiter-chart{
+							svg{
 								opacity: 0.5;
 							}
 						}
@@ -4757,64 +4487,58 @@ body {
 								}
 							}
 						}
-						.separator {
+						.separator{
 							border: 1px solid $dark-border-color;
 						}
 					}
-					.default-according {
-						li {
-							.text-muted {
-								color: $dark-all-font-color !important;
+					.default-according{
+						li{
+							.text-muted{
+								color: $dark-all-font-color!important;
 							}
 						}
 					}
 					.navs-icon.default-according.style-1 {
-						li {
-							button {
-								&:hover {
-									color: $primary-color !important;
+						li{
+							button{
+								&:hover
+								{
+									color: $primary-color!important;
 								}
 							}
 						}
 					}
-					.nav-list {
-						.nav-list-disc {
-							li {
-								a {
+					.nav-list{
+						.nav-list-disc{
+							li{
+								a{
 									color: $dark-all-font-color;
 								}
-								&:hover {
+								&:hover{
 									color: $primary-color;
-									a {
+									a{
 										color: $primary-color;
 									}
 								}
 							}
+
 						}
 					}
-					.navs-dropdown {
-						.onhover-show-div {
+					.navs-dropdown{
+						.onhover-show-div{
 							background-color: $dark-body-background;
 							box-shadow: 0 0 2px 2px $dark-border-color;
-							.navs-icon {
-								li {
-									a {
-										svg {
-											path,
-											line,
-											polyline,
-											polygon,
-											rect {
+							.navs-icon{
+								li{
+									a{
+										svg{
+											path, line, polyline, polygon, rect{
 												color: $dark-all-font-color !important;
 											}
 										}
-										&:hover {
-											svg {
-												path,
-												line,
-												polyline,
-												polygon,
-												rect {
+										&:hover{
+											svg{
+												path, line, polyline, polygon, rect{
 													color: $primary-color !important;
 												}
 											}
@@ -4824,10 +4548,10 @@ body {
 							}
 						}
 					}
-					.onhover-dropdown {
+					.onhover-dropdown{
 						&:hover {
-							.onhover-show-div {
-								&:before {
+							.onhover-show-div{
+								&:before{
 									border-bottom: 7px solid $dark-body-background;
 								}
 							}
@@ -4851,8 +4575,7 @@ body {
 						.blog-date {
 							color: $dark-all-font-color;
 						}
-						.blog-details,
-						.blog-details-main {
+						.blog-details, .blog-details-main {
 							.blog-social {
 								li {
 									color: $dark-small-font-color;
@@ -4898,7 +4621,7 @@ body {
 								}
 							}
 						}
-						hr {
+						hr{
 							border-top: 1px solid $dark-border-color;
 						}
 					}
@@ -4907,8 +4630,7 @@ body {
 							tr {
 								&:hover {
 									background-color: $dark-body-background;
-									td,
-									th {
+									td, th {
 										color: $white;
 									}
 								}
@@ -4940,8 +4662,7 @@ body {
 							}
 						}
 					}
-					#donut-color-chart-morris,
-					#donut-color-chart-morris-daily {
+					#donut-color-chart-morris, #donut-color-chart-morris-daily {
 						svg {
 							text {
 								fill: $dark-all-font-color;
@@ -4975,6 +4696,7 @@ body {
 									border-left: 1px solid $dark-border-color;
 								}
 							}
+
 						}
 					}
 					.form-control {
@@ -4988,8 +4710,7 @@ body {
 							border-bottom: 1px solid $primary-color !important;
 						}
 					}
-					.checkbox,
-					.radio {
+					.checkbox, .radio {
 						label {
 							&::before {
 								background-color: $dark-body-background;
@@ -5157,8 +4878,7 @@ body {
 						}
 					}
 					.social-widget-card {
-						h5,
-						h4 {
+						h5, h4 {
 							color: $dark-all-font-color;
 						}
 						span {
@@ -5208,26 +4928,25 @@ body {
 						}
 					}
 					.search-page {
-						.info-block {
-							+ .info-block {
+						.info-block{
+							+ .info-block{
 								border-top: 1px solid $dark-border-color;
 							}
 						}
 					}
-					.card-absolute {
-						.bg-primary,
-						.bg-secondary {
-							h5 {
+					.card-absolute{
+						.bg-primary, .bg-secondary{
+							h5{
 								color: $white;
 							}
 						}
 					}
-					.timeline-small {
-						.media {
-							.timeline-round {
+					.timeline-small{
+						.media{
+							.timeline-round{
 								&.timeline-line-1,
 								&.small-line,
-								&.medium-line {
+								&.medium-line{
 									&:after {
 										background-color: $dark-border-color;
 									}
@@ -5241,12 +4960,11 @@ body {
 					border-top: 1px solid $dark-body-background;
 					background-color: $dark-card-background;
 				}
-				.custom-select,
-				.custom-file-label {
+				.custom-select, .custom-file-label {
 					background: $dark-body-background;
 					color: $dark-all-font-color;
 				}
-				.footer-fix {
+				.footer-fix{
 					background-color: $dark-card-background;
 					border-top: 1px solid $dark-border-color;
 				}
@@ -5276,8 +4994,8 @@ body {
 								background-color: $dark-card-background;
 								box-shadow: 1px 1px 3px 1px $dark-body-background;
 							}
-							.avatar {
-								img {
+							.avatar{
+								img{
 									border: 5px solid $dark-border-color;
 								}
 							}
@@ -5316,13 +5034,13 @@ body {
 									}
 								}
 							}
-							img {
+							img{
 								box-shadow: 1px 1px 4px 1px $dark-body-background;
 							}
 						}
 						.chat-msg-box {
 							.my-message {
-								border: 1px solid $dark-border-color;
+								border: 1px solid $dark-border-color
 							}
 							.message {
 								color: $dark-all-font-color;
@@ -5354,10 +5072,10 @@ body {
 						}
 					}
 				}
-				.bitcoin-chat {
-					.chat {
-						.chat-msg-box {
-							.message {
+				.bitcoin-chat{
+					.chat{
+						.chat-msg-box{
+							.message{
 								&.my-message {
 									background-color: #1c222b;
 									.chat-user-img {
@@ -5385,15 +5103,13 @@ body {
 				box-shadow: 0 3px 20px 0 $dark-border-color;
 			}
 			.input-group-solid {
-				.input-group-text,
-				.form-control {
+				.input-group-text, .form-control {
 					background: $dark-body-background;
 					border: 1px solid $dark-border-color;
 					color: $dark-all-font-color;
 				}
 			}
-			.semilight-bg-color,
-			.header-bg-color {
+			.semilight-bg-color, .header-bg-color {
 				background-color: $white;
 			}
 			.list-group-item {
@@ -5484,9 +5200,7 @@ body {
 							}
 						}
 					}
-					h3,
-					h4,
-					h6 {
+					h3, h4, h6{
 						color: $white;
 					}
 				}
@@ -5495,8 +5209,7 @@ body {
 				background-blend-mode: overlay;
 				background-color: rgba(54, 64, 74, 0.7);
 				.authentication-box {
-					h4,
-					h3 {
+					h4, h3 {
 						color: $white;
 					}
 					h6 {
@@ -5506,8 +5219,8 @@ body {
 						background-color: $dark-card-background;
 						.theme-form {
 							.form-group {
-								input[type="text"],
-								input[type="password"] {
+								input[type=text],
+								input[type=password] {
 									background-color: $dark-body-background;
 									border: 1px solid $dark-border-color;
 									color: $dark-all-font-color;
@@ -5573,7 +5286,7 @@ body {
 				}
 			}
 			.theme-form {
-				.login-divider {
+				.login-divider{
 					border-top: 1px solid $dark-border-color;
 					&:before {
 						background: $dark-border-color;
@@ -5606,6 +5319,7 @@ body {
 								background-color: $dark-border-color;
 							}
 						}
+
 					}
 					.authentication-box {
 						h4 {
@@ -5614,15 +5328,15 @@ body {
 						h6 {
 							color: $dark-small-font-color;
 						}
-						h3 {
+						h3{
 							color: $dark-all-font-color;
 						}
 						.card {
 							background-color: $dark-card-background;
 							.theme-form {
 								.form-group {
-									input[type="text"],
-									input[type="password"] {
+									input[type=text],
+									input[type=password] {
 										background-color: $dark-body-background;
 										border: 1px solid $dark-border-color;
 										color: $dark-all-font-color;
@@ -5641,44 +5355,46 @@ body {
 					}
 				}
 			}
-			.vertical-menu-main {
+			.vertical-menu-main{
 				background-color: $dark-card-background;
 			}
 			.pixelstrap {
-				a {
+				a{
 					color: $dark-all-font-color;
 					&:focus,
 					&:active,
-					&:hover {
+					&:hover{
 						color: $dark-all-font-color;
 					}
 				}
 				> {
 					li {
-						> a.highlighted {
-							&:before {
+						> a.highlighted{
+							&:before
+							{
 								background-color: $dark-card-background;
 							}
-							&:after {
+							&:after
+							{
 								background-color: $dark-border-color;
 							}
 						}
 					}
 				}
 			}
-			@media (min-width: 1200px) {
-				.pixelstrap {
+			@media (min-width: 1200px){
+				.pixelstrap{
 					ul {
 						background: $dark-body-background;
 						border: 1px solid $dark-border-color;
-						a {
+						a{
 							&:hover,
 							&:focus,
 							&:active,
-							&.highlighted {
+							&.highlighted{
 								color: $primary-color;
 							}
-							&.current {
+							&.current{
 								background-color: $dark-body-background;
 								color: $primary-color;
 							}
@@ -5687,26 +5403,26 @@ body {
 				}
 			}
 			.mega-menu {
-				.title {
+				.title{
 					color: $dark-all-font-color;
 					border-bottom: 1px solid $dark-border-color;
 				}
-				.galleria-list {
-					.galleria {
+				.galleria-list{
+					.galleria{
 						> div {
-							.username {
+							.username{
 								color: $dark-all-font-color;
-								small {
+								small{
 									color: $dark-small-font-color;
 								}
 							}
 						}
 					}
 				}
-				.list-unstyled {
-					div {
-						a {
-							&:hover {
+				.list-unstyled{
+					div{
+						a{
+							&:hover{
 								color: $primary-color;
 							}
 						}
@@ -5716,59 +5432,59 @@ body {
 			.default-according {
 				.card {
 					background-color: $dark-card-background;
-					.btn-link {
+					.btn-link{
 						background-color: $dark-card-background;
 						border: 1px solid $dark-card-background;
 						color: $white;
 					}
-					.text-muted {
+					.text-muted{
 						color: $dark-small-font-color !important;
 					}
 				}
-				.bg-primary {
-					.btn-link {
+				.bg-primary{
+					.btn-link{
 						background-color: $primary-color;
 						border: 1px solid $primary-color;
 					}
 				}
-				.bg-secondary {
-					.btn-link {
+				.bg-secondary{
+					.btn-link{
 						background-color: $secondary-color;
 						border: 1px solid $secondary-color;
 					}
 				}
 			}
-			.collapse {
-				.card-body {
+			.collapse{
+				.card-body{
 					background-color: $dark-card-background;
 				}
 			}
-			@media screen and (max-width: 1660px) {
-				.chat-box {
-					.chat-history {
-						.call-icons {
-							ul {
-								li {
+			@media screen and (max-width: 1660px){
+				.chat-box{
+					.chat-history{
+						.call-icons{
+							ul{
+								li{
 									border: 1px solid $dark-border-color;
 								}
 							}
 						}
-						.total-time {
-							h2 {
+						.total-time{
+							h2{
 								color: $dark-all-font-color;
 							}
 						}
 					}
 				}
-				.caller-img {
-					img {
+				.caller-img{
+					img{
 						opacity: 0.7;
 					}
 				}
 				.chat-box {
 					.chat-history {
 						.call-content {
-							> div {
+							>div{
 								background-color: rgba(0, 0, 0, 0.75);
 								background-blend-mode: overlay;
 							}
@@ -5776,24 +5492,24 @@ body {
 					}
 				}
 			}
-			@media only screen and (max-width: 1199px) {
-				.sm {
+			@media only screen and (max-width: 1199px){
+				.sm{
 					background-color: $dark-card-background;
 					border: 1px solid $dark-border-color;
 				}
-				.pixelstrap {
-					.mobile-back {
+				.pixelstrap{
+					.mobile-back{
 						border-bottom: 1px solid $dark-border-color;
 					}
-					ul {
-						li {
+					ul{
+						li{
 							border-top: 1px solid $dark-border-color;
 						}
-						a {
+						a{
 							background: $dark-card-background;
 							&:hover,
 							&:focus,
-							&:active {
+							&:active{
 								background: $dark-card-background;
 							}
 						}
@@ -5803,22 +5519,22 @@ body {
 					border-top: 1px solid $dark-border-color;
 					background-color: $dark-card-background;
 				}
-				.error-wrapper {
-					.maintenance-icons {
-						li {
-							i {
+				.error-wrapper{
+					.maintenance-icons{
+						li{
+							i{
 								color: $dark-color;
 							}
 						}
 					}
 				}
 			}
-			.pixelstrap {
-				ul {
+			.pixelstrap{
+				ul{
 					background: $dark-card-background;
 				}
 			}
-			@media only screen and (max-width: 575px) {
+			@media only screen and (max-width: 575px){
 				.user-profile {
 					.hovercard {
 						.info {
@@ -5832,6 +5548,7 @@ body {
 				.widget-joins {
 					.border-after-xs {
 						&:after {
+
 							background-color: $dark-border-color;
 						}
 					}
@@ -5875,28 +5592,23 @@ body {
 			}
 		}
 		.vertical-timeline-element-icon {
-			box-shadow: 0 0 0 4px $dark-border-color, inset 0 2px 0 rgba($black, 0.08), 0 3px 0 4px rgba($black, 0.05);
+			box-shadow: 0 0 0 4px $dark-border-color, inset 0 2px 0 rgba($black,.08), 0 3px 0 4px rgba($black,.05);
 		}
 		.vertical-timeline {
 			&::before {
 				background: $dark-border-color !important;
 			}
 		}
-		.sweet-alert,
-		.reactour__helper,
-		.fileContainer,
-		.ceCBVJ {
+		.sweet-alert, .reactour__helper, .fileContainer, .ceCBVJ {
 			background-color: $dark-card-background !important;
 		}
-		.rbc-month-view,
-		.rbc-time-view {
+		.rbc-month-view, .rbc-time-view {
 			border: 1px solid $dark-border-color;
 		}
 		.rbc-toolbar {
 			button {
 				color: $dark-small-font-color;
-				&:hover,
-				&:focus {
+				&:hover, &:focus {
 					background-color: $primary-color;
 					color: $white;
 				}
@@ -5908,19 +5620,18 @@ body {
 			}
 		}
 		.rbc-off-range-bg {
-			background: $dark-body-background;
+			background: $dark-body-background ;
 		}
 		.rbc-day-bg {
 			+ .rbc-day-bg {
 				border-left: 1px solid $dark-border-color;
 			}
 		}
-		.rbc-header,
-		.rbc-timeslot-group {
+		.rbc-header, .rbc-timeslot-group {
 			border-bottom: 1px solid $dark-border-color;
-			+ .rbc-header {
+			 + .rbc-header {
 				border-left: 1px solid $dark-border-color;
-			}
+			 }
 		}
 		.rbc-time-content {
 			border-top: 2px solid $dark-border-color;
@@ -5953,24 +5664,14 @@ body {
 				border-top: 1px solid $dark-border-color;
 			}
 		}
-		.rbc-time-header-content,
-		.rbc-time-content > * + * > * {
+		.rbc-time-header-content, .rbc-time-content > * + * > * {
 			border-left: $dark-border-color;
 		}
 		#external-events {
 			border: 1px solid $dark-border-color;
 		}
 		.fc-unthemed {
-			th,
-			td,
-			thead,
-			tbody,
-			.fc-divider,
-			.fc-row,
-			.fc-content,
-			.fc-popover,
-			.fc-list-view,
-			.fc-list-heading td {
+			th,  td,  thead,  tbody,  .fc-divider,  .fc-row,  .fc-content,  .fc-popover,  .fc-list-view,  .fc-list-heading td {
 				border-color: $dark-border-color;
 			}
 			td {
@@ -5978,12 +5679,9 @@ body {
 					background: $dark-body-background;
 				}
 			}
-			.fc-divider,
-			.fc-popover,
-			.fc-list-heading {
+			.fc-divider, .fc-popover , .fc-list-heading {
 				background-color: $dark-border-color;
-				.fc-header,
-				td {
+				.fc-header, td {
 					background-color: $dark-border-color;
 				}
 			}
@@ -5993,36 +5691,10 @@ body {
 				.main-menu {
 					> li {
 						a {
-							&.active,
-							&:hover {
+							&.active, &:hover {
 								background: $dark-body-background;
 							}
 						}
-					}
-				}
-			}
-		}
-		.list-persons {
-			.profile-mail {
-				.media {
-					.media-body {
-						ul {
-							li {
-								+ li {
-									border-left: 2px solid $dark-border-color;
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-		.contacts-tabs {
-			.nav-pills {
-				border-right: 1px solid $dark-border-color;
-				.nav-link {
-					+ .nav-link {
-						border-top: 1px solid $dark-border-color;
 					}
 				}
 			}
@@ -6044,10 +5716,10 @@ body {
 				}
 			}
 		}
-		.my-gallery {
+		.my-gallery{
 			&.gallery-with-description {
 				.caption {
-					border: 1px solid $dark-border-color;
+                   border: 1px solid $dark-border-color;
 				}
 				figure {
 					.img-thumbnail {
@@ -6059,8 +5731,7 @@ body {
 		.masonry-with-dec {
 			.my-masonry-grid_column {
 				li {
-					img,
-					.caption {
+					img, .caption {
 						border: 1px solid $dark-border-color;
 					}
 				}
@@ -6071,43 +5742,39 @@ body {
 				background-color: $dark-body-background;
 			}
 		}
-		.table-primary,
-		.table-secondary,
-		.table-success,
-		.table-info,
-		.table-warning,
-		.table-danger,
-		.table-light {
-			th,
-			td {
+		.table-primary, .table-secondary, .table-success, .table-info, .table-warning, .table-danger, .table-light {
+			th,td {
 				color: $black !important;
 			}
 		}
-		@each $border-tab-name, $border-tab-color in (primary, $primary-color), (secondary, $secondary-color),
-			(success, $success-color), (danger, $danger-color), (info, $info-color), (light, $light-color),
-			(dark, $dark-color), (warning, $warning-color)
-		{
-			.borderb-tab-#{$border-tab-name} {
-				.nav-tabs {
-					&.nav-item {
-						.nav-link {
-							color: $dark-all-font-color;
-						}
-					}
-					.nav-link {
-						&.active {
-							color: $border-tab-color;
-							border-bottom: 2px solid $border-tab-color !important;
-						}
-					}
+		@each $border-tab-name, $border-tab-color in (primary, $primary-color),
+        (secondary, $secondary-color) ,
+        (success, $success-color),
+        (danger, $danger-color),
+        (info, $info-color),
+        (light, $light-color),
+        (dark, $dark-color),
+        (warning, $warning-color) {
+		.borderb-tab-#{$border-tab-name}{
+			.nav-tabs {
+			&.nav-item {
+				.nav-link {
+				color: $dark-all-font-color;
 				}
 			}
+			.nav-link {
+				&.active {
+				color: $border-tab-color;
+				border-bottom: 2px solid $border-tab-color !important;
+				}
+			}
+			}
+		}
 		}
 		ol {
 			&.progtrckr {
 				li {
-					&.progtrckr-doing,
-					&.progtrckr-done {
+					&.progtrckr-doing, &.progtrckr-done {
 						color: $dark-small-font-color;
 					}
 					&.progtrckr-todo {
@@ -6154,31 +5821,11 @@ body {
 				}
 			}
 		}
-		.mega-inline,
-		.mega-horizontal {
+		.mega-inline, .mega-horizontal {
 			.card {
 				border: 1px solid $dark-border-color;
 			}
 		}
-
-		// draggable card
-		.react-kanban-column {
-			background-color: $dark-body-background;
-		}
-		.react-kanban-card,
-		.react-kanban-card-adder-form,
-		.react-kanban-card-skeleton {
-			background-color: $dark-card-background;
-		}
-		.react-kanban-card__title {
-			border-bottom: 1px solid $dark-border-color;
-		}
-		.draggable-card {
-			.react-kanban-card__title {
-				border-bottom: none;
-			}
-		}
-
 		.input-cropper {
 			border: 1px solid $dark-border-color;
 		}
@@ -6188,61 +5835,6 @@ body {
 		.dzu-previewButton {
 			filter: brightness(0.5) invert(1);
 		}
-
-		// react datatable
-		.rdt_Table {
-			border: 1px solid $dark-border-color;
-		}
-		.rdt_TableHeadRow {
-			background-color: $dark-card-background;
-		}
-		.rdt_TableCol,
-		.rdt_TableCol_Sortable,
-		.___react-data-table-allow-propagation___ {
-			color: $dark-all-font-color;
-		}
-		.rdt_TableRow {
-			&:nth-of-type(odd) {
-				color: $dark-all-font-color;
-				background-color: $dark-body-background;
-			}
-			&:nth-of-type(even) {
-				color: $dark-all-font-color;
-				background-color: $dark-card-background;
-			}
-		}
-		.fpZHHx {
-			fill: $dark-all-font-color;
-			color: $dark-all-font-color;
-		}
-		.rdt_Pagination {
-			background-color: $dark-card-background;
-			border-top-color: $dark-border-color;
-			color: $dark-all-font-color;
-			button {
-				color: $dark-all-font-color;
-				fill: $dark-all-font-color;
-				&:disabled {
-					color: $dark-small-font-color;
-					fill: $dark-small-font-color;
-				}
-			}
-		}
-		.rdt_TableCol_Sortable {
-			&:hover {
-				color: $dark-all-font-color;
-			}
-		}
-		.rdt_TableHeader {
-			background-color: $dark-body-background !important;
-			> div {
-				&:last-child {
-					background-color: $dark-body-background !important;
-					color: $dark-all-font-color;
-				}
-			}
-		}
-
 		.popover-header {
 			color: $theme-body-font-color;
 		}
@@ -6260,38 +5852,15 @@ body {
 		.dropdown-menu {
 			background-color: $dark-body-background !important;
 		}
-		.dropdown-item,
-		span.twitter-typeahead .tt-suggestion {
+		.dropdown-item, span.twitter-typeahead .tt-suggestion {
 			color: $dark-all-font-color;
-			&:hover,
-			&:focus,
-			&.active {
+			&:hover, &:focus, &.active {
 				background-color: $dark-card-background !important;
 				color: $dark-all-font-color !important;
 			}
 		}
-
-		// kanban board
-		.kanban-container {
-			.kanban-item {
-				.kanban-box {
-					background-color: $dark-card-background;
-				}
-			}
-		}
-		.jkanban-container {
-			.kanban-container {
-				.kanban-item {
-					.kanban-box {
-						border: 1px solid $dark-border-color;
-					}
-				}
-			}
-		}
-
 		.modal {
-			.modal-header,
-			.modal-body {
+			.modal-header, .modal-body {
 				color: $dark-all-font-color;
 			}
 		}
@@ -6310,13 +5879,12 @@ body {
 		}
 		.tab-vertical {
 			.nav-tabs {
-				border: 1px solid hsla(0, 0%, 100%, 0.3);
+				border: 1px solid hsla(0,0%,100%,.3);
 				.nav-link {
 					+ .nav-link {
-						border-top: 1px solid hsla(0, 0%, 100%, 0.3);
+						border-top: 1px solid hsla(0,0%,100%,.3);
 					}
-					&:hover,
-					&:focus {
+					&:hover, &:focus {
 						background-color: $dark-body-background;
 					}
 				}
@@ -6344,29 +5912,29 @@ body {
 				}
 			}
 		}
-		.checkout {
+		.checkout{
 			.checkout-details {
 				background-color: $dark-body-background;
 				border: 1px solid $dark-border-color;
 				padding: 40px;
 			}
 		}
-		.shopping-checkout-option {
-			.checkbox_animated {
-				&:after {
+		.shopping-checkout-option{
+			.checkbox_animated{
+				&:after{
 					border: 2px solid $dark-border-color;
 				}
 			}
 		}
-		.animate-chk {
-			.radio_animated {
-				&:after {
+		.animate-chk{
+			.radio_animated{
+				&:after{
 					border: 2px solid $dark-border-color;
 				}
 			}
 		}
 		.order-box {
-			.title-box {
+			.title-box{
 				color: #bfc2c6;
 				border-bottom: 1px solid $dark-border-color;
 			}
@@ -6374,18 +5942,18 @@ body {
 				border-bottom: 1px solid $dark-border-color;
 				li {
 					color: #bfc2c6;
-					span {
+					span{
 						color: #bfc2c6;
 					}
 				}
 			}
 			.sub-total {
-				li {
+				li{
 					color: #bfc2c6;
 				}
 			}
 			.total {
-				li {
+				li{
 					color: #bfc2c6;
 				}
 			}
@@ -6418,8 +5986,7 @@ body {
 				}
 			}
 		}
-		.radio_animated,
-		.checkbox_animated {
+		.radio_animated, .checkbox_animated{
 			&:after {
 				background: $dark-body-background;
 				border: 2px solid $dark-body-background;
@@ -6437,46 +6004,45 @@ body {
 				}
 			}
 		}
-		.bitcoin-form {
-			.bitcoin-form-dropdown {
+		.bitcoin-form{
+			.bitcoin-form-dropdown{
 				.onhover-dropdown {
 					.btn {
 						background-color: $dark-border-color;
 						color: $dark-all-font-color;
 					}
-					.onhover-show-div {
+					.onhover-show-div{
 						background-color: $dark-body-background;
 						box-shadow: 0 0 2px 2px $dark-body-background;
 					}
 				}
 			}
-			.form-row {
-				.input-group {
-					.input-group-prepend {
-						.input-group-text {
+			.form-row{
+				.input-group{
+					.input-group-prepend{
+						.input-group-text{
 							border: 1px solid $dark-border-color;
 						}
 					}
 				}
 			}
 		}
-		.active-order-table,
-		.market-table {
-			table {
-				thead {
-					tr {
+		.active-order-table, .market-table {
+			table{
+				thead{
+					tr{
 						th {
 							border-top: none !important;
 						}
 					}
 				}
-				tbody {
-					tr {
-						td {
+				tbody{
+					tr{
+						td{
 							border-bottom: 1px solid $dark-border-color;
 						}
-						&:last-child {
-							td {
+						&:last-child{
+							td{
 								border-bottom: none;
 							}
 						}
@@ -6484,9 +6050,9 @@ body {
 				}
 			}
 		}
-		.pricing-card-design-2 {
-			.pricing-block {
-				.pricing-inner {
+		.pricing-card-design-2{
+			.pricing-block{
+				.pricing-inner{
 					ul {
 						li {
 							border-bottom: 1px solid $dark-border-color;
@@ -6495,32 +6061,31 @@ body {
 				}
 			}
 		}
-		.flot-chart-container {
-			.legend {
-				.table {
-					tbody {
+		.flot-chart-container{
+			.legend{
+				.table{
+					tbody{
 						background-color: $dark-card-background;
 						color: $white;
-						.legendLabel {
+						.legendLabel{
 							padding-left: 5px;
 						}
 					}
 				}
 			}
 		}
-		.google-visualization-tooltip {
-			text {
+		.google-visualization-tooltip{
+			text{
 				fill: rgba(0, 0, 0, 0.7) !important;
 			}
 		}
-		.nav-dark,
-		.nav-pills.nav-dark {
-			.nav-link {
+		.nav-dark ,.nav-pills.nav-dark{
+			.nav-link{
 				color: $white;
 			}
 		}
 		.loader-wrapper {
-			background-color: $dark-body-background;
+			background-color: $dark-body-background ;
 			.loader {
 				background-color: $dark-body-background !important;
 			}
@@ -6540,21 +6105,9 @@ body {
 					color: $dark-all-font-color;
 					border-color: $dark-border-color;
 				}
-				input[type="text"],
-				input[type="email"],
-				input[type="search"],
-				input[type="password"],
-				input[type="number"],
-				input[type="tel"],
-				input[type="date"],
-				input[type="datetime-local"],
-				input[type="time"],
-				input[type="datetime-local"],
-				input[type="month"],
-				input[type="week"],
-				input[type="url"],
-				input[type="file"],
-				select {
+				input[type=text], input[type=email], input[type=search],
+				input[type=password], input[type=number], input[type=tel], input[type=date], input[type=datetime-local], input[type=time], input[type=datetime-local], input[type=month], input[type=week],
+				input[type=url], input[type=file], select {
 					border-color: $dark-border-color;
 					background-color: $dark-body-background;
 					color: $dark-all-font-color;
@@ -6570,43 +6123,43 @@ body {
 					border-color: $dark-border-color;
 				}
 			}
-			.form-divider {
+			.form-divider{
 				border-top: 1px solid $dark-border-color;
-				&::before {
+				&::before{
 					background: $dark-card-background;
 					color: $dark-all-font-color;
 				}
 			}
 		}
-		.CodeMirror {
+		.CodeMirror{
 			background: $dark-card-background;
 			border: 1px solid $dark-small-font-color;
 			color: $dark-all-font-color;
-			.CodeMirror-code {
-				pre {
+			.CodeMirror-code{
+				pre{
 					background: $dark-card-background;
 				}
 			}
 		}
-		.editor-toolbar {
+		.editor-toolbar{
 			border-top: 1px solid $dark-small-font-color;
 			border-left: 1px solid $dark-small-font-color;
 			border-right: 1px solid $dark-small-font-color;
-			a {
+			a{
 				color: $dark-all-font-color !important;
 				&:hover,
-				&.active {
+				&.active{
 					background: $dark-border-color;
 				}
 			}
-			i.separator {
+			i.separator{
 				border-left: 1px solid $dark-small-font-color;
 				border-right: 1px solid $dark-small-font-color;
 			}
 		}
 		.editor-toolbar.disabled-for-preview {
-			a {
-				&:not(.no-disable) {
+			a{
+				&:not(.no-disable){
 					background: $dark-border-color;
 				}
 			}
@@ -6614,39 +6167,35 @@ body {
 		.editor-preview {
 			background-color: $dark-card-background;
 		}
-		.editor-toolbar.fullscreen,
-		.editor-preview-side {
+		.editor-toolbar.fullscreen, .editor-preview-side{
 			background: $dark-card-background;
 			border: 1px solid $dark-small-font-color;
 		}
-		.u-step {
+		.u-step{
 			background: $dark-border-color;
 			&.active,
-			&.current {
+			&.current{
 				background: $primary-color;
 				color: $white;
 			}
 		}
-		.u-step-title,
-		.u-pearl-title {
+		.u-step-title, .u-pearl-title{
 			color: $dark-all-font-color;
 		}
-		.u-step-number {
+		.u-step-number{
 			background-color: $dark-card-background;
 		}
-		.u-pearl {
-			&:before {
+		.u-pearl{
+			&:before{
 				background-color: $dark-border-color;
 			}
 		}
-		.u-pearl-number,
-		.u-pearl-icon {
+		.u-pearl-number, .u-pearl-icon{
 			background: $dark-body-background;
 			border: 2px solid $dark-body-background;
 		}
 		.u-pearl.disabled {
-			.u-pearl-icon,
-			.u-pearl-number {
+			.u-pearl-icon, .u-pearl-number{
 				background: $dark-border-color;
 				border: 2px solid $dark-border-color;
 			}
@@ -6654,48 +6203,48 @@ body {
 				background-color: #334053;
 			}
 		}
-		.u-pearl.error {
-			&:after {
+		.u-pearl.error{
+			&:after{
 				background-color: $dark-body-background;
 			}
 		}
-		.note-editor.note-frame {
+		.note-editor.note-frame{
 			border-color: $dark-border-color;
 			.note-editing-area {
-				.note-editable {
+				.note-editable{
 					background-color: $dark-card-background;
 					color: $dark-all-font-color;
 				}
 			}
 		}
-		.swal-modal {
+		.swal-modal{
 			background-color: $dark-card-background;
-			.swal-title {
+			.swal-title{
 				color: $dark-all-font-color;
 			}
-			.swal-text {
+			.swal-text{
 				color: $dark-small-font-color;
 			}
-			.swal-content__input {
+			.swal-content__input{
 				background-color: $dark-body-background;
 				color: $dark-all-font-color;
 			}
 		}
-		.nav-tabs {
+		.nav-tabs{
 			border-bottom: 1px solid $dark-border-color;
-			.nav-link {
-				&.active {
+			.nav-link{
+				&.active{
 					background-color: $dark-card-background;
 					color: $dark-all-font-color;
 					border-color: $dark-border-color $dark-border-color $dark-card-background;
 				}
 				&:hover,
-				&:focus {
+				&:focus{
 					border-color: $dark-border-color $dark-border-color $dark-border-color;
 				}
 			}
-			.nav-item.show {
-				.nav-link {
+			.nav-item.show{
+				.nav-link{
 					background-color: $dark-card-background;
 					color: $dark-all-font-color;
 					border-color: $dark-border-color $dark-border-color $dark-card-background;
@@ -6704,16 +6253,16 @@ body {
 		}
 		.nav-tabs.nav-bottom {
 			.nav-item {
-				.nav-link {
+				.nav-link{
 					&.active,
 					&.focus,
-					&.hover {
+					&.hover{
 						border-color: $dark-card-background $dark-border-color $dark-border-color;
 					}
 				}
 			}
 		}
-		.dropdown-divider {
+		.dropdown-divider{
 			border-top: 1px solid $dark-border-color;
 		}
 		.icon-hover-bottom {
@@ -6742,46 +6291,46 @@ body {
 			background-color: #d8ecff;
 			border-radius: 2px;
 		}
-		#cd-timeline {
+		#cd-timeline{
 			&::before {
 				background: $dark-border-color;
 			}
 		}
-		.timeliny {
+		.timeliny{
 			border-top: 1px solid $dark-border-color;
 			border-bottom: 1px solid $dark-border-color;
-			&::before {
+			&::before{
 				background-color: $white;
 			}
-			.timeliny-dot {
+			.timeliny-dot{
 				background-color: $dark-card-background;
 				border: 1px solid $white;
 				&::before {
 					color: $dark-all-font-color;
 				}
 			}
-			.timeliny-timeline {
-				.timeliny-timeblock {
-					&.active {
-						.timeliny-dot {
-							&::before {
+			.timeliny-timeline{
+				.timeliny-timeblock{
+					&.active{
+						.timeliny-dot{
+							&::before{
 								color: $dark-all-font-color;
 							}
 						}
 					}
-					&:not(.inactive):not(.active) {
-						.timeliny-dot {
+					&:not(.inactive):not(.active){
+						.timeliny-dot{
 							&:hover {
 								background-color: $white;
-								&::before {
+								&::before{
 									color: $dark-all-font-color;
 								}
 							}
 						}
 					}
-					.timeliny-dot {
-						&:hover {
-							&::after {
+					.timeliny-dot{
+						&:hover{
+							&::after{
 								background-color: $dark-card-background;
 								border: 1px solid $dark-border-color;
 								color: $dark-all-font-color;
@@ -6791,23 +6340,23 @@ body {
 				}
 			}
 		}
-		.todo {
-			.todo-list-wrapper {
-				#todo-list {
+		.todo{
+			.todo-list-wrapper{
+				#todo-list{
 					li {
-						.task-container {
+						.task-container{
 							background: $dark-card-background;
 							border-bottom: 1px solid $dark-border-color;
-							.task-label {
+							.task-label{
 								color: $dark-all-font-color;
 							}
-							&:hover {
-								h4 {
+							&:hover{
+								h4{
 									color: $white;
 								}
 							}
-							.task-action-btn {
-								.action-box {
+							.task-action-btn{
+								.action-box{
 									&:hover:not(.active) {
 										background: $dark-card-background;
 										border: 1px solid $dark-border-color;
@@ -6815,13 +6364,13 @@ body {
 								}
 							}
 						}
-						&.completed {
-							.task-container {
-								.task-label {
+						&.completed{
+							.task-container{
+								.task-label{
 									color: $primary-color;
 								}
-								.complete-btn {
-									&:hover {
+								.complete-btn{
+									&:hover{
 										border: 1px solid $success-color !important;
 									}
 								}
@@ -6830,14 +6379,15 @@ body {
 					}
 				}
 				.todo-list-footer {
-					.new-task-wrapper {
-						textarea {
+					.new-task-wrapper{
+						textarea{
 							background-color: $dark-card-background;
 							border: 1px solid $dark-border-color;
 							color: $dark-all-font-color;
 						}
 					}
 				}
+
 			}
 		}
 		.user-profile {
@@ -6852,137 +6402,130 @@ body {
 			.hovercard {
 				.info {
 					.title {
-						a {
+						a{
 							color: $dark-all-font-color;
 						}
 					}
 				}
-				.user-image {
-					.avatar {
-						img {
+				.user-image{
+					.avatar{
+						img{
 							border: 10px solid $dark-card-background;
 						}
 					}
-					.icon-wrapper {
+					.icon-wrapper{
 						background-color: $dark-card-background;
 					}
 				}
-				.tabs-scoial {
+				.tabs-scoial{
 					border-bottom: none !important;
 				}
 			}
 			.follow {
-				.follow-num {
+				.follow-num{
 					color: $dark-all-font-color;
 				}
 			}
-			.profile-img-style {
-				.user-name {
+			.profile-img-style{
+				.user-name{
 					color: $dark-all-font-color;
 				}
-				p {
+				p{
 					color: $dark-small-font-color;
 				}
 			}
 		}
-		span.twitter-typeahead {
-			.tt-menu {
+		span.twitter-typeahead{
+			.tt-menu{
 				background-color: $dark-body-background;
 				color: $dark-all-font-color;
 			}
-			.tt-suggestion {
+			.tt-suggestion{
 				color: $dark-all-font-color;
 				&:hover,
-				&:focus {
+				&:focus{
 					background-color: $dark-card-background;
 				}
 			}
 		}
-		.typography {
-			small {
+		.typography{
+			small{
 				color: $dark-all-font-color;
 			}
 		}
-		.blockquote-footer {
+		.blockquote-footer{
 			color: $dark-small-font-color;
 		}
-		.code-box-copy {
-			pre {
+		.code-box-copy{
+			pre{
 				background-color: $dark-body-background;
-				code {
+				code{
 					background-color: $dark-body-background;
 				}
 			}
-			pre[class*="language-"] {
+			pre[class*="language-"]{
 				border: 1px solid $dark-border-color;
 			}
-			.code-box-copy__btn {
+			.code-box-copy__btn{
 				background-color: $dark-body-background;
 				border: 1px solid $dark-border-color;
-				color: $white;
+				color:$white;
 			}
-			code[class*="language-"],
-			pre[class*="language-"] {
+			code[class*=language-], pre[class*=language-]{
 				text-shadow: 0px 1px $black;
-				::selection {
+				::selection{
 					text-shadow: none;
 					background: $dark-card-background;
 				}
 			}
 		}
-		table.fixedHeader-floating {
+		table.fixedHeader-floating{
 			background-color: $dark-body-background;
 		}
-		.error-wrapper {
+		.error-wrapper{
 			background-color: rgba(54, 64, 74, 0.8);
-			.sub-content {
+			.sub-content{
 				color: $dark-all-font-color;
 			}
 		}
-		.b-light {
-			border: 1px solid $dark-border-color !important;
+		.b-light{
+			border:1px solid $dark-border-color !important;
 		}
-		.modal-content {
+		.modal-content{
 			background-color: $dark-card-background;
-			.modal-header {
+			.modal-header{
 				border-bottom: 1px solid $dark-border-color;
 			}
 		}
-		.modal {
-			.theme-close {
+		.modal{
+			.theme-close{
 				background-color: $dark-card-background !important;
 			}
 		}
-		.loader-box {
-			&.card-loader {
+		.loader-box{
+			&.card-loader{
 				background-color: $dark-card-background;
 			}
 		}
-		.my-gallery {
-			&.gallery-with-description {
+		.my-gallery{
+			&.gallery-with-description{
 				img {
 					border: 1px solid $dark-border-color !important;
 					border-bottom: none !important;
 				}
 			}
 		}
-		@each $var in $alert-name {
-			$i: index($alert-name, $var);
-			.alert-#{$var}.inverse {
-				color: $dark-all-font-color;
-			}
-		}
-		.alert-theme {
-			span {
-				+ span {
-					+ span {
+		.alert-theme{
+			span{
+				+ span{
+					+ span{
 						border: 1px solid $primary-color;
 						background-color: $dark-body-background;
 						border-radius: 4px;
 					}
 				}
 			}
-			i {
+			i{
 				background-color: $primary-color;
 				color: $white;
 				padding: 20px;
@@ -6990,24 +6533,23 @@ body {
 			}
 		}
 		.user-card {
-			.user-deatils {
+			.user-deatils{
 				h6 {
 					color: $dark-small-font-color;
 				}
 			}
-			.card-footer {
-				> div {
+			.card-footer{
+				> div{
 					&:first-child {
 						border-right: 1px solid $dark-border-color;
 					}
 				}
-				.user-footer {
+				.user-footer{
 					h6 {
 						color: $dark-small-font-color;
 					}
-					svg {
-						path,
-						rect {
+					svg{
+						path, rect {
 							color: $dark-small-font-color;
 						}
 					}
@@ -7015,10 +6557,10 @@ body {
 			}
 		}
 		.dashboard-chat {
-			.chat {
+			.chat{
 				.media {
-					.media-body {
-						.message-main {
+					.media-body{
+						.message-main{
 							p {
 								background-color: $dark-body-background;
 							}
@@ -7028,19 +6570,19 @@ body {
 						}
 					}
 				}
-				.right-side-chat {
-					.media-body {
-						p {
+				.right-side-chat{
+					.media-body{
+						p{
 							&:before {
 								border-left: 7px solid $dark-body-background;
 							}
 						}
 					}
 				}
-				.left-side-chat {
-					.media-body {
-						p {
-							&:before {
+				.left-side-chat{
+					.media-body{
+						p{
+							&:before{
 								border-right: 7px solid $dark-body-background;
 							}
 						}
@@ -7052,41 +6594,39 @@ body {
 			border: 2px solid $dark-border-color;
 		}
 		.invest-dropdown {
-			.right-header-dropdown {
+			.right-header-dropdown{
 				&.onhover-show-div {
 					background-color: $dark-body-background;
 					box-shadow: 0 0 2px 2px $dark-body-background;
-					a {
+					a{
 						color: $dark-all-font-color;
 					}
 				}
 			}
 		}
-		.server-card-bg {
+		.server-card-bg{
 			background-color: #181f27 !important;
 		}
 		.server-widgets {
 			.bottom-server {
-				h5 {
+				h5{
 					.second-color {
 						color: $dark-all-font-color;
 					}
 				}
 			}
 		}
-		.tabs-project {
-			.nav-item {
-				.nav-link {
+		.tabs-project{
+			.nav-item{
+				.nav-link{
 					color: $dark-all-font-color;
 				}
 			}
 		}
-		.current-progress,
-		.order-history {
-			table {
-				tr {
-					td,
-					th {
+		.current-progress, .order-history{
+			table{
+				tr{
+					td, th{
 						border-top: none !important;
 					}
 				}
@@ -7095,13 +6635,13 @@ body {
 				background-color: $dark-body-background;
 			}
 		}
-		.navigation-option {
-			ul {
+		.navigation-option{
+			ul{
 				li {
 					a {
 						color: $dark-all-font-color;
 					}
-					&:hover {
+					&:hover{
 						background-color: $dark-body-background;
 					}
 				}
@@ -7119,9 +6659,9 @@ body {
 			.product-img {
 				.product-hover {
 					ul {
-						li {
+						li{
 							background-color: $dark-card-background;
-							&:hover {
+							&:hover{
 								background-color: $black;
 								color: $white;
 							}
@@ -7130,14 +6670,14 @@ body {
 				}
 			}
 		}
-		.browse {
-			.browse-articles {
-				ul {
-					li {
+		.browse{
+			.browse-articles{
+				ul{
+					li{
 						a {
 							color: $dark-all-font-color;
 						}
-						&:hover {
+						&:hover{
 							background-color: $dark-body-background;
 						}
 					}
@@ -7173,7 +6713,7 @@ body {
 				}
 				.rt-tbody {
 					.rt-tr-group {
-						.rt-tr {
+						.rt-tr{
 							&.-odd {
 								background-color: $dark-body-background;
 							}
@@ -7189,33 +6729,37 @@ body {
 				.-btn {
 					color: $dark-small-font-color;
 				}
-				input,
-				select {
+				input, select {
 					background: $dark-body-background;
 					color: $white;
 				}
 			}
 		}
-		@each $btn-name, $btn-color in (primary, $primary-color), (secondary, $secondary-color),
-			(success, $success-color), (danger, $danger-color), (info, $info-color), (light, $light-color),
-			(dark, $dark-color), (warning, $warning-color)
-		{
-			.radio-#{$btn-name} {
-				input[type="radio"] {
-					& + label {
-						&::before {
+		@each $btn-name, $btn-color in (primary, $primary-color),
+						(secondary, $secondary-color) ,
+						(success, $success-color),
+						(danger, $danger-color),
+						(info, $info-color),
+						(light, $light-color),
+						(dark, $dark-color),
+						(warning, $warning-color) {
+			.radio-#{$btn-name}{
+				input[type="radio"]
+				{
+					& + label{
+						&::before{
 							border-color: $btn-color !important;
 						}
-						&::after {
+						&::after{
 							background-color: $btn-color;
 						}
 					}
-					&:checked {
-						& + label {
-							&::before {
+					&:checked{
+						& + label{
+							&::before{
 								border-color: $btn-color !important;
 							}
-							&::after {
+							&::after{
 								background-color: $btn-color;
 							}
 						}
@@ -7224,23 +6768,32 @@ body {
 			}
 		}
 
-		@each $btn-name, $btn-color in (primary, $primary-color), (secondary, $secondary-color),
-			(success, $success-color), (danger, $danger-color), (info, $info-color), (light, $light-color),
-			(dark, $dark-color), (warning, $warning-color)
-		{
-			.checkbox-#{$btn-name} {
-				label {
-					&::before {
-						border-color: $btn-color !important;
+		@each $btn-name, $btn-color in (primary, $primary-color),
+						(secondary, $secondary-color) ,
+						(success, $success-color),
+						(danger, $danger-color),
+						(info, $info-color),
+						(light, $light-color),
+						(dark, $dark-color),
+						(warning, $warning-color) {
+			.checkbox-#{$btn-name}{
+				label{
+					&::before{
+						border-color:$btn-color !important;
 					}
 				}
+
 			}
 		}
 
-		@each $btn-name, $btn-color in (primary, $primary-color), (secondary, $secondary-color),
-			(success, $success-color), (danger, $danger-color), (info, $info-color), (light, $light-color),
-			(dark, $dark-color), (warning, $warning-color)
-		{
+		@each $btn-name, $btn-color in   (primary, $primary-color),
+						(secondary, $secondary-color) ,
+						(success, $success-color),
+						(danger, $danger-color),
+						(info, $info-color),
+						(light, $light-color),
+						(dark, $dark-color),
+						(warning, $warning-color) {
 			.checkbox-solid-#{$btn-name} {
 				label {
 					&:before {
@@ -7264,35 +6817,35 @@ body {
 					}
 				}
 			}
+
 		}
-		.bootstrap-datetimepicker-widget {
-			ul {
-				li {
+		.bootstrap-datetimepicker-widget{
+			ul{
+				li{
 					color: $dark-all-font-color;
 					border-bottom: 1px solid $dark-border-color;
 				}
 			}
-			tr {
-				th,
-				td {
-					&:hover {
+			tr{
+				th,td{
+					&:hover{
 						background-color: $dark-card-background;
 					}
-					span {
-						&:hover {
+					span{
+						&:hover{
 							background-color: $dark-card-background;
 						}
 					}
 					&.prev,
-					&.next {
-						&:hover {
+					&.next{
+						&:hover{
 							background-color: $dark-card-background;
 						}
 					}
 				}
-				&:first-child {
-					th {
-						&:hover {
+				&:first-child{
+					th{
+						&:hover{
 							background-color: $dark-card-background;
 						}
 					}
@@ -7302,19 +6855,19 @@ body {
 		.btn-transparent {
 			color: $dark-all-font-color;
 		}
-		.categories {
-			ul {
-				li {
+		.categories{
+			ul{
+				li{
 					a {
 						color: $dark-small-font-color;
 					}
-					&:hover {
+					&:hover{
 						background-color: $dark-body-background;
 					}
 				}
 			}
 		}
-		.main {
+		.main{
 			.langChoice {
 				background: $dark-body-background;
 				color: $white;
@@ -7341,8 +6894,7 @@ body {
 							color: $dark-small-font-color;
 						}
 					}
-					p,
-					.light-span {
+					p, .light-span{
 						color: $dark-small-font-color;
 					}
 				}
@@ -7355,8 +6907,7 @@ body {
 				}
 			}
 		}
-		.filter-cards-view,
-		.timeline-content {
+		.filter-cards-view, .timeline-content {
 			p {
 				color: $dark-small-font-color;
 			}
@@ -7367,7 +6918,7 @@ body {
 			}
 			.comments-box {
 				.input-group {
-					.form-control {
+					.form-control{
 						border: none !important;
 					}
 					.input-group-append {
@@ -7379,7 +6930,7 @@ body {
 		.social-chat {
 			.media-body {
 				border: 1px solid $dark-border-color;
-				&:after {
+				&:after{
 					border-right: 7px solid $dark-card-background;
 				}
 			}
@@ -7413,7 +6964,7 @@ body {
 								&:nth-child(2) {
 									border-right: 1px solid $dark-border-color;
 								}
-								&:nth-child(5) {
+								&:nth-child(5){
 									border-right: none;
 									border-left: 1px solid $dark-border-color;
 								}
@@ -7521,18 +7072,14 @@ body {
 								a {
 									color: $dark-all-font-color;
 									svg {
-										path,
-										line,
-										circle {
+										path, line, circle {
 											color: $dark-all-font-color !important;
 										}
 									}
 									&:hover {
 										color: $primary-color;
 										svg {
-											line,
-											path,
-											circle {
+											line, path, circle {
 												color: $primary-color !important;
 											}
 										}
@@ -7649,14 +7196,14 @@ body {
 			}
 			/* Main Header ends */
 		}
-		.page-body-wrapper {
-			.page-body {
+		.page-body-wrapper{
+			.page-body{
 				color: #313131;
 				background-color: rgb(252, 251, 251);
 			}
 		}
 	}
-	&.dark-sidebar-body-mix {
+	&.dark-sidebar-body-mix{
 		color: $dark-all-font-color;
 		background-color: $dark-body-background;
 		.offcanvas-bookmark {
@@ -7696,28 +7243,23 @@ body {
 			}
 		}
 		.vertical-timeline-element-icon {
-			box-shadow: 0 0 0 4px $dark-border-color, inset 0 2px 0 rgba($black, 0.08), 0 3px 0 4px rgba($black, 0.05);
+			box-shadow: 0 0 0 4px $dark-border-color, inset 0 2px 0 rgba($black,.08), 0 3px 0 4px rgba($black,.05);
 		}
 		.vertical-timeline {
 			&::before {
 				background: $dark-border-color !important;
 			}
 		}
-		.sweet-alert,
-		.reactour__helper,
-		.fileContainer,
-		.ceCBVJ {
+		.sweet-alert, .reactour__helper, .fileContainer, .ceCBVJ {
 			background-color: $dark-card-background !important;
 		}
-		.rbc-month-view,
-		.rbc-time-view {
+		.rbc-month-view, .rbc-time-view {
 			border: 1px solid $dark-border-color;
 		}
 		.rbc-toolbar {
 			button {
 				color: $dark-small-font-color;
-				&:hover,
-				&:focus {
+				&:hover, &:focus {
 					background-color: $primary-color;
 					color: $white;
 				}
@@ -7729,19 +7271,18 @@ body {
 			}
 		}
 		.rbc-off-range-bg {
-			background: $dark-body-background;
+			background: $dark-body-background ;
 		}
 		.rbc-day-bg {
 			+ .rbc-day-bg {
 				border-left: 1px solid $dark-border-color;
 			}
 		}
-		.rbc-header,
-		.rbc-timeslot-group {
+		.rbc-header, .rbc-timeslot-group {
 			border-bottom: 1px solid $dark-border-color;
-			+ .rbc-header {
+			 + .rbc-header {
 				border-left: 1px solid $dark-border-color;
-			}
+			 }
 		}
 		.rbc-time-content {
 			border-top: 2px solid $dark-border-color;
@@ -7774,24 +7315,14 @@ body {
 				border-top: 1px solid $dark-border-color;
 			}
 		}
-		.rbc-time-header-content,
-		.rbc-time-content > * + * > * {
+		.rbc-time-header-content, .rbc-time-content > * + * > * {
 			border-left: $dark-border-color;
 		}
 		#external-events {
 			border: 1px solid $dark-border-color;
 		}
 		.fc-unthemed {
-			th,
-			td,
-			thead,
-			tbody,
-			.fc-divider,
-			.fc-row,
-			.fc-content,
-			.fc-popover,
-			.fc-list-view,
-			.fc-list-heading td {
+			th,  td,  thead,  tbody,  .fc-divider,  .fc-row,  .fc-content,  .fc-popover,  .fc-list-view,  .fc-list-heading td {
 				border-color: $dark-border-color;
 			}
 			td {
@@ -7799,12 +7330,9 @@ body {
 					background: $dark-body-background;
 				}
 			}
-			.fc-divider,
-			.fc-popover,
-			.fc-list-heading {
+			.fc-divider, .fc-popover , .fc-list-heading {
 				background-color: $dark-border-color;
-				.fc-header,
-				td {
+				.fc-header, td {
 					background-color: $dark-border-color;
 				}
 			}
@@ -7814,36 +7342,10 @@ body {
 				.main-menu {
 					> li {
 						a {
-							&.active,
-							&:hover {
+							&.active, &:hover {
 								background: $dark-body-background;
 							}
 						}
-					}
-				}
-			}
-		}
-		.list-persons {
-			.profile-mail {
-				.media {
-					.media-body {
-						ul {
-							li {
-								+ li {
-									border-left: 2px solid $dark-border-color;
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-		.contacts-tabs {
-			.nav-pills {
-				border-right: 1px solid $dark-border-color;
-				.nav-link {
-					+ .nav-link {
-						border-top: 1px solid $dark-border-color;
 					}
 				}
 			}
@@ -7865,10 +7367,10 @@ body {
 				}
 			}
 		}
-		.my-gallery {
+		.my-gallery{
 			&.gallery-with-description {
 				.caption {
-					border: 1px solid $dark-border-color;
+                   border: 1px solid $dark-border-color;
 				}
 				figure {
 					.img-thumbnail {
@@ -7880,8 +7382,7 @@ body {
 		.masonry-with-dec {
 			.my-masonry-grid_column {
 				li {
-					img,
-					.caption {
+					img, .caption {
 						border: 1px solid $dark-border-color;
 					}
 				}
@@ -7892,43 +7393,39 @@ body {
 				background-color: $dark-body-background;
 			}
 		}
-		.table-primary,
-		.table-secondary,
-		.table-success,
-		.table-info,
-		.table-warning,
-		.table-danger,
-		.table-light {
-			th,
-			td {
+		.table-primary, .table-secondary, .table-success, .table-info, .table-warning, .table-danger, .table-light {
+			th,td {
 				color: $black !important;
 			}
 		}
-		@each $border-tab-name, $border-tab-color in (primary, $primary-color), (secondary, $secondary-color),
-			(success, $success-color), (danger, $danger-color), (info, $info-color), (light, $light-color),
-			(dark, $dark-color), (warning, $warning-color)
-		{
-			.borderb-tab-#{$border-tab-name} {
-				.nav-tabs {
-					&.nav-item {
-						.nav-link {
-							color: $dark-all-font-color;
-						}
-					}
-					.nav-link {
-						&.active {
-							color: $border-tab-color;
-							border-bottom: 2px solid $border-tab-color !important;
-						}
-					}
+		@each $border-tab-name, $border-tab-color in (primary, $primary-color),
+        (secondary, $secondary-color) ,
+        (success, $success-color),
+        (danger, $danger-color),
+        (info, $info-color),
+        (light, $light-color),
+        (dark, $dark-color),
+        (warning, $warning-color) {
+		.borderb-tab-#{$border-tab-name}{
+			.nav-tabs {
+			&.nav-item {
+				.nav-link {
+				color: $dark-all-font-color;
 				}
 			}
+			.nav-link {
+				&.active {
+				color: $border-tab-color;
+				border-bottom: 2px solid $border-tab-color !important;
+				}
+			}
+			}
+		}
 		}
 		ol {
 			&.progtrckr {
 				li {
-					&.progtrckr-doing,
-					&.progtrckr-done {
+					&.progtrckr-doing, &.progtrckr-done {
 						color: $dark-small-font-color;
 					}
 					&.progtrckr-todo {
@@ -7975,31 +7472,11 @@ body {
 				}
 			}
 		}
-		.mega-inline,
-		.mega-horizontal {
+		.mega-inline, .mega-horizontal {
 			.card {
 				border: 1px solid $dark-border-color;
 			}
 		}
-
-		// draggable card
-		.react-kanban-column {
-			background-color: $dark-body-background;
-		}
-		.react-kanban-card,
-		.react-kanban-card-adder-form,
-		.react-kanban-card-skeleton {
-			background-color: $dark-card-background;
-		}
-		.react-kanban-card__title {
-			border-bottom: 1px solid $dark-border-color;
-		}
-		.draggable-card {
-			.react-kanban-card__title {
-				border-bottom: none;
-			}
-		}
-
 		.input-cropper {
 			border: 1px solid $dark-border-color;
 		}
@@ -8009,61 +7486,6 @@ body {
 		.dzu-previewButton {
 			filter: brightness(0.5) invert(1);
 		}
-
-		// react datatable
-		.rdt_Table {
-			border: 1px solid $dark-border-color;
-		}
-		.rdt_TableHeadRow {
-			background-color: $dark-card-background;
-		}
-		.rdt_TableCol,
-		.rdt_TableCol_Sortable,
-		.___react-data-table-allow-propagation___ {
-			color: $dark-all-font-color;
-		}
-		.rdt_TableRow {
-			&:nth-of-type(odd) {
-				color: $dark-all-font-color;
-				background-color: $dark-body-background;
-			}
-			&:nth-of-type(even) {
-				color: $dark-all-font-color;
-				background-color: $dark-card-background;
-			}
-		}
-		.fpZHHx {
-			fill: $dark-all-font-color;
-			color: $dark-all-font-color;
-		}
-		.rdt_Pagination {
-			background-color: $dark-card-background;
-			border-top-color: $dark-border-color;
-			color: $dark-all-font-color;
-			button {
-				color: $dark-all-font-color;
-				fill: $dark-all-font-color;
-				&:disabled {
-					color: $dark-small-font-color;
-					fill: $dark-small-font-color;
-				}
-			}
-		}
-		.rdt_TableCol_Sortable {
-			&:hover {
-				color: $dark-all-font-color;
-			}
-		}
-		.rdt_TableHeader {
-			background-color: $dark-body-background !important;
-			> div {
-				&:last-child {
-					background-color: $dark-body-background !important;
-					color: $dark-all-font-color;
-				}
-			}
-		}
-
 		.popover-header {
 			color: $theme-body-font-color;
 		}
@@ -8081,35 +7503,13 @@ body {
 		.dropdown-menu {
 			background-color: $dark-body-background !important;
 		}
-		.dropdown-item,
-		span.twitter-typeahead .tt-suggestion {
+		.dropdown-item, span.twitter-typeahead .tt-suggestion {
 			color: $dark-all-font-color;
-			&:hover,
-			&:focus,
-			&.active {
+			&:hover, &:focus, &.active {
 				background-color: $dark-card-background !important;
 				color: $dark-all-font-color !important;
 			}
 		}
-
-		// kanban board
-		.kanban-container {
-			.kanban-item {
-				.kanban-box {
-					background-color: $dark-card-background;
-				}
-			}
-		}
-		.jkanban-container {
-			.kanban-container {
-				.kanban-item {
-					.kanban-box {
-						border: 1px solid $dark-border-color;
-					}
-				}
-			}
-		}
-
 		.modal-header {
 			.close {
 				color: $dark-small-font-color;
@@ -8125,13 +7525,12 @@ body {
 		}
 		.tab-vertical {
 			.nav-tabs {
-				border: 1px solid hsla(0, 0%, 100%, 0.3);
+				border: 1px solid hsla(0,0%,100%,.3);
 				.nav-link {
 					+ .nav-link {
-						border-top: 1px solid hsla(0, 0%, 100%, 0.3);
+						border-top: 1px solid hsla(0,0%,100%,.3);
 					}
-					&:hover,
-					&:focus {
+					&:hover, &:focus {
 						background-color: $dark-body-background;
 					}
 				}
@@ -8177,7 +7576,7 @@ body {
 				}
 			}
 		}
-		.checkout {
+		.checkout{
 			.checkout-details {
 				background-color: $dark-body-background;
 				border: 1px solid $dark-border-color;
@@ -8185,47 +7584,46 @@ body {
 			}
 		}
 		.order-box {
-			.title-box {
+			.title-box{
 				color: #bfc2c6;
 				border-bottom: 1px solid $dark-border-color;
 			}
 			.qty {
-				li {
+				li{
 					color: #bfc2c6;
-					span {
+					span{
 						color: #bfc2c6;
 					}
 				}
 				border-bottom: 1px solid $dark-border-color;
 			}
 			.sub-total {
-				li {
+				li{
 					color: #bfc2c6;
 				}
 			}
 			.total {
-				li {
+				li{
 					color: #bfc2c6;
 				}
 			}
 		}
-		.shopping-checkout-option {
-			.checkbox_animated {
-				&:after {
+		.shopping-checkout-option{
+			.checkbox_animated{
+				&:after{
 					border: 2px solid $dark-border-color;
 				}
 			}
 		}
-		.animate-chk {
-			.radio_animated {
-				&:after {
+		.animate-chk{
+			.radio_animated{
+				&:after{
 					border: 2px solid $dark-border-color;
 				}
 			}
 		}
 
-		.radio_animated,
-		.checkbox_animated {
+		.radio_animated, .checkbox_animated{
 			&:after {
 				background: $dark-body-background;
 				border: 2px solid $dark-body-background;
@@ -8268,46 +7666,45 @@ body {
 				}
 			}
 		}
-		.bitcoin-form {
-			.bitcoin-form-dropdown {
+		.bitcoin-form{
+			.bitcoin-form-dropdown{
 				.onhover-dropdown {
 					.btn {
 						background-color: $dark-border-color;
 						color: $dark-all-font-color;
 					}
-					.onhover-show-div {
+					.onhover-show-div{
 						background-color: $dark-body-background;
 						box-shadow: 0 0 2px 2px $dark-body-background;
 					}
 				}
 			}
-			.form-row {
-				.input-group {
-					.input-group-prepend {
-						.input-group-text {
+			.form-row{
+				.input-group{
+					.input-group-prepend{
+						.input-group-text{
 							border: 1px solid $dark-border-color;
 						}
 					}
 				}
 			}
 		}
-		.active-order-table,
-		.market-table {
-			table {
-				thead {
-					tr {
+		.active-order-table, .market-table {
+			table{
+				thead{
+					tr{
 						th {
 							border-top: none !important;
 						}
 					}
 				}
-				tbody {
-					tr {
-						td {
+				tbody{
+					tr{
+						td{
 							border-bottom: 1px solid $dark-border-color;
 						}
-						&:last-child {
-							td {
+						&:last-child{
+							td{
 								border-bottom: none;
 							}
 						}
@@ -8315,9 +7712,9 @@ body {
 				}
 			}
 		}
-		.pricing-card-design-2 {
-			.pricing-block {
-				.pricing-inner {
+		.pricing-card-design-2{
+			.pricing-block{
+				.pricing-inner{
 					ul {
 						li {
 							border-bottom: 1px solid $dark-border-color;
@@ -8326,22 +7723,21 @@ body {
 				}
 			}
 		}
-		.flot-chart-container {
-			.legend {
-				.table {
-					tbody {
+		.flot-chart-container{
+			.legend{
+				.table{
+					tbody{
 						background-color: $dark-card-background;
 						color: $white;
-						.legendLabel {
+						.legendLabel{
 							padding-left: 5px;
 						}
 					}
 				}
 			}
 		}
-		.nav-dark,
-		.nav-pills.nav-dark {
-			.nav-link {
+		.nav-dark ,.nav-pills.nav-dark{
+			.nav-link{
 				color: $white;
 			}
 		}
@@ -8374,7 +7770,7 @@ body {
 				}
 				.rt-tbody {
 					.rt-tr-group {
-						.rt-tr {
+						.rt-tr{
 							&.-odd {
 								background-color: $dark-body-background;
 							}
@@ -8390,19 +7786,18 @@ body {
 				.-btn {
 					color: $dark-small-font-color;
 				}
-				input,
-				select {
+				input, select {
 					background: $dark-body-background;
 					color: $white;
 				}
 			}
 		}
-		.page-wrapper {
+		.page-wrapper{
 			/* main-header start*/
-			.page-main-header {
+			.page-main-header{
 				color: $black;
-				.default-according {
-					.card {
+				.default-according{
+					.card{
 						.btn-link {
 							background-color: $white;
 							border: 1px solid $light-color;
@@ -8410,36 +7805,37 @@ body {
 						}
 					}
 				}
-				.collapse {
+				.collapse{
 					.card-body {
 						background-color: $white;
 					}
 				}
 				.theme-form {
-					.form-group {
-						input[type="text"],
-						input[type="email"],
-						textarea {
+					.form-group{
+						input[type=text],
+						input[type=email],
+						textarea{
 							border-color: $light-color;
 							background-color: $white;
 							color: $black;
 						}
-						label {
+						label{
 							color: $black;
 						}
 					}
 				}
 				#accordionoc {
 					#collapseicon,
-					#collapseicon1 {
+					#collapseicon1{
 						background-color: $white;
 					}
 				}
-				@media only screen and (max-width: 575px) {
-					.nav-right {
+				@media only screen and (max-width: 575px){
+					.nav-right{
 						> ul {
 							.search-form {
-								.form-control-plaintext {
+
+								.form-control-plaintext{
 									background-color: $dark-body-background;
 									border: 1px solid $dark-border-color;
 									color: $dark-all-font-color;
@@ -8449,15 +7845,15 @@ body {
 					}
 				}
 			}
-			.right-sidebar {
+			.right-sidebar{
 				background-color: $dark-body-background;
 				box-shadow: 0 0 11px rgba(69, 110, 243, 0.13);
-				.modal-header {
+				.modal-header{
 					border-bottom: 1px solid $dark-border-color;
 				}
 				.friend-list-search {
 					background-color: $dark-card-background;
-					input {
+					input{
 						background-color: $dark-body-background;
 						border: 1px solid $dark-border-color;
 					}
@@ -8466,34 +7862,34 @@ body {
 			.page-body-wrapper {
 				/* sidebar start */
 				&.sidebar-icon {
-					.page-sidebar {
+					.page-sidebar{
 						.sidebar-menu {
-							.sidebar-header {
+							.sidebar-header{
 								> i {
 									color: $dark-all-font-color;
 								}
 							}
-							li {
+							li{
 								background-color: $dark-card-background;
-								&:hover {
+								&:hover{
 									.single-header,
-									.sidebar-submenu {
+									.sidebar-submenu{
 										background-color: $dark-card-background;
 									}
 								}
-								a:hover + ul {
+								a:hover + ul{
 									background-color: $dark-card-background;
 								}
 							}
 						}
-						.sidebar-user {
+						.sidebar-user{
 							box-shadow: 3px 2px 7px -1px rgb(41, 50, 64);
 						}
 					}
 				}
 				.page-sidebar {
 					background: $dark-card-background;
-					.main-header-left {
+					.main-header-left{
 						background-color: $white;
 					}
 					&.native-image-bg {
@@ -8520,7 +7916,8 @@ body {
 							color: $primary-color;
 							border-bottom: 1px solid rgba(241, 241, 241, 0.35);
 						}
-						> li {
+						>
+						li {
 							> a {
 								color: $dark-all-font-color;
 								&.active {
@@ -8543,6 +7940,7 @@ body {
 							&.sidebar-header {
 								color: $warning-color;
 							}
+
 						}
 						a {
 							color: $light-color;
@@ -8574,12 +7972,12 @@ body {
 					}
 				}
 				/* sidebar end */
-				.page-body {
-					.topper-lists {
+				.page-body{
+					.topper-lists{
 						table {
-							tbody {
-								tr {
-									td {
+							tbody{
+								tr{
+									td{
 										p {
 											color: $dark-small-font-color;
 										}
@@ -8591,15 +7989,13 @@ body {
 					.header-small {
 						color: $dark-small-font-color;
 					}
-					.statistics {
+					.statistics{
 						p {
 							color: $dark-small-font-color;
 						}
 					}
-					.feather-main,
-					.professor-table {
-						.media-body,
-						.professor-block {
+					.feather-main, .professor-table {
+						.media-body, .professor-block{
 							p {
 								color: $dark-small-font-color;
 							}
@@ -8608,29 +8004,28 @@ body {
 					.logs-element {
 						span {
 							+ span {
-								color: $dark-small-font-color;
+								color: $dark-small-font-color
 							}
 						}
 					}
-					.progress-block {
-						.progress-title {
-							span {
+					.progress-block{
+						.progress-title{
+							span{
 								+ span {
 									color: $dark-small-font-color;
 								}
 							}
 						}
 					}
-					.ecommerce-icons {
-						div {
-							span {
+					.ecommerce-icons{
+						div{
+							span{
 								color: $dark-small-font-color;
 							}
 						}
 					}
-					.new-users,
-					.recent-notification {
-						.media {
+					.new-users, .recent-notification{
+						.media{
 							.media-body {
 								p {
 									color: $dark-small-font-color;
@@ -8638,30 +8033,30 @@ body {
 							}
 						}
 					}
-					.progress-media {
-						.media {
+					.progress-media{
+						.media{
 							.media-body {
 								span {
 									color: $dark-small-font-color;
 								}
 							}
 						}
-						.progress-change {
+						.progress-change{
 							span {
 								color: $dark-small-font-color;
 							}
 						}
 					}
-					.topper-lists {
-						table {
-							tbody {
-								tr {
+					.topper-lists{
+						table{
+							tbody{
+								tr{
 									td {
 										border-top: none !important;
 										border-bottom: 1px solid $dark-border-color;
 									}
-									&:last-child {
-										td {
+									&:last-child{
+										td{
 											border-bottom: none;
 										}
 									}
@@ -8669,9 +8064,9 @@ body {
 							}
 						}
 					}
-					.notifiaction-media {
-						.media {
-							.media-body {
+					.notifiaction-media{
+						.media{
+							.media-body{
 								.circle-left {
 									border: 5px solid #334154;
 								}
@@ -8681,14 +8076,14 @@ body {
 					.upcoming-event {
 						.upcoming-innner {
 							border-bottom: 1px solid $dark-border-color;
-							&:last-child {
+							&:last-child{
 								border-bottom: none;
 							}
 						}
 					}
-					.professor-table {
-						table {
-							tbody {
+					.professor-table{
+						table{
+							tbody{
 								tr {
 									td {
 										border-top: none !important;
@@ -8697,29 +8092,29 @@ body {
 							}
 						}
 					}
-					.number-widgets {
-						.media {
-							.media-body {
+					.number-widgets{
+						.media{
+							.media-body{
 								h6 {
 									color: $dark-all-font-color;
 								}
 							}
 						}
 					}
-					.activity {
+					.activity{
 						.media {
-							.gradient-round {
+							.gradient-round{
 								&.gradient-line-1,
 								&.small-line,
-								&.medium-line {
+								&.medium-line{
 									&:after {
 										background-color: $dark-border-color;
 									}
 								}
 							}
-							.media-body {
-								h6 {
-									span {
+							.media-body{
+								h6{
+									span{
 										color: $dark-small-font-color;
 									}
 								}
@@ -8727,8 +8122,8 @@ body {
 						}
 					}
 					.card.custom-card {
-						.card-header {
-							border-bottom: none !important;
+						.card-header{
+							border-bottom : none !important;
 						}
 					}
 				}
@@ -8759,18 +8154,18 @@ body {
 						.card-header {
 							background-color: $dark-card-background;
 							border-bottom: 1px solid $dark-border-color;
-							.buttons-right {
+							.buttons-right{
 								.right-header-dropdown.onhover-show-div {
 									background-color: $dark-body-background;
 									box-shadow: 0 0 2px 2px $dark-body-background;
-									a {
+									a{
 										color: $dark-all-font-color;
 									}
 								}
 							}
-							&.card-header-border {
-								.right-header {
-									span {
+							&.card-header-border{
+								.right-header{
+									span{
 										&:first-child {
 											color: $dark-small-font-color;
 										}
@@ -8778,7 +8173,7 @@ body {
 									.right-header-dropdown.onhover-show-div {
 										background-color: $dark-body-background;
 										box-shadow: 0 0 2px 2px $dark-body-background;
-										a {
+										a{
 											color: $dark-all-font-color;
 										}
 									}
@@ -8787,12 +8182,7 @@ body {
 							> span {
 								color: $dark-all-font-color;
 							}
-							h1,
-							h2,
-							h3,
-							h4,
-							h5,
-							h6 {
+							h1, h2, h3, h4, h5, h6 {
 								color: $dark-all-font-color;
 							}
 							.card-header-right {
@@ -8807,9 +8197,7 @@ body {
 								color: $dark-small-font-color;
 							}
 						}
-						.alert-light.outline,
-						.alert-light.outline-2x,
-						.alert-light.inverse {
+						.alert-light.outline, .alert-light.outline-2x, .alert-light.inverse {
 							color: $dark-all-font-color;
 						}
 						#animation-box {
@@ -8829,8 +8217,7 @@ body {
 							color: $dark-all-font-color;
 						}
 						.table {
-							th,
-							td {
+							th, td {
 								color: $dark-all-font-color;
 							}
 							thead {
@@ -8838,29 +8225,17 @@ body {
 									border-bottom: 2px solid $dark-border-color;
 								}
 								.border-bottom-primary {
-									th {
+									th{
 										border-bottom: 1px solid $primary-color;
 									}
 								}
 							}
-							.table-primary,
-							.table-secondary,
-							.table-success,
-							.table-info,
-							.table-warning,
-							.table-light,
-							.table-danger {
-								th,
-								td {
+							.table-primary, .table-secondary, .table-success, .table-info, .table-warning, .table-light, .table-danger {
+								th, td {
 									color: $sidebar-submenu-font-color;
 								}
 							}
-							.bg-primary,
-							.bg-secondary,
-							.bg-success,
-							.bg-info,
-							.bg-warning,
-							.bg-danger {
+							.bg-primary, .bg-secondary, .bg-success, .bg-info, .bg-warning, .bg-danger {
 								color: $white;
 							}
 							.bg-light {
@@ -8871,31 +8246,26 @@ body {
 									color: $black;
 								}
 							}
-							.double,
-							.dotted,
-							.dashed {
+							.double, .dotted, .dashed {
 								border-color: $dark-border-color;
 							}
 							tbody {
-								.border-bottom-primary {
-									th,
-									td {
+								.border-bottom-primary{
+									th, td{
 										border-bottom: 1px solid $primary-color;
 									}
 								}
 							}
 						}
-						.table-responsive {
-							.table {
-								th,
-								td {
+						.table-responsive{
+							.table{
+								th,td{
 									border-top: 1px solid $dark-border-color;
 								}
 							}
 						}
-						.table[class*="bg-"] {
-							th,
-							td {
+						.table[class*='bg-']{
+							th, td{
 								color: $white;
 							}
 						}
@@ -8903,10 +8273,9 @@ body {
 							tbody {
 								tr {
 									&:nth-of-type(odd) {
-										background-color: rgba(0, 0, 0, 0.05);
+										background-color:rgba(0, 0, 0, 0.05);
 										&:hover {
-											th,
-											td {
+											th, td {
 												color: $white;
 											}
 										}
@@ -8915,17 +8284,16 @@ body {
 							}
 						}
 						.table-bordered {
-							td,
-							th {
+							td, th {
 								border-color: $dark-border-color;
 							}
 						}
-						.table-inverse {
+						.table-inverse{
 							tbody {
-								tr {
-									&:nth-of-type(odd) {
+								tr{
+									&:nth-of-type(odd){
 										&:hover {
-											td {
+											td{
 												color: $dark-all-font-color;
 											}
 										}
@@ -8934,17 +8302,13 @@ body {
 							}
 						}
 						.table-border-vertical {
-							tr,
-							th,
-							td {
+							tr, th, td {
 								border-right: 1px solid $dark-border-color;
 							}
 						}
-						.table-styling {
-							thead,
-							tbody {
-								th,
-								td {
+						.table-styling{
+							thead, tbody{
+								th, td{
 									color: $white;
 								}
 							}
@@ -8987,8 +8351,7 @@ body {
 								}
 							}
 						}
-						.btn-outline-light,
-						.btn-outline-dark {
+						.btn-outline-light, .btn-outline-dark {
 							color: $white !important;
 						}
 						.btn-outline-light {
@@ -9010,9 +8373,7 @@ body {
 							}
 						}
 						.chart-overflow {
-							&#line-chart,
-							&#column-chart1,
-							&#column-chart2 {
+							&#line-chart,&#column-chart1,&#column-chart2{
 								rect {
 									fill: $dark-card-background;
 								}
@@ -9022,9 +8383,9 @@ body {
 									fill: $dark-card-background;
 								}
 								> g {
-									> g {
-										> g {
-											text {
+									>g{
+										>g{
+											text{
 												fill: rgb(177, 177, 178);
 											}
 										}
@@ -9055,10 +8416,7 @@ body {
 							border-right: 1px solid $dark-border-color !important;
 						}
 						.chart-container {
-							.live-products,
-							.turnover,
-							.monthly,
-							.uses {
+							.live-products, .turnover, .monthly, .uses {
 								.ct-labels {
 									.ct-label {
 										color: $white;
@@ -9068,8 +8426,7 @@ body {
 									stroke: $white;
 								}
 							}
-							#browser-uses-chart,
-							#website-visiter-chart {
+							#browser-uses-chart, #website-visiter-chart {
 								svg {
 									text {
 										fill: $dark-all-font-color;
@@ -9108,7 +8465,7 @@ body {
 						.page-link {
 							background-color: $dark-card-background;
 							border: 1px solid $dark-border-color;
-							&:hover {
+							&:hover{
 								background-color: $dark-border-color;
 							}
 						}
@@ -9135,47 +8492,46 @@ body {
 							background-color: $dark-card-background;
 							border-top: 1px solid $dark-border-color;
 						}
-						.product-table {
-							#API-2_wrapper {
-								#API-2 {
-									tbody {
-										td {
-											span,
-											p {
+						.product-table{
+							#API-2_wrapper{
+								#API-2{
+									tbody{
+										td{
+											span, p{
 												color: $dark-small-font-color;
 											}
 										}
 									}
 								}
 							}
-							h6 {
+							h6{
 								color: $dark-small-font-color;
 							}
 						}
-						.scroll-demo {
+						.scroll-demo{
 							border: 1px solid $dark-border-color;
 						}
-						.search-form {
-							input {
+						.search-form{
+							input{
 								border: 1px solid $dark-border-color;
 								color: $dark-all-font-color;
 								background-color: $dark-body-background;
 							}
-							.form-group {
+							.form-group{
 								&:before {
-									background: $dark-card-background;
+									background:$dark-card-background;
 								}
 							}
 						}
-						.cd-timeline-content {
+						.cd-timeline-content{
 							background-color: $dark-border-color;
-							&::before {
+							&::before{
 								border-left: 7px solid $dark-border-color;
 							}
 						}
-						.cd-timeline-block {
+						.cd-timeline-block{
 							&:nth-child(even) {
-								.cd-timeline-content {
+								.cd-timeline-content{
 									&::before {
 										border-right-color: $dark-border-color;
 										border-left: transparent;
@@ -9183,22 +8539,18 @@ body {
 								}
 							}
 						}
-						.breadcrumb {
+						.breadcrumb{
 							background-color: $dark-body-background;
 						}
-						.user-status {
-							table {
-								td,
-								th {
+						.user-status{
+							table{
+								td, th{
 									border-top: none !important;
 								}
 							}
 						}
-						#donut-color-chart-morris-daily,
-						#donut-color-chart-morris,
-						#browser-uses-chart,
-						#website-visiter-chart {
-							svg {
+						#donut-color-chart-morris-daily, #donut-color-chart-morris, #browser-uses-chart, #website-visiter-chart{
+							svg{
 								opacity: 0.5;
 							}
 						}
@@ -9228,14 +8580,14 @@ body {
 								}
 							}
 						}
-						.separator {
+						.separator{
 							border: 1px solid $dark-border-color;
 						}
 					}
-					.default-according {
-						li {
-							.text-muted {
-								color: $dark-all-font-color !important;
+					.default-according{
+						li{
+							.text-muted{
+								color: $dark-all-font-color!important;
 							}
 						}
 					}
@@ -9261,31 +8613,24 @@ body {
 									}
 								}
 							}
+
 						}
 					}
 					.navs-dropdown {
 						.onhover-show-div {
 							background-color: $dark-body-background;
 							box-shadow: 0 0 2px 2px $dark-border-color;
-							.navs-icon {
-								li {
-									a {
-										svg {
-											path,
-											line,
-											polyline,
-											polygon,
-											rect {
+							.navs-icon{
+								li{
+									a{
+										svg{
+											path, line, polyline, polygon, rect{
 												color: $dark-all-font-color !important;
 											}
 										}
-										&:hover {
-											svg {
-												path,
-												line,
-												polyline,
-												polygon,
-												rect {
+										&:hover{
+											svg{
+												path, line, polyline, polygon, rect{
 													color: $primary-color !important;
 												}
 											}
@@ -9322,8 +8667,7 @@ body {
 						.blog-date {
 							color: $dark-all-font-color;
 						}
-						.blog-details,
-						.blog-details-main {
+						.blog-details, .blog-details-main {
 							.blog-social {
 								li {
 									color: $dark-small-font-color;
@@ -9378,8 +8722,7 @@ body {
 							tr {
 								&:hover {
 									background-color: $dark-body-background;
-									td,
-									th {
+									td, th {
 										color: $white;
 									}
 								}
@@ -9411,8 +8754,7 @@ body {
 							}
 						}
 					}
-					#donut-color-chart-morris,
-					#donut-color-chart-morris-daily {
+					#donut-color-chart-morris, #donut-color-chart-morris-daily {
 						svg {
 							text {
 								fill: $dark-all-font-color;
@@ -9446,6 +8788,7 @@ body {
 									border-left: 1px solid $dark-border-color;
 								}
 							}
+
 						}
 					}
 					.form-control {
@@ -9459,8 +8802,7 @@ body {
 							border-bottom: 1px solid $primary-color !important;
 						}
 					}
-					.checkbox,
-					.radio {
+					.checkbox, .radio {
 						label {
 							&::before {
 								background-color: $dark-body-background;
@@ -9628,8 +8970,7 @@ body {
 						}
 					}
 					.social-widget-card {
-						h5,
-						h4 {
+						h5, h4 {
 							color: $dark-all-font-color;
 						}
 						span {
@@ -9686,19 +9027,18 @@ body {
 						}
 					}
 					.card-absolute {
-						.bg-primary,
-						.bg-secondary {
+						.bg-primary, .bg-secondary {
 							h5 {
 								color: $white;
 							}
 						}
 					}
-					.timeline-small {
-						.media {
-							.timeline-round {
+					.timeline-small{
+						.media{
+							.timeline-round{
 								&.timeline-line-1,
 								&.small-line,
-								&.medium-line {
+								&.medium-line{
 									&:after {
 										background-color: $dark-border-color;
 									}
@@ -9712,8 +9052,7 @@ body {
 					border-top: 1px solid $dark-body-background;
 					background-color: $dark-card-background;
 				}
-				.custom-select,
-				.custom-file-label {
+				.custom-select, .custom-file-label {
 					background: $dark-body-background;
 					color: $dark-all-font-color;
 				}
@@ -9787,13 +9126,13 @@ body {
 									}
 								}
 							}
-							img {
+							img{
 								box-shadow: 1px 1px 4px 1px $dark-body-background;
 							}
 						}
 						.chat-msg-box {
 							.my-message {
-								border: 1px solid $dark-border-color;
+								border: 1px solid $dark-border-color
 							}
 							.message {
 								color: $dark-all-font-color;
@@ -9825,10 +9164,10 @@ body {
 						}
 					}
 				}
-				.bitcoin-chat {
-					.chat {
-						.chat-msg-box {
-							.message {
+				.bitcoin-chat{
+					.chat{
+						.chat-msg-box{
+							.message{
 								&.my-message {
 									background-color: #1c222b;
 									.chat-user-img {
@@ -9856,15 +9195,13 @@ body {
 				box-shadow: 0 3px 20px 0 $dark-border-color;
 			}
 			.input-group-solid {
-				.input-group-text,
-				.form-control {
+				.input-group-text, .form-control {
 					background: $dark-body-background;
 					border: 1px solid $dark-border-color;
 					color: $dark-all-font-color;
 				}
 			}
-			.semilight-bg-color,
-			.header-bg-color {
+			.semilight-bg-color, .header-bg-color {
 				background-color: $white;
 			}
 			.list-group-item {
@@ -9955,9 +9292,7 @@ body {
 							}
 						}
 					}
-					h3,
-					h4,
-					h6 {
+					h3, h4, h6 {
 						color: $white;
 					}
 				}
@@ -9966,8 +9301,7 @@ body {
 				background-blend-mode: overlay;
 				background-color: rgba(54, 64, 74, 0.7);
 				.authentication-box {
-					h4,
-					h3 {
+					h4, h3 {
 						color: $white;
 					}
 					h6 {
@@ -9977,8 +9311,8 @@ body {
 						background-color: $dark-card-background;
 						.theme-form {
 							.form-group {
-								input[type="text"],
-								input[type="password"] {
+								input[type=text],
+								input[type=password] {
 									background-color: $dark-body-background;
 									border: 1px solid $dark-border-color;
 									color: $dark-all-font-color;
@@ -10044,7 +9378,7 @@ body {
 				}
 			}
 			.theme-form {
-				.login-divider {
+				.login-divider{
 					border-top: 1px solid $dark-border-color;
 					&:before {
 						background: $dark-border-color;
@@ -10077,6 +9411,7 @@ body {
 								background-color: $dark-border-color;
 							}
 						}
+
 					}
 					.authentication-box {
 						h4 {
@@ -10085,15 +9420,15 @@ body {
 						h6 {
 							color: $dark-small-font-color;
 						}
-						h3 {
+						h3{
 							color: $dark-all-font-color;
 						}
 						.card {
 							background-color: $dark-card-background;
 							.theme-form {
 								.form-group {
-									input[type="text"],
-									input[type="password"] {
+									input[type=text],
+									input[type=password] {
 										background-color: $dark-body-background;
 										border: 1px solid $dark-border-color;
 										color: $dark-all-font-color;
@@ -10204,6 +9539,7 @@ body {
 				.widget-joins {
 					.border-after-xs {
 						&:after {
+
 							background-color: $dark-border-color;
 						}
 					}
@@ -10225,21 +9561,9 @@ body {
 					color: $dark-all-font-color;
 					border-color: $dark-border-color;
 				}
-				input[type="text"],
-				input[type="email"],
-				input[type="search"],
-				input[type="password"],
-				input[type="number"],
-				input[type="tel"],
-				input[type="date"],
-				input[type="datetime-local"],
-				input[type="time"],
-				input[type="datetime-local"],
-				input[type="month"],
-				input[type="week"],
-				input[type="url"],
-				input[type="file"],
-				select {
+				input[type=text], input[type=email], input[type=search],
+				input[type=password], input[type=number], input[type=tel], input[type=date], input[type=datetime-local], input[type=time], input[type=datetime-local], input[type=month], input[type=week],
+				input[type=url], input[type=file], select {
 					border-color: $dark-border-color;
 					background-color: $dark-body-background;
 					color: $dark-all-font-color;
@@ -10299,8 +9623,7 @@ body {
 		.editor-preview {
 			background-color: $dark-card-background;
 		}
-		.editor-toolbar.fullscreen,
-		.editor-preview-side {
+		.editor-toolbar.fullscreen, .editor-preview-side {
 			background: $dark-card-background;
 			border: 1px solid $dark-small-font-color;
 		}
@@ -10312,8 +9635,7 @@ body {
 				color: $white;
 			}
 		}
-		.u-step-title,
-		.u-pearl-title {
+		.u-step-title, .u-pearl-title {
 			color: $dark-all-font-color;
 		}
 		.u-step-number {
@@ -10324,14 +9646,12 @@ body {
 				background-color: $dark-border-color;
 			}
 		}
-		.u-pearl-number,
-		.u-pearl-icon {
+		.u-pearl-number, .u-pearl-icon {
 			background: $dark-body-background;
 			border: 2px solid $dark-body-background;
 		}
 		.u-pearl.disabled {
-			.u-pearl-icon,
-			.u-pearl-number {
+			.u-pearl-icon, .u-pearl-number {
 				background: $dark-border-color;
 				border: 2px solid $dark-border-color;
 			}
@@ -10523,6 +9843,7 @@ body {
 						}
 					}
 				}
+
 			}
 		}
 		.user-profile {
@@ -10552,7 +9873,7 @@ body {
 						background-color: $dark-card-background;
 					}
 				}
-				.tabs-scoial {
+				.tabs-scoial{
 					border-bottom: none !important;
 				}
 			}
@@ -10606,10 +9927,9 @@ body {
 				border: 1px solid $dark-border-color;
 				color: $white;
 			}
-			code[class*="language-"],
-			pre[class*="language-"] {
+			code[class*=language-], pre[class*=language-] {
 				text-shadow: 0px 1px $black;
-				::selection {
+				::selection{
 					text-shadow: none;
 					background: $dark-card-background;
 				}
@@ -10638,36 +9958,30 @@ body {
 				background-color: $dark-card-background !important;
 			}
 		}
-		.loader-box {
-			&.card-loader {
+		.loader-box{
+			&.card-loader{
 				background-color: $dark-card-background;
 			}
 		}
-		.my-gallery {
-			&.gallery-with-description {
+		.my-gallery{
+			&.gallery-with-description{
 				img {
 					border: 1px solid $dark-border-color !important;
 					border-bottom: none !important;
 				}
 			}
 		}
-		@each $var in $alert-name {
-			$i: index($alert-name, $var);
-			.alert-#{$var}.inverse {
-				color: $dark-all-font-color;
-			}
-		}
-		.alert-theme {
-			span {
-				+ span {
-					+ span {
+		.alert-theme{
+			span{
+				+ span{
+					+ span{
 						border: 1px solid $primary-color;
 						background-color: $dark-body-background;
 						border-radius: 4px;
 					}
 				}
 			}
-			i {
+			i{
 				background-color: $primary-color;
 				color: $white;
 				padding: 20px;
@@ -10675,24 +9989,23 @@ body {
 			}
 		}
 		.user-card {
-			.user-deatils {
+			.user-deatils{
 				h6 {
 					color: $dark-small-font-color;
 				}
 			}
-			.card-footer {
-				> div {
+			.card-footer{
+				> div{
 					&:first-child {
 						border-right: 1px solid $dark-border-color;
 					}
 				}
-				.user-footer {
+				.user-footer{
 					h6 {
 						color: $dark-small-font-color;
 					}
-					svg {
-						path,
-						rect {
+					svg{
+						path, rect {
 							color: $dark-small-font-color;
 						}
 					}
@@ -10700,10 +10013,10 @@ body {
 			}
 		}
 		.dashboard-chat {
-			.chat {
+			.chat{
 				.media {
-					.media-body {
-						.message-main {
+					.media-body{
+						.message-main{
 							p {
 								background-color: $dark-body-background;
 							}
@@ -10713,19 +10026,19 @@ body {
 						}
 					}
 				}
-				.right-side-chat {
-					.media-body {
-						p {
+				.right-side-chat{
+					.media-body{
+						p{
 							&:before {
 								border-left: 7px solid $dark-body-background;
 							}
 						}
 					}
 				}
-				.left-side-chat {
-					.media-body {
-						p {
-							&:before {
+				.left-side-chat{
+					.media-body{
+						p{
+							&:before{
 								border-right: 7px solid $dark-body-background;
 							}
 						}
@@ -10737,41 +10050,39 @@ body {
 			border: 2px solid $dark-border-color;
 		}
 		.invest-dropdown {
-			.right-header-dropdown {
+			.right-header-dropdown{
 				&.onhover-show-div {
 					background-color: $dark-body-background;
 					box-shadow: 0 0 2px 2px $dark-body-background;
-					a {
+					a{
 						color: $dark-all-font-color;
 					}
 				}
 			}
 		}
-		.server-card-bg {
+		.server-card-bg{
 			background-color: #181f27 !important;
 		}
 		.server-widgets {
 			.bottom-server {
-				h5 {
+				h5{
 					.second-color {
 						color: $dark-all-font-color;
 					}
 				}
 			}
 		}
-		.tabs-project {
-			.nav-item {
-				.nav-link {
+		.tabs-project{
+			.nav-item{
+				.nav-link{
 					color: $dark-all-font-color;
 				}
 			}
 		}
-		.current-progress,
-		.order-history {
-			table {
-				tr {
-					td,
-					th {
+		.current-progress, .order-history{
+			table{
+				tr{
+					td, th{
 						border-top: none !important;
 					}
 				}
@@ -10780,13 +10091,13 @@ body {
 				background-color: $dark-body-background;
 			}
 		}
-		.navigation-option {
-			ul {
+		.navigation-option{
+			ul{
 				li {
 					a {
 						color: $dark-all-font-color;
 					}
-					&:hover {
+					&:hover{
 						background-color: $dark-body-background;
 					}
 				}
@@ -10804,9 +10115,9 @@ body {
 			.product-img {
 				.product-hover {
 					ul {
-						li {
+						li{
 							background-color: $dark-card-background;
-							&:hover {
+							&:hover{
 								background-color: $black;
 								color: $white;
 							}
@@ -10815,40 +10126,45 @@ body {
 				}
 			}
 		}
-		.browse {
-			.browse-articles {
-				ul {
-					li {
+		.browse{
+			.browse-articles{
+				ul{
+					li{
 						a {
 							color: $dark-all-font-color;
 						}
-						&:hover {
+						&:hover{
 							background-color: $dark-body-background;
 						}
 					}
 				}
 			}
 		}
-		@each $btn-name, $btn-color in (primary, $primary-color), (secondary, $secondary-color),
-			(success, $success-color), (danger, $danger-color), (info, $info-color), (light, $light-color),
-			(dark, $dark-color), (warning, $warning-color)
-		{
-			.radio-#{$btn-name} {
-				input[type="radio"] {
-					& + label {
-						&::before {
+		@each $btn-name, $btn-color in (primary, $primary-color),
+						(secondary, $secondary-color) ,
+						(success, $success-color),
+						(danger, $danger-color),
+						(info, $info-color),
+						(light, $light-color),
+						(dark, $dark-color),
+						(warning, $warning-color) {
+			.radio-#{$btn-name}{
+				input[type="radio"]
+				{
+					& + label{
+						&::before{
 							border-color: $btn-color !important;
 						}
-						&::after {
+						&::after{
 							background-color: $btn-color;
 						}
 					}
-					&:checked {
-						& + label {
-							&::before {
+					&:checked{
+						& + label{
+							&::before{
 								border-color: $btn-color !important;
 							}
-							&::after {
+							&::after{
 								background-color: $btn-color;
 							}
 						}
@@ -10857,75 +10173,85 @@ body {
 			}
 		}
 
-		@each $btn-name, $btn-color in (primary, $primary-color), (secondary, $secondary-color),
-			(success, $success-color), (danger, $danger-color), (info, $info-color), (light, $light-color),
-			(dark, $dark-color), (warning, $warning-color)
-		{
-			.checkbox-#{$btn-name} {
-				label {
-					&::before {
-						border-color: $btn-color !important;
+		@each $btn-name, $btn-color in (primary, $primary-color),
+						(secondary, $secondary-color) ,
+						(success, $success-color),
+						(danger, $danger-color),
+						(info, $info-color),
+						(light, $light-color),
+						(dark, $dark-color),
+						(warning, $warning-color) {
+			.checkbox-#{$btn-name}{
+				label{
+					&::before{
+						border-color:$btn-color !important;
 					}
 				}
+
 			}
 		}
 
-		@each $btn-name, $btn-color in (primary, $primary-color), (secondary, $secondary-color),
-			(success, $success-color), (danger, $danger-color), (info, $info-color), (light, $light-color),
-			(dark, $dark-color), (warning, $warning-color)
-		{
-			.checkbox-solid-#{$btn-name} {
-				label {
-					&:before {
+		@each $btn-name, $btn-color in   (primary, $primary-color),
+						(secondary, $secondary-color) ,
+						(success, $success-color),
+						(danger, $danger-color),
+						(info, $info-color),
+						(light, $light-color),
+						(dark, $dark-color),
+						(warning, $warning-color) {
+			.checkbox-solid-#{$btn-name}{
+				label{
+					&:before{
 						background-color: $btn-color !important;
 						border-color: $btn-color !important;
 						color: $white !important;
 					}
 				}
-				input[type="checkbox"] {
-					&:checked {
-						& + label {
-							&::before {
+				input[type="checkbox"]
+				{
+					&:checked{
+						& + label{
+							&::before{
 								background-color: $btn-color !important;
 								border-color: $btn-color !important;
 								color: $white !important;
 							}
-							&::after {
+							&::after{
 								color: $white !important;
 							}
 						}
 					}
 				}
 			}
+
 		}
-		.bootstrap-datetimepicker-widget {
-			ul {
-				li {
+		.bootstrap-datetimepicker-widget{
+			ul{
+				li{
 					color: $dark-all-font-color;
 					border-bottom: 1px solid $dark-border-color;
 				}
 			}
-			tr {
-				th,
-				td {
-					&:hover {
+			tr{
+				th,td{
+					&:hover{
 						background-color: $dark-card-background;
 					}
-					span {
-						&:hover {
+					span{
+						&:hover{
 							background-color: $dark-card-background;
 						}
 					}
 					&.prev,
-					&.next {
-						&:hover {
+					&.next{
+						&:hover{
 							background-color: $dark-card-background;
 						}
 					}
 				}
-				&:first-child {
-					th {
-						&:hover {
+				&:first-child{
+					th{
+						&:hover{
 							background-color: $dark-card-background;
 						}
 					}
@@ -10935,19 +10261,19 @@ body {
 		.btn-transparent {
 			color: $dark-all-font-color;
 		}
-		.categories {
-			ul {
-				li {
+		.categories{
+			ul{
+				li{
 					a {
 						color: $dark-small-font-color;
 					}
-					&:hover {
+					&:hover{
 						background-color: $dark-body-background;
 					}
 				}
 			}
 		}
-		.main {
+		.main{
 			.langChoice {
 				background: $dark-body-background;
 				color: $white;
@@ -10974,8 +10300,7 @@ body {
 							color: $dark-small-font-color;
 						}
 					}
-					p,
-					.light-span {
+					p, .light-span{
 						color: $dark-small-font-color;
 					}
 				}
@@ -10988,8 +10313,7 @@ body {
 				}
 			}
 		}
-		.filter-cards-view,
-		.timeline-content {
+		.filter-cards-view, .timeline-content {
 			p {
 				color: $dark-small-font-color;
 			}
@@ -11000,7 +10324,7 @@ body {
 			}
 			.comments-box {
 				.input-group {
-					.form-control {
+					.form-control{
 						border: none !important;
 					}
 					.input-group-append {
@@ -11012,7 +10336,7 @@ body {
 		.social-chat {
 			.media-body {
 				border: 1px solid $dark-border-color;
-				&:after {
+				&:after{
 					border-right: 7px solid $dark-card-background;
 				}
 			}
@@ -11046,7 +10370,7 @@ body {
 								&:nth-child(2) {
 									border-right: 1px solid $dark-border-color;
 								}
-								&:nth-child(5) {
+								&:nth-child(5){
 									border-right: none;
 									border-left: 1px solid $dark-border-color;
 								}

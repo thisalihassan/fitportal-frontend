@@ -2,8 +2,9 @@ import React, { Fragment, useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import logo from '../../../assets/images/endless-logo.png';
 import logo_compact from '../../../assets/images/logo/compact-logo.png';
+
 import UserPanel from './userPanel';
-import { MENUITEMS } from '../../../components/common/sidebar-component/menu';
+import { MENUITEMS } from '../../../constant/menu';
 import { Link } from 'react-router-dom';
 import { translate } from 'react-switch-lang';
 import configDB from '../../../data/customizer/config';
@@ -37,22 +38,16 @@ const Sidebar = (props) => {
                 if (!subItems.children) return false
                 // eslint-disable-next-line
                 subItems.children.filter(subSubItems => {
-                    if (subSubItems.path === currentUrl) {
+                    if (subSubItems.path === currentUrl)
                         setNavActive(subSubItems)
-                        return true
-                    }
-                    else{
-                        return false
-                    }
                 })
-                return subItems
             })
-            return items
         })
 
-        const timeout = setTimeout(() => {
+        setTimeout(() => {
             const elmnt = document.getElementById("myDIV");
             const menuWidth = elmnt.offsetWidth;
+            // setMenuWidth(menuWidth)
             if (menuWidth > window.innerWidth) {
                 setHideRightArrow(false);
                 setHideLeftArrowRTL(false);
@@ -64,8 +59,7 @@ const Sidebar = (props) => {
 
         return () => {
             // eslint-disable-next-line
-            window.removeEventListener('resize', handleResize)
-            clearTimeout(timeout)
+            window.addEventListener('resize', handleResize)
         }
         // eslint-disable-next-line
     }, []);
@@ -88,16 +82,13 @@ const Sidebar = (props) => {
                     if (submenuItems.children && submenuItems.children.includes(item)) {
                         menuItem.active = true
                         submenuItems.active = true
-                        return true
-                    }else{
-                        return false
                     }
                 })
             }
-            return menuItem
         })
         item.active = !item.active
         setMainMenu({ mainmenu: MENUITEMS })
+
     }
 
     // Click Toggle menu
@@ -176,12 +167,13 @@ const Sidebar = (props) => {
         }
     }
 
+
     return (
         <Fragment>
             <div className="page-sidebar">
                 <div className="main-header-left d-none d-lg-block">
                     <div className="logo-wrapper compactLogo">
-                        <Link to={`${process.env.PUBLIC_URL}/dashboard/default`}>
+                        <Link to="/dashboard/default">
                             <img className="blur-up lazyloaded" src={logo_compact} alt="" />
                             <img className="blur-up lazyloaded" src={logo} alt="" />
                         </Link>
@@ -222,6 +214,9 @@ const Sidebar = (props) => {
                                                 <i className="fa fa-angle-right pull-right"></i> : ''}
                                         </Link>
                                         : ''}
+                                        {(menuItem.type === 'exteral_link') ?
+                                            <a href={menuItem.path}  className={`sidebar-header ${menuItem.active ? 'active' : ''}`} ><menuItem.icon /><span>{menuItem.title}</span></a>
+                                            : ''}
                                     {menuItem.children ?
                                         <ul
                                             className={`sidebar-submenu ${menuItem.active ? 'menu-open' : ''}`}
@@ -242,6 +237,8 @@ const Sidebar = (props) => {
                                                         >
                                                             <i className="fa fa-circle"></i>{props.t(childrenItem.title)} </Link>
                                                         : ''}
+                                                    
+                                                        
                                                     {childrenItem.children ?
                                                         <ul className={`sidebar-submenu ${childrenItem.active ? 'menu-open' : 'active'}`}>
                                                             {childrenItem.children.map((childrenSubItem, key) =>

@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import {English,Spanish,Portuguese,French} from '../../../constant'
 import {
     setTranslations,
     setDefaultLanguage,
@@ -26,22 +25,22 @@ const Language = () => {
                 <ul className="language-dropdown onhover-show-div p-20">
                     <li onClick={() => handleSetLanguage('en')}>
                         <a href="#javascript" data-lng="en">
-                            <i className="flag-icon flag-icon-is"></i> {English}
+                            <i className="flag-icon flag-icon-is"></i> English
                         </a>
                     </li>
                     <li onClick={() => handleSetLanguage('es')}>
                         <a href="#javascript" data-lng="es">
-                            <i className="flag-icon flag-icon-um"></i> {Spanish}
+                            <i className="flag-icon flag-icon-um"></i> Spanish
                         </a>
                     </li>
                     <li onClick={() => handleSetLanguage('pt')}>
                         <a href="#javascript" data-lng="pt">
-                            <i className="flag-icon flag-icon-uy"></i> {Portuguese}
+                            <i className="flag-icon flag-icon-uy"></i> Portuguese
                         </a>
                     </li>
                     <li onClick={() => handleSetLanguage('fr')}>
                         <a href="#javascript" data-lng="fr">
-                            <i className="flag-icon flag-icon-nz"></i> {French}
+                            <i className="flag-icon flag-icon-nz"></i> French
                         </a>
                     </li>
                 </ul>
