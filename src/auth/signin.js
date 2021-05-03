@@ -6,40 +6,27 @@ import 'react-toastify/dist/ReactToastify.css';
 import { withRouter } from 'react-router';
 import { handleResponse } from '../services/fack.backend';
 import { LOGIN, YourName, Password, Login, SignUp } from '../constant';
-import { connect } from 'react-redux';
+import authActions from "../redux/auth/actions"
 
-const Signin = ({ history }) => {
+import { connect } from 'react-redux';
+const { loginUser, fetchLoginDetails} = authActions;
+const Signin = ({ history, loginUser, fetchLoginDetails, user }) => {
+	console.log(user)
 	const [email, setEmail] = useState('test@gmail.com');
 	const [password, setPassword] = useState('test123');
 
 	const [value, setValue] = useState(localStorage.getItem('profileURL' || man));
-
+	useEffect(()=> {
+		fetchLoginDetails();
+	},[])
 	useEffect(() => {
-		if (value !== null) localStorage.setItem('profileURL', value);
-		else localStorage.setItem('profileURL', man);
-	}, [value]);
+		if(user) {
+			history.push('/endless/dashboard')
+		}
+	}, [user]);
 
 	const loginWithJwt = (email, password) => {
-		const requestOptions = {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: { email, password }
-		};
-
-		return fetch('/users/authenticate', requestOptions)
-			.then(handleResponse)
-			.then((user) => {
-				// store user details and jwt token in local storage to keep user logged in between page refreshes
-				setValue(man);
-				localStorage.setItem('token', user);
-				window.location.href = `${process.env.PUBLIC_URL}/dashboard/default`;
-				return user;
-			})
-			.catch((error) => {
-				setTimeout(() => {
-					toast.error('Oppss.. The password is invalid or the user does not have a password.');
-				}, 200);
-			});
+		loginUser({email, password})
 	};
 
 	return (
@@ -113,4 +100,6 @@ const Signin = ({ history }) => {
 	);
 };
 
-export default withRouter(Signin);
+export default withRouter(connect((state) => ({
+	user: state.authReducer.user,
+}),{loginUser, fetchLoginDetails})(Signin));
