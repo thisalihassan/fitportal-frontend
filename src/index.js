@@ -300,7 +300,7 @@ const Root = () => {
 
 									{/* Users */}
 									<Route path={`${process.env.PUBLIC_URL}/users/userProfile`} component={UserProfile} />
-									<Route path={`${process.env.PUBLIC_URL}/users/userEdit`} component={UserEdit} />
+									<Route path={`${process.env.PUBLIC_URL}/users/userEdit/:id`} component={UserEdit} />
 									<Route path={`${process.env.PUBLIC_URL}/users/userCards`} component={UserCards} />
 								</App>
 							) : (

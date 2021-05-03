@@ -1,14 +1,19 @@
 import React, { Fragment,useState,useEffect } from 'react';
 import Breadcrumb from '../common/breadcrumb';
 import seven from '../../assets/images/user/7.jpg';
-import axios from 'axios'
+
 import { MyProfile,Bio,MarkJecno,Designer,Password,Website,Save,EditProfile,Company,Username,UsersCountryMenu,AboutMe,UpdateProfile,UsersTableTitle,FirstName,LastName,Address,EmailAddress,PostalCode,Country, UsersTableHeader,City,Edit,Update,Delete} from '../../constant'
-const UserEdit = () => {
+import customerActions from "../../redux/customers/actions"
 
+import { connect } from 'react-redux';
+const { fetchSingleCustomer } = customerActions;
+
+const UserEdit = ({fetchSingleCustomer}, props ) => {
+    // console.log(props.match.params.id)
     const [data,setData] = useState([])
-
-    useEffect(() => {
-        axios.get(`${process.env.PUBLIC_URL}/api/user-edit-table.json`).then(res => setData(res.data))
+    
+    useEffect (()=> {
+        console.log(fetchSingleCustomer)
     },[])
 
     return (
@@ -182,4 +187,6 @@ const UserEdit = () => {
     );
 };
 
-export default UserEdit;
+export default connect((state) => ({
+	customer: state.customerReducer.singleCustomer,
+}),{fetchSingleCustomer})(UserEdit);

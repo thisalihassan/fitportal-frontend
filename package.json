@@ -25,6 +25,7 @@
     "knob": "^1.1.0",
     "leaflet": "^1.5.1",
     "lodash": "^4.17.15",
+    "mdbreact": "^5.0.2",
     "moment": "^2.26.0",
     "moment-timezone": "^0.5.31",
     "node-sass": "^4.14.1",
