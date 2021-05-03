@@ -2,7 +2,7 @@ const actions = {
 	LOGIN: 'LOGIN',
 	LOGIN_FETCH: 'LOGIN_FETCH',
 	LOGIN_SUCCESS: 'LOGIN_SUCCESS',
-	login: (payload) => ({
+	loginUser: (payload) => ({
 		type: actions.LOGIN,
 		payload
 	}),

@@ -25,15 +25,14 @@ export function* loginDetails() {
 	yield takeEvery(actions.LOGIN, function* (data) {
 		const { payload } = data;
 		if (payload) {
-			const { status, info } = yield call(loginDetailsFetch, payload);
-			console.log(info);
-			localStorage.setItem('id_token', info);
-			if (status >= 400) {
-				console.log(status);
+			const response  = yield call(loginDetailsFetch, payload);
+			localStorage.setItem('id_token', response.token);
+			if (!response) {
+				console.log(response);
 			} else {
 				yield put({
 					type: actions.LOGIN_FETCH,
-					payload: info
+					payload: response
 				});
 			}
 		}

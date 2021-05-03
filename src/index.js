@@ -139,10 +139,11 @@ import Conformation from './auth/confirmation';
 //config data
 import configDB from './data/customizer/config';
 import Callback from './auth/callback';
+import { PersistGate } from 'redux-persist/integration/react';
 
 const Root = () => {
-	const abortController = new AbortController();
-	const jwt_token = localStorage.getItem('token');
+	// const abortController = new AbortController();
+	const jwt_token = localStorage.getItem('id_token');
 
 	useEffect(() => {
 		const color = localStorage.getItem('color');
@@ -152,16 +153,16 @@ const Root = () => {
 		console.disableYellowBox = true;
 		document.getElementById('color').setAttribute('href', `${process.env.PUBLIC_URL}/assets/css/${color}.css`);
 
-		return function cleanup() {
-			abortController.abort();
-		};
+		// return function cleanup() {
+		// 	abortController.abort();
+		// };
 
 		// eslint-disable-next-line
-	}, [abortController]);
+	}, []);
 
 	return (
 		<div className='App'>
-			<Auth0Provider domain={auth0.domain} clientId={auth0.clientId} redirectUri={auth0.redirectUri}>
+		
 				<Provider store={store}>
 					<BrowserRouter basename={`/`}>
 						<Switch>
@@ -308,7 +309,6 @@ const Root = () => {
 						</Switch>
 					</BrowserRouter>
 				</Provider>
-			</Auth0Provider>
 		</div>
 	);
 };
