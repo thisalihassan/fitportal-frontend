@@ -4,8 +4,9 @@ $theme-body-font-color: #313131;
 $theme-body-sub-title-color: #777777;
 
 // Theme colors variables
+
 $primary-color: #4466f2;
-$secondary-color: #1ea6ec ;
+$secondary-color: #1ea6ec;
 $success-color: #22af47 ;
 $info-color   : #007bff  ;
 $warning-color: #ff9f40;
@@ -127,9 +128,9 @@ $table-inverse-bg-color:     #292b2c;
 
 //According setting
 $according-card-top-margin           : 10px;
-$according-btn-weight                : 600;
+$according-btn-weight                : 500;
 $according-btn-color                 : $theme-body-font-color;
-$according-card-header-padding       : 20px;
+$according-card-header-padding       : 0.75rem 1.25rem;
 $according-card-header-icon          : $font-ICO;
 $according-open-icon                 : "\eb73";
 $according-close-icon                : "\eb7a";

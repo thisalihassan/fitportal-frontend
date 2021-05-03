@@ -30,7 +30,7 @@
     border-radius: 0;
     .settings{
       i{
-        color: $primary-color;
+        color: $primary-color ;
         font-size: 24px;
         padding: 15px 17px;
         display: inline-block;
@@ -42,12 +42,12 @@
       .settings {
         i{
           color: $white;
-          background-color: $primary-color;
+          background-color: $primary-color ;
         }
       }
     }
     &+.nav-link{
-      border-top: 1px solid rgba($primary-color, 0.1);
+      border-top: 1px solid rgba($primary-color , 0.1);
     }
   }
 }
@@ -59,7 +59,7 @@
   width: 330px;
   right: -330px;
   background-color: $white;
-  z-index: 99;
+  z-index: 999;
   font-family: $font-nunito;
   transition: all 0.3s ease;
   &.open{
@@ -102,7 +102,7 @@
       cursor: pointer;
       font-weight: 900;
       right: 30px;
-      color: $primary-color;
+      color: $primary-color ;
     }
     h5{
       font-weight: 700;
@@ -185,7 +185,7 @@
         .nav-link{
           border-radius: 0;
           &.active{
-            background-color: $primary-color;
+            background-color: $primary-color ;
             color: $white;
           }
         }

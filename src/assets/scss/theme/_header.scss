@@ -258,7 +258,7 @@ $header-size: 80px;
                 height: 25px;
                 width: 25px;
                 z-index: 10;
-                border: 5px solid $primary-color;
+                border: 5px solid $primary-color ;
                 border-radius: 70px;
                 animation: heartbit 1s ease-out;
                 animation-iteration-count: infinite;
@@ -267,7 +267,7 @@ $header-size: 80px;
                 width: 6px;
                 height: 6px;
                 border-radius: 30px;
-                background-color: $primary-color;
+                background-color: $primary-color ;
                 position: absolute;
                 right: 6px;
                 top: -10px;
@@ -408,7 +408,7 @@ $header-size: 80px;
           }
           h6{
             margin-top: 10px;
-            color: $primary-color;
+            color: $primary-color ;
             ul{
               left: inherit;
               right: -10px;
@@ -480,12 +480,12 @@ $header-size: 80px;
           }
           &:hover{
             a{
-              color: $primary-color;
+              color: $primary-color ;
               transition: $sidebar-transition;
               svg{
-                color: $primary-color !important;
+                color: $primary-color  !important;
                 path, line {
-                  color: $primary-color !important;
+                  color: $primary-color  !important;
                 }
               }
             }
@@ -542,6 +542,16 @@ ul.notification-dropdown.onhover-show-div{
         font-size: 12px;
       }
     }
+    .font-success {
+      .line {
+        color: $success-color !important;
+      }
+    }
+    .font-danger {
+      .line {
+        color: $danger-color !important;
+      }
+    }
     span{
       svg{
         margin-top: 0 !important;
@@ -550,7 +560,7 @@ ul.notification-dropdown.onhover-show-div{
       }
       .shopping-color{
         path,line{
-          color: $primary-color;
+          color: $primary-color ;
         }
       }
       .download-color{
@@ -779,7 +789,7 @@ ul{
       width: 100%;
       &:hover{
         background-color: transparent;
-        color:$primary-color;
+        color:$primary-color ;
       }
     }
   }

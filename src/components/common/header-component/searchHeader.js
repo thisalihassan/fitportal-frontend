@@ -1,19 +1,19 @@
 import React, { useState, Fragment, useEffect, useCallback } from 'react';
-import { MENUITEMS } from '../../../constant/menu';
+import { MENUITEMS } from '../../../components/common/sidebar-component/menu';
 import { Link } from 'react-router-dom';
 import { Search } from 'react-feather';
 
 const SearchHeader = () => {
-    const mainmenu = MENUITEMS;
     
+    const mainmenu = MENUITEMS;
     const [searchValue, setsearchValue] = useState('');
     const [searchOpen, setsearchOpen] = useState(false);
 
     const escFunction = useCallback((event) => {
-        if(event.keyCode === 27) {
-          //Do whatever when esc is pressed
-          setsearchOpen(false)
-          setsearchValue('')
+        if (event.keyCode === 27) {
+            //Do whatever when esc is pressed
+            setsearchOpen(false)
+            setsearchValue('')
         }
     }, []);
 
@@ -22,8 +22,7 @@ const SearchHeader = () => {
         return () => {
             document.removeEventListener("keydown", escFunction, false);
         };
-        //eslint-disable-next-line
-    }, []);
+    });
 
     const handleSearchKeyword = (keyword) => {
         keyword ? addFix() : removeFix()
@@ -37,9 +36,11 @@ const SearchHeader = () => {
             if (!menuItems.children) return false
             // eslint-disable-next-line
             menuItems.children.filter(subItems => {
+                // eslint-disable-next-line
                 if (subItems.title.toLowerCase().includes(keyword) && subItems.type === 'link') {
                     subItems.icon = menuItems.icon
                     items.push(subItems);
+                    // eslint-disable-next-line
                 }
                 if (!subItems.children) return false
                 // eslint-disable-next-line
@@ -75,16 +76,16 @@ const SearchHeader = () => {
     }
 
     const toggleBtn = () => {
-        if(searchOpen){
+        if (searchOpen) {
             setsearchOpen(!searchOpen);
             document.querySelector('.searchIcon').classList.add('open');
-        }else{
+        } else {
             setsearchOpen(!searchOpen);
             document.querySelector('.searchIcon').classList.remove('open');
         }
     }
 
-    
+
     return (
         <Fragment>
             <div>
@@ -111,9 +112,9 @@ const SearchHeader = () => {
                                             </div>
                                             <div className="ProfileCard-details">
                                                 <div className="ProfileCard-realName">
-                                                    <Link 
-                                                        to={`${process.env.PUBLIC_URL}${data.path}`} 
-                                                        className="realname" 
+                                                    <Link
+                                                        to={`${process.env.PUBLIC_URL}${data.path}`}
+                                                        className="realname"
                                                         onClick={removeFix}
                                                     >
                                                         {data.title}
@@ -128,7 +129,7 @@ const SearchHeader = () => {
                         <div className="Typeahead-menu empty-menu">
                             <div className="tt-dataset tt-dataset-0">
                                 <div className="EmptyMessage">
-                                    Opps!! There are no result found.
+                                    {"Opps!! There are no result found."}
                                 </div>
                             </div>
                         </div>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Star } from 'react-feather';
-import { MENUITEMS } from '../../constant/menu';
+import { MENUITEMS } from '../../components/common/sidebar-component/menu';
 import { Link } from 'react-router-dom';
 import { Tooltip } from 'reactstrap';
 
@@ -11,7 +11,7 @@ const Bookmark = () => {
     const [searchValue, setSearchValue] = useState('');
     const [searchResult, setSearchResult] = useState(false);
     const [bookmarkItems, setBookmarkItems] = useState([]);
-    // eslint-disable-next-line 
+    // eslint-disable-next-line
     const [targetName, setTargetName] = useState('');
 
     const toggle = targetName => {
@@ -33,7 +33,8 @@ const Bookmark = () => {
     };
 
     const escFunction = useCallback((event) => {
-        if (event.keyCode === 27) {
+        // eslint-disable-next-line
+        if (event.keyCode == 27) {
             //Do whatever when esc is pressed
             setSearchValue('')
             setSearchResult([])
@@ -45,38 +46,37 @@ const Bookmark = () => {
 
     useEffect(() => {
         document.addEventListener("keydown", escFunction, false);
-        // eslint-disable-next-line 
         mainmenu.filter(menuItems => {
             if (menuItems.bookmark) {
                 setBookmarkItems(bookmarkItems => [...bookmarkItems, menuItems])
             }
+            return 0;
         });
 
         return () => {
             document.removeEventListener("keydown", escFunction, false);
         };
-        // eslint-disable-next-line 
-    }, []);
+    }, [escFunction , mainmenu]);
 
     const handleSearchKeyword = (keyword) => {
 
         keyword ? addFix() : removeFix()
         const items = [];
         setSearchValue(keyword)
-        // eslint-disable-next-line 
+        // eslint-disable-next-line
         mainmenu.filter(menuItems => {
             if (menuItems.title.toLowerCase().includes(keyword) && menuItems.type === 'link') {
                 items.push(menuItems);
             }
             if (!menuItems.children) return false
-            // eslint-disable-next-line 
+            // eslint-disable-next-line
             menuItems.children.filter(subItems => {
                 if (subItems.title.toLowerCase().includes(keyword) && subItems.type === 'link') {
                     subItems.icon = menuItems.icon
                     items.push(subItems);
                 }
                 if (!subItems.children) return false
-                // eslint-disable-next-line 
+                // eslint-disable-next-line
                 subItems.children.filter(suSubItems => {
                     if (suSubItems.title.toLowerCase().includes(keyword)) {
                         suSubItems.icon = menuItems.icon
@@ -112,7 +112,8 @@ const Bookmark = () => {
 
     const addToBookmark = (event, items) => {
         const index = bookmarkItems.indexOf(items);
-        if (index === -1 && !items.bookmark) {
+        // eslint-disable-next-line
+        if (index == -1 && !items.bookmark) {
             items.bookmark = true;
             event.currentTarget.classList.add('starred');
             setBookmarkItems([...bookmarkItems, items])
@@ -154,7 +155,8 @@ const Bookmark = () => {
                             })}
 
                         <li>
-                            <a href="#javascript" onClick={removeOffcanvas}>
+                         {/* eslint-disable-next-line */}
+                         <a href="#" onClick={removeOffcanvas}>
                                 <Star className="bookmark-search" />
                             </a>
                             <form className="form-inline search-form">
@@ -180,7 +182,7 @@ const Bookmark = () => {
                                                                     {data.title}
                                                                 </Link>
                                                                 <span className="pull-right">
-                                                                    <a href="#javascript">
+                                                                    <a href="##">
                                                                         <i className="fa fa-star-o mt-1 icon-star" onClick={(e) => addToBookmark(e, data)}></i>
                                                                     </a>
                                                                 </span>
@@ -194,7 +196,7 @@ const Bookmark = () => {
                                     <div className="Typeahead-menu empty-bookmark">
                                         <div className="tt-dataset tt-dataset-0">
                                             <div className="EmptyMessage">
-                                                Opps!! There are no result found.
+                                                {"Opps!! There are no result found."}
                                         </div>
                                         </div>
                                     </div>

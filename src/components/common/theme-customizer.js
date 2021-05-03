@@ -4,6 +4,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { toast } from 'react-toastify';
+import {Customize,Customizer,Color,Pattern,Image,LayoutType,RTLLayout,LTRLayout,SidebarBackgroundSetting,PreviewRealTime,CopyText,ModalTitle,SidebarType,Default,Border,IconColor,DarkLayout,MixLayout,LightLayout,Cancel,Configuration,SidebarSettings} from '../../constant'
 
 const ThemeCustomizer = () => {
 
@@ -41,7 +42,6 @@ const ThemeCustomizer = () => {
             }
         })
 
-
         //set layout_type
         document.body.setAttribute('main-theme-layout', layout_type);
         document.documentElement.dir = layout_type;
@@ -60,6 +60,7 @@ const ThemeCustomizer = () => {
 
         //set colors
         document.body.className = mix_layout;
+
 
         if (localStorage.getItem('primary_color') == null || localStorage.getItem('secondary_color') == null || localStorage.getItem('color') == null || localStorage.getItem('layout_version') == null) {
             document.documentElement.className = config_color;
@@ -154,10 +155,6 @@ const ThemeCustomizer = () => {
 
         localStorage.setItem('wrapper', wrapper);
         localStorage.setItem('bodyWrapper', bodyWrapper);
-
-        console.log("sidebar_type", sidebar_type);
-
-
         window.location.reload();
     }
 
@@ -255,39 +252,39 @@ const ThemeCustomizer = () => {
                 <div className="tab-content" id="c-pills-tabContent">
                     <div className="customizer-header">
                         <i className="icon-close" onClick={closeCustomizer}></i>
-                        <h5>Customizer</h5>
-                        <p className="mb-0">Customize &amp; Preview Real Time</p>
-                        <button className="btn btn-primary plus-popup mt-2 " onClick={() => setModal(!modal)}>Configuration</button>
+                        <h5>{Customizer}</h5>
+                        <p className="mb-0">{Customize} &amp; {PreviewRealTime}</p>
+                        <button className="btn btn-primary plus-popup mt-2 " onClick={() => setModal(!modal)}>{Configuration}</button>
                         <Modal isOpen={modal} toggle={toggle} className="modal-body" centered={true}>
-                            <ModalHeader toggle={toggle}>Modal title</ModalHeader>
+                            <ModalHeader toggle={toggle}>{ModalTitle}</ModalHeader>
                             <ModalBody>
                                 <div className="container-fluid bd-example-row">
                                     <div className="row">
-                                        <p>To replace our design with your desired theme. Please do configuration as mention </p>
+                                        <p>{"To replace our design with your desired theme. Please do configuration as mention"} </p>
                                         <p> <b> {"Path : data > customizer > config.js"} </b> </p>
                                     </div>
                                     <pre>
                                         <code>
-                                            <div> export class ConfigDB &#123;</div>
-                                            <div>  static data = &#123;</div>
-                                            <div>   settings&#58; &#123;</div>
-                                            <div>       layout_type&#58; : '{configDB.settings.layout_type}',</div>
+                                            <div> {"export class ConfigDB"} &#123;</div>
+                                            <div>  {"static data ="} &#123;</div>
+                                            <div>   {"settings"}&#58; &#123;</div>
+                                            <div>       {"layout_type"}&#58; '{configDB.settings.layout_type}',</div>
 
-                                            <div>   sidebar&#58; &#123;</div>
-                                            <div>       type&#58; : '{configDB.settings.sidebar.wrapper}'</div>
-                                            <div>       body_type&#58; : '{configDB.settings.sidebar.bodyWrapper}' </div>
+                                            <div>   {"sidebar"}&#58; &#123;</div>
+                                            <div>       {"type"}&#58; '{configDB.settings.sidebar.wrapper}',</div>
+                                            <div>       {"body_type"}&#58; '{configDB.settings.sidebar.bodyWrapper}' </div>
                                             <div>   &#125;,</div>
-                                            <div>       sidebar_setting&#58; : '{configDB.settings.sidebar_setting}' </div>
-                                            <div>       sidebar_backround&#58; : '{configDB.settings.sidebar_backround}' </div>
+                                            <div>       {"sidebar_setting"}&#58; '{configDB.settings.sidebar_setting}', </div>
+                                            <div>       {"sidebar_backround"}&#58; '{configDB.settings.sidebar_backround}' </div>
                                             <div>              &#125;,</div>
-                                            <div>       color&#58; &#123;</div>
-                                            <div>       layout_version&#58; : '{configDB.color.layout_version}' </div>
-                                            <div>       color&#58; '{configDB.color.color}' </div>
-                                            <div>       primary_color&#58; : '{configDB.color.primary_color}' </div>
-                                            <div>       secondary_color&#58; : '{configDB.color.secondary_color}' </div>
-                                            <div>       mix_layout&#58; : '{configDB.color.mix_layout}' </div>
-                                            <div>           &#125;,</div>
-                                            <div>       router_animation&#58; 'fadeIn'</div>
+                                            <div>   {"color"}&#58; &#123;</div>
+                                            <div>       {"layout_version"}&#58; '{configDB.color.layout_version}', </div>
+                                            <div>       {"color"}&#58; '{configDB.color.color}', </div>
+                                            <div>       {"primary_color"}&#58; '{configDB.color.primary_color}', </div>
+                                            <div>       {"secondary_color"}&#58; '{configDB.color.secondary_color}', </div>
+                                            <div>       {"mix_layout"}&#58; '{configDB.color.mix_layout}' </div>
+                                            <div>   &#125;,</div>
+                                            <div>   {"router_animation"}&#58; {"'fadeIn'"}</div>
                                             <div>   &#125;</div>
                                             <div>   &#125;</div>
                                         </code>
@@ -302,16 +299,16 @@ const ThemeCustomizer = () => {
                                         onClick={() => toast.success("Code Copied to clipboard !", {
                                             position: toast.POSITION.BOTTOM_RIGHT
                                         })}
-                                    >Copy text</button>
+                                    >{CopyText}</button>
                                 </CopyToClipboard>
-                                <Button color="secondary" onClick={toggle}>Cancel</Button>
+                                <Button color="secondary" onClick={toggle}>{Cancel}</Button>
                             </ModalFooter>
                         </Modal>
                     </div>
                     <div className="customizer-body custom-scrollbar">
                         <TabContent activeTab={activeTab1}>
                             <TabPane tabId="1">
-                                <h6>Layout Type</h6>
+                                <h6>{LayoutType}</h6>
                                 <ul className="main-layout layout-grid">
                                     <li data-attr="ltr" className={`${layout_type === 'ltr' ? 'active' : ''}`} onClick={() => handleLayout('ltr')}>
                                         <div className="header bg-light">
@@ -325,7 +322,7 @@ const ThemeCustomizer = () => {
                                             <ul>
                                                 <li className="bg-dark sidebar"></li>
                                                 <li className="bg-light body">
-                                                    <span className="badge badge-dark">LTR Layout</span>
+                                                    <span className="badge badge-dark">{LTRLayout}</span>
                                                 </li>
                                             </ul>
                                         </div>
@@ -341,14 +338,14 @@ const ThemeCustomizer = () => {
                                         <div className="body">
                                             <ul>
                                                 <li className="bg-light body">
-                                                    <span className="badge badge-dark">RTL Layout</span>
+                                                    <span className="badge badge-dark">{RTLLayout}</span>
                                                 </li>
                                                 <li className="bg-dark sidebar"></li>
                                             </ul>
                                         </div>
                                     </li>
                                 </ul>
-                                <h6 className="">Sidebar Type</h6>
+                                <h6 className="">{SidebarType}</h6>
                                 <ul className="sidebar-type layout-grid">
                                     <li data-attr="normal-sidebar" className="active" onClick={(e) => handleSidebarType(e, 'default', 'default')}>
                                         <div className="header bg-light">
@@ -411,7 +408,7 @@ const ThemeCustomizer = () => {
                                         </div>
                                     </li>
                                 </ul>
-                                <h6 className="">Sidebar settings</h6>
+                                <h6 className="">{SidebarSettings}</h6>
                                 <ul className="sidebar-setting layout-grid">
                                     <li className="active" data-attr="default-sidebar" onClick={handleSidebarSetting} >
                                         <div className="header bg-light">
@@ -422,7 +419,7 @@ const ThemeCustomizer = () => {
                                             </ul>
                                         </div>
                                         <div className="body bg-light">
-                                            <span className="badge badge-dark">Default</span>
+                                            <span className="badge badge-dark">{Default}</span>
                                         </div>
                                     </li>
                                     <li data-attr="border-sidebar" onClick={handleSidebarSetting} >
@@ -434,7 +431,7 @@ const ThemeCustomizer = () => {
                                             </ul>
                                         </div>
                                         <div className="body bg-light">
-                                            <span className="badge badge-dark">Border</span>
+                                            <span className="badge badge-dark">{Border}</span>
                                         </div>
                                     </li>
                                     <li data-attr="iconcolor-sidebar" onClick={handleSidebarSetting} >
@@ -446,13 +443,13 @@ const ThemeCustomizer = () => {
                                             </ul>
                                         </div>
                                         <div className="body bg-light">
-                                            <span className="badge badge-dark">icon Color</span>
+                                            <span className="badge badge-dark">{IconColor}</span>
                                         </div>
                                     </li>
                                 </ul>
                             </TabPane>
                             <TabPane tabId="2">
-                                <h6>Light layout</h6>
+                                <h6>{LightLayout}</h6>
                                 <ul className="layout-grid customizer-color">
                                     <li className="color-layout " data-attr="light-1" data-primary="#4466f2" data-secondary="#1ea6ec" onClick={() => colorChangeTheme('light-1')}> <div></div></li>
                                     <li className="color-layout " data-attr="light-2" data-primary="#0288d1" data-secondary="#26c6da" onClick={() => colorChangeTheme('light-2')}> <div></div></li>
@@ -461,7 +458,7 @@ const ThemeCustomizer = () => {
                                     <li className="color-layout" data-attr="light-5" data-primary="#7c4dff" data-secondary="#7b1fa2" onClick={() => colorChangeTheme('light-5')}> <div></div></li>
                                     <li className="color-layout" data-attr="light-6" data-primary="#3949ab" data-secondary="#4fc3f7" onClick={() => colorChangeTheme('light-6')}> <div></div></li>
                                 </ul>
-                                <h6 className="">Dark Layout</h6>
+                                <h6 className="">{DarkLayout}</h6>
                                 <ul className="layout-grid customizer-color dark">
                                     <li className="color-layout" data-attr="dark-1" data-primary="#4466f2" data-secondary="#1ea6ec" onClick={() => colorChangeTheme('dark-1')}> <div></div></li>
                                     <li className="color-layout" data-attr="dark-2" data-primary="#0288d1" data-secondary="#26c6da" onClick={() => colorChangeTheme('dark-2')}> <div></div></li>
@@ -470,7 +467,7 @@ const ThemeCustomizer = () => {
                                     <li className="color-layout" data-attr="dark-5" data-primary="#7c4dff" data-secondary="#7b1fa2" onClick={() => colorChangeTheme('dark-5')}> <div></div></li>
                                     <li className="color-layout" data-attr="dark-6" data-primary="#3949ab" data-secondary="#4fc3f7" onClick={() => colorChangeTheme('dark-6')}> <div></div></li>
                                 </ul>
-                                <h6 className="">Mix Layout</h6>
+                                <h6 className="">{MixLayout}</h6>
                                 <ul className="layout-grid customizer-mix">
                                     <li className="color-layout" data-attr="light-only" onClick={handleCustomizerMix}>
                                         <div className="header bg-light">
@@ -563,25 +560,22 @@ const ThemeCustomizer = () => {
                                         </div>
                                     </li>
                                 </ul>
-                                <h6 className="">Sidebar background setting</h6>
+                                <h6 className="">{SidebarBackgroundSetting}</h6>
                                 <Nav tabs className="nav-pills nav-primary nac-pills">
                                     <NavItem className="nav nav-tabs" id="myTab" role="tablist">
-                                        {/* eslint-disable-next-line */}
-                                        <NavLink className={activeTab == '1' ? 'active' : ''} onClick={() => setActiveTab('1')}>
-                                            Color
-                                                    </NavLink>
+                                        <NavLink className={activeTab === '1' ? 'active' : ''} onClick={() => setActiveTab('1')}>
+                                            {Color}
+                                        </NavLink>
                                     </NavItem>
                                     <NavItem className="nav nav-tabs" id="myTab" role="tablist">
-                                        {/* eslint-disable-next-line */}
-                                        <NavLink className={activeTab == '2' ? 'active' : ''} onClick={() => setActiveTab('2')}>
-                                            Pattern
-                                                    </NavLink>
+                                        <NavLink className={activeTab === '2' ? 'active' : ''} onClick={() => setActiveTab('2')}>
+                                            {Pattern}
+                                        </NavLink>
                                     </NavItem>
                                     <NavItem className="nav nav-tabs" id="myTab" role="tablist">
-                                        {/* eslint-disable-next-line */}
-                                        <NavLink className={activeTab == '3' ? 'active' : ''} onClick={() => setActiveTab('3')}>
-                                            image
-                                                    </NavLink>
+                                        <NavLink className={activeTab === '3' ? 'active' : ''} onClick={() => setActiveTab('3')}>
+                                            {Image}
+                                        </NavLink>
                                     </NavItem>
                                 </Nav>
                                 <TabContent activeTab={activeTab} className="sidebar-main-bg-setting">

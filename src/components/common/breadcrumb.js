@@ -3,7 +3,6 @@ import { Home } from 'react-feather';
 import { Link } from 'react-router-dom'
 import Bookmark from './bookmark';
 
-
 const Breadcrumb = props => {
     const breadcrumb = props;
 
@@ -17,7 +16,7 @@ const Breadcrumb = props => {
                                 <h3>{breadcrumb.title}</h3>
                                 <ol className="breadcrumb pull-right">
                                     <li className="breadcrumb-item">
-                                        <Link to="/dashboard/default">
+                                        <Link to={`${process.env.PUBLIC_URL}/dashboard/default`}>
                                             <Home />
                                         </Link>
                                     </li>

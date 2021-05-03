@@ -1024,6 +1024,29 @@
       }
     }
   }
+
+  // kanban board
+  .jkanban-container {
+    .kanban-container {
+      display: block;
+      .kanban-board {
+        width: 400px;
+        .kanban-drag {
+          > div {
+            > div {
+              display: block;
+              white-space: unset;
+              div[data-testid="lane"] {
+                margin-left: 0;
+                margin-right: 0;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
   // contact
   .contact-search {
     .form-group {
@@ -2941,6 +2964,13 @@
 }
 /* ========= responsive scss for 768 screen ========= */
 @media only screen and (max-width: 767px) {
+  .button-auth {
+    > div {
+      +  div {
+        margin-top: 16px;
+      }
+    }
+  }
   .call-chat-sidebar{
       width: 100%;
       max-width: unset;
@@ -5558,6 +5588,16 @@
   #linecharts-bitcoin{
     height: 270px !important;
   }
+
+  // kanban board
+  .jkanban-container {
+    .kanban-container {
+      .kanban-board {
+        width: 100%;
+      }
+    }
+  }
+  
   //landing page
   .creative-demo-section {
     .creative-demo-content{

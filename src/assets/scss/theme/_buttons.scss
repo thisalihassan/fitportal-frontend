@@ -54,7 +54,7 @@
   margin-bottom: -20px;
 }
 // outline buttons//
-@each $btn-name, $btn-color in (primary, $primary-color),
+@each $btn-name, $btn-color in (primary, $primary-color ),
         (secondary, $secondary-color) ,
         (success, $success-color),
         (danger, $danger-color),
@@ -73,7 +73,7 @@
 
 
 // forms //
-@each $btn-name, $btn-color in (primary, $primary-color),
+@each $btn-name, $btn-color in (primary, $primary-color ),
         (secondary, $secondary-color) ,
         (success, $success-color),
         (danger, $danger-color),
@@ -90,7 +90,7 @@
 }
 
 //input background //
-@each $btn-name, $btn-color in (primary, $primary-color),
+@each $btn-name, $btn-color in (primary, $primary-color ),
         (secondary, $secondary-color) ,
         (success, $success-color),
         (danger, $danger-color),
@@ -138,11 +138,11 @@
   }
 }
 .btn-primary-gradien{
-  @include btn-gradien(60,lighten($primary-color,8%),0%,darken($primary-color,8%),100%,$white);
+  @include btn-gradien(60,lighten($primary-color ,8%),0%,darken($primary-color ,8%),100%,$white);
  &:focus,&:active,&.active{
     transition: 1.5s;
     background-position: right center;
-    background-image: linear-gradient(to right, lighten($primary-color,8%),0%,darken($primary-color,8%),100%,$white) !important;
+    background-image: linear-gradient(to right, lighten($primary-color ,8%),0%,darken($primary-color ,8%),100%,$white) !important;
 
   }
 }

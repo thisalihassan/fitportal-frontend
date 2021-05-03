@@ -73,7 +73,7 @@
 
 .Typeahead-menu {
   position: absolute;
-  height: 300px;
+  max-height: 300px;
   top: 120%;
   padding: 12px;
   z-index: 100;

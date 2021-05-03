@@ -11,7 +11,7 @@ export class ConfigDB {
 		},
 		color: {
 			layout_version: 'light',
-			color: 'light-1',
+			color: 'color-1',
 			primary_color: '#4466f2',
 			secondary_color: '#1ea6ec',
 			mix_layout: 'default'
