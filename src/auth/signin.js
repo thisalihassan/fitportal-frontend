@@ -5,7 +5,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { withRouter } from 'react-router';
 import { handleResponse } from '../services/fack.backend';
-import { LOGIN, YourName, Password, LoginWithJWT } from '../constant';
+import { LOGIN, YourName, Password, Login, SignUp } from '../constant';
+import { connect } from 'react-redux';
 
 const Signin = ({ history }) => {
 	const [email, setEmail] = useState('test@gmail.com');
@@ -85,8 +86,16 @@ const Signin = ({ history }) => {
 
 													<div className='form-group form-row mt-3 mb-0'>
 														<button className='btn btn-secondary btn-block' type='button' onClick={() => loginWithJwt(email, password)}>
-															{LoginWithJWT}
+															{Login}
 														</button>
+													</div>
+													<div className='form-group form-row mt-3 mb-0'>
+														<div className='text-center'>
+															{'Not a user?'}  
+															<a className='btn-link text-capitalize' href='signup'>
+																{SignUp}
+															</a>
+														</div>
 													</div>
 												</form>
 											</div>

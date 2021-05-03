@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
 import { firebase_app, auth0 } from './data/config';
@@ -91,7 +91,6 @@ import TimePickerWrapper from './components/forms/form-widgets/timepickerCompone
 import TypeaheadComp from './components/forms/form-widgets/typeaheadComponent/typeahead';
 
 import FormDefault from './components/forms/form-layout/formDefault';
-import FormWizard from './components/forms/form-layout/wizard/form-wizard';
 
 // tables
 import BasicTable from './components/tables/bootstrap/basicTable';
@@ -119,7 +118,7 @@ import UserCards from './components/users/user-cards';
 
 import LoginWithBgImg from './pages/loginWithBgImg';
 import LoginWithVideo from './pages/loginWithVideo';
-import Signup from './pages/signup';
+import Signup from './auth/signup';
 import SignupWithImg from './pages/signupWithImg';
 import SignupWithVideo from './pages/signupWithVideo';
 import UnlockUser from './pages/unlockUser';
@@ -136,28 +135,18 @@ import Error404 from './pages/errors/error404';
 import Error500 from './pages/errors/error500';
 import Error503 from './pages/errors/error503';
 import Signin from './auth/signin';
-
+import Conformation from './auth/confirmation';
 //config data
 import configDB from './data/customizer/config';
-
 import Callback from './auth/callback';
-
-// setup fake backend
-configureFakeBackend();
 
 const Root = () => {
 	const abortController = new AbortController();
-	const [currentUser, setCurrentUser] = useState(false);
-	const [authenticated, setAuthenticated] = useState(false);
 	const jwt_token = localStorage.getItem('token');
 
 	useEffect(() => {
-		const requestOptions = { method: 'GET', headers: authHeader() };
-		fetch('/users', requestOptions).then(handleResponse);
 		const color = localStorage.getItem('color');
 		const layout = localStorage.getItem('layout_version') || configDB.data.color.layout_version;
-		firebase_app.auth().onAuthStateChanged(setCurrentUser);
-		setAuthenticated(JSON.parse(localStorage.getItem('authenticated')));
 		document.body.classList.add(layout);
 		console.ignoredYellowBox = ['Warning: Each', 'Warning: Failed'];
 		console.disableYellowBox = true;
@@ -176,11 +165,12 @@ const Root = () => {
 				<Provider store={store}>
 					<BrowserRouter basename={`/`}>
 						<Switch>
+							<Route path={`${process.env.PUBLIC_URL}/conformation/:id/:token`} component={Conformation} />
 							<Route path={`${process.env.PUBLIC_URL}/login`} component={Signin} />
-
+							<Route path={`${process.env.PUBLIC_URL}/signup`} component={Signup} />
 							<Route path={`${process.env.PUBLIC_URL}/pages/loginWithBgImg`} component={LoginWithBgImg} />
 							<Route path={`${process.env.PUBLIC_URL}/pages/loginWithVideo`} component={LoginWithVideo} />
-							<Route path={`${process.env.PUBLIC_URL}/pages/signup`} component={Signup} />
+
 							<Route path={`${process.env.PUBLIC_URL}/pages/signupWithImg`} component={SignupWithImg} />
 							<Route path={`${process.env.PUBLIC_URL}/pages/signupWithVideo`} component={SignupWithVideo} />
 							<Route path={`${process.env.PUBLIC_URL}/pages/unlockUser`} component={UnlockUser} />
@@ -198,7 +188,7 @@ const Root = () => {
 							<Route path={`${process.env.PUBLIC_URL}/pages/errors/error503`} component={Error503} />
 							<Route path={`${process.env.PUBLIC_URL}/callback`} render={() => <Callback />} />
 
-							{currentUser !== null || authenticated || jwt_token ? (
+							{jwt_token ? (
 								<App>
 									{/* dashboard menu */}
 									<Route
@@ -282,7 +272,7 @@ const Root = () => {
 									<Route path={`${process.env.PUBLIC_URL}/forms-controls/megaOptions`} component={MegaOptions} />
 
 									<Route path={`${process.env.PUBLIC_URL}/form-layout/formDefault`} component={FormDefault} />
-									<Route path={`${process.env.PUBLIC_URL}/form-layout/FormWizard`} component={FormWizard} />
+									{/* <Route path={`${process.env.PUBLIC_URL}/form-layout/FormWizard`} component={FormWizard} /> */}
 
 									<Route path={`${process.env.PUBLIC_URL}/form-widget/datepickerComponent`} component={DatepickerComponent} />
 									<Route path={`${process.env.PUBLIC_URL}/form-widget/timepicker`} component={TimePickerWrapper} />
