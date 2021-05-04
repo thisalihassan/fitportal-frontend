@@ -2,7 +2,8 @@ import React ,{Fragment ,useEffect} from 'react';
 import Breadcrumb from '../common/breadcrumb';
 import { MDBDataTableV5 } from 'mdbreact';
 import customerActions from "../../redux/customers/actions"
-
+import axios from 'axios';
+import { API_URL, CONFIG } from '../../services/helper';
 import { connect } from 'react-redux';
 const { fetchCustomers } = customerActions;
 
@@ -32,21 +33,27 @@ const Ecommerce = ({fetchCustomers, customers}) => {
     ],
   })
 
+  const handleDelete = async (id) => {
+    CONFIG.headers.access_token = localStorage.getItem('id_token')
+    
+    await axios.delete(`${API_URL}/user/${id}`,CONFIG);
+    
+  }
   useEffect (()=> {
     fetchCustomers();
   }, [])
   useEffect (()=> {
    if(customers){
      for (var i=0; i< customers.length; i++) {
+        const id = customers[i]._id
        customers[i].actions = <div>
-         <a href= {`http://localhost:3000/endless/users/userEdit/${customers[0]._id}`} className="btn btn-pill btn-primary mb-2" type="button">Edit</a>
-         <button className="btn btn-pill btn-danger mb-2" type="button">Delete</button>
+         <a href= {`http://localhost:3000/endless/users/userEdit/${customers[i]._id}`} className="btn btn-pill btn-primary mb-2" type="button">Edit</a>
+         <button onClick={ ()=> {handleDelete(id)}} className="btn btn-pill btn-danger mb-2" type="button">Delete</button>
        </div>
      }
      setDatatable({...datatable, rows: customers})
    } 
   }, [customers])
-  console.log(customers)
   return (
     <Fragment>
        <Breadcrumb  parent = "Dashboard"   title = "Ecommerce"  />
