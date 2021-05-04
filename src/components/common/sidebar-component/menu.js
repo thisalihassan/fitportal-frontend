@@ -6,7 +6,7 @@ export const MENUITEMS = [
 		icon: Home,
 		badgeType: 'primary',
 		active: false,
-		path: '/dashboard/ecommerce',
+		path: '/dashboard',
 		type: 'link'
 	},
 
