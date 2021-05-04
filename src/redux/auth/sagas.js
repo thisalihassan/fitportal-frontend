@@ -1,6 +1,7 @@
 import { all, takeEvery, put, fork, call } from 'redux-saga/effects';
 import actions from './actions';
 import { API_URL, headers } from '../../services/helper';
+import { toast } from 'react-toastify';
 
 const loginDetailsFetch = async (payload) =>
 	await fetch(`${API_URL}/auth`, {
@@ -25,11 +26,11 @@ export function* loginDetails() {
 	yield takeEvery(actions.LOGIN, function* (data) {
 		const { payload } = data;
 		if (payload) {
-			const response  = yield call(loginDetailsFetch, payload);
-			localStorage.setItem('id_token', response.token);
-			if (!response) {
-				console.log(response);
+			const response = yield call(loginDetailsFetch, payload);
+			if (response.msg) {
+				toast.error('Oppss.. The password is invalid or the user does not have a password.');
 			} else {
+				localStorage.setItem('id_token', response.token);
 				yield put({
 					type: actions.LOGIN_FETCH,
 					payload: response
