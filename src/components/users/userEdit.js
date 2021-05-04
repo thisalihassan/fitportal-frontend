@@ -2,7 +2,7 @@ import React, { Fragment,useState,useEffect } from 'react';
 import Breadcrumb from '../common/breadcrumb';
 import seven from '../../assets/images/user/7.jpg';
 import DatePicker from 'react-date-picker';
-import { MyProfile, BOD, Bio,MarkJecno,Designer,Password,Website,Save,EditProfile,Company,Username,UsersCountryMenu,AboutMe,UpdateProfile,UsersTableTitle,FirstName,LastName,Address,EmailAddress,PostalCode,Country, UsersTableHeader,City,Edit,Update,Delete, NAME} from '../../constant'
+import { MyProfile, BOD, Bio,MarkJecno,Designer,Password,Website,Save,EditProfile,Company,Username,UsersCountryMenu,AboutMe,UpdateProfile,UsersTableTitle,FirstName,LastName,Address,EmailAddress,PostalCode,Country, UsersTableHeader,City,Edit,Update,Delete, NAME, Phone} from '../../constant'
 import customerActions from "../../redux/customers/actions"
 import { useForm } from 'react-hook-form';
 import { API_URL, CONFIG } from '../../services/helper';
@@ -19,9 +19,11 @@ const UserEdit = ({fetchSingleCustomer, customer, match} ) => {
 		email: '',
 		dateOfBirth: '',
         id: null,
+        phone: '',
+        address: ''
 	});
 
-    const { dateOfBirth, email , name } = formData;
+    const { dateOfBirth, email , name, phone, address } = formData;
 
     const inputChangeHandler = (e) => {
 		const { name, value } = e.target;
@@ -33,10 +35,12 @@ const UserEdit = ({fetchSingleCustomer, customer, match} ) => {
 	};
 
     const formSubmitHandler = async (e) => {
-        console.log(formData)
 		const body = JSON.stringify(formData);
         CONFIG.headers.access_token = localStorage.getItem('id_token')
-		await axios.put(`${API_URL}/user/update`, body, CONFIG);
+		const response = await axios.put(`${API_URL}/user/update`, body, CONFIG);
+        if(response.status < 300) {
+            window.location.reload();
+        }
 	};
 
     useEffect (()=> {
@@ -62,7 +66,7 @@ const UserEdit = ({fetchSingleCustomer, customer, match} ) => {
                         <div className="col-lg-4">
                             <div className="card">
                                 <div className="card-header">
-                                    <h4 className="card-title mb-0">{MyProfile}</h4>
+                                    <h4 className="card-title mb-0">{`${name}'s Profile`}</h4>
                                     <div className="card-options">
                                         <a className="card-options-collapse" href="javascript" data-toggle="card-collapse"><i className="fe fe-chevron-up"></i></a><a className="card-options-remove" href="javascript" data-toggle="card-remove"><i className="fe fe-x"></i></a></div>
                                 </div>
@@ -71,8 +75,8 @@ const UserEdit = ({fetchSingleCustomer, customer, match} ) => {
                                         <div className="row mb-2">
                                             <div className="col-auto"><img className="img-70 rounded-circle" alt="" src={seven} /></div>
                                             <div className="col">
-                                                <h3 className="mb-1">{MarkJecno}</h3>
-                                                <p className="mb-4">{Designer}</p>
+                                                <h3 className="mb-1">{name}</h3>
+                                                <p className="mb-4">{customer && customer.role}</p>
                                             </div>
                                         </div>
                                         <div className="form-group">
@@ -86,7 +90,18 @@ const UserEdit = ({fetchSingleCustomer, customer, match} ) => {
                                             <input className="form-control" onChange={inputChangeHandler}
 												name='email' value= {email} placeholder="your-email@domain.com" ref={register({ required: true })} />
                                         </div>
+                                        
                                         <span>{errors.email && 'email is required'}</span>
+                                        <div className="form-group">
+                                            <label className="form-label">{Phone}</label>
+                                            <input className="form-control" onChange={inputChangeHandler}
+												name='phone' value= {phone} placeholder="your-phone" ref={register({ required: true })} />
+                                        </div>
+                                        <div className="form-group">
+                                            <label className="form-label">Address</label>
+                                            <input className="form-control" onChange={inputChangeHandler}
+												name='address' value= {address} placeholder="your-address" ref={register({ required: true })} />
+                                        </div>
                                     <div className='form-group'>
 									<label className='col-form-label'>{BOD}</label>
 									<div className='form-row'>

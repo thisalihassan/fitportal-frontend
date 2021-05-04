@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import logo from '../../../assets/images/endless-logo.png';
+import logo from '../../../assets/images/logo.jpg';
 import logo_compact from '../../../assets/images/logo/compact-logo.png';
 import UserPanel from './userPanel';
 import { MENUITEMS } from '../../../components/common/sidebar-component/menu';
@@ -27,11 +27,6 @@ const Sidebar = ({ history , fetchLoginDetails, user, t}) => {
 		}
 	},[user])
 
-    useEffect(() => {
-		if(user) {
-			history.push('/endless/dashboard/ecommerce')
-		}
-	}, [user]);
     useEffect(() => {
         window.addEventListener('resize', handleResize)
         handleResize();
@@ -195,9 +190,10 @@ const Sidebar = ({ history , fetchLoginDetails, user, t}) => {
                 <div className="main-header-left d-none d-lg-block">
                     <div className="logo-wrapper compactLogo">
                         <Link to={`${process.env.PUBLIC_URL}/dashboard/default`}>
-                            <img className="blur-up lazyloaded" src={logo_compact} alt="" />
                             <img className="blur-up lazyloaded" src={logo} alt="" />
+                            <img style={{width: '50px', height: '50px'}} className="blur-up lazyloaded" src={logo} alt="" />
                         </Link>
+                        <h6 className="ml-4" style={{color: 'white'}}>GYM PORTAL</h6>
                     </div>
                 </div>
                 <div className="sidebar custom-scrollbar">

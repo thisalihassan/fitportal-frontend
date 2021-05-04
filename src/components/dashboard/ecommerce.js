@@ -56,7 +56,7 @@ const Ecommerce = ({fetchCustomers, customers}) => {
   }, [customers])
   return (
     <Fragment>
-       <Breadcrumb  parent = "Dashboard"   title = "Ecommerce"  />
+       <Breadcrumb  parent = "Dashboard"   title = "Customers"  />
        <div className="container-fluid">
           <div className="row">
             <div className="col-xl-12 xl-50">
