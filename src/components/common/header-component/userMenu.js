@@ -1,16 +1,13 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import man from '../../../assets/images/dashboard/user.png';
 import { User, LogOut } from 'react-feather';
-import { firebase_app } from '../../../data/config';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
-import { useAuth0 } from '@auth0/auth0-react';
 import { EditProfile } from '../../../constant';
 
-const UserMenu = ({ history }) => {
+const UserMenu = ({ history, logoutUser }) => {
 	const [profile, setProfile] = useState('');
-	// auth0 profile
-	const { logout } = useAuth0();
+
 	const authenticated = JSON.parse(localStorage.getItem('authenticated'));
 	const auth0_profile = JSON.parse(localStorage.getItem('auth0_profile'));
 
@@ -18,10 +15,12 @@ const UserMenu = ({ history }) => {
 		setProfile(localStorage.getItem('profileURL') || man);
 	}, []);
 
-
 	const Logout_From_Auth0 = () => {
 		localStorage.removeItem('id_token');
-		history.push(`${process.env.PUBLIC_URL}/`);
+		logoutUser();
+		setTimeout(() => {
+			window.location.reload();
+		}, 1000);
 	};
 
 	return (
