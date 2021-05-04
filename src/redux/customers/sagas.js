@@ -37,13 +37,14 @@ export function* fetchCustomers() {
 export function* fetchSingleCustomer() {
 	yield takeEvery(actions.SINGLECUSTOMER, function* (data) {
 		const { payload } = data;
+		console.log(payload)
 		if (payload) {
 			const response  = yield call(singleUserFetch, payload);
 			if (!response) {
 				console.log(response);
 			} else {
 				yield put({
-					type: actions.singleDetail,
+					type: actions.SINGLECUSTOMERDETAIL,
 					payload: response
 				});
 			}
@@ -53,5 +54,5 @@ export function* fetchSingleCustomer() {
 
 
 export default function* rootSaga() {
-	yield all([fork(fetchCustomers)]);
+	yield all([fork(fetchCustomers), fork(fetchSingleCustomer)]);
 }
