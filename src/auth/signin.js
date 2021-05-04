@@ -1,35 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import logo from '../assets/images/endless-logo.png';
-import man from '../assets/images/dashboard/user.png';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { withRouter } from 'react-router';
-import { handleResponse } from '../services/fack.backend';
 import { LOGIN, YourName, Password, Login, SignUp } from '../constant';
-import authActions from "../redux/auth/actions"
+import authActions from '../redux/auth/actions';
 
 import { connect } from 'react-redux';
-const { loginUser, fetchLoginDetails} = authActions;
+const { loginUser, fetchLoginDetails } = authActions;
 const Signin = ({ history, loginUser, fetchLoginDetails, user }) => {
 	const [email, setEmail] = useState('ali-hassan01@outlook.com');
 	const [password, setPassword] = useState('12345678');
 
-	const [value, setValue] = useState(localStorage.getItem('profileURL' || man));
-	useEffect(()=> {
-		if(!user){
-			
+	useEffect(() => {
+		if (!user) {
 			fetchLoginDetails();
 		}
-	},[user])
-	
-	// useEffect(() => {
-	// 	if(user) {
-	// 		history.push('/endless/dashboard/ecommerce')
-	// 	}
-	// }, [user]);
+		if (user && user.msg) {
+			toast.error('Oops you entered invalid credentials');
+		}
+	}, [fetchLoginDetails, user]);
+
+	useEffect(() => {
+		if (localStorage.getItem('id_token')) {
+			history.push('/endless/dashboard/ecommerce');
+		}
+	}, [history, user]);
 
 	const loginWithJwt = (email, password) => {
-		loginUser({email, password})
+		loginUser({ email, password });
 	};
 
 	return (
@@ -103,6 +102,11 @@ const Signin = ({ history, loginUser, fetchLoginDetails, user }) => {
 	);
 };
 
-export default withRouter(connect((state) => ({
-	user: state.authReducer.user,
-}),{loginUser, fetchLoginDetails})(Signin));
+export default withRouter(
+	connect(
+		(state) => ({
+			user: state.authReducer.user
+		}),
+		{ loginUser, fetchLoginDetails }
+	)(Signin)
+);

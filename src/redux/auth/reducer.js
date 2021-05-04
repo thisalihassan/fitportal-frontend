@@ -5,7 +5,11 @@ const initState = {
 
 export default function interviewReducer(state = initState, action) {
 	switch (action.type) {
-	
+		case actions.LOGOUT:
+			return {
+				...state,
+				user: null
+			};
 		case actions.LOGIN_SUCCESS:
 			return {
 				...state,

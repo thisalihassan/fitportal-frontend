@@ -4,8 +4,11 @@ import UserMenu from './userMenu';
 import SearchHeader from './searchHeader';
 import { Link } from 'react-router-dom';
 import { AlignLeft, MoreHorizontal } from 'react-feather';
+import authActions from '../../../redux/auth/actions';
+import { connect } from 'react-redux';
+const { logoutUser } = authActions;
 
-const Header = () => {
+const Header = ({ logoutUser }) => {
 	const [sidebar, setSidebar] = useState(false);
 	const [headerbar, setHeaderbar] = useState(true);
 
@@ -47,7 +50,7 @@ const Header = () => {
 								<SearchHeader />
 							</li>
 
-							<UserMenu />
+							<UserMenu logoutUser={logoutUser} />
 						</ul>
 						<div className='d-lg-none mobile-toggle pull-right' onClick={() => setHeaderbar(!headerbar)}>
 							<MoreHorizontal />
@@ -84,4 +87,4 @@ const Header = () => {
 		</Fragment>
 	);
 };
-export default Header;
+export default connect(null, { logoutUser })(Header);
