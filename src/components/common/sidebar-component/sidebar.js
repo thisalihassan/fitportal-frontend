@@ -7,8 +7,11 @@ import { MENUITEMS } from '../../../components/common/sidebar-component/menu';
 import { Link } from 'react-router-dom';
 import { translate } from 'react-switch-lang';
 import configDB from '../../../data/customizer/config';
-
-const Sidebar = (props) => {
+import authActions from "../../../redux/auth/actions"
+import {withRouter} from 'react-router'
+import { connect } from 'react-redux';
+const { loginUser, fetchLoginDetails} = authActions;
+const Sidebar = ({ history , fetchLoginDetails, user, t}) => {
     const [margin, setMargin] = useState(0);
     const [width, setWidth] = useState(0);
     const [hideLeftArrowRTL, setHideLeftArrowRTL] = useState(true);
@@ -18,7 +21,17 @@ const Sidebar = (props) => {
     const [mainmenu, setMainMenu] = useState(MENUITEMS);
     const wrapper = configDB.data.settings.sidebar.wrapper;
     const layout = useSelector(content => content.Customizer.layout);
+    useEffect(()=> {
+		if(!user){	
+			fetchLoginDetails();
+		}
+	},[user])
 
+    useEffect(() => {
+		if(user) {
+			history.push('/endless/dashboard/ecommerce')
+		}
+	}, [user]);
     useEffect(() => {
         window.addEventListener('resize', handleResize)
         handleResize();
@@ -188,7 +201,7 @@ const Sidebar = (props) => {
                     </div>
                 </div>
                 <div className="sidebar custom-scrollbar">
-                    <UserPanel />
+                    {user && <UserPanel name= {user.name} role = {user.role} />}
                     <ul
                         className="sidebar-menu"
                         id="myDIV"
@@ -206,7 +219,7 @@ const Sidebar = (props) => {
                                     {(menuItem.type === 'sub') ?
                                         <a className="sidebar-header" href="#javascript" onClick={() => toggletNavActive(menuItem)}>
                                             <menuItem.icon />
-                                            <span>{props.t(menuItem.title)}</span>
+                                            <span>{t(menuItem.title)}</span>
                                             <i className="fa fa-angle-right pull-right"></i>
                                         </a>
                                         : ''}
@@ -217,7 +230,7 @@ const Sidebar = (props) => {
 
                                             onClick={() => toggletNavActive(menuItem)}
                                         >
-                                            <menuItem.icon /><span>{props.t(menuItem.title)}</span>
+                                            <menuItem.icon /><span>{t(menuItem.title)}</span>
                                             {menuItem.children ?
                                                 <i className="fa fa-angle-right pull-right"></i> : ''}
                                         </Link>
@@ -231,7 +244,7 @@ const Sidebar = (props) => {
                                                 <li key={index} className={childrenItem.children ? childrenItem.active ? 'active' : '' : ''}>
                                                     {(childrenItem.type === 'sub') ?
                                                         <a href="#javascript" onClick={() => toggletNavActive(childrenItem)} >
-                                                            <i className="fa fa-circle"></i>{props.t(childrenItem.title)} <i className="fa fa-angle-right pull-right"></i></a>
+                                                            <i className="fa fa-circle"></i>{t(childrenItem.title)} <i className="fa fa-angle-right pull-right"></i></a>
                                                         : ''}
 
                                                     {(childrenItem.type === 'link') ?
@@ -240,7 +253,7 @@ const Sidebar = (props) => {
                                                             className={childrenItem.active ? 'active' : ''}
                                                             onClick={() => toggletNavActive(childrenItem)}
                                                         >
-                                                            <i className="fa fa-circle"></i>{props.t(childrenItem.title)} </Link>
+                                                            <i className="fa fa-circle"></i>{t(childrenItem.title)} </Link>
                                                         : ''}
                                                     {childrenItem.children ?
                                                         <ul className={`sidebar-submenu ${childrenItem.active ? 'menu-open' : 'active'}`}>
@@ -252,7 +265,7 @@ const Sidebar = (props) => {
                                                                             className={childrenSubItem.active ? 'active' : ''}
                                                                             onClick={() => toggletNavActive(childrenSubItem)}
                                                                         >
-                                                                            <i className="fa fa-circle"></i>{props.t(childrenSubItem.title)}</Link>
+                                                                            <i className="fa fa-circle"></i>{t(childrenSubItem.title)}</Link>
                                                                         : ''}
                                                                 </li>
                                                             )}
@@ -274,5 +287,7 @@ const Sidebar = (props) => {
     );
 };
 
-export default translate(Sidebar);
+export default translate(withRouter(connect((state) => ({
+	user: state.authReducer.user,
+}),{fetchLoginDetails})(Sidebar)));
 
