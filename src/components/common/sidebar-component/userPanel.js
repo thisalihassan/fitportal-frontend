@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Edit } from 'react-feather';
 import {ELANA,GeneralManager} from '../../../constant'
 
-const UserPanel = () => {
+const UserPanel = ({name, role}) => {
     const url = '';
     return (
         <Fragment>
@@ -17,8 +17,8 @@ const UserPanel = () => {
                         </Link>
                     </div>
                 </div>
-                <h6 className="mt-3 f-14">{ELANA}</h6>
-                <p>{GeneralManager}.</p>
+                <h6 className="mt-3 f-14">{name}</h6>
+                <p>{role}.</p>
             </div>
         </Fragment>
     );

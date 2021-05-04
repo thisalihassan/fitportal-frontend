@@ -11,19 +11,22 @@ import authActions from "../redux/auth/actions"
 import { connect } from 'react-redux';
 const { loginUser, fetchLoginDetails} = authActions;
 const Signin = ({ history, loginUser, fetchLoginDetails, user }) => {
-	console.log(user)
-	const [email, setEmail] = useState('test@gmail.com');
-	const [password, setPassword] = useState('test123');
+	const [email, setEmail] = useState('ali-hassan01@outlook.com');
+	const [password, setPassword] = useState('12345678');
 
 	const [value, setValue] = useState(localStorage.getItem('profileURL' || man));
 	useEffect(()=> {
-		fetchLoginDetails();
-	},[])
-	useEffect(() => {
-		if(user) {
-			history.push('/endless/dashboard')
+		if(!user){
+			
+			fetchLoginDetails();
 		}
-	}, [user]);
+	},[user])
+	
+	// useEffect(() => {
+	// 	if(user) {
+	// 		history.push('/endless/dashboard/ecommerce')
+	// 	}
+	// }, [user]);
 
 	const loginWithJwt = (email, password) => {
 		loginUser({email, password})

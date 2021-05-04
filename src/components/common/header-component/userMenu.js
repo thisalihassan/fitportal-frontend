@@ -18,18 +18,10 @@ const UserMenu = ({ history }) => {
 		setProfile(localStorage.getItem('profileURL') || man);
 	}, []);
 
-	const Logout_From_Firebase = () => {
-		localStorage.removeItem('profileURL');
-		localStorage.removeItem('token');
-		firebase_app.auth().signOut();
-		history.push(`${process.env.PUBLIC_URL}/login`);
-	};
 
 	const Logout_From_Auth0 = () => {
-		localStorage.removeItem('auth0_profile');
-		localStorage.setItem('authenticated', false);
-		history.push(`${process.env.PUBLIC_URL}/login`);
-		logout();
+		localStorage.removeItem('id_token');
+		history.push(`${process.env.PUBLIC_URL}/`);
 	};
 
 	return (
@@ -54,7 +46,7 @@ const UserMenu = ({ history }) => {
 						</Link>
 					</li>
 					<li>
-						<a onClick={authenticated ? Logout_From_Auth0 : Logout_From_Firebase} href='#javascript'>
+						<a onClick={Logout_From_Auth0} href='#javascript'>
 							<LogOut /> {'Log out'}
 						</a>
 					</li>
