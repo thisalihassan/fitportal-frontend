@@ -13,7 +13,7 @@ const Signin = ({ history, loginUser, fetchLoginDetails, user }) => {
 	const [password, setPassword] = useState('12345678');
 
 	useEffect(() => {
-		if (!user) {
+		if (localStorage.getItem('id_token')) {
 			fetchLoginDetails();
 		}
 		if (user && user.msg) {
