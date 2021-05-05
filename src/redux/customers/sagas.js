@@ -19,6 +19,15 @@ const singleUserFetch = async (payload) =>
 		.then((res) => res)
 		.catch((error) => error);
 
+const customerWeights = async (payload) =>
+	await fetch(`${API_URL}/weight/user-weights/${payload.id}`, {
+		method: 'GET',
+		headers
+	})
+		.then((res) => res.json())
+		.then((res) => res)
+		.catch((error) => error);
+
 export function* fetchCustomers() {
 	yield takeEvery(actions.ALLCUSTOMERS, function* () {
         headers.access_token = localStorage.getItem('id_token');
@@ -52,7 +61,24 @@ export function* fetchSingleCustomer() {
 	});
 }
 
+export function* fetchCustomerWeight() {
+	yield takeEvery(actions.CUSTOMER_WEIGHTS, function* (data) {
+		const { payload } = data;
+		console.log(payload)
+		if (payload) {
+			const response  = yield call(customerWeights, payload);
+			if (!response) {
+				console.log(response);
+			} else {
+				yield put({
+					type: actions.CUSTOMER_WEIGHTS_DETAIL,
+					payload: response
+				});
+			}
+		}
+	});
+}
 
 export default function* rootSaga() {
-	yield all([fork(fetchCustomers), fork(fetchSingleCustomer)]);
+	yield all([fork(fetchCustomers), fork(fetchSingleCustomer), fork(fetchCustomerWeight)]);
 }
