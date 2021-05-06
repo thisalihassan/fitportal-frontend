@@ -11,6 +11,7 @@ const {fetchCustomerWeight } = customerActions;
 const UserWeights = ({ fetchCustomerWeight, weights, userId }) => {
   const [modal, setModal] = useState(false)
   const [editModal, setEditModal] = useState(false)
+  const [weight, setWeight] = useState();
   const [formData, setFormData] = useState({
 		weight: 0,
     user: userId
@@ -48,7 +49,7 @@ const UserWeights = ({ fetchCustomerWeight, weights, userId }) => {
               const id = weights[i]._id
               weights[i].actions = <div>
               <button onClick= {()=> toggleEdit(id)} className="btn btn-pill btn-primary mb-2" type="button">Edit</button>
-              <button onClick={ ""} className="btn btn-pill btn-danger mb-2" type="button">Delete</button>
+              <button onClick={""} className="btn btn-pill btn-danger mb-2" type="button">Delete</button>
             </div>
           }
           setDatatable({...datatable, rows: weights})
@@ -58,15 +59,20 @@ const UserWeights = ({ fetchCustomerWeight, weights, userId }) => {
       const { name, value } = e.target;
       setFormData({ ...formData, [name]: value });
     };
+    const weightChangeHandler = (e) => {
+      const { name, value } = e.target;
+      setWeight({ ...weight, [name]: value });
+      
+    };
     const toggle = () => {
       setModal(!modal);
     }
 
     const toggleEdit =  async (id) => {
       CONFIG.headers.access_token = localStorage.getItem('id_token')
-      const response = await axios.get(`${API_URL}/weight/user-weights/${id}`, CONFIG);
-      console.log(response)    
-      // setEditModalModal(!modal);
+      const response = await axios.get(`${API_URL}/weight/${id}`, CONFIG);
+      setWeight(response.data);
+      setEditModal(!modal);
     }
     var d = new Date();
 
@@ -79,6 +85,15 @@ const UserWeights = ({ fetchCustomerWeight, weights, userId }) => {
               window.location.reload();
           }
     };
+    const editModalSubmitHandler = async (e) => {
+      
+      const body = JSON.stringify(weight);
+      CONFIG.headers.access_token = localStorage.getItem('id_token')
+      const response = await axios.put(`${API_URL}/weight/update/${weight._id}`, body, CONFIG);     
+      if(response.status < 300) {
+              window.location.reload();
+          }
+    };
 	return (
     
 		<div style= {{padding: '10px'}}>
@@ -86,7 +101,6 @@ const UserWeights = ({ fetchCustomerWeight, weights, userId }) => {
       <MDBDataTableV5 hover entriesOptions={[5, 20, 25]} entries={5} pagesAmount={4} data={datatable} />
     
       <MDBContainer>
-      <MDBBtn onClick={toggle}>Modal</MDBBtn>
       <MDBModal isOpen={modal} toggle={toggle}>
         <MDBModalHeader toggle={toggle}>Add Daily Weights</MDBModalHeader>
         <MDBModalBody>
@@ -102,6 +116,28 @@ const UserWeights = ({ fetchCustomerWeight, weights, userId }) => {
         <MDBModalFooter>
           <MDBBtn color="secondary" onClick={toggle}>Close</MDBBtn>
           <MDBBtn color="primary" onClick={modalSubmitHandler}>Add</MDBBtn>
+        </MDBModalFooter>
+      </MDBModal>
+    </MDBContainer>
+
+     {/* updateModal */}
+
+     <MDBContainer>
+      <MDBModal isOpen={editModal}>
+        <MDBModalHeader>Update Daily Weights</MDBModalHeader>
+        <MDBModalBody>
+          <span>Date: {weight && weight.date}</span>
+          <br></br>
+          <div className="form-group">
+            <label className="form-label">Weight (in kGs)</label>
+            <input className="form-control" onChange={weightChangeHandler}
+            name='weight' value= {weight && weight.weight } placeholder="Enter weight in kgs"/>
+          </div>
+
+        </MDBModalBody>
+        <MDBModalFooter>
+          <MDBBtn color="secondary" onClick={() => setEditModal(false)}>Close</MDBBtn>
+          <MDBBtn color="primary" onClick={editModalSubmitHandler}>update</MDBBtn>
         </MDBModalFooter>
       </MDBModal>
     </MDBContainer>
