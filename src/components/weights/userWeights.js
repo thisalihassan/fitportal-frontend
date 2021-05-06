@@ -49,7 +49,7 @@ const UserWeights = ({ fetchCustomerWeight, weights, userId }) => {
               const id = weights[i]._id
               weights[i].actions = <div>
               <button onClick= {()=> toggleEdit(id)} className="btn btn-pill btn-primary mb-2" type="button">Edit</button>
-              <button onClick={""} className="btn btn-pill btn-danger mb-2" type="button">Delete</button>
+              <button onClick={() => deleteWeight(id)} className="btn btn-pill btn-danger mb-2" type="button">Delete</button>
             </div>
           }
           setDatatable({...datatable, rows: weights})
@@ -90,6 +90,14 @@ const UserWeights = ({ fetchCustomerWeight, weights, userId }) => {
       const body = JSON.stringify(weight);
       CONFIG.headers.access_token = localStorage.getItem('id_token')
       const response = await axios.put(`${API_URL}/weight/update/${weight._id}`, body, CONFIG);     
+      if(response.status < 300) {
+              window.location.reload();
+          }
+    };
+    const deleteWeight = async (id) => {
+      
+      CONFIG.headers.access_token = localStorage.getItem('id_token')
+      const response = await axios.delete(`${API_URL}/weight/${id}`, CONFIG);     
       if(response.status < 300) {
               window.location.reload();
           }
