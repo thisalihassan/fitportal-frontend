@@ -5,8 +5,17 @@ export const MENUITEMS = [
 		title: 'Dashboard',
 		icon: Home,
 		badgeType: 'primary',
-		active: false,
+		active: true,
 		path: '/dashboard/ecommerce',
+		type: 'link'
+	},
+
+	{
+		title: 'Training Plans',
+		icon: Box,
+		badgeType: 'primary',
+		active: false,
+		path: '/dashboard/training-plans',
 		type: 'link'
 	},
 

@@ -1,7 +1,8 @@
 import actions from './actions';
 const initState = {
 	customers: null,
-    singleCustomer: null
+    singleCustomer: null,
+	customerWeights: null,
 };
 
 export default function interviewReducer(state = initState, action) {
@@ -17,6 +18,11 @@ export default function interviewReducer(state = initState, action) {
                 ...state,
                 singleCustomer: action.payload
             };
+		case actions.CUSTOMER_WEIGHTS_DETAIL:
+			return {
+				...state,
+				customerWeights: action.payload
+			};
 		default:
 			return state;
 	}

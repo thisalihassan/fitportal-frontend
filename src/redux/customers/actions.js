@@ -3,6 +3,9 @@ const actions = {
     SINGLECUSTOMER: 'SINGLECUSTOMERS',
     SINGLECUSTOMERDETAIL: 'SINGLECUSTOMERDETAIL',
 	CUSTOMERSSUCCESS: 'CUSTOMERSSUCCESS',
+
+	CUSTOMER_WEIGHTS: 'CUSTOMER_WEIGHTS',
+	CUSTOMER_WEIGHTS_DETAIL: 'CUSTOMER_WEIGHTS_DETAIL',
 	fetchCustomers: () => ({
 		type: actions.ALLCUSTOMERS,
 	}),
@@ -10,6 +13,17 @@ const actions = {
 		type: actions.SINGLECUSTOMER,
         payload
 	}),
+
+	fetchCustomerWeight: (payload) => ({
+		type: actions.CUSTOMER_WEIGHTS,
+        payload
+	}),
+
+	WeightSuccess: (payload) => ({
+		type: actions.CUSTOMER_WEIGHTS_DETAIL,
+		payload
+	}),
+
     Success: (payload) => ({
 		type: actions.CUSTOMERSSUCCESS,
 		payload

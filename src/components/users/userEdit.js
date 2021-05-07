@@ -8,12 +8,14 @@ import { useForm } from 'react-hook-form';
 import { API_URL, CONFIG } from '../../services/helper';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import { MDBContainer, MDBRow, MDBCol, MDBTabPane, MDBTabContent, MDBNav, MDBNavItem, MDBNavLink, MDBIcon } from
+"mdbreact";
+import UserWeights from '../weights/userWeights'
 const { fetchSingleCustomer } = customerActions;
 
 const UserEdit = ({fetchSingleCustomer, customer, match} ) => {
-    console.log(match.params.id)
     const { register, handleSubmit, errors } = useForm();
-
+    const [activeItem, setActiveItem] = useState("1");
     const [formData, setFormData] = useState({
 		name: '',
 		email: '',
@@ -22,7 +24,11 @@ const UserEdit = ({fetchSingleCustomer, customer, match} ) => {
         phone: '',
         address: ''
 	});
-
+    const toggle  = (tab) => {
+        if (activeItem !== tab) {
+        setActiveItem(tab)
+        }
+      }
     const { dateOfBirth, email , name, phone, address } = formData;
 
     const inputChangeHandler = (e) => {
@@ -57,7 +63,49 @@ const UserEdit = ({fetchSingleCustomer, customer, match} ) => {
     return (
         <Fragment>
             <Breadcrumb parent="User" title="Edit Profile" />
-            <div className="container-fluid">
+
+            <MDBContainer>
+          <MDBNav tabs>
+          <MDBNavItem>
+            <MDBNavLink
+              link
+              to="#"
+              active={activeItem === "1"}
+              onClick={()=> toggle("1")}
+              role="tab"
+            >
+              <MDBIcon icon="user" /> Profile
+            </MDBNavLink>
+          </MDBNavItem>
+          <MDBNavItem>
+            <MDBNavLink
+              link
+              to="#"
+              active={activeItem === "2"}
+              onClick={()=> toggle("2")}
+              role="tab"
+            >
+              <MDBIcon icon="heart" /> Weights
+            </MDBNavLink>
+          </MDBNavItem>
+          <MDBNavItem>
+            <MDBNavLink
+              link
+              to="#"
+              active={activeItem === "3"}
+              onClick={()=> toggle("3")}
+              role="tab"
+            >
+              <MDBIcon icon="envelope" /> Contact
+            </MDBNavLink>
+          </MDBNavItem>
+        </MDBNav>
+        <MDBTabContent
+          className="card"
+          activeItem={activeItem}
+        >
+          <MDBTabPane tabId="1" role="tabpanel">
+          <div className="container-fluid">
                 <div className="edit-profile">
                     <div className="row">
                         <div className="col-lg-4">
@@ -122,7 +170,31 @@ const UserEdit = ({fetchSingleCustomer, customer, match} ) => {
                     </div>
                 </div>
             </div>
-        </Fragment>
+        
+          </MDBTabPane>
+          <MDBTabPane tabId="2" role="tabpanel">
+            <p className="mt-2">
+              <UserWeights userId = {match.params.id}/>
+            </p>
+          </MDBTabPane>
+          <MDBTabPane tabId="3" role="tabpanel">
+            <p className="mt-2">
+              Etsy mixtape wayfarers, ethical wes anderson tofu before
+              they sold out mcsweeney's organic lomo retro fanny pack
+              lo-fi farm-to-table readymade. Messenger bag gentrify
+              pitchfork tattooed craft beer, iphone skateboard locavore
+              carles etsy salvia banksy hoodie helvetica. DIY synth PBR
+              banksy irony. Leggings gentrify squid 8-bit cred pitchfork.
+              Williamsburg banh mi whatever gluten-free, carles pitchfork
+              biodiesel fixie etsy retro mlkshk vice blog. Scenester cred
+              you probably haven't heard of them, vinyl craft beer blog
+              stumptown. Pitchfork sustainable tofu synth chambray yr.
+            </p>
+          </MDBTabPane>
+        </MDBTabContent>
+      </MDBContainer>
+
+            </Fragment>
     );
 };
 
