@@ -7,6 +7,8 @@ import App from './components/app';
 import Default from './components/dashboard/defaultCompo/default';
 import Ecommerce from './components/dashboard/ecommerce';
 import Training from './components/dashboard/training';
+import Invoice from './components/dashboard/invoice';
+import Stats from './components/dashboard/stats';
 import University from './components/dashboard/university';
 import Crypto from './components/dashboard/crypto/crypto-component';
 import ServerComponent from './components/dashboard/server/server-component';
@@ -134,6 +136,8 @@ const AppComp = ({ user }) => {
 					/>
 					<Route path={`${process.env.PUBLIC_URL}/dashboard/default`} component={Default} />
 					<Route path={`${process.env.PUBLIC_URL}/dashboard/training-plans`} component={Training} />
+					<Route path={`${process.env.PUBLIC_URL}/dashboard/invoices`} component={Invoice} />
+					<Route path={`${process.env.PUBLIC_URL}/dashboard/stats`} component={Stats} />
 					<Route path={`${process.env.PUBLIC_URL}/dashboard/ecommerce`} component={Ecommerce} />
 					<Route path={`${process.env.PUBLIC_URL}/dashboard/university`} component={University} />
 					<Route path={`${process.env.PUBLIC_URL}/dashboard/crypto`} component={Crypto} />
