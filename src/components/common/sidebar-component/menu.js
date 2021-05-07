@@ -16,7 +16,11 @@ export const MENUITEMS = [
 		badgeType: 'primary',
 		active: false,
 		path: '/dashboard/training-plans',
-		type: 'link'
+		type: 'sub',
+		children: [
+					{ path: '/dashboard/training-plans', title: 'New Plans', type: 'link' },
+					{ path: '/dashboard/plans', title: 'All plans', type: 'link' },
+		]		
 	},
 
 	{
@@ -37,9 +41,6 @@ export const MENUITEMS = [
 	// 	icon: Box,
 	// 	type: 'sub',
 	// 	active: false,
-	// 	children: [
-	// 		{ path: '/base/statecolor', title: 'State-color', type: 'link' },
-	// 		{ path: '/base/typography', title: 'Typography', type: 'link' },
 	// 		{ path: '/base/avatar', title: 'Avatars', type: 'link' },
 	// 		{ path: '/base/helperclass', title: 'Helper-Classes  ', type: 'link' },
 	// 		{ path: '/base/grid', title: 'Grid', type: 'link' },
