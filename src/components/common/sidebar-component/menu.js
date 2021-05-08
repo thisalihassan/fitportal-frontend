@@ -36,6 +36,19 @@ export const MENUITEMS = [
 		]
 	},
 
+	{
+		title: 'Recipes',
+		icon: FileText,
+		badgeType: 'primary',
+		active: false,
+		// path: '/dashboard/invoices',
+		type: 'sub',
+		children: [
+			{ path: '/dashboard/recipe', title: 'New Recipe ', type: 'link' },
+			{ path: '/dashboard/all/recipes', title: 'All Recipe', type: 'link' }
+		]
+	},
+
 	// {
 	// 	title: 'Base',
 	// 	icon: Box,

@@ -29,7 +29,7 @@ const EditPlans = ({user, plans, fetchTrainingPlans, match}) => {
                     <label style={{ float: 'left' }} className='col-form-label pt-0'>
                             {`Plan name`}
                     </label>
-					<input
+					<input	
 						// onChange={(e) => setFormData((prevState) => ({ ...prevState, planName: e.target.value }))}
 						required
 						className='form-control'
