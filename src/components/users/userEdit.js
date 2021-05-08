@@ -2,14 +2,13 @@ import React, { Fragment,useState,useEffect } from 'react';
 import Breadcrumb from '../common/breadcrumb';
 import seven from '../../assets/images/user/7.jpg';
 import DatePicker from 'react-date-picker';
-import { MyProfile, BOD, Bio,MarkJecno,Designer,Password,Website,Save,EditProfile,Company,Username,UsersCountryMenu,AboutMe,UpdateProfile,UsersTableTitle,FirstName,LastName,Address,EmailAddress,PostalCode,Country, UsersTableHeader,City,Edit,Update,Delete, NAME, Phone} from '../../constant'
+import {  BOD, Save,EmailAddress, NAME, Phone} from '../../constant'
 import customerActions from "../../redux/customers/actions"
 import { useForm } from 'react-hook-form';
 import { API_URL, CONFIG } from '../../services/helper';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { MDBContainer, MDBRow, MDBCol, MDBTabPane, MDBTabContent, MDBNav, MDBNavItem, MDBNavLink, MDBIcon } from
-"mdbreact";
+import { MDBContainer,  MDBTabPane, MDBTabContent, MDBNav, MDBNavItem, MDBNavLink, MDBIcon } from "mdbreact";
 import UserWeights from '../weights/userWeights'
 const { fetchSingleCustomer } = customerActions;
 
@@ -51,7 +50,7 @@ const UserEdit = ({fetchSingleCustomer, customer, match} ) => {
 
     useEffect (()=> {
         fetchSingleCustomer({id:match.params.id});
-    },[])
+    },[fetchSingleCustomer, match.params.id])
 
     useEffect (()=> {
         if(customer){

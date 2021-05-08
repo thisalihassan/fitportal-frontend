@@ -8,6 +8,8 @@ import Default from './components/dashboard/defaultCompo/default';
 import Ecommerce from './components/dashboard/ecommerce';
 import Training from './components/dashboard/training';
 import Invoice from './components/dashboard/invoice';
+import Plans from './components/dashboard/plans';
+import EditPlans from './components/dashboard/editPlaning';
 import Stats from './components/dashboard/stats';
 import University from './components/dashboard/university';
 import Crypto from './components/dashboard/crypto/crypto-component';
@@ -137,13 +139,15 @@ const AppComp = ({ user }) => {
 					<Route path={`${process.env.PUBLIC_URL}/dashboard/default`} component={Default} />
 					<Route path={`${process.env.PUBLIC_URL}/dashboard/training-plans`} component={Training} />
 					<Route path={`${process.env.PUBLIC_URL}/dashboard/invoices`} component={Invoice} />
+					<Route path={`${process.env.PUBLIC_URL}/dashboard/plans`} exact component={Plans} />
 					<Route path={`${process.env.PUBLIC_URL}/dashboard/stats`} component={Stats} />
 					<Route path={`${process.env.PUBLIC_URL}/dashboard/ecommerce`} component={Ecommerce} />
 					<Route path={`${process.env.PUBLIC_URL}/dashboard/university`} component={University} />
 					<Route path={`${process.env.PUBLIC_URL}/dashboard/crypto`} component={Crypto} />
 					<Route path={`${process.env.PUBLIC_URL}/dashboard/server`} component={ServerComponent} />
 					<Route path={`${process.env.PUBLIC_URL}/dashboard/project`} component={Project} />
-
+					<Route path={`${process.env.PUBLIC_URL}/dashboard/plans/edit/:index`} exact component={EditPlans} />
+					
 					{/* Widgets Menu */}
 					<Route path={`${process.env.PUBLIC_URL}/widgets/general`} component={General} />
 					<Route path={`${process.env.PUBLIC_URL}/widgets/chart`} component={Chart} />
