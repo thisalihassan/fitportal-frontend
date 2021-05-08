@@ -153,6 +153,7 @@ const AppComp = ({ user }) => {
 					<Route path={`${process.env.PUBLIC_URL}/dashboard/recipe`} component={BlogPost} />
 					<Route path={`${process.env.PUBLIC_URL}/dashboard/all/recipes`} component={BlogDetail} />
 					<Route path={`${process.env.PUBLIC_URL}/dashboard/plans/edit/:index`} exact component={EditPlans} />
+					<Route path={`${process.env.PUBLIC_URL}/dashboard/recpie/:id`} exact component={SingleBlog} />
 					
 					{/* Widgets Menu */}
 					<Route path={`${process.env.PUBLIC_URL}/widgets/general`} component={General} />

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import Breadcrumb from "../common/breadcrumb";
 import blogSingle from "../../assets/images/blog/blog-single.jpg";
 import comment from "../../assets/images/blog/comment.jpg";
@@ -7,136 +7,99 @@ import four from "../../assets/images/blog/4.jpg";
 import twelve from "../../assets/images/blog/12.png";
 import fourteen from "../../assets/images/blog/14.png";
 import {Comment,JolioMark} from "../../constant";
-const BlogSingle = () => {
+import { useForm } from 'react-hook-form';
+import { API_URL, CONFIG } from '../../services/helper';
+import axios from 'axios';
+const BlogSingle = ({match}) => {
+    const [formData, setFormData] = React.useState({
+        recipe: match.params.id,
+        comment: "" 
+    })
+    const [data, setData] = React.useState()
+    const [comment , setComment] = React.useState()
+    React.useEffect(async ()=> {
+        CONFIG.headers.access_token = localStorage.getItem('id_token')
+		const res =await axios.get(`${API_URL}/recipe/${match.params.id}`, CONFIG);
+		setData(res.data);
+
+        const comments =await axios.get(`${API_URL}/recipe/${match.params.id}/comment`, CONFIG);
+        setComment(comments.data);
+
+    }, [])
+    const inputChangeHandler = (e) => {
+		const { name, value } = e.target;
+		setFormData({ ...formData, [name]: value });
+	};
+    const formSubmitHandler = async (e) => {
+        CONFIG.headers.access_token = localStorage.getItem('id_token')
+		const body = JSON.stringify(formData);
+		const res = await axios.post(`${API_URL}/recipe/comment`, body, CONFIG);
+        if(res.status < 300) {
+            window.location.reload();
+        }
+	};
+
     return (
         <Fragment>
-            <Breadcrumb title="Blog Single" parent="Blog" />
-            <div className="container-fluid">
+            <Breadcrumb title="Recipe" />
+            {data && 
+                <div className="container-fluid">
                 <div className="row">
                     <div className="col-sm-12">
                         <div className="blog-single">
                             <div className="blog-box blog-details">
-                                <img className="img-fluid w-100" src={blogSingle} alt="blog-main" />
                                 <div className="blog-details">
                                     <ul className="blog-social">
-                                        <li className="digits">{"25 July 2018"}</li>
-                                        <li><i className="icofont icofont-user"></i>{"Mark"} <span>{"Jecno"} </span></li>
-                                        <li className="digits"><i className="icofont icofont-thumbs-up"></i>{"02"}<span>{"Hits"}</span></li>
-                                        <li className="digits"><i className="icofont icofont-ui-chat"></i>{"598 Comments"}</li>
+                                        <li className="digits">{data.date}</li>
+                                        <li><i className="icofont icofont-user"></i>{data.user.name}</li>
+                                        <li className="digits"><i className="icofont icofont-thumbs-up"></i>{"02"}<span>{"Reviews"}</span></li>
+                                        {/* <li className="digits"><i className="icofont icofont-ui-chat"></i>{"598 Comments"}</li> */}
                                     </ul>
                                     <h4>
-                                       {` All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the
-                                        Internet.`}
+                                       {data.title}
                                     </h4>
                                     <div className="single-blog-content-top">
-                                        <p>{"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."}</p>
-                                        <p>{"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like"}</p>
+                                        {data.body}
                                     </div>
                                 </div>
                             </div>
                             <section className="comment-box">
                                 <h4>{Comment}</h4>
                                 <hr />
+                                
                                 <ul>
+                                {comment && comment.map(item => (
                                     <li>
-                                        <div className="media align-self-center">
-                                            <img className="align-self-center" src={comment} alt="Generic placeholder" />
-                                            <div className="media-body">
-                                                <div className="row">
-                                                    <div className="col-md-4">
-                                                        <h6 className="mt-0">{JolioMark}<span> {"( Designer )"}</span></h6>
-                                                    </div>
-                                                    <div className="col-md-8">
-                                                        <ul className="comment-social float-left float-md-right">
-                                                            <li className="digits"><i className="icofont icofont-thumbs-up"></i>{"02 Hits"}</li>
-                                                            <li className="digits"><i className="icofont icofont-ui-chat"></i>{"598 Comments"}</li>
-                                                        </ul>
-                                                    </div>
+                                    <div className="media">
+                                        <img className="align-self-center" src={fourteen} alt="Generic placeholder" />
+                                        <div className="media-body">
+                                            <div className="row">
+                                                <div className="col-md-4">
+                                                    <h6 className="mt-0">{item.user.name}</h6>
                                                 </div>
-                                                <p>{"There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text."}</p>
+                            
                                             </div>
+                                            <p>{item.comment}</p>    
                                         </div>
-                                    </li>
-                                    <li>
-                                        <ul>
-                                            <li>
-                                                <div className="media">
-                                                    <img className="align-self-center" src={nine} alt="Generic placeholder" />
-                                                    <div className="media-body">
-                                                        <div className="row">
-                                                            <div className="col-xl-12">
-                                                                <h6 className="mt-0">{JolioMark}<span> {"( Designer )"}</span></h6>
-                                                            </div>
-                                                        </div>
-                                                        <p>{"There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text."}</p>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <div className="media">
-                                            <img className="align-self-center" src={four} alt="Generic placeholder" />
-                                            <div className="media-body">
-                                                <div className="row">
-                                                    <div className="col-md-4">
-                                                        <h6 className="mt-0">{JolioMark}<span> {"( Designer )"}</span></h6>
-                                                    </div>
-                                                    <div className="col-md-8">
-                                                        <ul className="comment-social float-left float-md-right">
-                                                            <li className="digits"><i className="icofont icofont-thumbs-up"></i>{"02 Hits"}</li>
-                                                            <li className="digits"><i className="icofont icofont-ui-chat"></i>{"598 Comments"}</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <p>{"There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text."}</p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div className="media">
-                                            <img className="align-self-center" src={twelve} alt="Generic placeholder" />
-                                            <div className="media-body">
-                                                <div className="row">
-                                                    <div className="col-md-4">
-                                                        <h6 className="mt-0">{JolioMark}<span> {"( Designer )"}</span></h6>
-                                                    </div>
-                                                    <div className="col-md-8">
-                                                        <ul className="comment-social float-left float-md-right">
-                                                            <li className="digits"><i className="icofont icofont-thumbs-up"></i>{"02 Hits"}</li>
-                                                            <li className="digits"><i className="icofont icofont-ui-chat"></i>{"598 Comments"}</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <p>{"There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text."}</p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div className="media">
-                                            <img className="align-self-center" src={fourteen} alt="Generic placeholder" />
-                                            <div className="media-body">
-                                                <div className="row">
-                                                    <div className="col-md-4">
-                                                        <h6 className="mt-0">{JolioMark}<span> {"( Designer )"}</span></h6>
-                                                    </div>
-                                                    <div className="col-md-8">
-                                                        <ul className="comment-social float-left float-md-right">
-                                                            <li className="digits"><i className="icofont icofont-thumbs-up"></i>{"02 Hits"}</li>
-                                                            <li className="digits"><i className="icofont icofont-ui-chat"></i>{"598 Comments"}</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <p>{"There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text."}</p>
-                                            </div>
-                                        </div>
-                                    </li>
+                                    </div>
+                                </li>
+                                
+                                ))}
                                 </ul>
                             </section>
+                            <div className="email-wrapper mb-2">
+                                <div className="theme-form">
+                                    <label htmlFor="exampleFormControlTextarea14">Write Comment</label>
+                                    <textarea onChange={""} name={"comment"} onChange={inputChangeHandler}  className="form-control btn-square" id="exampleFormControlTextarea14" rows="1" cols="50"></textarea>
+                                    <button className="btn btn-primary mt-2" onClick={formSubmitHandler}>Post</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+        
+            }
         </Fragment>
     );
 };

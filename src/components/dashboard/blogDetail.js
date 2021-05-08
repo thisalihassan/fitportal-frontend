@@ -22,7 +22,7 @@ const BlogDetail = () => {
                 <div className="row">
                     {recipe && recipe.map (item => (
                         <div className="col-md-6 col-xl-3 set-col-6">
-                        <div className="card">
+                        <a href= {`http://localhost:3000/endless/dashboard/recpie/${item._id}`} className="card">
                             <div className="card-header">{item.title}</div> 
                             <div className="blog-box blog-grid text-center">
                                 <div className="blog-details-main">
@@ -35,7 +35,7 @@ const BlogDetail = () => {
                                     <h6 className="blog-bottom-details">{item.body.substring(0,300)}</h6>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     </div>    
                     ))}
                     
