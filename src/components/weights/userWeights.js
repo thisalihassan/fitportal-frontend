@@ -6,12 +6,21 @@ import { MDBDataTableV5 } from 'mdbreact';
 import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter } from 'mdbreact';
 import { API_URL, CONFIG } from '../../services/helper';
 import axios from 'axios';
+import { Line } from 'react-chartjs-2';
 import { connect } from 'react-redux';
 const { fetchCustomerWeight } = customerActions;
 const UserWeights = ({ fetchCustomerWeight, weights, userId }) => {
 	const [modal, setModal] = useState(false);
 	const [editModal, setEditModal] = useState(false);
 	const [weight, setWeight] = useState();
+	const [labels, setLabels] = useState([]);
+	const [datasets, setDataset] = useState({
+		label: 'Daily Weights',
+		data: [],
+		fill: false,
+		borderColor: 'rgb(75, 192, 192)',
+		tension: 0.1
+	});
 	const [formData, setFormData] = useState({
 		weight: 0,
 		user: userId
@@ -44,8 +53,14 @@ const UserWeights = ({ fetchCustomerWeight, weights, userId }) => {
 	}, []);
 	useEffect(() => {
 		if (weights) {
+			const labels = [];
+			const data = [];
 			for (var i = 0; i < weights.length; i++) {
 				const id = weights[i]._id;
+				labels.push(weights[i].date);
+				data.push(weights[i].weight);
+				setDataset((prevState) => ({ ...prevState, data }));
+				setLabels(labels);
 				weights[i].actions = (
 					<div>
 						<button onClick={() => toggleEdit(id)} className='btn btn-pill btn-primary mb-2' type='button'>
@@ -60,14 +75,17 @@ const UserWeights = ({ fetchCustomerWeight, weights, userId }) => {
 			setDatatable({ ...datatable, rows: weights });
 		}
 	}, [weights]);
+
 	const inputChangeHandler = (e) => {
 		const { name, value } = e.target;
 		setFormData({ ...formData, [name]: value });
 	};
+
 	const weightChangeHandler = (e) => {
 		const { name, value } = e.target;
 		setWeight({ ...weight, [name]: value });
 	};
+
 	const toggle = () => {
 		setModal(!modal);
 	};
@@ -103,13 +121,14 @@ const UserWeights = ({ fetchCustomerWeight, weights, userId }) => {
 			window.location.reload();
 		}
 	};
+	console.log(datasets);
 	return (
-		<div style={{ padding: '10px' }}>
+		<div style={{ padding: '10px', height: '100vh' }}>
 			<MDBBtn color='primary' onClick={toggle}>
 				Add Weight
 			</MDBBtn>
 			<MDBDataTableV5 hover entriesOptions={[5, 20, 25]} entries={5} pagesAmount={4} data={datatable} />
-
+			{datasets.data.length > 0 && <Line data={{ labels: labels, datasets: [datasets] }} />}
 			<MDBContainer>
 				<MDBModal isOpen={modal} toggle={toggle}>
 					<MDBModalHeader toggle={toggle}>Add Daily Weights</MDBModalHeader>
