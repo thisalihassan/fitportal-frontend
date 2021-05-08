@@ -7,154 +7,173 @@ import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalF
 import { API_URL, CONFIG } from '../../services/helper';
 import axios from 'axios';
 import { connect } from 'react-redux';
-const {fetchCustomerWeight } = customerActions;
+const { fetchCustomerWeight } = customerActions;
 const UserWeights = ({ fetchCustomerWeight, weights, userId }) => {
-  const [modal, setModal] = useState(false)
-  const [editModal, setEditModal] = useState(false)
-  const [weight, setWeight] = useState();
-  const [formData, setFormData] = useState({
+	const [modal, setModal] = useState(false);
+	const [editModal, setEditModal] = useState(false);
+	const [weight, setWeight] = useState();
+	const [formData, setFormData] = useState({
 		weight: 0,
-    user: userId
+		user: userId
 	});
 	const [datatable, setDatatable] = React.useState({
-        columns: [
-          {
-            label: 'Date',
-            field: 'date',
-            width: 150,
-            attributes: {
-              'aria-controls': 'DataTable',
-              'aria-label': 'Name',
-            },
-          },
-          {
-            label: 'Weight',
-            field: 'weight',
-            width: 270,
-          },
-          {
-            label: 'Actions',
-            field: 'actions',
-            width: 270,
-          },
-    
-        ],
-      })
-    useEffect(()=> {
-        fetchCustomerWeight({id: userId});
-    }, [])
-    useEffect(()=> {
-        if(weights){
-          for (var i=0; i< weights.length; i++) {
-              const id = weights[i]._id
-              weights[i].actions = <div>
-              <button onClick= {()=> toggleEdit(id)} className="btn btn-pill btn-primary mb-2" type="button">Edit</button>
-              <button onClick={() => deleteWeight(id)} className="btn btn-pill btn-danger mb-2" type="button">Delete</button>
-            </div>
-          }
-          setDatatable({...datatable, rows: weights})
-        }
-    },[weights])
-    const inputChangeHandler = (e) => {
-      const { name, value } = e.target;
-      setFormData({ ...formData, [name]: value });
-    };
-    const weightChangeHandler = (e) => {
-      const { name, value } = e.target;
-      setWeight({ ...weight, [name]: value });
-      
-    };
-    const toggle = () => {
-      setModal(!modal);
-    }
+		columns: [
+			{
+				label: 'Date',
+				field: 'date',
+				width: 150,
+				attributes: {
+					'aria-controls': 'DataTable',
+					'aria-label': 'Name'
+				}
+			},
+			{
+				label: 'Weight',
+				field: 'weight',
+				width: 270
+			},
+			{
+				label: 'Actions',
+				field: 'actions',
+				width: 270
+			}
+		]
+	});
+	useEffect(() => {
+		fetchCustomerWeight({ id: userId });
+	}, []);
+	useEffect(() => {
+		if (weights) {
+			for (var i = 0; i < weights.length; i++) {
+				const id = weights[i]._id;
+				weights[i].actions = (
+					<div>
+						<button onClick={() => toggleEdit(id)} className='btn btn-pill btn-primary mb-2' type='button'>
+							Edit
+						</button>
+						<button onClick={() => deleteWeight(id)} className='btn btn-pill btn-danger mb-2' type='button'>
+							Delete
+						</button>
+					</div>
+				);
+			}
+			setDatatable({ ...datatable, rows: weights });
+		}
+	}, [weights]);
+	const inputChangeHandler = (e) => {
+		const { name, value } = e.target;
+		setFormData({ ...formData, [name]: value });
+	};
+	const weightChangeHandler = (e) => {
+		const { name, value } = e.target;
+		setWeight({ ...weight, [name]: value });
+	};
+	const toggle = () => {
+		setModal(!modal);
+	};
 
-    const toggleEdit =  async (id) => {
-      CONFIG.headers.access_token = localStorage.getItem('id_token')
-      const response = await axios.get(`${API_URL}/weight/${id}`, CONFIG);
-      setWeight(response.data);
-      setEditModal(!modal);
-    }
-    var d = new Date();
+	const toggleEdit = async (id) => {
+		CONFIG.headers.access_token = localStorage.getItem('id_token');
+		const response = await axios.get(`${API_URL}/weight/${id}`, CONFIG);
+		setWeight(response.data);
+		setEditModal(!modal);
+	};
+	var d = new Date();
 
-    const modalSubmitHandler = async (e) => {
-      
-      const body = JSON.stringify(formData);
-      CONFIG.headers.access_token = localStorage.getItem('id_token')
-      const response = await axios.post(`${API_URL}/weight`, body, CONFIG);
-          if(response.status < 300) {
-              window.location.reload();
-          }
-    };
-    const editModalSubmitHandler = async (e) => {
-      
-      const body = JSON.stringify(weight);
-      CONFIG.headers.access_token = localStorage.getItem('id_token')
-      const response = await axios.put(`${API_URL}/weight/update/${weight._id}`, body, CONFIG);     
-      if(response.status < 300) {
-              window.location.reload();
-          }
-    };
-    const deleteWeight = async (id) => {
-      
-      CONFIG.headers.access_token = localStorage.getItem('id_token')
-      const response = await axios.delete(`${API_URL}/weight/${id}`, CONFIG);     
-      if(response.status < 300) {
-              window.location.reload();
-          }
-    };
+	const modalSubmitHandler = async (e) => {
+		const body = JSON.stringify(formData);
+		CONFIG.headers.access_token = localStorage.getItem('id_token');
+		const response = await axios.post(`${API_URL}/weight`, body, CONFIG);
+		if (response.status < 300) {
+			window.location.reload();
+		}
+	};
+	const editModalSubmitHandler = async (e) => {
+		const body = JSON.stringify(weight);
+		CONFIG.headers.access_token = localStorage.getItem('id_token');
+		const response = await axios.put(`${API_URL}/weight/update/${weight._id}`, body, CONFIG);
+		if (response.status < 300) {
+			window.location.reload();
+		}
+	};
+	const deleteWeight = async (id) => {
+		CONFIG.headers.access_token = localStorage.getItem('id_token');
+		const response = await axios.delete(`${API_URL}/weight/${id}`, CONFIG);
+		if (response.status < 300) {
+			window.location.reload();
+		}
+	};
 	return (
-    
-		<div style= {{padding: '10px'}}>
-      <MDBBtn color="primary" onClick={toggle}>Add Weight</MDBBtn>
-      <MDBDataTableV5 hover entriesOptions={[5, 20, 25]} entries={5} pagesAmount={4} data={datatable} />
-    
-      <MDBContainer>
-      <MDBModal isOpen={modal} toggle={toggle}>
-        <MDBModalHeader toggle={toggle}>Add Daily Weights</MDBModalHeader>
-        <MDBModalBody>
-          <span>Date: {`${d.getDate()+1}-${d.getMonth()}-${d.getFullYear()}` }</span>
-          <br></br>
-          <div className="form-group">
-            <label className="form-label">Weight (in kGs)</label>
-            <input className="form-control" onChange={inputChangeHandler}
-            name='weight' value= {formData.weight} placeholder="Enter weight in kgs"/>
-          </div>
+		<div style={{ padding: '10px' }}>
+			<MDBBtn color='primary' onClick={toggle}>
+				Add Weight
+			</MDBBtn>
+			<MDBDataTableV5 hover entriesOptions={[5, 20, 25]} entries={5} pagesAmount={4} data={datatable} />
 
-        </MDBModalBody>
-        <MDBModalFooter>
-          <MDBBtn color="secondary" onClick={toggle}>Close</MDBBtn>
-          <MDBBtn color="primary" onClick={modalSubmitHandler}>Add</MDBBtn>
-        </MDBModalFooter>
-      </MDBModal>
-    </MDBContainer>
+			<MDBContainer>
+				<MDBModal isOpen={modal} toggle={toggle}>
+					<MDBModalHeader toggle={toggle}>Add Daily Weights</MDBModalHeader>
+					<MDBModalBody>
+						<span>Date: {`${d.getDate() + 1}-${d.getMonth()}-${d.getFullYear()}`}</span>
+						<br></br>
+						<div className='form-group'>
+							<label className='form-label'>Weight (in kGs)</label>
+							<input
+								className='form-control'
+								onChange={inputChangeHandler}
+								name='weight'
+								value={formData.weight}
+								placeholder='Enter weight in kgs'
+							/>
+						</div>
+					</MDBModalBody>
+					<MDBModalFooter>
+						<MDBBtn color='secondary' onClick={toggle}>
+							Close
+						</MDBBtn>
+						<MDBBtn color='primary' onClick={modalSubmitHandler}>
+							Add
+						</MDBBtn>
+					</MDBModalFooter>
+				</MDBModal>
+			</MDBContainer>
 
-     {/* updateModal */}
+			{/* updateModal */}
 
-     <MDBContainer>
-      <MDBModal isOpen={editModal}>
-        <MDBModalHeader>Update Daily Weights</MDBModalHeader>
-        <MDBModalBody>
-          <span>Date: {weight && weight.date}</span>
-          <br></br>
-          <div className="form-group">
-            <label className="form-label">Weight (in kGs)</label>
-            <input className="form-control" onChange={weightChangeHandler}
-            name='weight' value= {weight && weight.weight } placeholder="Enter weight in kgs"/>
-          </div>
-
-        </MDBModalBody>
-        <MDBModalFooter>
-          <MDBBtn color="secondary" onClick={() => setEditModal(false)}>Close</MDBBtn>
-          <MDBBtn color="primary" onClick={editModalSubmitHandler}>update</MDBBtn>
-        </MDBModalFooter>
-      </MDBModal>
-    </MDBContainer>
-    </div>
+			<MDBContainer>
+				<MDBModal isOpen={editModal}>
+					<MDBModalHeader>Update Daily Weights</MDBModalHeader>
+					<MDBModalBody>
+						<span>Date: {weight && weight.date}</span>
+						<br></br>
+						<div className='form-group'>
+							<label className='form-label'>Weight (in kGs)</label>
+							<input
+								className='form-control'
+								onChange={weightChangeHandler}
+								name='weight'
+								value={weight && weight.weight}
+								placeholder='Enter weight in kgs'
+							/>
+						</div>
+					</MDBModalBody>
+					<MDBModalFooter>
+						<MDBBtn color='secondary' onClick={() => setEditModal(false)}>
+							Close
+						</MDBBtn>
+						<MDBBtn color='primary' onClick={editModalSubmitHandler}>
+							update
+						</MDBBtn>
+					</MDBModalFooter>
+				</MDBModal>
+			</MDBContainer>
+		</div>
 	);
 };
 
-export default 	connect((state) => ({
-    weights: state.customerReducer.customerWeights
-}),
-{ fetchCustomerWeight })
-(UserWeights);
+export default connect(
+	(state) => ({
+		weights: state.customerReducer.customerWeights
+	}),
+	{ fetchCustomerWeight }
+)(UserWeights);
