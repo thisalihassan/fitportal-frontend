@@ -19,6 +19,19 @@ export const MENUITEMS = [
 		type: 'link'
 	},
 
+	{
+		title: 'Invoices Manager',
+		icon: FileText,
+		badgeType: 'primary',
+		active: false,
+		// path: '/dashboard/invoices',
+		type: 'sub',
+		children: [
+			{ path: '/dashboard/invoices', title: 'Invoices ', type: 'link' },
+			{ path: '/dashboard/stats', title: 'Stats', type: 'link' }
+		]
+	},
+
 	// {
 	// 	title: 'Base',
 	// 	icon: Box,

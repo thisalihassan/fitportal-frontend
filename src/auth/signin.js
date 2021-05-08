@@ -5,8 +5,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { withRouter } from 'react-router';
 import { LOGIN, YourName, Password, Login, SignUp } from '../constant';
 import authActions from '../redux/auth/actions';
-
 import { connect } from 'react-redux';
+
 const { loginUser, fetchLoginDetails } = authActions;
 const Signin = ({ history, loginUser, fetchLoginDetails, user }) => {
 	const [email, setEmail] = useState('ali-hassan01@outlook.com');
