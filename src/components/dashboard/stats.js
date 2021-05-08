@@ -5,9 +5,22 @@ import { connect } from 'react-redux';
 import invoiceActions from '../../redux/invoice/actions';
 import { Line } from 'react-chartjs-2';
 const { getLast30DaysInvoices } = invoiceActions;
-const Stats = ({ getLast30DaysInvoices, expenses, profit, paidInvoices, unPaidInvoices }) => {
-	const [dataset, setDataset] = useState(null);
+const Stats = ({ getLast30DaysInvoices, expenses, profit, invoiceDatasets }) => {
+	const [paidDataset, setPaidDataset] = useState({
+		label: 'Paid',
+		data: [],
+		fill: false,
+		borderColor: 'rgb(75, 192, 192)',
+		tension: 0.1
+	});
 
+	const [unPaidDataset, setUnpaidDataset] = useState({
+		label: 'Unpaid',
+		data: [],
+		fill: false,
+		borderColor: 'rgb(0, 112, 112)',
+		tension: 0.1
+	});
 	const [formData, setFormData] = React.useState({
 		from: '',
 		to: ''
@@ -16,9 +29,22 @@ const Stats = ({ getLast30DaysInvoices, expenses, profit, paidInvoices, unPaidIn
 		getLast30DaysInvoices();
 	}, []);
 
-	useEffect(() => {}, [paidInvoices]);
+	useEffect(() => {
+		const { unpaidDataset } = invoiceDatasets;
 
-	useEffect(() => {}, [unPaidInvoices]);
+		console.log(unpaidDataset);
+		if (unpaidDataset && unpaidDataset.length) {
+			setUnpaidDataset((prevState) => ({ ...prevState, data: unpaidDataset }));
+		}
+	}, [invoiceDatasets.unpaidDataset]);
+
+	useEffect(() => {
+		const { paidDataset } = invoiceDatasets;
+		if (paidDataset && paidDataset.length) {
+			setPaidDataset((prevState) => ({ ...prevState, data: paidDataset }));
+		}
+	}, [invoiceDatasets.paidDataset]);
+
 	const dateHandler = (value) => {
 		setFormData({ ...formData, from: value });
 	};
@@ -89,7 +115,7 @@ const Stats = ({ getLast30DaysInvoices, expenses, profit, paidInvoices, unPaidIn
 						</div>
 					</div>
 				</div>
-				<Line />
+				<Line data={{ labels: invoiceDatasets.labels, datasets: [unPaidDataset, paidDataset] }} />
 			</div>
 		</Fragment>
 	);
@@ -97,8 +123,7 @@ const Stats = ({ getLast30DaysInvoices, expenses, profit, paidInvoices, unPaidIn
 
 export default connect(
 	(state) => ({
-		unPaidInvoices: state.invoice.unPaidInvoices,
-		paidInvoices: state.invoice.paidInvoices,
+		invoiceDatasets: state.invoice.invoiceDatasets,
 		expenses: state.invoice.expenses,
 		profit: state.invoice.profit
 	}),

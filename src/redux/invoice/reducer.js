@@ -1,6 +1,6 @@
 import actions from './actions';
 const initState = {
-	oldInvoices: [],
+	invoiceDatasets: {},
 	unPaidInvoices: [],
 	paidInvoices: [],
 	profit: null,
@@ -10,11 +10,10 @@ const initState = {
 export default function interviewReducer(state = initState, action) {
 	switch (action.type) {
 		case actions.FETCH_LAST_30_DAYS_INVOICES_SUCCESS:
-			const { unPaidInvoices, paidInvoices, profit, expenses } = action.payload;
+			const { paidDataset, unpaidDataset, profit, expenses, labels } = action.payload;
 			return {
 				...state,
-				unPaidInvoices,
-				paidInvoices,
+				invoiceDatasets: { paidDataset, unpaidDataset, labels },
 				profit,
 				expenses
 			};
