@@ -6,6 +6,9 @@ import App from './components/app';
 // Import custom Components
 import Default from './components/dashboard/defaultCompo/default';
 import Ecommerce from './components/dashboard/ecommerce';
+import BlogPost from './components/dashboard/blogPost';
+import SingleBlog from './components/dashboard/blogSingle';
+import DetailBlog from './components/dashboard/blogDetail';
 import Training from './components/dashboard/training';
 import Invoice from './components/dashboard/invoice';
 import Plans from './components/dashboard/plans';
@@ -112,6 +115,7 @@ import UserProfile from './components/users/userProfile';
 import UserEdit from './components/users/userEdit';
 import UserCards from './components/users/user-cards';
 import { Route, Redirect } from 'react-router-dom';
+import BlogDetail from './components/dashboard/blogDetail';
 
 const AppComp = ({ user }) => {
 	const [jwtToken, setToken] = useState(localStorage.getItem('id_token'));
@@ -146,6 +150,8 @@ const AppComp = ({ user }) => {
 					<Route path={`${process.env.PUBLIC_URL}/dashboard/crypto`} component={Crypto} />
 					<Route path={`${process.env.PUBLIC_URL}/dashboard/server`} component={ServerComponent} />
 					<Route path={`${process.env.PUBLIC_URL}/dashboard/project`} component={Project} />
+					<Route path={`${process.env.PUBLIC_URL}/dashboard/recipe`} component={BlogPost} />
+					<Route path={`${process.env.PUBLIC_URL}/dashboard/all/recipes`} component={BlogDetail} />
 					<Route path={`${process.env.PUBLIC_URL}/dashboard/plans/edit/:index`} exact component={EditPlans} />
 					
 					{/* Widgets Menu */}
