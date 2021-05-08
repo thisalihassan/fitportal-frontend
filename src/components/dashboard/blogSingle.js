@@ -9,6 +9,7 @@ import fourteen from "../../assets/images/blog/14.png";
 import {Comment,JolioMark} from "../../constant";
 import { useForm } from 'react-hook-form';
 import { API_URL, CONFIG } from '../../services/helper';
+import StarRatings from 'react-star-ratings';
 import axios from 'axios';
 const BlogSingle = ({match}) => {
     const [formData, setFormData] = React.useState({
@@ -52,7 +53,13 @@ const BlogSingle = ({match}) => {
                                     <ul className="blog-social">
                                         <li className="digits">{data.date}</li>
                                         <li><i className="icofont icofont-user"></i>{data.user.name}</li>
-                                        <li className="digits"><i className="icofont icofont-thumbs-up"></i>{"02"}<span>{"Reviews"}</span></li>
+                                        <li className="digits"><i className="icofont icofont-thumbs-up mr-2"></i>{"02"}<span>{"Reviews"}</span>
+                                        <StarRatings
+                                            rating={2.403}
+                                            starDimension="15px"
+                                            starSpacing="2px"
+                                        />
+                                        </li>
                                         {/* <li className="digits"><i className="icofont icofont-ui-chat"></i>{"598 Comments"}</li> */}
                                     </ul>
                                     <h4>
