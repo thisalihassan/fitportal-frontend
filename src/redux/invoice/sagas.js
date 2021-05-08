@@ -3,7 +3,7 @@ import actions from './actions';
 import { API_URL, headers } from '../../services/helper';
 
 const fetchUnpaidInvoicesRequest = async () =>
-	await fetch(`${API_URL}/invoice/upaid`, {
+	await fetch(`${API_URL}/invoice/unpaid`, {
 		method: 'GET',
 		headers
 	})
@@ -33,15 +33,14 @@ const createInvoiceRequest = async (payload) =>
 const updateInvoiceRequest = async (payload) =>
 	await fetch(`${API_URL}/invoice/${payload.id}`, {
 		method: 'PUT',
-		headers,
-		body: JSON.stringify(payload)
+		headers
 	})
 		.then((res) => res.json())
 		.then((res) => res)
 		.catch((error) => error);
 
 const fetchLast30DaysInvoicesRequest = async () =>
-	await fetch(`${API_URL}/invoice/last30days`, {
+	await fetch(`${API_URL}/invoice/last-thirty-days`, {
 		method: 'GET',
 		headers
 	})
@@ -104,6 +103,7 @@ export function* updateInvoice() {
 		const { payload } = data;
 		headers.access_token = localStorage.getItem('id_token');
 		if (payload) {
+			console.log(payload.id);
 			const response = yield call(updateInvoiceRequest, payload);
 			if (!response) {
 				console.log(response);
@@ -123,6 +123,7 @@ export function* fetchLast30DaysInvoices() {
 	yield takeEvery(actions.FETCH_LAST_30_DAYS_INVOICES, function* () {
 		headers.access_token = localStorage.getItem('id_token');
 		const response = yield call(fetchLast30DaysInvoicesRequest);
+		console.log(response);
 		if (!response) {
 			console.log(response);
 		} else {
