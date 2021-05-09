@@ -29,7 +29,7 @@ const BlogDetail = () => {
 											<ul className='blog-social'>
 												<li className='digits'>{item.date}</li>
 												<li className='digits'>by: {item.user.name}</li>
-												<li className='digits'>Reviews: {'0'}</li>
+												<li className='digits'>Reviews: {item.rating}</li>
 											</ul>
 											<hr />
 											<h6 className='blog-bottom-details'>{item.body.substring(0, 50) + '...'}</h6>
