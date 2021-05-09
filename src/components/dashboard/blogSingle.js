@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import Breadcrumb from '../common/breadcrumb';
 import fourteen from '../../assets/images/blog/14.png';
 import { Comment } from '../../constant';
@@ -6,12 +6,18 @@ import { API_URL, CONFIG } from '../../services/helper';
 import StarRatings from 'react-star-ratings';
 import axios from 'axios';
 const BlogSingle = ({ match }) => {
-	const [formData, setFormData] = React.useState({
+	const [formData, setFormData] = useState({
 		recipe: match.params.id,
 		comment: ''
 	});
-	const [data, setData] = React.useState();
-	const [comment, setComment] = React.useState();
+	const [data, setData] = useState();
+	const [comment, setComment] = useState();
+	const [ratings, setRatings] = useState(0);
+
+	const getComments = async () => {
+		const comments = await axios.get(`${API_URL}/recipe/${match.params.id}/comment`, CONFIG);
+		setComment(comments.data);
+	};
 
 	useEffect(() => {
 		async function myAPI() {
@@ -19,25 +25,41 @@ const BlogSingle = ({ match }) => {
 				CONFIG.headers.access_token = localStorage.getItem('id_token');
 				const res = await axios.get(`${API_URL}/recipe/${match.params.id}`, CONFIG);
 				setData(res.data);
-
-				const comments = await axios.get(`${API_URL}/recipe/${match.params.id}/comment`, CONFIG);
-				setComment(comments.data);
+				setRatings(parseInt(res.data.rating));
+				getComments();
 			} catch (error) {
 				console.log(error);
 			}
 		}
 		myAPI();
 	}, []);
+
+	const changeRating = async (newRating, name) => {
+		try {
+			const body = JSON.stringify({ recipe: match.params.id, rating: newRating });
+			CONFIG.headers.access_token = localStorage.getItem('id_token');
+			const res = await axios.post(`${API_URL}/recipe/rating`, body, CONFIG);
+			setRatings(parseInt(res.data.rating));
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	const inputChangeHandler = (e) => {
 		const { name, value } = e.target;
 		setFormData({ ...formData, [name]: value });
 	};
+
 	const formSubmitHandler = async (e) => {
-		CONFIG.headers.access_token = localStorage.getItem('id_token');
-		const body = JSON.stringify(formData);
-		const res = await axios.post(`${API_URL}/recipe/comment`, body, CONFIG);
-		if (res.status < 300) {
-			window.location.reload();
+		try {
+			CONFIG.headers.access_token = localStorage.getItem('id_token');
+			const body = JSON.stringify(formData);
+			const res = await axios.post(`${API_URL}/recipe/comment`, body, CONFIG);
+			if (res.status < 300) {
+				getComments();
+			}
+		} catch (error) {
+			console.log(error);
 		}
 	};
 
@@ -58,7 +80,7 @@ const BlogSingle = ({ match }) => {
 												{data.user.name}
 											</li>
 											<li style={{ marginLeft: 4 }} className='digits'>
-												<StarRatings rating={2.403} starDimension='15px' starSpacing='2px' />
+												<StarRatings changeRating={changeRating} rating={ratings} starDimension='15px' starSpacing='2px' />
 											</li>
 										</ul>
 										<h4>{data.title}</h4>

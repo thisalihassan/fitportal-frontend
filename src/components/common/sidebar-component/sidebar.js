@@ -10,7 +10,7 @@ import authActions from '../../../redux/auth/actions';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 const { fetchLoginDetails } = authActions;
-const Sidebar = ({ history, fetchLoginDetails, user, t }) => {
+const Sidebar = ({ fetchLoginDetails, user, t }) => {
 	const [margin, setMargin] = useState(0);
 	const [width, setWidth] = useState(0);
 	const [hideLeftArrowRTL, setHideLeftArrowRTL] = useState(true);
