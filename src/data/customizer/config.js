@@ -17,7 +17,7 @@ export class ConfigDB {
 			mix_layout: 'default'
 		},
 		router_animation: 'fadeIn'
-	}
+	};
 }
 
 export default ConfigDB;

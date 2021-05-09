@@ -1,22 +1,22 @@
 const actions = {
 	ALLCUSTOMERS: 'ALLCUSTOMERS',
-    SINGLECUSTOMER: 'SINGLECUSTOMERS',
-    SINGLECUSTOMERDETAIL: 'SINGLECUSTOMERDETAIL',
+	SINGLECUSTOMER: 'SINGLECUSTOMERS',
+	SINGLECUSTOMERDETAIL: 'SINGLECUSTOMERDETAIL',
 	CUSTOMERSSUCCESS: 'CUSTOMERSSUCCESS',
 
 	CUSTOMER_WEIGHTS: 'CUSTOMER_WEIGHTS',
 	CUSTOMER_WEIGHTS_DETAIL: 'CUSTOMER_WEIGHTS_DETAIL',
 	fetchCustomers: () => ({
-		type: actions.ALLCUSTOMERS,
+		type: actions.ALLCUSTOMERS
 	}),
-    fetchSingleCustomer: (payload) => ({
+	fetchSingleCustomer: (payload) => ({
 		type: actions.SINGLECUSTOMER,
-        payload
+		payload
 	}),
 
 	fetchCustomerWeight: (payload) => ({
 		type: actions.CUSTOMER_WEIGHTS,
-        payload
+		payload
 	}),
 
 	WeightSuccess: (payload) => ({
@@ -24,11 +24,11 @@ const actions = {
 		payload
 	}),
 
-    Success: (payload) => ({
+	Success: (payload) => ({
 		type: actions.CUSTOMERSSUCCESS,
 		payload
 	}),
-    SingleSuccess: (payload) => ({
+	SingleSuccess: (payload) => ({
 		type: actions.SINGLECUSTOMERDETAIL,
 		payload
 	})
