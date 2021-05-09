@@ -1,4 +1,5 @@
-export const API_URL = 'https://fitportal-backend.herokuapp.com'
+export const API_URL =
+	process.env.NODE_ENV === 'production' ? 'https://fitportal-backend.herokuapp.com' : 'http://localhost:6600';
 export const CONFIG = {
 	headers: {
 		'Content-Type': 'application/json'
