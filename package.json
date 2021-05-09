@@ -3,6 +3,9 @@
     "version": "0.1.0",
     "private": true,
     "homepage": "https://react.pixelstrap.com/endless/",
+    "engines": {
+        "node": "12.X"
+    },
     "dependencies": {
         "axios": "^0.20.0",
         "feather-icons": "^4.28.0",
