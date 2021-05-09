@@ -30,25 +30,24 @@ const customerWeights = async (payload) =>
 
 export function* fetchCustomers() {
 	yield takeEvery(actions.ALLCUSTOMERS, function* () {
-        headers.access_token = localStorage.getItem('id_token');
-			const response  = yield call(userFetch);
-			if (!response) {
-				console.log(response);
-			} else {
-				yield put({
-					type: actions.CUSTOMERSSUCCESS,
-					payload: response
-				});
-			}
-		
+		headers.access_token = localStorage.getItem('id_token');
+		const response = yield call(userFetch);
+		if (!response) {
+			console.log(response);
+		} else {
+			yield put({
+				type: actions.CUSTOMERSSUCCESS,
+				payload: response
+			});
+		}
 	});
 }
 export function* fetchSingleCustomer() {
 	yield takeEvery(actions.SINGLECUSTOMER, function* (data) {
 		const { payload } = data;
-		console.log(payload)
+		console.log(payload);
 		if (payload) {
-			const response  = yield call(singleUserFetch, payload);
+			const response = yield call(singleUserFetch, payload);
 			if (!response) {
 				console.log(response);
 			} else {
@@ -64,9 +63,9 @@ export function* fetchSingleCustomer() {
 export function* fetchCustomerWeight() {
 	yield takeEvery(actions.CUSTOMER_WEIGHTS, function* (data) {
 		const { payload } = data;
-		console.log(payload)
+		console.log(payload);
 		if (payload) {
-			const response  = yield call(customerWeights, payload);
+			const response = yield call(customerWeights, payload);
 			if (!response) {
 				console.log(response);
 			} else {

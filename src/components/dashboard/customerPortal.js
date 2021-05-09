@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import customerActions from '../../redux/customers/actions';
 const { fetchCustomers } = customerActions;
 
-const Ecommerce = ({ fetchCustomers, customers }) => {
+const CustomerPortal = ({ fetchCustomers, customers }) => {
 	const [datatable, setDatatable] = React.useState({
 		columns: [
 			{
@@ -94,4 +94,4 @@ export default connect(
 		customers: state.customerReducer.customers
 	}),
 	{ fetchCustomers }
-)(Ecommerce);
+)(CustomerPortal);
