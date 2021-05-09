@@ -20,8 +20,8 @@ const BlogDetail = () => {
 			<div className='container-fluid'>
 				<div className='row'>
 					{recipe &&
-						recipe.map((item) => (
-							<div className='col-md-6 col-xl-3 set-col-6'>
+						recipe.map((item, index) => (
+							<div key={index} className='col-md-6 col-xl-3 set-col-6'>
 								<a href={`http://localhost:3000/endless/dashboard/recpie/${item._id}`} className='card'>
 									<div className='card-header'>{item.title}</div>
 									<div className='blog-box blog-grid text-center'>
@@ -32,7 +32,7 @@ const BlogDetail = () => {
 												<li className='digits'>Reviews: {'0'}</li>
 											</ul>
 											<hr />
-											<h6 className='blog-bottom-details'>{item.body.substring(0, 300)}</h6>
+											<h6 className='blog-bottom-details'>{item.body.substring(0, 50) + '...'}</h6>
 										</div>
 									</div>
 								</a>

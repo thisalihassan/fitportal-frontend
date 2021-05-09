@@ -15,12 +15,16 @@ const BlogSingle = ({ match }) => {
 
 	useEffect(() => {
 		async function myAPI() {
-			CONFIG.headers.access_token = localStorage.getItem('id_token');
-			const res = await axios.get(`${API_URL}/recipe/${match.params.id}`, CONFIG);
-			setData(res.data);
+			try {
+				CONFIG.headers.access_token = localStorage.getItem('id_token');
+				const res = await axios.get(`${API_URL}/recipe/${match.params.id}`, CONFIG);
+				setData(res.data);
 
-			const comments = await axios.get(`${API_URL}/recipe/${match.params.id}/comment`, CONFIG);
-			setComment(comments.data);
+				const comments = await axios.get(`${API_URL}/recipe/${match.params.id}/comment`, CONFIG);
+				setComment(comments.data);
+			} catch (error) {
+				console.log(error);
+			}
 		}
 		myAPI();
 	}, []);
@@ -53,13 +57,9 @@ const BlogSingle = ({ match }) => {
 												<i className='icofont icofont-user'></i>
 												{data.user.name}
 											</li>
-											<li className='digits'>
-												<i className='icofont icofont-thumbs-up mr-2'></i>
-												{'02'}
-												<span>{'Reviews'}</span>
+											<li style={{ marginLeft: 4 }} className='digits'>
 												<StarRatings rating={2.403} starDimension='15px' starSpacing='2px' />
 											</li>
-											{/* <li className="digits"><i className="icofont icofont-ui-chat"></i>{"598 Comments"}</li> */}
 										</ul>
 										<h4>{data.title}</h4>
 										<div className='single-blog-content-top'>{data.body}</div>
@@ -71,8 +71,8 @@ const BlogSingle = ({ match }) => {
 
 									<ul>
 										{comment &&
-											comment.map((item) => (
-												<li>
+											comment.map((item, index) => (
+												<li key={index}>
 													<div className='media'>
 														<img className='align-self-center' src={fourteen} alt='Generic placeholder' />
 														<div className='media-body'>
