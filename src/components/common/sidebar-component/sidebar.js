@@ -1,6 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import logo from '../../../assets/images/logo.jpg';
 import UserPanel from './userPanel';
 import { MENUITEMS } from '../../../components/common/sidebar-component/menu';
 import { Link } from 'react-router-dom';
@@ -9,8 +8,8 @@ import configDB from '../../../data/customizer/config';
 import authActions from "../../../redux/auth/actions"
 import {withRouter} from 'react-router'
 import { connect } from 'react-redux';
-const {  fetchLoginDetails} = authActions;
-const Sidebar = ({  fetchLoginDetails, user, t}) => {
+const { loginUser, fetchLoginDetails} = authActions;
+const Sidebar = ({ history , fetchLoginDetails, user, t}) => {
     const [margin, setMargin] = useState(0);
     const [width, setWidth] = useState(0);
     const [hideLeftArrowRTL, setHideLeftArrowRTL] = useState(true);
@@ -26,6 +25,11 @@ const Sidebar = ({  fetchLoginDetails, user, t}) => {
 		}
 	},[user])
 
+    useEffect(() => {
+		if(user) {
+			history.push('/endless/dashboard/customers')
+		}
+	}, [user]);
     useEffect(() => {
         window.addEventListener('resize', handleResize)
         handleResize();
@@ -186,15 +190,6 @@ const Sidebar = ({  fetchLoginDetails, user, t}) => {
     return (
         <Fragment>
             <div className="page-sidebar">
-                <div className="main-header-left d-none d-lg-block">
-                    <div className="logo-wrapper compactLogo">
-                        <Link to={`${process.env.PUBLIC_URL}/dashboard/default`}>
-                            <img className="blur-up lazyloaded" src={logo} alt="" />
-                            <img style={{width: '50px', height: '50px'}} className="blur-up lazyloaded" src={logo} alt="" />
-                        </Link>
-                        <h6 className="ml-4" style={{color: 'white'}}>GYM PORTAL</h6>
-                    </div>
-                </div>
                 <div className="sidebar custom-scrollbar">
                     {user && <UserPanel name= {user.name} role = {user.role} />}
                     <ul
@@ -285,3 +280,4 @@ const Sidebar = ({  fetchLoginDetails, user, t}) => {
 export default translate(withRouter(connect((state) => ({
 	user: state.authReducer.user,
 }),{fetchLoginDetails})(Sidebar)));
+

@@ -7,7 +7,7 @@ import CustomerPortal from './components/dashboard/customerPortal';
 import BlogPost from './components/dashboard/blogPost';
 import SingleBlog from './components/dashboard/blogSingle';
 import Training from './components/dashboard/training';
-import Invoice from './components/dashboard/invoice';
+// import Invoice from './components/dashboard/invoice';
 import Plans from './components/dashboard/plans';
 import EditPlans from './components/dashboard/editPlaning';
 import Stats from './components/dashboard/stats';
@@ -43,7 +43,7 @@ const AppComp = ({ user }) => {
 						}}
 					/>
 					<Route path={`${process.env.PUBLIC_URL}/dashboard/training-plans`} component={Training} />
-					<Route path={`${process.env.PUBLIC_URL}/dashboard/invoices`} component={Invoice} />
+					{/* <Route path={`${process.env.PUBLIC_URL}/dashboard/invoices`} component={Invoice} /> */}
 					<Route path={`${process.env.PUBLIC_URL}/dashboard/plans`} exact component={Plans} />
 					<Route path={`${process.env.PUBLIC_URL}/dashboard/stats`} component={Stats} />
 					<Route path={`${process.env.PUBLIC_URL}/dashboard/customers`} component={CustomerPortal} />

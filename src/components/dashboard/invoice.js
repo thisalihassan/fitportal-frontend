@@ -121,14 +121,13 @@ const Invoice = ({
 		}
 	}, [paidInvoices]);
 
-	useEffect(() => {
-		fetchCustomers();
-	}, [fetchCustomers]);
+
 
 	useEffect(() => {
+		fetchCustomers();
 		fetchUnpaidInvoices();
 		fetchPaidInvoices();
-	}, [fetchPaidInvoices, fetchUnpaidInvoices]);
+	}, []);
 
 	const handleChange = (selectedOption) => {
 		setSelectedOption(selectedOption);
