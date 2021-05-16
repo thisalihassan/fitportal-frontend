@@ -12,7 +12,7 @@ const Conformation = (props) => {
 				const response = await axios.post(API_URL + '/auth/confirmation', body, CONFIG);
 				console.log(response);
 				if (response.status < 300) {
-					props.history.push('/endless/login');
+					props.history.push('/login');
 				} else {
 					alert(response.body);
 				}

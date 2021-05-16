@@ -23,7 +23,7 @@ const Signin = ({ history, loginUser, fetchLoginDetails, user }) => {
 
 	useEffect(() => {
 		if (localStorage.getItem('id_token')) {
-			history.push('/endless/dashboard/customers');
+			history.push('/dashboard/customers');
 		}
 	}, [history, user]);
 
