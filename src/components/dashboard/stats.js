@@ -14,6 +14,7 @@ const Stats = ({ getLast30DaysInvoices, expenses, profit, invoiceDatasets }) => 
 		tension: 0.1
 	});
 
+	
 	const [unPaidDataset, setUnpaidDataset] = useState({
 		label: 'Unpaid',
 		data: [],
