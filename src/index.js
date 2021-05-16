@@ -9,10 +9,8 @@ import { Provider } from 'react-redux';
 import store from './store';
 
 import Signup from './auth/signup';
-import UnlockUser from './pages/unlockUser';
 import ForgetPwd from './pages/forgetPwd';
 import ResetPwd from './pages/resetPwd';
-import Maintenance from './pages/maintenance';
 import Signin from './auth/signin';
 import Conformation from './auth/confirmation';
 //config data
@@ -26,7 +24,7 @@ const Root = () => {
 		document.body.classList.add(layout);
 		console.ignoredYellowBox = ['Warning: Each', 'Warning: Failed'];
 		console.disableYellowBox = true;
-		document.getElementById('color').setAttribute('href', `${process.env.PUBLIC_URL}/assets/css/${color}.css`);
+		document.getElementById('color').setAttribute('href', ` /assets/css/${color}.css`);
 
 		// eslint-disable-next-line
 	}, []);
@@ -36,13 +34,11 @@ const Root = () => {
 			<Provider store={store}>
 				<BrowserRouter basename={`/`}>
 					<Switch>
-						<Route path={`${process.env.PUBLIC_URL}/conformation/:id/:token`} component={Conformation} />
-						<Route path={`${process.env.PUBLIC_URL}/login`} component={Signin} />
-						<Route path={`${process.env.PUBLIC_URL}/signup`} component={Signup} />
-						<Route path={`${process.env.PUBLIC_URL}/pages/unlockUser`} component={UnlockUser} />
-						<Route path={`${process.env.PUBLIC_URL}/pages/forgetPwd`} component={ForgetPwd} />
-						<Route path={`${process.env.PUBLIC_URL}/pages/resetPwd`} component={ResetPwd} />
-						<Route path={`${process.env.PUBLIC_URL}/pages/maintenance`} component={Maintenance} />
+						<Route path="/conformation/:id/:token" component={Conformation} />
+						<Route path="/login" component={Signin} />
+						<Route path="/signup" component={Signup} />
+						<Route path="/pages/forgetPwd" component={ForgetPwd} />
+						<Route path="/pages/resetPwd" component={ResetPwd} />
 
 						<PrivateRoute />
 					</Switch>

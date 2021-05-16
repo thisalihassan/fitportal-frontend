@@ -27,7 +27,7 @@ const Sidebar = ({ history , fetchLoginDetails, user, t}) => {
 
     useEffect(() => {
 		if(user) {
-			history.push('/endless/dashboard/customers')
+			history.push('/dashboard/customers')
 		}
 	}, [user]);
     useEffect(() => {
@@ -215,7 +215,7 @@ const Sidebar = ({ history , fetchLoginDetails, user, t}) => {
                                         : ''}
                                     {(menuItem.type === 'link') ?
                                         <Link
-                                            to={`${process.env.PUBLIC_URL}${menuItem.path}`}
+                                            to={`${menuItem.path}`}
                                             className={`sidebar-header ${menuItem.active ? 'active' : ''}`}
 
                                             onClick={() => toggletNavActive(menuItem)}
@@ -239,7 +239,7 @@ const Sidebar = ({ history , fetchLoginDetails, user, t}) => {
 
                                                     {(childrenItem.type === 'link') ?
                                                         <Link
-                                                            to={`${process.env.PUBLIC_URL}${childrenItem.path}`}
+                                                            to={`${childrenItem.path}`}
                                                             className={childrenItem.active ? 'active' : ''}
                                                             onClick={() => toggletNavActive(childrenItem)}
                                                         >
@@ -251,7 +251,7 @@ const Sidebar = ({ history , fetchLoginDetails, user, t}) => {
                                                                 <li className={childrenSubItem.active ? 'active' : ''} key={key}>
                                                                     {(childrenSubItem.type === 'link') ?
                                                                         <Link
-                                                                            to={`${process.env.PUBLIC_URL}${childrenSubItem.path}`}
+                                                                            to={`${childrenSubItem.path}`}
                                                                             className={childrenSubItem.active ? 'active' : ''}
                                                                             onClick={() => toggletNavActive(childrenSubItem)}
                                                                         >

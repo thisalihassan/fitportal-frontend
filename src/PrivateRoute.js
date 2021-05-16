@@ -37,28 +37,28 @@ const AppComp = ({ user }) => {
 					{/* dashboard menu */}
 					<Route
 						exact
-						path={`${process.env.PUBLIC_URL}/`}
+						path="/"
 						render={() => {
-							return <Redirect to={`${process.env.PUBLIC_URL}/dashboard/customers`} />;
+							return <Redirect to="/dashboard/customers"/>;
 						}}
 					/>
-					<Route path={`${process.env.PUBLIC_URL}/dashboard/training-plans`} component={Training} />
-					{/* <Route path={`${process.env.PUBLIC_URL}/dashboard/invoices`} component={Invoice} /> */}
-					<Route path={`${process.env.PUBLIC_URL}/dashboard/plans`} exact component={Plans} />
-					<Route path={`${process.env.PUBLIC_URL}/dashboard/stats`} component={Stats} />
-					<Route path={`${process.env.PUBLIC_URL}/dashboard/customers`} component={CustomerPortal} />
-					<Route path={`${process.env.PUBLIC_URL}/dashboard/recipe`} component={BlogPost} />
-					<Route path={`${process.env.PUBLIC_URL}/dashboard/all/recipes`} component={BlogDetail} />
-					<Route path={`${process.env.PUBLIC_URL}/dashboard/plans/edit/:index`} exact component={EditPlans} />
-					<Route path={`${process.env.PUBLIC_URL}/dashboard/recpie/:id`} exact component={SingleBlog} />
+					<Route path="/dashboard/training-plans" component={Training} />
+					{/* <Route path="/dashboard/invoices"component={Invoice} /> */}
+					<Route path="/dashboard/plans"exact component={Plans} />
+					<Route path="/dashboard/stats" component={Stats} />
+					<Route path="/dashboard/customers" component={CustomerPortal} />
+					<Route path="/dashboard/recipe" component={BlogPost} />
+					<Route path="/dashboard/all/recipes" component={BlogDetail} />
+					<Route path="/dashboard/plans/edit/:index" exact component={EditPlans} />
+					<Route path="/dashboard/recpie/:id" exact component={SingleBlog} />
 
 					{/* Users */}
-					<Route path={`${process.env.PUBLIC_URL}/users/userProfile`} component={UserProfile} />
-					<Route path={`${process.env.PUBLIC_URL}/users/userEdit/:id`} component={UserEdit} />
-					<Route path={`${process.env.PUBLIC_URL}/users/userCards`} component={UserCards} />
+					<Route path="/users/userProfile" component={UserProfile} />
+					<Route path="/users/userEdit/:id" component={UserEdit} />
+					<Route path="/users/userCards" component={UserCards} />
 				</App>
 			) : (
-				<Redirect to={`${process.env.PUBLIC_URL}/login`} />
+				<Redirect to="/login"/>
 			)}
 		</>
 	);
