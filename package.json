@@ -4,7 +4,7 @@
     "private": true,
     "homepage": "https://react.pixelstrap.com/endless/",
     "engines": {
-        "node": "12.X"
+        "node": "12.19.0"
     },
     "dependencies": {
         "axios": "^0.20.0",
