@@ -39,7 +39,7 @@ const UserMenu = ({ history, logoutUser }) => {
 				</div>
 				<ul className='profile-dropdown onhover-show-div p-20 profile-dropdown-hover'>
 					<li>
-						<Link to={`${process.env.PUBLIC_URL}/users/userEdit`}>
+						<Link to="/users/userEdit">
 							<User />
 							{EditProfile}
 						</Link>

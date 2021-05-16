@@ -11,7 +11,7 @@ const UserPanel = ({ name, role }) => {
 				<div>
 					<img className='img-60 rounded-circle lazyloaded blur-up' src={url ? url : man} alt='#' />
 					<div className='profile-edit'>
-						<Link to={`${process.env.PUBLIC_URL}/users/userEdit`}>
+						<Link to="/users/userEdit">
 							<Edit />
 						</Link>
 					</div>

@@ -30,7 +30,7 @@ const Header = ({ logoutUser }) => {
 				<div className='main-header-right row'>
 					<div className='main-header-left d-lg-none'>
 						<div className='logo-wrapper'>
-							<Link to={`${process.env.PUBLIC_URL}/dashboard/default`}>
+							<Link to="/">
 								<img className='img-fluid' src={logo} alt='' />
 							</Link>
 						</div>

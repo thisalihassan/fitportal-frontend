@@ -113,7 +113,7 @@ const SearchHeader = () => {
                                             <div className="ProfileCard-details">
                                                 <div className="ProfileCard-realName">
                                                     <Link
-                                                        to={`${process.env.PUBLIC_URL}${data.path}`}
+                                                        to={`${data.path}`}
                                                         className="realname"
                                                         onClick={removeFix}
                                                     >
