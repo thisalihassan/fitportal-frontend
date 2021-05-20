@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect } from 'react';
+import moment from 'moment'
 import Breadcrumb from '../common/breadcrumb';
 import { MDBDataTableV5 } from 'mdbreact';
 import axios from 'axios';
@@ -25,7 +26,7 @@ const CustomerPortal = ({ fetchCustomers, customers, user }) => {
 			{
 				label: 'DOB',
 				field: 'dateOfBirth',
-				width: 270
+				width: 270,
 			},
 			{
 				label: 'Actions',
@@ -54,6 +55,7 @@ const CustomerPortal = ({ fetchCustomers, customers, user }) => {
 		if (customers) {
 			for (var i = 0; i < customers.length; i++) {
 				const id = customers[i]._id;
+				customers[i].dateOfBirth = moment(customers[i].dateOfBirth).format("LL")
 				customers[i].actions = (
 					<div>
 						<Link

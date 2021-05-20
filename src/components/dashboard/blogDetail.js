@@ -1,5 +1,7 @@
 import React, { Fragment, useEffect } from 'react';
 import Breadcrumb from '../common/breadcrumb';
+import moment from 'moment'
+import {Link} from 'react-router-dom'
 import { API_URL, CONFIG } from '../../services/helper';
 import axios from 'axios';
 const BlogDetail = () => {
@@ -22,12 +24,12 @@ const BlogDetail = () => {
 					{recipe &&
 						recipe.map((item, index) => (
 							<div key={index} className='col-md-6 col-xl-3 set-col-6'>
-								<a href={`http://localhost:3000/endless/dashboard/recpie/${item._id}`} className='card'>
+								<Link to={`/dashboard/recpie/${item._id}`} className='card'>
 									<div className='card-header'>{item.title}</div>
 									<div className='blog-box blog-grid text-center'>
 										<div className='blog-details-main'>
 											<ul className='blog-social'>
-												<li className='digits'>{item.date}</li>
+												<li className='digits'>{moment(item.date).format("LL")}</li>
 												<li className='digits'>by: {item.user.name}</li>
 												<li className='digits'>Reviews: {item.rating}</li>
 											</ul>
@@ -35,7 +37,7 @@ const BlogDetail = () => {
 											<h6 className='blog-bottom-details'>{item.body.substring(0, 50) + '...'}</h6>
 										</div>
 									</div>
-								</a>
+								</Link>
 							</div>
 						))}
 				</div>
