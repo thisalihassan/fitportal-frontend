@@ -7,7 +7,7 @@ import CustomerPortal from './components/dashboard/customerPortal';
 import BlogPost from './components/dashboard/blogPost';
 import SingleBlog from './components/dashboard/blogSingle';
 import Training from './components/dashboard/training';
-// import Invoice from './components/dashboard/invoice';
+import Invoice from './components/dashboard/invoice';
 import Plans from './components/dashboard/plans';
 import EditPlans from './components/dashboard/editPlaning';
 import Stats from './components/dashboard/stats';
@@ -43,7 +43,7 @@ const AppComp = ({ user }) => {
 						}}
 					/>
 					<Route path="/dashboard/training-plans" component={Training} />
-					{/* <Route path="/dashboard/invoices"component={Invoice} /> */}
+					<Route path="/dashboard/invoices"component={Invoice} />
 					<Route path="/dashboard/plans"exact component={Plans} />
 					<Route path="/dashboard/stats" component={Stats} />
 					<Route path="/dashboard/customers" component={CustomerPortal} />

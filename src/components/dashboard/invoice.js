@@ -56,7 +56,7 @@ const Invoice = ({
 	unPaidInvoices,
 	paidInvoices
 }) => {
-	const [modal, setModal] = useState(false);
+	const [toggleModal, setToggleModal] = useState(false);
 	const [selectedOption, setSelectedOption] = useState(null);
 	const [selectPaidOption, setselectPaidOption] = useState(null);
 	const [formData, setFormData] = useState({ price: 0, dueDate: new Date() });
@@ -72,15 +72,21 @@ const Invoice = ({
 	});
 
 	const [paidDataTable, setPaidDataTable] = useState({
-		columns: [columns]
+		columns: [...columns]
 	});
-	const toggle = () => {
-		setModal(!modal);
+	const changeModalToggle = () => {
+		setToggleModal((prevState)=> !prevState);
 	};
 
 	const payUp = (id) => {
 		updateInvoice({ id });
 	};
+
+	useEffect(() => {
+		fetchCustomers();
+		fetchUnpaidInvoices();
+		fetchPaidInvoices();
+	}, []);
 
 	useEffect(() => {
 		if (unPaidInvoices.length > 0) {
@@ -123,11 +129,6 @@ const Invoice = ({
 
 
 
-	useEffect(() => {
-		fetchCustomers();
-		fetchUnpaidInvoices();
-		fetchPaidInvoices();
-	}, []);
 
 	const handleChange = (selectedOption) => {
 		setSelectedOption(selectedOption);
@@ -144,22 +145,23 @@ const Invoice = ({
 		payload.user = selectedOption.value;
 		createInvoice(payload);
 	};
+	
 	const inputChangeHandler = (e) => {
 		const { name, value } = e.target;
-		console.log(name, value);
 		setFormData({ ...formData, [name]: value });
 	};
+
 	return (
 		<Fragment>
 			<MDBContainer>
-				<MDBModal isOpen={modal} toggle={toggle}>
-					<MDBModalHeader toggle={toggle}>Add Daily Weights</MDBModalHeader>
+				<MDBModal isOpen={toggleModal} >
+					<MDBModalHeader>Add Daily Weights</MDBModalHeader>
 					<MDBModalBody>
 						<br></br>
 						<div className='form-group'>
 							<label className='form-label'>Customer</label>
 							<Select value={selectedOption} onChange={handleChange} options={options} />
-						</div>
+						</div> 
 						<div className='form-group'>
 							<label className='form-label'>Price</label>
 							<input
@@ -187,7 +189,7 @@ const Invoice = ({
 						</div>
 					</MDBModalBody>
 					<MDBModalFooter>
-						<MDBBtn color='secondary' onClick={toggle}>
+						<MDBBtn color='secondary' onClick={changeModalToggle}>
 							Close
 						</MDBBtn>
 						<MDBBtn color='primary' onClick={modalSubmitHandler}>
@@ -197,9 +199,9 @@ const Invoice = ({
 				</MDBModal>
 			</MDBContainer>
 			<Breadcrumb parent='Dashboard' title='Invoice Manager' />
-			<MDBBtn color='primary' onClick={toggle}>
+			<button color='primary' onClick={() => changeModalToggle()}>
 				Create Invoice
-			</MDBBtn>
+			</button>
 			<div className='container-fluid'>
 				<div className='row'>
 					<div className='col-xl-12 xl-50'>

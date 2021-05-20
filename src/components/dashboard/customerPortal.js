@@ -47,7 +47,7 @@ const CustomerPortal = ({ fetchCustomers, customers }) => {
 				customers[i].actions = (
 					<div>
 						<a
-							href={`http://localhost:3000/endless/users/userEdit/${customers[i]._id}`}
+							href={`/users/userEdit/${customers[i]._id}`}
 							className='btn btn-pill btn-primary mb-2'
 							type='button'>
 							Edit

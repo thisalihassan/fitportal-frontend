@@ -28,6 +28,7 @@ export const MENUITEMS = [
 		icon: FileText,
 		badgeType: 'primary',
 		active: false,
+		path: '/dashboard/invoices',
 		type: 'sub',
 		children: [
 			{ path: '/dashboard/invoices', title: 'Invoices ', type: 'link' },
