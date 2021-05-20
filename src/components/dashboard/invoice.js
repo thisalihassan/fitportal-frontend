@@ -1,8 +1,8 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import Breadcrumb from '../common/breadcrumb';
 import { MDBDataTableV5 } from 'mdbreact';
+import {Modal, Button} from 'react-bootstrap';
 import Select from 'react-select';
-import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter } from 'mdbreact';
 import { connect } from 'react-redux';
 import invoiceActions from '../../redux/invoice/actions';
 import customerActions from '../../redux/customers/actions';
@@ -153,11 +153,17 @@ const Invoice = ({
 
 	return (
 		<Fragment>
-			<MDBContainer>
-				<MDBModal isOpen={toggleModal} >
-					<MDBModalHeader>Add Daily Weights</MDBModalHeader>
-					<MDBModalBody>
-						<br></br>
+		<Modal
+        show={toggleModal}
+        onHide={changeModalToggle}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Add Daily Weights</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+		<br></br>
 						<div className='form-group'>
 							<label className='form-label'>Customer</label>
 							<Select value={selectedOption} onChange={handleChange} options={options} />
@@ -187,17 +193,15 @@ const Invoice = ({
 							<label className='form-label'>Is Paid?</label>
 							<Select value={selectPaidOption} onChange={handlePaidOptions} options={otherOptions} />
 						</div>
-					</MDBModalBody>
-					<MDBModalFooter>
-						<MDBBtn color='secondary' onClick={changeModalToggle}>
-							Close
-						</MDBBtn>
-						<MDBBtn color='primary' onClick={modalSubmitHandler}>
-							Add
-						</MDBBtn>
-					</MDBModalFooter>
-				</MDBModal>
-			</MDBContainer>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={changeModalToggle}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={modalSubmitHandler}>Add</Button>
+        </Modal.Footer>
+      </Modal>
+	
 			<Breadcrumb parent='Dashboard' title='Invoice Manager' />
 			<button color='primary' onClick={() => changeModalToggle()}>
 				Create Invoice
