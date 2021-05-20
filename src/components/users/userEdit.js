@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form';
 import { API_URL, CONFIG } from '../../services/helper';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { MDBContainer,  MDBTabPane, MDBTabContent, MDBNav, MDBNavItem, MDBNavLink, MDBIcon } from "mdbreact";
+import { Tabs, Tab} from 'react-bootstrap';
 import UserWeights from '../weights/userWeights'
 const { fetchSingleCustomer } = customerActions;
 
@@ -62,49 +62,13 @@ const UserEdit = ({fetchSingleCustomer, customer, match} ) => {
     return (
         <Fragment>
             <Breadcrumb parent="User" title="Edit Profile" />
-
-            {/* <MDBContainer>
-          <MDBNav tabs>
-          <MDBNavItem>
-            <MDBNavLink
-              link
-              to="#"
-              active={activeItem === "1"}
-              onClick={()=> toggle("1")}
-              role="tab"
-            >
-              <MDBIcon icon="user" /> Profile
-            </MDBNavLink>
-          </MDBNavItem>
-          <MDBNavItem>
-            <MDBNavLink
-              link
-              to="#"
-              active={activeItem === "2"}
-              onClick={()=> toggle("2")}
-              role="tab"
-            >
-              <MDBIcon icon="heart" /> Weights
-            </MDBNavLink>
-          </MDBNavItem>
-          <MDBNavItem>
-            <MDBNavLink
-              link
-              to="#"
-              active={activeItem === "3"}
-              onClick={()=> toggle("3")}
-              role="tab"
-            >
-              <MDBIcon icon="envelope" /> Contact
-            </MDBNavLink>
-          </MDBNavItem>
-        </MDBNav>
-        <MDBTabContent
-          className="card"
-          activeItem={activeItem}
-        >
-          <MDBTabPane tabId="1" role="tabpanel">
-          <div className="container-fluid">
+            <Tabs
+      id="controlled-tab-example"
+      activeKey={activeItem}
+      onSelect={(k) => toggle(k)}
+    >
+      <Tab eventKey="1" title="Profile">
+      <div className="container-fluid">
                 <div className="edit-profile">
                     <div className="row">
                         <div className="col-lg-4">
@@ -170,28 +134,14 @@ const UserEdit = ({fetchSingleCustomer, customer, match} ) => {
                 </div>
             </div>
         
-          </MDBTabPane>
-          <MDBTabPane tabId="2" role="tabpanel">
-            <p className="mt-2">
+      </Tab>
+      <Tab eventKey="2" title="Weights">
+      <p className="mt-2">
               <UserWeights userId = {match.params.id}/>
             </p>
-          </MDBTabPane>
-          <MDBTabPane tabId="3" role="tabpanel">
-            <p className="mt-2">
-              Etsy mixtape wayfarers, ethical wes anderson tofu before
-              they sold out mcsweeney's organic lomo retro fanny pack
-              lo-fi farm-to-table readymade. Messenger bag gentrify
-              pitchfork tattooed craft beer, iphone skateboard locavore
-              carles etsy salvia banksy hoodie helvetica. DIY synth PBR
-              banksy irony. Leggings gentrify squid 8-bit cred pitchfork.
-              Williamsburg banh mi whatever gluten-free, carles pitchfork
-              biodiesel fixie etsy retro mlkshk vice blog. Scenester cred
-              you probably haven't heard of them, vinyl craft beer blog
-              stumptown. Pitchfork sustainable tofu synth chambray yr.
-            </p>
-          </MDBTabPane>
-        </MDBTabContent>
-      </MDBContainer> */}
+      </Tab>
+    </Tabs>
+           
 
             </Fragment>
     );

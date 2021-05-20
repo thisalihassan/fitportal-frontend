@@ -2,6 +2,7 @@ import React, { Fragment, useEffect } from 'react';
 import Breadcrumb from '../common/breadcrumb';
 import { MDBDataTableV5 } from 'mdbreact';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import { API_URL, CONFIG } from '../../services/helper';
 import { connect } from 'react-redux';
 import customerActions from '../../redux/customers/actions';
@@ -46,12 +47,12 @@ const CustomerPortal = ({ fetchCustomers, customers }) => {
 				const id = customers[i]._id;
 				customers[i].actions = (
 					<div>
-						<a
-							href={`/users/userEdit/${customers[i]._id}`}
+						<Link
+							to={`/dashboard/users/userEdit/${customers[i]._id}`}
 							className='btn btn-pill btn-primary mb-2'
 							type='button'>
 							Edit
-						</a>
+						</Link>
 						<button
 							onClick={() => {
 								handleDelete(id);

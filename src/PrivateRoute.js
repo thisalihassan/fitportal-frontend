@@ -53,9 +53,9 @@ const AppComp = ({ user }) => {
 					<Route path="/dashboard/recpie/:id" exact component={SingleBlog} />
 
 					{/* Users */}
-					<Route path="/users/userProfile" component={UserProfile} />
-					<Route path="/users/userEdit/:id" exact component={UserEdit} />
-					<Route path="/users/userCards" component={UserCards} />
+					<Route path="/dashboard/users/userProfile" component={UserProfile} />
+					<Route path="/dashboard/users/userEdit/:id" exact component={UserEdit} />
+					<Route path="/dashboard/users/userCards" component={UserCards} />
 				</App>
 			) : (
 				<Redirect to="/login"/>

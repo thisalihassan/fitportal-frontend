@@ -2,7 +2,6 @@ import React, { Fragment } from 'react';
 import man from '../../../assets/images/dashboard/user.png';
 import { Link } from 'react-router-dom';
 import { Edit } from 'react-feather';
-
 const UserPanel = ({ name, role }) => {
 	const url = '';
 	return (
@@ -11,7 +10,7 @@ const UserPanel = ({ name, role }) => {
 				<div>
 					<img className='img-60 rounded-circle lazyloaded blur-up' src={url ? url : man} alt='#' />
 					<div className='profile-edit'>
-						<Link to="/users/userEdit">
+						<Link to="/dashboard/users/userEdit">
 							<Edit />
 						</Link>
 					</div>
