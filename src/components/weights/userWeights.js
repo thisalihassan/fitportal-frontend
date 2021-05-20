@@ -128,7 +128,7 @@ const UserWeights = ({ fetchCustomerWeight, weights, userId }) => {
 			<button color='primary' onClick={toggle}>
 				Add Weight
 			</button>
-			<MDBDataTableV5 entriesOptions={[5, 20, 25]} data={datatable} />
+			<MDBDataTableV5 hover entriesOptions={[5, 20, 25]} entries={5} pagesAmount={4} data={datatable} />
 			{datasets.data.length > 0 && <Line data={{ labels: labels, datasets: [datasets] }} />}
 			
 			<Modal
