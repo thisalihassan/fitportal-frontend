@@ -54,7 +54,7 @@ const AppComp = ({ user }) => {
 
 					{/* Users */}
 					<Route path="/users/userProfile" component={UserProfile} />
-					<Route path="/users/userEdit/:id" component={UserEdit} />
+					<Route path="/users/userEdit/:id" exact component={UserEdit} />
 					<Route path="/users/userCards" component={UserCards} />
 				</App>
 			) : (

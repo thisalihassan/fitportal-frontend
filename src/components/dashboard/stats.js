@@ -56,8 +56,6 @@ const Stats = ({ getLast30DaysInvoices, expenses, profit, invoiceDatasets }) => 
 			<Breadcrumb parent='Dashboard' title='Invoice Manager' />
 			<div className='container-fluid'>
 				<div className='row'>
-					
-
 					<div className='col-sm-12 col-xl-4 col-md-4'>
 						<div class='card' style={{ width: '18rem' }}>
 							<div class='card-body'>

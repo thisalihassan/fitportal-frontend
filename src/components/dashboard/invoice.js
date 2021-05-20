@@ -206,9 +206,9 @@ const Invoice = ({
 			<button color='primary' onClick={() => changeModalToggle()}>
 				Create Invoice
 			</button>
-			<div className='container-fluid'>
+			<div className='container'>
 				<div className='row'>
-					<div className='col-xl-12 xl-50'>
+					<div className='col-xl-12 col-md-12'>
 						<div className='card'>
 							<div className='card-header'>
 								<h4>Due Invoices</h4>
@@ -221,7 +221,7 @@ const Invoice = ({
 						</div>
 					</div>
 
-					<div className='col-xl-12 xl-50'>
+					<div className='col-xl-12 col-md-12'>
 						<div className='card'>
 							<div className='card-header'>
 								<h4>Last Paid Invoices</h4>

@@ -63,7 +63,7 @@ const UserEdit = ({fetchSingleCustomer, customer, match} ) => {
         <Fragment>
             <Breadcrumb parent="User" title="Edit Profile" />
 
-            <MDBContainer>
+            {/* <MDBContainer>
           <MDBNav tabs>
           <MDBNavItem>
             <MDBNavLink
@@ -191,7 +191,7 @@ const UserEdit = ({fetchSingleCustomer, customer, match} ) => {
             </p>
           </MDBTabPane>
         </MDBTabContent>
-      </MDBContainer>
+      </MDBContainer> */}
 
             </Fragment>
     );
