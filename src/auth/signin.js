@@ -9,8 +9,8 @@ import { connect } from 'react-redux';
 
 const { loginUser, fetchLoginDetails } = authActions;
 const Signin = ({ history, loginUser, fetchLoginDetails, user }) => {
-	const [email, setEmail] = useState('ali-hassan01@outlook.com');
-	const [password, setPassword] = useState('12345678');
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
 
 	useEffect(() => {
 		if (localStorage.getItem('id_token')) {

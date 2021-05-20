@@ -5,10 +5,12 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { API_URL, CONFIG } from '../../services/helper';
 import { connect } from 'react-redux';
+import {  Redirect } from 'react-router-dom';
 import customerActions from '../../redux/customers/actions';
 const { fetchCustomers } = customerActions;
 
-const CustomerPortal = ({ fetchCustomers, customers }) => {
+const CustomerPortal = ({ fetchCustomers, customers, user }) => {
+	const [redirect, setredirect] = React.useState(false)
 	const [datatable, setDatatable] = React.useState({
 		columns: [
 			{
@@ -38,6 +40,13 @@ const CustomerPortal = ({ fetchCustomers, customers }) => {
 
 		await axios.delete(`${API_URL}/user/${id}`, CONFIG);
 	};
+
+	useEffect(() => {
+		if(user && user.role === 'customer'){
+			setredirect(true);
+		}
+	}, [user])
+
 	useEffect(() => {
 		fetchCustomers();
 	}, [fetchCustomers]);
@@ -67,6 +76,10 @@ const CustomerPortal = ({ fetchCustomers, customers }) => {
 			setDatatable({ ...datatable, rows: customers });
 		}
 	}, [customers]);
+
+	if(redirect)
+		return <Redirect to={`/dashboard/users/userEdit/${user._id}`}/>
+	
 	return (
 		<Fragment>
 			<Breadcrumb parent='Dashboard' title='Customers' />
@@ -92,6 +105,7 @@ const CustomerPortal = ({ fetchCustomers, customers }) => {
 
 export default connect(
 	(state) => ({
+		user: state.authReducer.user,
 		customers: state.customerReducer.customers
 	}),
 	{ fetchCustomers }

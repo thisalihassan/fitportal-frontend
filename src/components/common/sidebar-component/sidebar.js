@@ -9,6 +9,7 @@ import authActions from "../../../redux/auth/actions"
 import {withRouter} from 'react-router'
 import { connect } from 'react-redux';
 const { loginUser, fetchLoginDetails} = authActions;
+const userRole = localStorage.getItem('role');
 const Sidebar = ({ history , fetchLoginDetails, user, t}) => {
     const [margin, setMargin] = useState(0);
     const [width, setWidth] = useState(0);
@@ -187,6 +188,73 @@ const Sidebar = ({ history , fetchLoginDetails, user, t}) => {
         }
     }
 
+    const renderItems =(menuItem, i) =>{
+        return  <li className={`${menuItem.active ? 'active' : ''}`} key={i}>
+        {(menuItem.sidebartitle) ?
+            <div className="sidebar-title">{menuItem.sidebartitle}</div>
+            : ''}
+        {(menuItem.type === 'sub') ?
+            <a className="sidebar-header" href="#javascript" onClick={() => toggletNavActive(menuItem)}>
+                <menuItem.icon />
+                <span>{t(menuItem.title)}</span>
+                <i className="fa fa-angle-right pull-right"></i>
+            </a>
+            : ''}
+        {(menuItem.type === 'link') ?
+            <Link
+                to={`${menuItem.path}`}
+                className={`sidebar-header ${menuItem.active ? 'active' : ''}`}
+
+                onClick={() => toggletNavActive(menuItem)}
+            >
+                <menuItem.icon /><span>{t(menuItem.title)}</span>
+                {menuItem.children ?
+                    <i className="fa fa-angle-right pull-right"></i> : ''}
+            </Link>
+            : ''}
+        {menuItem.children ?
+            <ul
+                className={`sidebar-submenu ${menuItem.active ? 'menu-open' : ''}`}
+                style={menuItem.active ? { opacity: 1, transition: 'opacity 500ms ease-in' } : {}}
+            >
+                {menuItem.children.map((childrenItem, index) =>
+                    <li key={index} className={childrenItem.children ? childrenItem.active ? 'active' : '' : ''}>
+                        {(childrenItem.type === 'sub') ?
+                            <a href="#javascript" onClick={() => toggletNavActive(childrenItem)} >
+                                <i className="fa fa-circle"></i>{t(childrenItem.title)} <i className="fa fa-angle-right pull-right"></i></a>
+                            : ''}
+
+                        {(childrenItem.type === 'link') ?
+                            <Link
+                                to={`${childrenItem.path}`}
+                                className={childrenItem.active ? 'active' : ''}
+                                onClick={() => toggletNavActive(childrenItem)}
+                            >
+                                <i className="fa fa-circle"></i>{t(childrenItem.title)} </Link>
+                            : ''}
+                        {childrenItem.children ?
+                            <ul className={`sidebar-submenu ${childrenItem.active ? 'menu-open' : 'active'}`}>
+                                {childrenItem.children.map((childrenSubItem, key) =>
+                                    <li className={childrenSubItem.active ? 'active' : ''} key={key}>
+                                        {(childrenSubItem.type === 'link') ?
+                                            <Link
+                                                to={`${childrenSubItem.path}`}
+                                                className={childrenSubItem.active ? 'active' : ''}
+                                                onClick={() => toggletNavActive(childrenSubItem)}
+                                            >
+                                                <i className="fa fa-circle"></i>{t(childrenSubItem.title)}</Link>
+                                            : ''}
+                                    </li>
+                                )}
+                            </ul>
+                            : ''}
+                    </li>
+                )}
+            </ul>
+            : ''}
+    </li>
+    }
+
     return (
         <Fragment>
             <div className="page-sidebar">
@@ -202,70 +270,16 @@ const Sidebar = ({ history , fetchLoginDetails, user, t}) => {
                             onClick={(wrapper === 'horizontal_sidebar' && layout === 'rtl') ? scrollToLeftRTL : scrollToLeft}><i className="fa fa-angle-left"></i></li>
                         {
                             MENUITEMS.map((menuItem, i) =>
-                                <li className={`${menuItem.active ? 'active' : ''}`} key={i}>
-                                    {(menuItem.sidebartitle) ?
-                                        <div className="sidebar-title">{menuItem.sidebartitle}</div>
-                                        : ''}
-                                    {(menuItem.type === 'sub') ?
-                                        <a className="sidebar-header" href="#javascript" onClick={() => toggletNavActive(menuItem)}>
-                                            <menuItem.icon />
-                                            <span>{t(menuItem.title)}</span>
-                                            <i className="fa fa-angle-right pull-right"></i>
-                                        </a>
-                                        : ''}
-                                    {(menuItem.type === 'link') ?
-                                        <Link
-                                            to={`${menuItem.path}`}
-                                            className={`sidebar-header ${menuItem.active ? 'active' : ''}`}
-
-                                            onClick={() => toggletNavActive(menuItem)}
-                                        >
-                                            <menuItem.icon /><span>{t(menuItem.title)}</span>
-                                            {menuItem.children ?
-                                                <i className="fa fa-angle-right pull-right"></i> : ''}
-                                        </Link>
-                                        : ''}
-                                    {menuItem.children ?
-                                        <ul
-                                            className={`sidebar-submenu ${menuItem.active ? 'menu-open' : ''}`}
-                                            style={menuItem.active ? { opacity: 1, transition: 'opacity 500ms ease-in' } : {}}
-                                        >
-                                            {menuItem.children.map((childrenItem, index) =>
-                                                <li key={index} className={childrenItem.children ? childrenItem.active ? 'active' : '' : ''}>
-                                                    {(childrenItem.type === 'sub') ?
-                                                        <a href="#javascript" onClick={() => toggletNavActive(childrenItem)} >
-                                                            <i className="fa fa-circle"></i>{t(childrenItem.title)} <i className="fa fa-angle-right pull-right"></i></a>
-                                                        : ''}
-
-                                                    {(childrenItem.type === 'link') ?
-                                                        <Link
-                                                            to={`${childrenItem.path}`}
-                                                            className={childrenItem.active ? 'active' : ''}
-                                                            onClick={() => toggletNavActive(childrenItem)}
-                                                        >
-                                                            <i className="fa fa-circle"></i>{t(childrenItem.title)} </Link>
-                                                        : ''}
-                                                    {childrenItem.children ?
-                                                        <ul className={`sidebar-submenu ${childrenItem.active ? 'menu-open' : 'active'}`}>
-                                                            {childrenItem.children.map((childrenSubItem, key) =>
-                                                                <li className={childrenSubItem.active ? 'active' : ''} key={key}>
-                                                                    {(childrenSubItem.type === 'link') ?
-                                                                        <Link
-                                                                            to={`${childrenSubItem.path}`}
-                                                                            className={childrenSubItem.active ? 'active' : ''}
-                                                                            onClick={() => toggletNavActive(childrenSubItem)}
-                                                                        >
-                                                                            <i className="fa fa-circle"></i>{t(childrenSubItem.title)}</Link>
-                                                                        : ''}
-                                                                </li>
-                                                            )}
-                                                        </ul>
-                                                        : ''}
-                                                </li>
-                                            )}
-                                        </ul>
-                                        : ''}
-                                </li>
+                            <>
+                            {menuItem.title !== 'Invoices Manager' && userRole === 'customer' &&
+                            renderItems(menuItem, i) 
+                            }
+                            {
+                                userRole !== 'customer' &&
+                            renderItems(menuItem, i) 
+                            }
+                            </>
+                               
                             )
                         }
                         <li className={`right-arrow ${layout === 'rtl' ? hideRightArrowRTL ? 'd-none' : '' : hideRightArrow ? 'd-none' : ''}`}

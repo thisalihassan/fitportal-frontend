@@ -48,6 +48,7 @@ export function* userDetails() {
 		const response = yield call(userDetailsFetch);
 		if (response === null) {
 		} else {
+			localStorage.setItem('role', response.role);
 			yield put({
 				type: actions.LOGIN_SUCCESS,
 				payload: response
