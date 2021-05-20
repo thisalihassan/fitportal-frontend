@@ -4,6 +4,7 @@ import fourteen from '../../assets/images/blog/14.png';
 import { Comment } from '../../constant';
 import { API_URL, CONFIG } from '../../services/helper';
 import StarRatings from 'react-star-ratings';
+import moment from 'moment';
 import axios from 'axios';
 const BlogSingle = ({ match }) => {
 	const [formData, setFormData] = useState({
@@ -74,7 +75,7 @@ const BlogSingle = ({ match }) => {
 								<div className='blog-box blog-details'>
 									<div className='blog-details'>
 										<ul className='blog-social'>
-											<li className='digits'>{data.date}</li>
+											<li className='digits'>{moment(data.date).format("LL")}</li>
 											<li>
 												<i className='icofont icofont-user'></i>
 												{data.user.name}

@@ -6,6 +6,7 @@ import Select from 'react-select';
 import { connect } from 'react-redux';
 import invoiceActions from '../../redux/invoice/actions';
 import customerActions from '../../redux/customers/actions';
+import moment from 'moment'
 const { fetchCustomers } = customerActions;
 const { fetchUnpaidInvoices, fetchPaidInvoices, createInvoice, updateInvoice } = invoiceActions;
 
@@ -93,7 +94,7 @@ const Invoice = ({
 			const fetchedInvoices = [];
 			for (let i = 0; i < unPaidInvoices.length; i++) {
 				const { price, dueDate, user, _id } = unPaidInvoices[i];
-				const customerObj = { name: user.name, customerID: user.id, user: user._id, price, dueDate, _id };
+				const customerObj = { name: user.name, customerID: user.id, user: user._id, price, dueDate:  moment(unPaidInvoices[i].dueDate).format("LL"), _id };
 				customerObj.actions = (
 					<button onClick={() => payUp(_id)} className='btn btn-pill btn-danger mb-2' type='button'>
 						PayUp
@@ -120,7 +121,7 @@ const Invoice = ({
 			const fetchedInvoices = [];
 			for (let i = 0; i < paidInvoices.length; i++) {
 				const { price, dueDate, user, _id } = paidInvoices[i];
-				const customerObj = { name: user.name, customerID: user.id, user: user._id, price, dueDate, _id };
+				const customerObj = { name: user.name, customerID: user.id, user: user._id, price, dueDate:  moment(paidInvoices[i].dueDate).format("LL"), _id };
 				fetchedInvoices.push(customerObj);
 			}
 			setPaidDataTable({ ...unPaidDataTable, rows: fetchedInvoices });

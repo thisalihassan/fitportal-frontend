@@ -4,7 +4,7 @@ import customerActions from '../../redux/customers/actions';
 
 import {Modal, Button} from 'react-bootstrap';
 import { MDBDataTableV5 } from 'mdbreact';
-
+import moment from 'moment';
 import { API_URL, CONFIG } from '../../services/helper';
 import axios from 'axios';
 import { Line } from 'react-chartjs-2';
@@ -62,6 +62,7 @@ const UserWeights = ({ fetchCustomerWeight, weights, userId }) => {
 				data.push(weights[i].weight);
 				setDataset((prevState) => ({ ...prevState, data }));
 				setLabels(labels);
+				weights[i].date = moment(weights[i].date).format("LL")
 				weights[i].actions = (
 					<div>
 						<button onClick={() => toggleEdit(id)} className='btn btn-pill btn-primary mb-2' type='button'>
