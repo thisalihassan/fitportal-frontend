@@ -69,9 +69,9 @@ const CustomerPortal = ({ fetchCustomers, customers }) => {
 	return (
 		<Fragment>
 			<Breadcrumb parent='Dashboard' title='Customers' />
-			<div className='container-fluid'>
+			<div className='container'>
 				<div className='row'>
-					<div className='col-xl-12 xl-50'>
+					<div className='col-xl-12 col-md-12'>
 						<div className='card'>
 							<div className='card-header'>
 								<h4>Customers</h4>
