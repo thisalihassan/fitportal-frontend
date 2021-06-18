@@ -1,10 +1,9 @@
 import React, { Fragment } from 'react';
-import man from '../../../assets/images/dashboard/user.png';
 import { Link } from 'react-router-dom';
 import { Edit } from 'react-feather';
 import DisplayInitials from '../displayInitials';
 
-const UserPanel = ({ name,avatar, role }) => {
+const UserPanel = ({ name,avatar, role,id }) => {
 	
 	return (
 		<Fragment>
@@ -17,7 +16,7 @@ const UserPanel = ({ name,avatar, role }) => {
 					
 				
 					<div className='profile-edit'>
-						<Link to="/dashboard/users/userEdit">
+						<Link to={"/dashboard/users/userEdit/" + id}>
 							<Edit />
 						</Link>
 					</div>
