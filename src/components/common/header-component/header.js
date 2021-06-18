@@ -1,14 +1,13 @@
 import React, { useState, Fragment } from 'react';
 import logo from '../../../assets/images/endless-logo.png';
 import UserMenu from './userMenu';
-import SearchHeader from './searchHeader';
 import { Link } from 'react-router-dom';
 import { AlignLeft, MoreHorizontal } from 'react-feather';
 import authActions from '../../../redux/auth/actions';
 import { connect } from 'react-redux';
 const { logoutUser } = authActions;
 
-const Header = ({ logoutUser }) => {
+const Header = ({ logoutUser, user }) => {
 	const [sidebar, setSidebar] = useState(false);
 	const [headerbar, setHeaderbar] = useState(true);
 
@@ -47,10 +46,10 @@ const Header = ({ logoutUser }) => {
 					<div className='nav-right col p-0'>
 						<ul className={`nav-menus ${headerbar ? '' : 'open'}`}>
 							<li>
-								<SearchHeader />
+								
 							</li>
 
-							<UserMenu logoutUser={logoutUser} />
+							<UserMenu user={user} logoutUser={logoutUser} />
 						</ul>
 						<div className='d-lg-none mobile-toggle pull-right' onClick={() => setHeaderbar(!headerbar)}>
 							<MoreHorizontal />
@@ -87,4 +86,8 @@ const Header = ({ logoutUser }) => {
 		</Fragment>
 	);
 };
-export default connect(null, { logoutUser })(Header);
+const mapStateToProps = (state) => ({
+	user: state.authReducer.user,
+})
+
+export default connect(mapStateToProps, { logoutUser })(Header);

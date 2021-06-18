@@ -2,13 +2,20 @@ import React, { Fragment } from 'react';
 import man from '../../../assets/images/dashboard/user.png';
 import { Link } from 'react-router-dom';
 import { Edit } from 'react-feather';
-const UserPanel = ({ name, role }) => {
-	const url = '';
+import DisplayInitials from '../displayInitials';
+
+const UserPanel = ({ name,avatar, role }) => {
+	
 	return (
 		<Fragment>
 			<div className='sidebar-user text-center'>
-				<div>
-					<img className='img-60 rounded-circle lazyloaded blur-up' src={url ? url : man} alt='#' />
+				<div style={{textAlign: 'center',
+				justifyContent: 'center',
+				display: 'flex'}}>
+				
+				{avatar ? <img className="img-60 rounded-circle lazyloaded blur-up" alt="" src={avatar} />: <DisplayInitials classNames='img-60 rounded-circle lazyloaded blur-up' picID={1} size={60} name={name} />}
+					
+				
 					<div className='profile-edit'>
 						<Link to="/dashboard/users/userEdit">
 							<Edit />

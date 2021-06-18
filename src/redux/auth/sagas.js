@@ -2,6 +2,7 @@ import { all, takeEvery, put, fork, call } from 'redux-saga/effects';
 import actions from './actions';
 import { API_URL, headers } from '../../services/helper';
 import { toast } from 'react-toastify';
+
 const loginDetailsFetch = async (payload) =>
 	await fetch(`${API_URL}/auth`, {
 		method: 'POST',
@@ -24,12 +25,17 @@ const userDetailsFetch = async () =>
 export function* loginDetails() {
 	yield takeEvery(actions.LOGIN, function* (data) {
 		const { payload } = data;
-		if (payload) {
+		if (payload.email && payload.password) {
+			
 			const response = yield call(loginDetailsFetch, payload);
+			console.log(response)
 			if (!response) {
 				toast.error('Oops you entered invalid credentials');
 			}
-			if (response.msg) {
+			else if(response.errors){
+				toast.error('Oops you entered invalid credentials');
+			}
+			else if (response.msg) {
 				toast.error('Oops you entered invalid credentials');
 			} else {
 				localStorage.setItem('id_token', response.token);
@@ -38,6 +44,8 @@ export function* loginDetails() {
 					payload: response
 				});
 			}
+		}else{
+			toast.error('Oops you entered invalid credentials');
 		}
 	});
 }

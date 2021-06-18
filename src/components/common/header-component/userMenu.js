@@ -1,19 +1,12 @@
-import React, { Fragment, useState, useEffect } from 'react';
-import man from '../../../assets/images/dashboard/user.png';
+import React, { Fragment} from 'react';
 import { User, LogOut } from 'react-feather';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import { EditProfile } from '../../../constant';
+import DisplayInitials from '../displayInitials';
 
-const UserMenu = ({ history, logoutUser }) => {
-	const [profile, setProfile] = useState('');
+const UserMenu = ({ history, logoutUser, user }) => {
 
-	const authenticated = JSON.parse(localStorage.getItem('authenticated'));
-	const auth0_profile = JSON.parse(localStorage.getItem('auth0_profile'));
-
-	useEffect(() => {
-		setProfile(localStorage.getItem('profileURL') || man);
-	}, []);
 
 	const Logout_From_Auth0 = () => {
 		localStorage.removeItem('id_token');
@@ -25,21 +18,17 @@ const UserMenu = ({ history, logoutUser }) => {
 
 	return (
 		<Fragment>
-			<li className='onhover-dropdown'>
+			{user && <li className='onhover-dropdown'>
 				<div className='media align-items-center'>
-					<img
-						className='align-self-center pull-right img-50 rounded-circle blur-up lazyloaded'
-						src={authenticated ? auth0_profile.picture : profile}
-						alt='header-user'
-					/>
-					<div className='dotted-animation'>
-						<span className='animate-circle'></span>
-						<span className='main-circle'></span>
+					
+					<div className='align-self-center pull-right img-50 rounded-circle blur-up lazyloaded'>
+					{user.avatar ? <img className="img-50 rounded-circle" alt="" src={user.avatar} />: <DisplayInitials size={50} picID={2} name={user.name} />}
 					</div>
+					
 				</div>
 				<ul className='profile-dropdown onhover-show-div p-20 profile-dropdown-hover'>
 					<li>
-						<Link to="/dashboard/users/userEdit">
+						<Link to={"/dashboard/users/userEdit/" + user._id}>
 							<User />
 							{EditProfile}
 						</Link>
@@ -50,7 +39,7 @@ const UserMenu = ({ history, logoutUser }) => {
 						</a>
 					</li>
 				</ul>
-			</li>
+			</li>}
 		</Fragment>
 	);
 };

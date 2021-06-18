@@ -52,6 +52,7 @@ const UserWeights = ({ fetchCustomerWeight, weights, userId }) => {
 	useEffect(() => {
 		fetchCustomerWeight({ id: userId });
 	}, []);
+
 	useEffect(() => {
 		if (weights) {
 			const labels = [];
@@ -108,6 +109,7 @@ const UserWeights = ({ fetchCustomerWeight, weights, userId }) => {
 			window.location.reload();
 		}
 	};
+
 	const editModalSubmitHandler = async (e) => {
 		const body = JSON.stringify(weight);
 		CONFIG.headers.access_token = localStorage.getItem('id_token');
@@ -123,10 +125,10 @@ const UserWeights = ({ fetchCustomerWeight, weights, userId }) => {
 			window.location.reload();
 		}
 	};
-	console.log(datasets);
+
 	return (
 		<div style={{ padding: '10px', height: '100vh' }}>
-			<button color='primary' onClick={toggle}>
+			<button  style={{ marginLeft: 20 }} color='primary' className='btn btn-pill' onClick={toggle}>
 				Add Weight
 			</button>
 			<MDBDataTableV5 hover entriesOptions={[5, 20, 25]} entries={5} pagesAmount={4} data={datatable} />

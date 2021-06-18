@@ -5,6 +5,7 @@ import DatePicker from 'react-date-picker';
 import axios from 'axios';
 import { API_URL, CONFIG } from '../services/helper';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
 const SignupWithImg = () => {
 	const { register, handleSubmit, errors } = useForm();
@@ -18,7 +19,10 @@ const SignupWithImg = () => {
 	const { dateOfBirth } = formData;
 
 	const inputChangeHandler = (e) => {
-		const { name, value } = e.target;
+		let { name, value } = e.target;
+		if(name === 'email'){
+			value = value.toLowerCase();
+		}
 		setFormData({ ...formData, [name]: value });
 	};
 
@@ -27,8 +31,22 @@ const SignupWithImg = () => {
 	};
 
 	const formSubmitHandler = async (e) => {
-		const body = JSON.stringify(formData);
-		await axios.post(`${API_URL}/user`, body, CONFIG);
+	
+		try {
+			formData.email = formData.email.trim();
+			const body = JSON.stringify(formData);
+			const response = await axios.post(`${API_URL}/user`, body, CONFIG);
+			if(response.data.msg){
+				toast.error(response.data.msg);
+			}
+			else {
+				toast.success('Registration Successfull! check your email');
+			}
+			} catch (error) {
+				if(error.message){
+					toast.error(error.message);
+				}
+			}
 	};
 
 	return (
@@ -64,6 +82,7 @@ const SignupWithImg = () => {
 										className='form-control'
 										type='text'
 										name='email'
+										type='email'
 										onChange={inputChangeHandler}
 										ref={register({ required: true })}
 									/>

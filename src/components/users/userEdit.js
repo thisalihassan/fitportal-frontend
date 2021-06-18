@@ -1,6 +1,6 @@
 import React, { Fragment,useState,useEffect } from 'react';
 import Breadcrumb from '../common/breadcrumb';
-import seven from '../../assets/images/user/7.jpg';
+import DisplayInitials from '../common/displayInitials';
 import DatePicker from 'react-date-picker';
 import {  BOD, Save,EmailAddress, NAME, Phone} from '../../constant'
 import customerActions from "../../redux/customers/actions"
@@ -20,6 +20,8 @@ const UserEdit = ({fetchSingleCustomer, customer, match} ) => {
 		email: '',
 		dateOfBirth: '',
         id: null,
+        password:'',
+        avatar:'',
         phone: '',
         address: ''
 	});
@@ -28,11 +30,24 @@ const UserEdit = ({fetchSingleCustomer, customer, match} ) => {
         setActiveItem(tab)
         }
       }
-    const { dateOfBirth, email , name, phone, address } = formData;
+    const { dateOfBirth, email , name, phone, avatar, address ,password} = formData;
 
-    const inputChangeHandler = (e) => {
-		const { name, value } = e.target;
-		setFormData({ ...formData, [name]: value });
+    const inputChangeHandler =async (e) => {
+        const file = e.target.files[0];
+        const formDataPic = new FormData();
+        formDataPic.append("file", file);
+        const configg = {
+          headers: {
+            "content-type": "multipart/form-data",
+          },
+        };
+        const res = await axios.post(`${API_URL}/upload-avatar`, formDataPic, configg);
+        const avatar =`${API_URL}/profile/${res.data.filename}`;
+        setFormData({ ...formData, avatar: `${API_URL}/profile/${avatar}`});
+        setTimeout(() => {
+            const body = JSON.stringify({...formData,avatar});
+            updateData(body);
+        }, 2000);
 	};
 
     const dateHandler = (value) => {
@@ -41,12 +56,16 @@ const UserEdit = ({fetchSingleCustomer, customer, match} ) => {
 
     const formSubmitHandler = async (e) => {
 		const body = JSON.stringify(formData);
+        updateData(body);
+	};
+
+    const updateData =async(body)=>{
         CONFIG.headers.access_token = localStorage.getItem('id_token')
 		const response = await axios.put(`${API_URL}/user/update`, body, CONFIG);
         if(response.status < 300) {
             window.location.reload();
         }
-	};
+    }
 
     useEffect (()=> {
         fetchSingleCustomer({id:match.params.id});
@@ -71,10 +90,8 @@ const UserEdit = ({fetchSingleCustomer, customer, match} ) => {
       <div className="container-fluid">
                 <div className="edit-profile">
                     <div className="row">
-                        <div className="col-lg-4">
-
-                        </div>
-                        <div className="col-lg-4">
+                    <div className="col-lg-2 col-md-2"></div>
+                        <div className="col-lg-8 col-md-8">
                             <div className="card">
                                 <div className="card-header">
                                     <h4 className="card-title mb-0">{`${name}'s Profile`}</h4>
@@ -84,11 +101,19 @@ const UserEdit = ({fetchSingleCustomer, customer, match} ) => {
                                 <div className="card-body">
                                     <form onSubmit={handleSubmit(formSubmitHandler)}>
                                         <div className="row mb-2">
-                                            <div className="col-auto"><img className="img-70 rounded-circle" alt="" src={seven} /></div>
+                                            <div className="col-auto">{avatar ? <img className="img-70 rounded-circle" alt="" src={avatar} />: <DisplayInitials size={70} picID={3} name={name} />}</div>
+                                            <input
+                                                onChange={inputChangeHandler}
+                                                type="file" id="avatar" name="avatar" accept="image/*"
+                                            />
                                             <div className="col">
                                                 <h3 className="mb-1">{name}</h3>
                                                 <p className="mb-4">{customer && customer.role}</p>
                                             </div>
+                                        </div>
+                                        <div className="form-group">
+                                            <label className="form-label">{EmailAddress}</label>
+                                            <p>{email}</p>
                                         </div>
                                         <div className="form-group">
                                             <label className="form-label">{NAME}</label>
@@ -96,13 +121,6 @@ const UserEdit = ({fetchSingleCustomer, customer, match} ) => {
 												name='name' value= {name} placeholder="your-name" ref={register({ required: true })} />
                                         </div>
                                         <span>{errors.name && 'name is required'}</span>
-                                        <div className="form-group">
-                                            <label className="form-label">{EmailAddress}</label>
-                                            <input className="form-control" onChange={inputChangeHandler}
-												name='email' value= {email} placeholder="your-email@domain.com" ref={register({ required: true })} />
-                                        </div>
-                                        
-                                        <span>{errors.email && 'email is required'}</span>
                                         <div className="form-group">
                                             <label className="form-label">{Phone}</label>
                                             <input className="form-control" onChange={inputChangeHandler}
@@ -113,6 +131,11 @@ const UserEdit = ({fetchSingleCustomer, customer, match} ) => {
                                             <input className="form-control" onChange={inputChangeHandler}
 												name='address' value= {address} placeholder="your-address" ref={register({ required: true })} />
                                         </div>
+                                        <div className="form-group">
+                                            <label className="form-label">Password</label>
+                                            <input className="form-control" type='password' onChange={inputChangeHandler}
+												name='password' value= {password}/>
+                                        </div>
                                     <div className='form-group'>
 									<label className='col-form-label'>{BOD}</label>
 									<div className='form-row'>
@@ -120,7 +143,7 @@ const UserEdit = ({fetchSingleCustomer, customer, match} ) => {
 									</div>
 								</div>
                                         <div className="form-footer">
-                                            <button className="btn btn-primary btn-block">{Save}</button>
+                                            <button type='submit' className="btn btn-primary btn-block">{Save}</button>
                                         </div>
                                     </form>
                                 </div>

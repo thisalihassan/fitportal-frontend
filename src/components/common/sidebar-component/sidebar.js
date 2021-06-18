@@ -259,7 +259,7 @@ const Sidebar = ({ history , fetchLoginDetails, user, t}) => {
         <Fragment>
             <div className="page-sidebar">
                 <div className="sidebar custom-scrollbar">
-                    {user && <UserPanel name= {user.name} role = {user.role} />}
+                    {user && <UserPanel name= {user.name} avatar={user.avatar} role = {user.role} />}
                     <ul
                         className="sidebar-menu"
                         id="myDIV"
