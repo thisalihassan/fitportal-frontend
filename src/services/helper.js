@@ -1,5 +1,5 @@
-export const API_URL = 'https://fitportal-backend.herokuapp.com'
-// export const API_URL = 'http://localhost:6600'
+// export const API_URL = 'https://fitportal-backend.herokuapp.com'
+export const API_URL = 'http://localhost:6600'
 export const CONFIG = {
 	headers: {
 		'Content-Type': 'application/json'

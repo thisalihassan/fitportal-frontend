@@ -39,10 +39,11 @@ const updateInvoiceRequest = async (payload) =>
 		.then((res) => res)
 		.catch((error) => error);
 
-const fetchLast30DaysInvoicesRequest = async () =>
+const fetchLast30DaysInvoicesRequest = async (payload) =>
 	await fetch(`${API_URL}/invoice/last-thirty-days`, {
-		method: 'GET',
-		headers
+		method: 'POST',
+		headers,
+		body: payload,
 	})
 		.then((res) => res.json())
 		.then((res) => res)
@@ -53,7 +54,6 @@ export function* fetchUnpaidInvoices() {
 		headers.access_token = localStorage.getItem('id_token');
 		const response = yield call(fetchUnpaidInvoicesRequest);
 		if (!response) {
-			console.log(response);
 		} else {
 			yield put({
 				type: actions.FETCH_UNPAID_INVOICES_SUCCESS,
@@ -68,7 +68,6 @@ export function* fetchPaidInvoices() {
 		headers.access_token = localStorage.getItem('id_token');
 		const response = yield call(fetchPaidInvoicesRequest);
 		if (!response) {
-			console.log(response);
 		} else {
 			yield put({
 				type: actions.FETCH_PAID_INVOICES_SUCCESS,
@@ -85,7 +84,6 @@ export function* createInvoice() {
 		if (payload) {
 			const response = yield call(createInvoiceRequest, payload);
 			if (!response) {
-				console.log(response);
 			} else {
 				yield put({
 					type: actions.FETCH_PAID_INVOICES
@@ -103,10 +101,8 @@ export function* updateInvoice() {
 		const { payload } = data;
 		headers.access_token = localStorage.getItem('id_token');
 		if (payload) {
-			console.log(payload.id);
 			const response = yield call(updateInvoiceRequest, payload);
 			if (!response) {
-				console.log(response);
 			} else {
 				yield put({
 					type: actions.FETCH_PAID_INVOICES
@@ -120,17 +116,19 @@ export function* updateInvoice() {
 }
 
 export function* fetchLast30DaysInvoices() {
-	yield takeEvery(actions.FETCH_LAST_30_DAYS_INVOICES, function* () {
-		headers.access_token = localStorage.getItem('id_token');
-		const response = yield call(fetchLast30DaysInvoicesRequest);
-		console.log(response);
-		if (!response) {
-			console.log(response);
-		} else {
-			yield put({
-				type: actions.FETCH_LAST_30_DAYS_INVOICES_SUCCESS,
-				payload: response
-			});
+	yield takeEvery(actions.FETCH_LAST_30_DAYS_INVOICES, function* (data) {
+		const { payload } = data;
+		console.log(payload)
+		if(payload){
+			headers.access_token = localStorage.getItem('id_token');
+			const response = yield call(fetchLast30DaysInvoicesRequest, payload);
+			if (!response) {
+			} else {
+				yield put({
+					type: actions.FETCH_LAST_30_DAYS_INVOICES_SUCCESS,
+					payload: response
+				});
+			}
 		}
 	});
 }

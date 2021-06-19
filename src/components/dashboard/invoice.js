@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import invoiceActions from '../../redux/invoice/actions';
 import customerActions from '../../redux/customers/actions';
 import moment from 'moment'
+import DisplayInitials from '../common/displayInitials';
 const { fetchCustomers } = customerActions;
 const { fetchUnpaidInvoices, fetchPaidInvoices, createInvoice, updateInvoice } = invoiceActions;
 
@@ -22,14 +23,9 @@ const columns = [
 		}
 	},
 	{
-		label: 'Price',
-		field: 'price',
-		width: 150
-	},
-	{
-		label: 'Due Date',
-		field: 'dueDate',
-		width: 270
+		label: 'Pic',
+		field: 'avatar',
+		width: 50,
 	},
 	{
 		label: 'Who',
@@ -39,7 +35,18 @@ const columns = [
 			'aria-controls': 'DataTable',
 			'aria-label': 'name'
 		}
-	}
+	},
+	{
+		label: 'Price',
+		field: 'price',
+		width: 150
+	},
+	{
+		label: 'Due Date',
+		field: 'dueDate',
+		width: 270
+	},
+	
 ];
 
 const otherOptions = [
@@ -95,6 +102,7 @@ const Invoice = ({
 			for (let i = 0; i < unPaidInvoices.length; i++) {
 				const { price, dueDate, user, _id } = unPaidInvoices[i];
 				const customerObj = { name: user.name, customerID: user.id, user: user._id, price, dueDate:  moment(unPaidInvoices[i].dueDate).format("LL"), _id };
+				customerObj.avatar = user.avatar? <img className="img-50 rounded-circle" alt="" src={user.avatar} />: <DisplayInitials size={50} picID={i+20} name={user.name} />
 				customerObj.actions = (
 					<button onClick={() => payUp(_id)} className='btn btn-pill btn-danger mb-2' type='button'>
 						PayUp
@@ -107,7 +115,7 @@ const Invoice = ({
 	}, [unPaidInvoices]);
 
 	useEffect(() => {
-		if (customers.length) {
+		if (customers.length && !options.length) {
 			for (let i = 0; i < customers.length; i++) {
 				const { name, _id, id } = customers[i];
 				const customerObj = { value: _id, label: `${name} ${id}` };
@@ -122,9 +130,10 @@ const Invoice = ({
 			for (let i = 0; i < paidInvoices.length; i++) {
 				const { price, dueDate, user, _id } = paidInvoices[i];
 				const customerObj = { name: user.name, customerID: user.id, user: user._id, price, dueDate:  moment(paidInvoices[i].dueDate).format("LL"), _id };
+				customerObj.avatar = user.avatar? <img className="img-50 rounded-circle" alt="" src={user.avatar} />: <DisplayInitials size={50} picID={i+60} name={user.name} />
 				fetchedInvoices.push(customerObj);
 			}
-			setPaidDataTable({ ...unPaidDataTable, rows: fetchedInvoices });
+			setPaidDataTable({ ...paidDataTable, rows: fetchedInvoices });
 		}
 	}, [paidInvoices]);
 
@@ -204,7 +213,7 @@ const Invoice = ({
       </Modal>
 	
 			<Breadcrumb parent='Dashboard' title='Invoice Manager' />
-			<button color='primary' onClick={() => changeModalToggle()}>
+			<button style={{ marginLeft:20, marginTop: '-16px', marginBottom: 12 }} className='btn btn-pill btn-primary'  onClick={() => changeModalToggle()}>
 				Create Invoice
 			</button>
 			<div className='container'>

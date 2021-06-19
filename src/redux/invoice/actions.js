@@ -32,8 +32,9 @@ const actions = {
 		type: actions.FETCH_PAID_INVOICES_SUCCESS,
 		payload
 	}),
-	getLast30DaysInvoices: () => ({
-		type: actions.FETCH_LAST_30_DAYS_INVOICES
+	getLast30DaysInvoices: (payload) => ({
+		type: actions.FETCH_LAST_30_DAYS_INVOICES,
+		payload
 	}),
 	getLast30DaysInvoicesSuccess: (payload) => ({
 		type: actions.FETCH_LAST_30_DAYS_INVOICES_SUCCESS,

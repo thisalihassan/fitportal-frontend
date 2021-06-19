@@ -1,7 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import trainingPlansActions from '../../redux/trainingPlans/actions';
 import { connect } from 'react-redux';
-import { MDBDataTableV5 } from 'mdbreact';
 
 const { fetchTrainingPlans } = trainingPlansActions;
 

@@ -59,11 +59,11 @@ const UserWeights = ({ fetchCustomerWeight, weights, userId }) => {
 			const data = [];
 			for (var i = 0; i < weights.length; i++) {
 				const id = weights[i]._id;
-				labels.push(weights[i].date);
+				labels.push(moment(weights[i].date).format("l"));
 				data.push(weights[i].weight);
 				setDataset((prevState) => ({ ...prevState, data }));
 				setLabels(labels);
-				weights[i].date = moment(weights[i].date).format("LL")
+				weights[i].date = moment(weights[i].date).format("LL");
 				weights[i].actions = (
 					<div>
 						<button onClick={() => toggleEdit(id)} className='btn btn-pill btn-primary mb-2' type='button'>
