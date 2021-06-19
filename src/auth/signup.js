@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import logo from '../assets/images/endless-logo.png';
+import logo from '../assets/logo.png';
 import { Name, EMAIL, Login, Password, SignUp, BOD } from '../constant';
 import DatePicker from 'react-date-picker';
 import axios from 'axios';
@@ -55,7 +55,7 @@ const SignupWithImg = () => {
 				<div className='auth-bg'>
 					<div className='authentication-box'>
 						<div className='text-center'>
-							<img src={logo} alt='' />
+							<img style={{height: 42, width: 146}} src={logo} alt='' />
 						</div>
 						<div className='card mt-4 p-4'>
 							<h4 className='text-center'>{'NEW USER'}</h4>
