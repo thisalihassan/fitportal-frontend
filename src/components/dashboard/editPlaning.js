@@ -21,7 +21,19 @@ const EditPlans = ({user, plans, fetchTrainingPlans, match}) => {
     
     return (
         <div className={'container-fluid p-0'}>
-            {plan && 
+			<div className="container-fluid">
+                <div className="edit-profile">
+                    <div className="row">
+                    <div className="col-lg-2 col-md-2"></div>
+                        <div className="col-lg-8 col-md-8">
+                            <div className="card">
+                                <div className="card-header">
+                                    <h4 className="card-title mb-0">{`Edit Plans`}</h4>
+                                    <div className="card-options">
+                                        <a className="card-options-collapse" href="javascript" data-toggle="card-collapse"><i className="fe fe-chevron-up"></i></a><a className="card-options-remove" href="javascript" data-toggle="card-remove"><i className="fe fe-x"></i></a></div>
+                                </div>
+                                <div className="card-body">
+								{plan && 
                 <form className='theme-form'>
 				<label className='col-form-label pt-0'></label>
 				<div className='form-group'>
@@ -41,7 +53,7 @@ const EditPlans = ({user, plans, fetchTrainingPlans, match}) => {
 				{plan.exercises.map((input, index) => {
 					return (
 						<Fragment key={input + index}>
-							<label style={{ float: 'left' }} className='col-form-label pt-0 mt-5'>
+							<label style={{ float: 'left' }} className='col-form-label pt-0 mt-2'>
 								{`Exercise-${index}`}
 							</label>
 							{index !== 0 && (
@@ -104,6 +116,18 @@ const EditPlans = ({user, plans, fetchTrainingPlans, match}) => {
 			</form>
 
             }
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div className="col-lg-4">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+       
+            
     </div>
 		
 	);

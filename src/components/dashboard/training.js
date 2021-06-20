@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import trainingPlansActions from '../../redux/trainingPlans/actions';
 import { connect } from 'react-redux';
+import Select from 'react-select';
 const { createTrainingPlan, fetchTrainingPlans } = trainingPlansActions;
 
 const Training = ({ user, createTrainingPlan, fetchTrainingPlans }) => {
@@ -66,8 +67,21 @@ const Training = ({ user, createTrainingPlan, fetchTrainingPlans }) => {
 	const { exercises } = formData;
 
 	return (
-		<div className={'container-fluid p-0'}>
-			<form className='theme-form'>
+
+		<div className="container-fluid">
+                <div className="edit-profile">
+                    <div className="row">
+                    <div className="col-lg-2 col-md-2"></div>
+                        <div className="col-lg-8 col-md-8">
+                            <div className="card">
+                                <div className="card-header">
+                                    <h4 className="card-title mb-0">{`Make a plan`}</h4>
+                                    <div className="card-options">
+                                        <a className="card-options-collapse" href="javascript" data-toggle="card-collapse"><i className="fe fe-chevron-up"></i></a><a className="card-options-remove" href="javascript" data-toggle="card-remove"><i className="fe fe-x"></i></a></div>
+                                </div>
+                                <div className="card-body">
+								<form className='theme-form'>
+				
 				<label className='col-form-label pt-0'>Training Plan Name</label>
 				<div className='form-group'>
 					<input
@@ -79,9 +93,14 @@ const Training = ({ user, createTrainingPlan, fetchTrainingPlans }) => {
 						placeholder='sets'
 					/>
 				</div>
+
+				<div className="mt-2 mb-2">
+				<label className='col-form-label pt-0'>Customer</label>
+				<Select isMulti />
+				</div>
 				{inputs.inputs.map((input, index) => {
 					return (
-						<Fragment key={input + index}>
+						<Fragment className= {'mb-2'} key={input + index}>
 							<label style={{ float: 'left' }} className='col-form-label pt-0'>
 								{input}
 							</label>
@@ -140,11 +159,26 @@ const Training = ({ user, createTrainingPlan, fetchTrainingPlans }) => {
 						</Fragment>
 					);
 				})}
-				<span onClick={submitForm}>Submit Training Plan</span>
+				<button className='btn btn-pill btn-primary mb-2' type='button' onClick={submitForm}>Submit Training Plan</button>
 			</form>
+			<button className='btn btn-pill btn-primary mb-2' type='button' onClick={appendInput}>Click To Add Exercise</button>
 
-			<button onClick={appendInput}>CLICK ME TO ADD AN INPUT</button>
-		</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div className="col-lg-4">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+       
+
+		// <div className={'container-fluid p-0'}>
+			
+		
+		// </div>
 	);
 };
 

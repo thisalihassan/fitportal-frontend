@@ -3,6 +3,8 @@ import Breadcrumb from '../common/breadcrumb';
 import moment from 'moment'
 import {Link} from 'react-router-dom'
 import { API_URL, CONFIG } from '../../services/helper';
+import SearchField from "react-search-field";
+
 import axios from 'axios';
 const BlogDetail = () => {
 	const [recipe, setRecipe] = React.useState();
@@ -20,7 +22,13 @@ const BlogDetail = () => {
 		<Fragment>
 			<Breadcrumb title='Recipe Details' parent='Recipe' />
 			<div className='container-fluid'>
-				<div className='row'>
+				<SearchField
+					placeholder="Search..."
+					// onChange={onChange}
+					searchText="This is initial search text"
+					classNames="test-class"
+				/>
+				<div className='row mt-2'>
 					{recipe &&
 						recipe.map((item, index) => (
 							<div key={index} className='col-md-6 col-xl-3 set-col-6'>
