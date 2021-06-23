@@ -123,7 +123,7 @@ const CustomerPortal = ({ fetchCustomers, customers, user }) => {
 
 	const modalSubmitHandler = async (e) => {
 		if (!formData.dateOfBirth) {
-			toast.error('Please enter date of birth!');
+			toast.error('Please enter date of Birth!');
 			return;
 		}
 		try {
