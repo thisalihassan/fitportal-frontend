@@ -2,6 +2,16 @@ import { all, takeEvery, put, fork, call } from 'redux-saga/effects';
 import actions from './actions';
 import { API_URL, headers } from '../../services/helper';
 
+const deleteTrainingPlanRequest = async (payload) =>
+	await fetch(`${API_URL}/trainingPlan/`, {
+		method: 'DELETE',
+		body: JSON.stringify({ payload }),
+		headers
+	})
+		.then((res) => res.json())
+		.then((res) => res)
+		.catch((error) => error);
+
 const createTrainingPlanRequest = async (payload) =>
 	await fetch(`${API_URL}/trainingPlan/`, {
 		method: 'POST',
@@ -21,6 +31,16 @@ const fetchTrainingPlansRequest = async (user) =>
 		.then((res) => res)
 		.catch((error) => error);
 
+export function* deleteTrainingPlans() {
+	yield takeEvery(actions.DELETE_TRAINING_PLAN, function* (data) {
+		const { payload } = data;
+		headers.access_token = localStorage.getItem('id_token');
+		if (payload) {
+			yield call(deleteTrainingPlanRequest, payload);
+		}
+	});
+}
+
 export function* createTrainingPlans() {
 	yield takeEvery(actions.POST_TRAINING_PLAN, function* (data) {
 		const { payload } = data;
@@ -29,11 +49,6 @@ export function* createTrainingPlans() {
 			const response = yield call(createTrainingPlanRequest, payload);
 			if (!response) {
 				console.log(response);
-			} else {
-				yield put({
-					type: actions.FETCH_TRAINING_PLANS,
-					payload: payload[0].user
-				});
 			}
 		}
 	});
@@ -58,5 +73,5 @@ export function* fetchTrainingPlans() {
 }
 
 export default function* rootSaga() {
-	yield all([fork(createTrainingPlans), fork(fetchTrainingPlans)]);
+	yield all([fork(createTrainingPlans), fork(fetchTrainingPlans), fork(deleteTrainingPlans)]);
 }

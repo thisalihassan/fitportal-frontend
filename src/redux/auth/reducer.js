@@ -1,6 +1,7 @@
 import actions from './actions';
 const initState = {
-	user: null
+	user: null,
+	error: ''
 };
 
 export default function interviewReducer(state = initState, action) {
@@ -8,12 +9,19 @@ export default function interviewReducer(state = initState, action) {
 		case actions.LOGOUT:
 			return {
 				...state,
-				user: null
+				user: null,
+				error: ''
 			};
 		case actions.LOGIN_SUCCESS:
 			return {
 				...state,
+				error: '',
 				user: action.payload
+			};
+		case actions.LOGIN_ERROR:
+			return {
+				...state,
+				error: action.payload
 			};
 
 		default:

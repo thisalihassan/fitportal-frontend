@@ -3,9 +3,10 @@ import trainingPlansActions from '../../redux/trainingPlans/actions';
 import { connect } from 'react-redux';
 import { MDBDataTableV5 } from 'mdbreact';
 import { Redirect } from 'react-router-dom';
-const { fetchTrainingPlans } = trainingPlansActions;
+import { toast } from 'react-toastify';
+const { fetchTrainingPlans, deleteTrainingPlans } = trainingPlansActions;
 
-const Plans = ({ user, plans, fetchTrainingPlans }) => {
+const Plans = ({ user, plans, fetchTrainingPlans, deleteTrainingPlans }) => {
 	const [toggle, setToggle] = useState({ value: false, index: 0 });
 	const [datatable, setDatatable] = React.useState({
 		columns: [
@@ -37,6 +38,20 @@ const Plans = ({ user, plans, fetchTrainingPlans }) => {
 		setToggle({ value: true, index: i });
 	};
 
+	const toDeletePlan = (item) => {
+		let listToDelete = [];
+		const { exercises } = item;
+		for (let i = 0; i < exercises.length; i++) {
+			listToDelete.push(exercises[i]._id);
+		}
+		console.log(listToDelete);
+		deleteTrainingPlans(listToDelete);
+		toast.success('Please Deleted Successfully!!');
+		setTimeout(() => {
+			window.location.reload();
+		}, 2000);
+	};
+
 	useEffect(() => {
 		if (plans) {
 			plans.map((plan, index) => {
@@ -45,7 +60,7 @@ const Plans = ({ user, plans, fetchTrainingPlans }) => {
 						<button onClick={() => redirectEdit(index)} className='btn btn-pill btn-primary mb-2' type='button'>
 							Edit
 						</button>
-						<button onClick={''} className='btn btn-pill btn-danger mb-2' type='button'>
+						<button onClick={() => toDeletePlan(plan)} className='btn btn-pill btn-danger mb-2' type='button'>
 							Delete
 						</button>
 					</div>
@@ -56,7 +71,7 @@ const Plans = ({ user, plans, fetchTrainingPlans }) => {
 	}, [plans]);
 
 	if (toggle.value) {
-		return <Redirect to={`plans/edit/${toggle.index}`} />;
+		return <Redirect to={`training-plans/${toggle.index}`} />;
 	}
 	return (
 		<div className='card'>
@@ -77,5 +92,5 @@ export default connect(
 		user: state.authReducer.user,
 		plans: state.plans.trainingPlans
 	}),
-	{ fetchTrainingPlans }
+	{ fetchTrainingPlans, deleteTrainingPlans }
 )(Plans);

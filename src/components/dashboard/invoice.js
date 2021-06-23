@@ -1,12 +1,12 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import Breadcrumb from '../common/breadcrumb';
 import { MDBDataTableV5 } from 'mdbreact';
-import {Modal, Button} from 'react-bootstrap';
+import { Modal, Button } from 'react-bootstrap';
 import Select from 'react-select';
 import { connect } from 'react-redux';
 import invoiceActions from '../../redux/invoice/actions';
 import customerActions from '../../redux/customers/actions';
-import moment from 'moment'
+import moment from 'moment';
 import DisplayInitials from '../common/displayInitials';
 const { fetchCustomers } = customerActions;
 const { fetchUnpaidInvoices, fetchPaidInvoices, createInvoice, updateInvoice } = invoiceActions;
@@ -25,7 +25,7 @@ const columns = [
 	{
 		label: 'Pic',
 		field: 'avatar',
-		width: 50,
+		width: 50
 	},
 	{
 		label: 'Who',
@@ -45,8 +45,7 @@ const columns = [
 		label: 'Due Date',
 		field: 'dueDate',
 		width: 270
-	},
-	
+	}
 ];
 
 const otherOptions = [
@@ -83,7 +82,7 @@ const Invoice = ({
 		columns: [...columns]
 	});
 	const changeModalToggle = () => {
-		setToggleModal((prevState)=> !prevState);
+		setToggleModal((prevState) => !prevState);
 	};
 
 	const payUp = (id) => {
@@ -101,8 +100,19 @@ const Invoice = ({
 			const fetchedInvoices = [];
 			for (let i = 0; i < unPaidInvoices.length; i++) {
 				const { price, dueDate, user, _id } = unPaidInvoices[i];
-				const customerObj = { name: user.name, customerID: user.id, user: user._id, price, dueDate:  moment(unPaidInvoices[i].dueDate).format("LL"), _id };
-				customerObj.avatar = user.avatar? <img className="img-50 rounded-circle" alt="" src={user.avatar} />: <DisplayInitials size={50} picID={i+20} name={user.name} />
+				const customerObj = {
+					name: user.name,
+					customerID: user.id,
+					user: user._id,
+					price,
+					dueDate: moment(unPaidInvoices[i].dueDate).format('LL'),
+					_id
+				};
+				customerObj.avatar = user.avatar ? (
+					<img className='img-50 rounded-circle' alt='' src={user.avatar} />
+				) : (
+					<DisplayInitials size={50} picID={i + 20} name={user.name} />
+				);
 				customerObj.actions = (
 					<button onClick={() => payUp(_id)} className='btn btn-pill btn-danger mb-2' type='button'>
 						PayUp
@@ -129,16 +139,24 @@ const Invoice = ({
 			const fetchedInvoices = [];
 			for (let i = 0; i < paidInvoices.length; i++) {
 				const { price, dueDate, user, _id } = paidInvoices[i];
-				const customerObj = { name: user.name, customerID: user.id, user: user._id, price, dueDate:  moment(paidInvoices[i].dueDate).format("LL"), _id };
-				customerObj.avatar = user.avatar? <img className="img-50 rounded-circle" alt="" src={user.avatar} />: <DisplayInitials size={50} picID={i+60} name={user.name} />
+				const customerObj = {
+					name: user.name,
+					customerID: user.id,
+					user: user._id,
+					price,
+					dueDate: moment(paidInvoices[i].dueDate).format('LL'),
+					_id
+				};
+				customerObj.avatar = user.avatar ? (
+					<img className='img-50 rounded-circle' alt='' src={user.avatar} />
+				) : (
+					<DisplayInitials size={50} picID={i + 60} name={user.name} />
+				);
 				fetchedInvoices.push(customerObj);
 			}
 			setPaidDataTable({ ...paidDataTable, rows: fetchedInvoices });
 		}
 	}, [paidInvoices]);
-
-
-
 
 	const handleChange = (selectedOption) => {
 		setSelectedOption(selectedOption);
@@ -155,7 +173,7 @@ const Invoice = ({
 		payload.user = selectedOption.value;
 		createInvoice(payload);
 	};
-	
+
 	const inputChangeHandler = (e) => {
 		const { name, value } = e.target;
 		setFormData({ ...formData, [name]: value });
@@ -163,57 +181,51 @@ const Invoice = ({
 
 	return (
 		<Fragment>
-		<Modal
-        show={toggleModal}
-        onHide={changeModalToggle}
-        backdrop="static"
-        keyboard={false}
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>Add Daily Weights</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-		<br></br>
-						<div className='form-group'>
-							<label className='form-label'>Customer</label>
-							<Select value={selectedOption} onChange={handleChange} options={options} />
-						</div> 
-						<div className='form-group'>
-							<label className='form-label'>Price</label>
-							<input
-								onChange={inputChangeHandler}
-								className='form-control'
-								type='number'
-								min={0}
-								name='price'
-								placeholder='Enter Price'
-							/>
-						</div>
-						<div className='form-group'>
-							<label className='form-label'>Due Date</label>
-							<input
-								onChange={inputChangeHandler}
-								className='form-control'
-								type='date'
-								name='weight'
-								placeholder='Enter weight in kgs'
-							/>
-						</div>
-						<div className='form-group'>
-							<label className='form-label'>Is Paid?</label>
-							<Select value={selectPaidOption} onChange={handlePaidOptions} options={otherOptions} />
-						</div>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={changeModalToggle}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={modalSubmitHandler}>Add</Button>
-        </Modal.Footer>
-      </Modal>
-	
+			<Modal show={toggleModal} onHide={changeModalToggle} backdrop='static' keyboard={false}>
+				<Modal.Header closeButton>
+					<Modal.Title>Add Daily Weights</Modal.Title>
+				</Modal.Header>
+				<Modal.Body>
+					<br></br>
+					<div className='form-group'>
+						<label className='form-label'>Customer</label>
+						<Select value={selectedOption} onChange={handleChange} options={options} />
+					</div>
+					<div className='form-group'>
+						<label className='form-label'>Price</label>
+						<input
+							onChange={inputChangeHandler}
+							className='form-control'
+							type='number'
+							min={0}
+							name='price'
+							placeholder='Enter Price'
+						/>
+					</div>
+					<div className='form-group'>
+						<label className='form-label'>Due Date</label>
+						<input onChange={inputChangeHandler} className='form-control' type='date' name='weight' placeholder='Enter weight in kgs' />
+					</div>
+					<div className='form-group'>
+						<label className='form-label'>Is Paid?</label>
+						<Select value={selectPaidOption} onChange={handlePaidOptions} options={otherOptions} />
+					</div>
+				</Modal.Body>
+				<Modal.Footer>
+					<Button variant='secondary' onClick={changeModalToggle}>
+						Close
+					</Button>
+					<Button variant='primary' onClick={modalSubmitHandler}>
+						Add
+					</Button>
+				</Modal.Footer>
+			</Modal>
+
 			<Breadcrumb parent='Dashboard' title='Invoice Manager' />
-			<button style={{ marginLeft:20, marginTop: '-16px', marginBottom: 12 }} className='btn btn-pill btn-primary'  onClick={() => changeModalToggle()}>
+			<button
+				style={{ marginLeft: 20, marginTop: '-16px', marginBottom: 12 }}
+				className='btn btn-pill btn-primary'
+				onClick={() => changeModalToggle()}>
 				Create Invoice
 			</button>
 			<div className='container'>

@@ -37,28 +37,28 @@ const AppComp = ({ user }) => {
 					{/* dashboard menu */}
 					<Route
 						exact
-						path="/"
+						path='/'
 						render={() => {
-							return <Redirect to="/dashboard/customers"/>;
+							return <Redirect to='/dashboard/customers' />;
 						}}
 					/>
-					<Route path="/dashboard/training-plans" component={Training} />
-					<Route path="/dashboard/invoices"component={Invoice} />
-					<Route path="/dashboard/plans"exact component={Plans} />
-					<Route path="/dashboard/stats" component={Stats} />
-					<Route path="/dashboard/customers" component={CustomerPortal} />
-					<Route path="/dashboard/recipe" component={BlogPost} />
-					<Route path="/dashboard/all/recipes" component={BlogDetail} />
-					<Route path="/dashboard/plans/edit/:index" exact component={EditPlans} />
-					<Route path="/dashboard/recpie/:id" exact component={SingleBlog} />
+					<Route path='/dashboard/training-plans/:index?' component={Training} />
+					<Route path='/dashboard/invoices' component={Invoice} />
+					<Route path='/dashboard/plans' exact component={Plans} />
+					<Route path='/dashboard/stats' component={Stats} />
+					<Route path='/dashboard/customers' component={CustomerPortal} />
+					<Route path='/dashboard/recipe' component={BlogPost} />
+					<Route path='/dashboard/all/recipes' component={BlogDetail} />
+					<Route path='/dashboard/plans/edit/:index' exact component={EditPlans} />
+					<Route path='/dashboard/recpie/:id' exact component={SingleBlog} />
 
 					{/* Users */}
-					<Route path="/dashboard/users/userProfile" component={UserProfile} />
-					<Route path="/dashboard/users/userEdit/:id" exact component={UserEdit} />
-					<Route path="/dashboard/users/userCards" component={UserCards} />
+					<Route path='/dashboard/users/userProfile' component={UserProfile} />
+					<Route path='/dashboard/users/userEdit/:id' exact component={UserEdit} />
+					<Route path='/dashboard/users/userCards' component={UserCards} />
 				</App>
 			) : (
-				<Redirect to="/login"/>
+				<Redirect to='/login' />
 			)}
 		</>
 	);

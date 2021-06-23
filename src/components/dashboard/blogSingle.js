@@ -75,7 +75,7 @@ const BlogSingle = ({ match }) => {
 								<div className='blog-box blog-details'>
 									<div className='blog-details'>
 										<ul className='blog-social'>
-											<li className='digits'>{moment(data.date).format("LL")}</li>
+											<li className='digits'>{moment(data.date).format('LL')}</li>
 											<li>
 												<i className='icofont icofont-user'></i>
 												{data.user.name}
@@ -115,7 +115,7 @@ const BlogSingle = ({ match }) => {
 									<div className='theme-form'>
 										<label htmlFor='exampleFormControlTextarea14'>Write Comment</label>
 										<textarea
-											name={'comment'}
+											name='comment'
 											onChange={inputChangeHandler}
 											className='form-control btn-square'
 											id='exampleFormControlTextarea14'
