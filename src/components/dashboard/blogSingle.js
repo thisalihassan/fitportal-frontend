@@ -1,10 +1,10 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import Breadcrumb from '../common/breadcrumb';
-import fourteen from '../../assets/images/blog/14.png';
 import { Comment } from '../../constant';
 import { API_URL, CONFIG } from '../../services/helper';
 import StarRatings from 'react-star-ratings';
 import moment from 'moment';
+import DisplayInitials from '../common/displayInitials';
 import axios from 'axios';
 const BlogSingle = ({ match }) => {
 	const [formData, setFormData] = useState({
@@ -68,11 +68,14 @@ const BlogSingle = ({ match }) => {
 		<Fragment>
 			<Breadcrumb title='Recipe' />
 			{data && (
-				<div className='container-fluid'>
+				<div className='container-fluid' style={{ backgroundColor: 'white' }}>
 					<div className='row'>
 						<div className='col-sm-12'>
 							<div className='blog-single'>
 								<div className='blog-box blog-details'>
+									<div style={{ display: 'flex', justifyContent: 'center' }}>
+										<img className='img-fluid w-50' src={data.picture} alt='blog-main' />
+									</div>
 									<div className='blog-details'>
 										<ul className='blog-social'>
 											<li className='digits'>{moment(data.date).format('LL')}</li>
@@ -85,7 +88,13 @@ const BlogSingle = ({ match }) => {
 											</li>
 										</ul>
 										<h4>{data.title}</h4>
-										<div className='single-blog-content-top'>{data.body}</div>
+										<div className='single-blog-content-top'>
+											<li>Calories {data.calories}</li>
+											<li>Carbs {data.carbs}</li>
+											<li>Fats {data.fats}</li>
+											<li>Proteins {data.proteins}</li>
+											<div style={{ marginTop: 20 }}>{data.body}</div>
+										</div>
 									</div>
 								</div>
 								<section className='comment-box'>
@@ -97,7 +106,11 @@ const BlogSingle = ({ match }) => {
 											comment.map((item, index) => (
 												<li key={index}>
 													<div className='media'>
-														<img className='align-self-center' src={fourteen} alt='Generic placeholder' />
+														{item.user.avatar ? (
+															<img className='align-self-center img-70 rounded-circle' alt='' src={item.user.avatar} />
+														) : (
+															<DisplayInitials classNames='align-self-center' size={70} picID={index + 900} name={item.user.name} />
+														)}
 														<div className='media-body'>
 															<div className='row'>
 																<div className='col-md-4'>
