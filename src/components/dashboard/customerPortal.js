@@ -122,6 +122,10 @@ const CustomerPortal = ({ fetchCustomers, customers, user }) => {
 	};
 
 	const modalSubmitHandler = async (e) => {
+		if (!formData.dateOfBirth) {
+			toast.error('Please enter date of birth!');
+			return;
+		}
 		try {
 			formData.email = formData.email.trim();
 			formData.role = selectPaidOption.value;
