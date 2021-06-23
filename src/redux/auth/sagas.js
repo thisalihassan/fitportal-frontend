@@ -52,6 +52,8 @@ export function* userDetails() {
 		headers.access_token = localStorage.getItem('id_token');
 		const response = yield call(userDetailsFetch);
 		if (response === null) {
+			localStorage.removeItem('id_token');
+			window.location.reload();
 		} else if (response.msg === 'Token is not valid') {
 			localStorage.removeItem('id_token');
 			window.location.reload();
