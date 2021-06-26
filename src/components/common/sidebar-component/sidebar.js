@@ -8,8 +8,8 @@ import configDB from '../../../data/customizer/config';
 import authActions from "../../../redux/auth/actions"
 import {withRouter} from 'react-router'
 import { connect } from 'react-redux';
-const { loginUser, fetchLoginDetails} = authActions;
-const userRole = localStorage.getItem('role');
+const {  fetchLoginDetails} = authActions;
+
 const Sidebar = ({ history , fetchLoginDetails, user, t}) => {
     const [margin, setMargin] = useState(0);
     const [width, setWidth] = useState(0);
@@ -188,7 +188,7 @@ const Sidebar = ({ history , fetchLoginDetails, user, t}) => {
         }
     }
 
-    const renderItems =(menuItem, i) =>{
+    const renderItems =(menuItem, i, role) =>{
         return  <li className={`${menuItem.active ? 'active' : ''}`} key={i}>
         {(menuItem.sidebartitle) ?
             <div className="sidebar-title">{menuItem.sidebartitle}</div>
@@ -218,6 +218,8 @@ const Sidebar = ({ history , fetchLoginDetails, user, t}) => {
                 style={menuItem.active ? { opacity: 1, transition: 'opacity 500ms ease-in' } : {}}
             >
                 {menuItem.children.map((childrenItem, index) =>
+                    <>
+                    {role === 'customer' && childrenItem.title !== 'New Plans' ?
                     <li key={index} className={childrenItem.children ? childrenItem.active ? 'active' : '' : ''}>
                         {(childrenItem.type === 'sub') ?
                             <a href="#javascript" onClick={() => toggletNavActive(childrenItem)} >
@@ -248,7 +250,40 @@ const Sidebar = ({ history , fetchLoginDetails, user, t}) => {
                                 )}
                             </ul>
                             : ''}
-                    </li>
+                    </li>:''}
+                    {role !== 'customer' &&
+                    <li key={index} className={childrenItem.children ? childrenItem.active ? 'active' : '' : ''}>
+                        {(childrenItem.type === 'sub') ?
+                            <a href="#javascript" onClick={() => toggletNavActive(childrenItem)} >
+                                <i className="fa fa-circle"></i>{t(childrenItem.title)} <i className="fa fa-angle-right pull-right"></i></a>
+                            : ''}
+
+                        {(childrenItem.type === 'link') ?
+                            <Link
+                                to={`${childrenItem.path}`}
+                                className={childrenItem.active ? 'active' : ''}
+                                onClick={() => toggletNavActive(childrenItem)}
+                            >
+                                <i className="fa fa-circle"></i>{t(childrenItem.title)} </Link>
+                            : ''}
+                        {childrenItem.children ?
+                            <ul className={`sidebar-submenu ${childrenItem.active ? 'menu-open' : 'active'}`}>
+                                {childrenItem.children.map((childrenSubItem, key) =>
+                                    <li className={childrenSubItem.active ? 'active' : ''} key={key}>
+                                        {(childrenSubItem.type === 'link') ?
+                                            <Link
+                                                to={`${childrenSubItem.path}`}
+                                                className={childrenSubItem.active ? 'active' : ''}
+                                                onClick={() => toggletNavActive(childrenSubItem)}
+                                            >
+                                                <i className="fa fa-circle"></i>{t(childrenSubItem.title)}</Link>
+                                            : ''}
+                                    </li>
+                                )}
+                            </ul>
+                            : ''}
+                    </li>}
+                    </>
                 )}
             </ul>
             : ''}
@@ -268,15 +303,15 @@ const Sidebar = ({ history , fetchLoginDetails, user, t}) => {
                     >
                         <li className={`left-arrow ${layout === 'rtl' ? hideLeftArrowRTL ? 'd-none' : '' : hideLeftArrow ? 'd-none' : ''}`}
                             onClick={(wrapper === 'horizontal_sidebar' && layout === 'rtl') ? scrollToLeftRTL : scrollToLeft}><i className="fa fa-angle-left"></i></li>
-                        {
+                        {user &&
                             MENUITEMS.map((menuItem, i) =>
                             <>
-                            {menuItem.title !== 'Invoices Manager' && userRole === 'customer' &&
-                            renderItems(menuItem, i) 
+                            {menuItem.title !== 'Invoices Manager' && user.role === 'customer' &&
+                            renderItems(menuItem, i, user.role) 
                             }
                             {
-                                userRole !== 'customer' &&
-                            renderItems(menuItem, i) 
+                                user.role !== 'customer' &&
+                            renderItems(menuItem, i, user.role) 
                             }
                             </>
                                
