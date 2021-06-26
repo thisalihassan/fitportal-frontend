@@ -42,7 +42,7 @@ const Signin = ({ history, loginUser, fetchLoginDetails, user }) => {
 								<div className='auth-innerright'>
 									<div className='authentication-box'>
 										<div className='text-center'>
-											<img style={{height: 42, width: 146}} src={logo} alt='' />
+											<img style={{ height: 'auto', width: 146 }} src={logo} alt='' />
 										</div>
 										<div className='card mt-4'>
 											<div className='card-body'>

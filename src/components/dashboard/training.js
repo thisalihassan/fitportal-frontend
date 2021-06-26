@@ -45,7 +45,6 @@ const Training = ({
 	useEffect(() => {
 		if (user) {
 			fetchCustomers();
-			fetchTrainingPlans(user._id);
 		}
 	}, [user]);
 
@@ -153,11 +152,6 @@ const Training = ({
 
 	const { exercises, planName } = formData;
 
-	let shouldDisplay = true;
-	if ((match.params && match.params.index == 0) || match.params.index) {
-		shouldDisplay = false;
-	}
-
 	return (
 		<div className='container-fluid'>
 			<div className='edit-profile'>
@@ -191,7 +185,7 @@ const Training = ({
 										/>
 									</div>
 
-									{user && user.role !== 'customer' && shouldDisplay && (
+									{user && user.role !== 'customer' && (
 										<div className='mt-2 mb-2'>
 											<label className='col-form-label pt-0'>Customer</label>
 											<Select isMulti value={selectedOption} onChange={handleChange} options={options} />
@@ -218,6 +212,8 @@ const Training = ({
 														name='exercise'
 														placeholder='Exercise Name'
 													/>
+												</div>
+												<div className='form-group'>
 													<input
 														onChange={(e) => addNewExercise(index, e)}
 														required
@@ -227,6 +223,8 @@ const Training = ({
 														name='set'
 														placeholder='sets'
 													/>
+												</div>
+												<div className='form-group'>
 													<input
 														onChange={(e) => addNewExercise(index, e)}
 														required
@@ -236,6 +234,8 @@ const Training = ({
 														name='weight'
 														placeholder='weights'
 													/>
+												</div>
+												<div className='form-group'>
 													<input
 														onChange={(e) => addNewExercise(index, e)}
 														required
@@ -245,6 +245,8 @@ const Training = ({
 														name='repetitions'
 														placeholder='Repetitions'
 													/>
+												</div>
+												<div className='form-group'>
 													<input
 														onChange={(e) => addNewExercise(index, e)}
 														required
@@ -273,10 +275,6 @@ const Training = ({
 				</div>
 			</div>
 		</div>
-
-		// <div className={'container-fluid p-0'}>
-
-		// </div>
 	);
 };
 

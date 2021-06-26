@@ -47,7 +47,7 @@ const AppComp = ({ user }) => {
 					<Route path='/dashboard/plans' exact component={Plans} />
 					<Route path='/dashboard/stats' component={Stats} />
 					<Route path='/dashboard/customers' component={CustomerPortal} />
-					<Route path='/dashboard/recipe' component={BlogPost} />
+					<Route path='/dashboard/recipe/:id?' component={BlogPost} />
 					<Route path='/dashboard/all/recipes' component={BlogDetail} />
 					<Route path='/dashboard/plans/edit/:index' exact component={EditPlans} />
 					<Route path='/dashboard/recpie/:id' exact component={SingleBlog} />

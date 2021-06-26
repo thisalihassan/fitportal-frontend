@@ -6,7 +6,7 @@ import { Redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
 const { fetchTrainingPlans, deleteTrainingPlans } = trainingPlansActions;
 
-const Plans = ({ user, plans, fetchTrainingPlans, deleteTrainingPlans }) => {
+const Plans = ({ user, plans, fetchTrainingPlans, deleteTrainingPlans, userId }) => {
 	const [toggle, setToggle] = useState({ value: false, index: 0 });
 	const [datatable, setDatatable] = React.useState({
 		columns: [
@@ -28,8 +28,9 @@ const Plans = ({ user, plans, fetchTrainingPlans, deleteTrainingPlans }) => {
 	});
 
 	useEffect(() => {
-		if (user) {
-			console.log(user._id);
+		if (userId) {
+			fetchTrainingPlans(userId);
+		} else if (user) {
 			fetchTrainingPlans(user._id);
 		}
 	}, [fetchTrainingPlans, user]);
@@ -44,7 +45,6 @@ const Plans = ({ user, plans, fetchTrainingPlans, deleteTrainingPlans }) => {
 		for (let i = 0; i < exercises.length; i++) {
 			listToDelete.push(exercises[i]._id);
 		}
-		console.log(listToDelete);
 		deleteTrainingPlans(listToDelete);
 		toast.success('Please Deleted Successfully!!');
 		setTimeout(() => {
@@ -71,7 +71,7 @@ const Plans = ({ user, plans, fetchTrainingPlans, deleteTrainingPlans }) => {
 	}, [plans]);
 
 	if (toggle.value) {
-		return <Redirect to={`training-plans/${toggle.index}`} />;
+		return <Redirect to={`/dashboard/training-plans/${toggle.index}`} />;
 	}
 	return (
 		<div className='card'>

@@ -53,8 +53,8 @@ const BlogDetail = () => {
 							<div key={index} className='col-md-6 col-xl-3 set-col-6'>
 								<Link to={`/dashboard/recpie/${item._id}`} className='card'>
 									<div className='card-header'>{item.title}</div>
-									<div style={{ display: 'flex', height: 130, justifyContent: 'center' }}>
-										{item.picture && <img style={{ height: 130, width: 130 }} src={item.picture} alt='' />}
+									<div style={{ display: 'flex', height: 'auto', justifyContent: 'center' }}>
+										{item.picture && <img style={{ height: 'auto', width: 130 }} src={item.picture} alt='' />}
 									</div>
 
 									<div className='blog-box blog-grid text-center'>
@@ -63,6 +63,10 @@ const BlogDetail = () => {
 												<li className='digits'>{moment(item.date).format('LL')}</li>
 												<li className='digits'>by: {item.user.name}</li>
 												<li className='digits'>Reviews: {item.rating}</li>
+												<li className='digits'>Calories: {item.calories}</li>
+												<li className='digits'>Carbs: {item.carbs}</li>
+												<li className='digits'>Fats: {item.fats}</li>
+												<li className='digits'>Proteins: {item.proteins}</li>
 											</ul>
 											<hr />
 											<h6 className='blog-bottom-details'>{item.body.substring(0, 20) + '...'}</h6>

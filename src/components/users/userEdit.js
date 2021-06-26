@@ -10,9 +10,10 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { Tabs, Tab } from 'react-bootstrap';
 import UserWeights from '../weights/userWeights';
+import Plans from '../dashboard/plans';
 const { fetchSingleCustomer } = customerActions;
 
-const UserEdit = ({ fetchSingleCustomer, customer, match }) => {
+const UserEdit = ({ fetchSingleCustomer, customer, match, user }) => {
 	const { register, handleSubmit, errors } = useForm();
 	const [activeItem, setActiveItem] = useState('1');
 	const [formData, setFormData] = useState({
@@ -188,6 +189,13 @@ const UserEdit = ({ fetchSingleCustomer, customer, match }) => {
 						<UserWeights userId={match.params.id} />
 					</p>
 				</Tab>
+				{user && user.role !== 'customer' && (
+					<Tab eventKey='3' title='Training Plan'>
+						<p className='mt-2'>
+							<Plans userId={match.params.id} />
+						</p>
+					</Tab>
+				)}
 			</Tabs>
 		</Fragment>
 	);
@@ -195,6 +203,7 @@ const UserEdit = ({ fetchSingleCustomer, customer, match }) => {
 
 export default connect(
 	(state) => ({
+		user: state.authReducer.user,
 		customer: state.customerReducer.singleCustomer
 	}),
 	{ fetchSingleCustomer }

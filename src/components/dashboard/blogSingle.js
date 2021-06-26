@@ -5,8 +5,11 @@ import { API_URL, CONFIG } from '../../services/helper';
 import StarRatings from 'react-star-ratings';
 import moment from 'moment';
 import DisplayInitials from '../common/displayInitials';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
-const BlogSingle = ({ match }) => {
+import { connect } from 'react-redux';
+
+const BlogSingle = ({ match, user, history }) => {
 	const [formData, setFormData] = useState({
 		recipe: match.params.id,
 		comment: ''
@@ -14,6 +17,7 @@ const BlogSingle = ({ match }) => {
 	const [data, setData] = useState();
 	const [comment, setComment] = useState();
 	const [ratings, setRatings] = useState(0);
+	const [shouldDiplay, setShouldDiplay] = useState(false);
 
 	const getComments = async () => {
 		const comments = await axios.get(`${API_URL}/recipe/${match.params.id}/comment`, CONFIG);
@@ -34,6 +38,12 @@ const BlogSingle = ({ match }) => {
 		}
 		myAPI();
 	}, []);
+
+	useEffect(() => {
+		if (data && user && data.user._id === user._id) {
+			setShouldDiplay(true);
+		}
+	}, [data, user]);
 
 	const changeRating = async (newRating, name) => {
 		try {
@@ -64,6 +74,16 @@ const BlogSingle = ({ match }) => {
 		}
 	};
 
+	const deleteRecipe = async () => {
+		try {
+			CONFIG.headers.access_token = localStorage.getItem('id_token');
+			await axios.delete(`${API_URL}/recipe/${match.params.id}`, CONFIG);
+			history.push('/');
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	return (
 		<Fragment>
 			<Breadcrumb title='Recipe' />
@@ -86,6 +106,16 @@ const BlogSingle = ({ match }) => {
 											<li style={{ marginLeft: 4 }} className='digits'>
 												<StarRatings changeRating={changeRating} rating={ratings} starDimension='15px' starSpacing='2px' />
 											</li>
+											{shouldDiplay && (
+												<li style={{ marginLeft: 4 }} className='digits'>
+													<button onClick={deleteRecipe} className='btn btn-pill btn-danger' type='button' style={{ marginRight: 16 }}>
+														Delete
+													</button>
+													<Link to={'/dashboard/recipe/' + data._id} className='btn btn-pill btn-primary' type='button'>
+														Update
+													</Link>
+												</li>
+											)}
 										</ul>
 										<h4>{data.title}</h4>
 										<div className='single-blog-content-top'>
@@ -148,4 +178,9 @@ const BlogSingle = ({ match }) => {
 	);
 };
 
-export default BlogSingle;
+export default connect(
+	(state) => ({
+		user: state.authReducer.user
+	}),
+	null
+)(BlogSingle);

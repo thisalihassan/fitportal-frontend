@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import invoiceActions from '../../redux/invoice/actions';
 import { Line } from 'react-chartjs-2';
 import Select from 'react-select';
+import DatePicker from 'react-date-picker';
 import moment from 'moment';
 const { getLast30DaysInvoices } = invoiceActions;
 
@@ -23,8 +24,9 @@ const Stats = ({ getLast30DaysInvoices, expenses, profit, invoiceDatasets }) => 
 		tension: 0.1
 	});
 
-	const [labels, setLabels] = useState([])
-
+	const [labels, setLabels] = useState([]);
+	const [startDate, setStartDate] = useState(new Date());
+	const [endDate, setEndDate] = useState(new Date());
 	const [unPaidDataset, setUnpaidDataset] = useState({
 		label: 'Unpaid',
 		data: [],
@@ -34,19 +36,27 @@ const Stats = ({ getLast30DaysInvoices, expenses, profit, invoiceDatasets }) => 
 	});
 
 	useEffect(() => {
-		const payload = JSON.stringify({noOfDays: 30})
+		const startDate = new Date();
+		let endDate = new Date();
+		endDate.setDate(endDate.getDate() - 7);
+		setEndDate(endDate);
+		const payload = JSON.stringify({ startDate, endDate });
 		getLast30DaysInvoices(payload);
 	}, []);
 
 	useEffect(() => {
 		let { labels } = invoiceDatasets;
-		if(labels && labels.length){
-			for(let i=0;i<labels.length; i++){
-				labels[i] = moment(labels[i]).format("l")
+		if (labels && labels.length) {
+			for (let i = 0; i < labels.length; i++) {
+				labels[i] = moment(labels[i]).format('l');
 			}
 		}
-		setLabels(labels)
-	}, [invoiceDatasets.labels])
+		setLabels(labels);
+	}, [invoiceDatasets.labels]);
+
+	useEffect(() => {
+		handlePaidOptions();
+	}, [endDate, startDate]);
 
 	useEffect(() => {
 		const { unpaidDataset } = invoiceDatasets;
@@ -62,8 +72,8 @@ const Stats = ({ getLast30DaysInvoices, expenses, profit, invoiceDatasets }) => 
 		}
 	}, [invoiceDatasets.paidDataset]);
 
-	const handlePaidOptions = (dateFilter) => {
-		const payload = JSON.stringify({noOfDays: dateFilter.value})
+	const handlePaidOptions = () => {
+		const payload = JSON.stringify({ startDate, endDate });
 		getLast30DaysInvoices(payload);
 	};
 
@@ -71,18 +81,26 @@ const Stats = ({ getLast30DaysInvoices, expenses, profit, invoiceDatasets }) => 
 		<Fragment>
 			<Breadcrumb parent='Dashboard' title='Invoice Manager' />
 			<div className='container-fluid'>
-				
 				<div className='row'>
 					<div className='col-sm-12 col-xl-3 col-md-3'>
-						<div class='card' style={{ width: '18rem' }}>
+						<div class='card' style={{ width: '18rem', height: 220 }}>
 							<div class='card-body'>
-								<h5 class='card-title ml-5'>Filter</h5>
-								<p class='card-text'><Select defaultValue={otherOptions[0]} onChange={handlePaidOptions} options={otherOptions} /></p>
+								<h5 class='card-title ml-5'>Date Filter</h5>
+								<p class='card-text'>
+									<div classNames='form-group'>
+										<label className='form-label'>Start Date</label>
+										<DatePicker value={startDate} onChange={(e) => setStartDate(e)} />
+									</div>
+									<div classNames='form-group'>
+										<label className='form-label'>End Date</label>
+										<DatePicker value={endDate} onChange={(e) => setEndDate(e)} />
+									</div>
+								</p>
 							</div>
 						</div>
 					</div>
 					<div className='col-sm-12 col-xl-3 col-md-3'>
-						<div class='card' style={{ width: '18rem' }}>
+						<div class='card' style={{ width: '18rem', height: 220 }}>
 							<div class='card-body'>
 								<h5 class='card-title ml-5'>Invoices</h5>
 								<p class='card-text'>{profit}</p>
@@ -91,7 +109,7 @@ const Stats = ({ getLast30DaysInvoices, expenses, profit, invoiceDatasets }) => 
 					</div>
 
 					<div className='col-sm-12 col-xl-3 col-md-3'>
-						<div class='card' style={{ width: '18rem' }}>
+						<div class='card' style={{ width: '18rem', height: 220 }}>
 							<div class='card-body'>
 								<h5 class='card-title ml-5'>Expenses</h5>
 								<p class='card-text'>{expenses}</p>
@@ -99,7 +117,7 @@ const Stats = ({ getLast30DaysInvoices, expenses, profit, invoiceDatasets }) => 
 						</div>
 					</div>
 					<div className='col-sm-12 col-xl-3 col-md-3'>
-						<div class='card' style={{ width: '18rem' }}>
+						<div class='card' style={{ width: '18rem', height: 220 }}>
 							<div class='card-body'>
 								<h5 class='card-title ml-5'>Net Profit</h5>
 								<p class='card-text'>{[profit - expenses]}</p>

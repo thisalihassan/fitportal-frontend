@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import Breadcrumb from '../common/breadcrumb';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 import { Title, Post } from '../../constant';
@@ -7,7 +7,7 @@ import { API_URL, CONFIG } from '../../services/helper';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
-const BlogPost = ({ history }) => {
+const BlogPost = ({ match }) => {
 	const { register, handleSubmit } = useForm();
 	const [formData, setFormData] = React.useState({
 		title: '',
@@ -18,6 +18,23 @@ const BlogPost = ({ history }) => {
 		carbs: '',
 		picture: ''
 	});
+
+	useEffect(() => {
+		if (match && match.params && match.params.id) {
+			getRecipeData();
+		}
+	}, [match]);
+
+	const getRecipeData = async () => {
+		try {
+			CONFIG.headers.access_token = localStorage.getItem('id_token');
+			const res = await axios.get(`${API_URL}/recipe/${match.params.id}`, CONFIG);
+			setFormData(res.data);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	const fileInputChangeHandler = async (e) => {
 		const file = e.target.files[0];
 		const formDataPic = new FormData();
@@ -44,14 +61,19 @@ const BlogPost = ({ history }) => {
 		const body = JSON.stringify(formData);
 
 		try {
-			await axios.post(`${API_URL}/recipe`, body, CONFIG);
-			toast.success('Recipe Added Successfully');
+			if (match && match.params && match.params.id) {
+				await axios.put(`${API_URL}/recipe/${match.params.id}`, body, CONFIG);
+				toast.success('Recipe Updated Successfully');
+			} else {
+				await axios.post(`${API_URL}/recipe`, body, CONFIG);
+				toast.success('Recipe Added Successfully');
+			}
 		} catch (error) {
 			toast.error(error.message);
 		}
 	};
 
-	const { picture } = formData;
+	const { title, body, calories, fats, proteins, carbs, picture } = formData;
 	return (
 		<Fragment>
 			<Breadcrumb title='Add Recipe' parent='Recipe' />
@@ -87,6 +109,7 @@ const BlogPost = ({ history }) => {
 										<div className='form-group'>
 											<label htmlFor='validationCustom01'>{Title}:</label>
 											<input
+												value={title}
 												onChange={inputChangeHandler}
 												className='form-control'
 												name='title'
@@ -102,6 +125,7 @@ const BlogPost = ({ history }) => {
 										<div className='form-group'>
 											<label htmlFor='validationCustom01'>Calories :</label>
 											<input
+												value={calories}
 												onChange={inputChangeHandler}
 												className='form-control'
 												name='calories'
@@ -117,6 +141,7 @@ const BlogPost = ({ history }) => {
 										<div className='form-group'>
 											<label htmlFor='validationCustom01'>Carbs :</label>
 											<input
+												value={carbs}
 												onChange={inputChangeHandler}
 												className='form-control'
 												name='carbs'
@@ -132,6 +157,7 @@ const BlogPost = ({ history }) => {
 										<div className='form-group'>
 											<label htmlFor='validationCustom01'>fats :</label>
 											<input
+												value={fats}
 												onChange={inputChangeHandler}
 												className='form-control'
 												name='fats'
@@ -147,6 +173,7 @@ const BlogPost = ({ history }) => {
 										<div className='form-group'>
 											<label htmlFor='validationCustom01'>Proteins :</label>
 											<input
+												value={proteins}
 												onChange={inputChangeHandler}
 												className='form-control'
 												name='proteins'
@@ -162,6 +189,7 @@ const BlogPost = ({ history }) => {
 											<div className='theme-form'>
 												<label htmlFor='exampleFormControlTextarea14'>Body:</label>
 												<textarea
+													defaultValue={body}
 													onChange={inputChangeHandler}
 													name='body'
 													ref={register({ required: true })}
